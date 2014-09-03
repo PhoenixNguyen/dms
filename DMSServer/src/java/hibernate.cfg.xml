@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory >
+        <!--FOR online Server -->
+        <!--property name="hibernate.connection.datasource">jdbc/DMSProject</property-->
+        
+        <!-- FOR TEST WITH SERVER-->
+        <!--property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://112.78.3.116:1488;databaseName=DMS_8083_test</property>
+        <property name="hibernate.connection.username">hp_dms</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="show_sql">true</property-->
+        
+        <property name="hibernate.dialect">com.hp.filter.CustomMysqlDialect</property>
+        <!--com.hp.filter.CustomMysqlDialect - org.hibernate.dialect.SQLServerDialect -->
+        
+        <!-- FOR LOCALHOST -->
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=DMS8080</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="show_sql">true</property>
+        
+    
+        <property name="hbm2ddl.auto">create</property>
+    
+        <mapping class="com.hp.domain.Customer" />
+        <mapping class="com.hp.domain.RoadManagement" />
+        <mapping class="com.hp.domain.User" />
+        <mapping class="com.hp.domain.Staff" />
+        <mapping class="com.hp.domain.Schedule" />
+        
+        <mapping class="com.hp.domain.Provider" />
+        <mapping class="com.hp.domain.Product" />
+        <mapping class="com.hp.domain.TakeOrder" />
+        <mapping class="com.hp.domain.TakeOrderDetail" />
+        
+        <mapping class="com.hp.domain.SaleOrder" />
+        <mapping class="com.hp.domain.SaleOrderDetail" />
+        <mapping class="com.hp.domain.ReturnOrder" />
+        <mapping class="com.hp.domain.ReturnOrderDetail" />
+        <mapping class="com.hp.domain.InventoryManager" />
+        <mapping class="com.hp.domain.InventoryManagerDetail" />
+        
+        <mapping class="com.hp.domain.Stock" />
+        <mapping class="com.hp.domain.CustomerImage" />
+        
+        <mapping class="com.hp.domain.ReportSaleWithProduct" />
+                
+        <mapping class="com.hp.domain.Announcement" />
+        <mapping class="com.hp.domain.History" />
+        <mapping class="com.hp.domain.StaffHistory" />
+        
+  </session-factory>
+</hibernate-configuration>

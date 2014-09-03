@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    >
+    
+    
+     <LinearLayout
+		        android:focusable="true" 
+		        android:focusableInTouchMode="true"
+    			android:layout_width="0px" 
+    			android:layout_height="0px"/>
+    <ScrollView 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    
+        >
+       
+        <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" 
+	    android:layout_marginTop="10dp"
+	    >
+	    	<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_id"
+	            />
+	        
+		    	
+		        <EditText
+		            android:id="@+id/cus_id"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            
+	    	<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_name"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_name"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            
+	    	
+	    	<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_state"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_state"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_line"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_line"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_area"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_area"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_address"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_address"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_phone"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_phone"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_fax"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_fax"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+            <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		    	<TextView 
+	            android:layout_weight="0.3"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@+string/cus_note"
+	            />
+	        
+		    	
+		        <EditText 
+		            android:id="@+id/cus_note"
+		            android:layout_weight="0.7"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            
+		            />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    
+
+</LinearLayout>

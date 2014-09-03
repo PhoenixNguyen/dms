@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+  
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+    
+      <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal">
+		    <TextView
+	        android:layout_weight="0.3"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    android:text="@string/customer_name"/>
+		    <TextView
+		        
+		    android:id="@+id/customer_name"
+		    android:layout_weight="0.7"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    />
+		    
+	    </LinearLayout>
+	    
+      <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal">
+		    <TextView
+		    android:layout_weight="0.3"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    android:text="@string/customer_id"/>
+		    <TextView
+		    android:id="@+id/customer_id"
+		    android:layout_weight="0.7"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    />
+		</LinearLayout>
+		
+      <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal">
+		    <TextView
+		    android:layout_weight="0.3"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    android:text="@string/customer_phone"/>
+		    <TextView
+	        android:id="@+id/customer_phone"
+		    android:layout_weight="0.7"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    />
+	    </LinearLayout>
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal">
+		    <TextView
+		    android:layout_weight="0.3"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    android:text="@string/customer_address"/>
+		    <TextView
+		    android:id="@+id/customer_address"
+		    android:layout_weight="0.7"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:lines="2"
+		    />
+	    </LinearLayout>
+    
+  </LinearLayout>
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment
+      android:id="@+id/map"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      class="com.google.android.gms.maps.SupportMapFragment"/>
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|right"
+      android:background="#D000"
+      android:orientation="vertical"
+      android:padding="5dp">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+          android:id="@+id/send_location"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.5"
+          android:onClick="onSendDemo"
+          android:text="@string/send_demo"
+          android:visibility="gone"
+          />
+        
+        <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.5"
+          android:onClick="onClearMap"
+          android:text="@string/clear_map"/>
+        <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.5"
+          android:onClick="onResetMap"
+          android:text="@string/reset_map"/>
+      </LinearLayout>
+      
+    </LinearLayout>
+  </FrameLayout>
+</LinearLayout>

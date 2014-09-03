@@ -1,0 +1,9 @@
+/DMSClient/.metadata/
+/DMSClient/bin/
+/DMSClient/project.properties
+
+/DMSServer/build/
+/DMSServer/dist/
+/DMSServer/lib/
+/DMSServer/web/WEB-INF/lib/
+

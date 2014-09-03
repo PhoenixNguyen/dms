@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- overflow / will display always -->
+    <item
+    android:id="@+id/action_over_flow"
+    android:icon="@drawable/ic_action_overflow"
+    android:orderInCategory="101"
+    android:showAsAction="always">
+    <menu>
+        <item
+            android:id="@+id/init_order"
+            android:showAsAction="always|withText"
+            android:title="Tạo hóa đơn đặt hàng"/>
+        <item
+            android:id="@+id/take_picture"
+            android:showAsAction="always|withText"
+            android:title="Chụp ảnh tại cửa hàng"/>
+        
+        <item
+            android:id="@+id/sale"
+            android:showAsAction="always|withText"
+            android:title="Bán hàng"/>
+        
+        <item
+            android:id="@+id/inventory_manager"
+            android:showAsAction="always|withText"
+            android:title="Quản lý hàng tồn"/>
+    </menu>
+</item>
+     
+    
+</menu>

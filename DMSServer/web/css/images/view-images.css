@@ -1,0 +1,32 @@
+#title{
+    display: block;
+    width: 900px;
+    height: 500px;
+    background-color: aliceblue;
+    margin: auto;
+}
+
+#content{
+    display: block;
+    width: 900px;
+    height: auto;
+    background-color: antiquewhite;
+    margin: auto;
+}
+
+.detail li{
+    width: 250px;
+    float: left;
+    height: 200px;
+    padding: 10px 10px 10px 10px;
+    background-color: bisque;
+    display: block;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.setup{
+    margin-top: -28px;
+    margin-left: 100px;
+    position: absolute;
+}

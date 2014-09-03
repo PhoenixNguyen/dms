@@ -1,0 +1,159 @@
+html {
+ height: 100% 
+}
+body {
+ height: 100%; margin: 0; padding: 0 
+}
+
+#canvas{
+    position:relative;
+    height: 100%;
+    //width:300px;
+}
+
+#map-canvas { 
+   
+	height: 74% 
+}
+
+
+#info{
+	
+        
+        height: 17% ;
+       
+}
+
+#page{
+	float: left;
+	width: 200px;
+	height: 100%;
+	overflow: auto;
+	background: #F7EFEF;
+}
+
+#detail{
+	height: 100%;
+	
+}
+.gallery li{
+	display: inline-block;
+	list-style: none;
+	width: 200px;
+	height: 95%;
+	margin: 0 3px 3px 0;
+	//text-align: center;
+        
+        //white-space: pre-wrap;
+        
+}
+
+.gallery  img{
+	width: 100%;
+	height: 100%;
+        //height: 100px;
+}
+
+div#detail ul {
+   	
+    overflow-x: scroll;
+    white-space: nowrap
+}
+
+.frag li{
+	display: inline;
+	list-style: none;
+	margin: 0 5px 5px 0;
+	text-align: center;
+	float: left;
+}
+div#page ul{
+	margin-left: -5px;
+}
+
+img.bgr{
+    //z-index: -1;
+    //margin-left: -10px;
+    left:0px;
+    top:0px;
+}
+
+p#name{
+    margin-top: -40px;
+    width: 200px;
+    //height: 100px;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+        
+    color: aliceblue; 
+    font: bold 13px/45px Helvetica, Sans-Serif;
+/*    z-index: 1;
+    //width: 200px;
+    //height: 100px;
+    //margin-left: -200px;
+    text-align: left;
+    //margin-top: -100px;
+    color: white; 
+    font: bold 13px/45px Helvetica, Sans-Serif; */
+}
+h2 span {
+    //z-index: 1;
+/*    margin-top: -80px;
+    margin-left: -100px;*/
+    color: white; 
+    font: bold 13px/45px Helvetica, Sans-Serif; 
+    letter-spacing: -1px;  
+/*    background: rgb(0, 0, 0);  fallback color 
+    background: rgba(0, 0, 0, 0.7);*/
+    padding: 10px; 
+/*    width: 200px;*/
+    
+}
+
+
+/*IN MAP*/
+#boxShow{
+    width: 440px;
+    height: 220px;
+    background-color: #F0F0F0;
+}
+
+#boxShow a{
+    color: #2caf1e;
+    font-size: 18px;
+}
+img{
+    background-image:url('/DMS/db_customers/default.jpg');
+}
+
+.poi-photo img{
+    
+}
+.TextWrap{
+    float: right;
+    margin: 10px;
+
+    width: 200px;
+    height: 200px;
+}
+
+.ImageWrap{
+    float: left;
+    margin: 10px;
+    margin-right: 10px;
+
+    width: 200px;
+    height: 200px;
+}
+
+#filter{
+    width: 200px;
+    position: absolute;
+    /* margin-right: -1000px; */
+    float: right;
+    margin-top: -12%;
+    display: block;
+    margin-left: 85%;
+}
+

@@ -1,0 +1,85 @@
+/*
+ * Copyright (C) 2012 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.hp.menu;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import com.hp.map.R;
+
+import android.R.color;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+/**
+ * A widget that describes an activity that demonstrates a feature.
+ */
+public final class DialogFeatureView extends FrameLayout {
+
+	private Context context;
+	
+    /**
+     * Constructs a feature view by inflating layout/feature.xml.
+     */
+    public DialogFeatureView(Context context ) {
+        super(context);
+        this.context = context;
+        LayoutInflater layoutInflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater.inflate(R.layout.menu_dialog_feature, this);
+    }
+
+    /**
+     * Set the resource id of the title of the demo.
+     *
+     * @param titleId the resource id of the title of the demo
+     */
+    public synchronized void setTitle(final String pTitle) {
+    	TextView title = (TextView) (findViewById(R.id.title));    	
+    	title.setText(pTitle);
+    	
+    	
+    	
+    }
+    
+    public synchronized void setIcon(final int src) {
+    	
+    		
+    	ImageView image = (ImageView) (findViewById(R.id.image));  
+    	image.setVisibility(View.VISIBLE);
+    	image.setImageResource(src);
+    	
+    	if(src == 0)
+    		image.setVisibility(View.GONE);
+    }
+    
+    
+
+    
+}

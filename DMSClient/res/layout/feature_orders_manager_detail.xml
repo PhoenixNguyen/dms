@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:layout_weight="1"
+  
+  android:orientation="vertical">
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  
+  >
+	  <TextView
+	    android:id="@+id/name"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    />
+	  <TextView
+	    android:id="@+id/id"
+	    android:layout_weight="0.5"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"/>
+	</LinearLayout>
+
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  
+  >
+	  <TextView
+	    android:id="@+id/origin0"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:text="Giá gốc:"
+	    />
+	  <TextView
+	    android:id="@+id/origin"
+	    android:layout_weight="0.5"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"/>
+	</LinearLayout>
+	
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  
+  >
+	  <TextView
+	    android:id="@+id/discount0"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:text="Giảm giá (%):"
+	    />
+	  <TextView
+	    android:id="@+id/discount"
+	    android:layout_weight="0.5"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"/>
+	</LinearLayout>
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  android:layout_weight="0.3"
+  >
+	  <TextView
+	    android:id="@+id/number"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:text="Số lượng:"
+	    />
+	  <TextView
+	    android:id="@+id/number_value"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    />
+	</LinearLayout>
+	
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  android:layout_weight="0.3"
+  >
+	  <TextView
+	    android:id="@+id/total"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:text="Thành tiền:"
+	    />
+	  <TextView
+	    android:id="@+id/total_value"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    />
+	</LinearLayout>
+	
+  <LinearLayout 
+  android:layout_width= "match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:orientation="horizontal"
+  android:layout_weight="0.3"
+  android:background="@color/orange"
+  android:layout_marginTop="30dp"
+  >
+	  <TextView
+	    android:id="@+id/promotional_product_title"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:text="Khuyến mãi:"
+	    android:visibility="gone"
+	    />
+	  <TextView
+	    android:id="@+id/promotional_product"
+	    android:layout_width="0dip"
+	    android:layout_height="wrap_content"
+	    android:textSize="16sp"
+	    android:layout_weight="0.5"
+	    android:visibility="gone"
+	    />
+	</LinearLayout>
+</LinearLayout>

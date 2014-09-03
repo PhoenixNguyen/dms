@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:layout_marginLeft="5dp" >
+ 
+     
+    <TextView
+        android:id="@+id/idlaber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã kho"
+        />
+    
+ 	<EditText
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/idlaber"
+        android:text="abc"
+        />
+ 	<TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/idlaber"
+        android:text="Giá sản phẩm:"
+        />
+ 	
+ 	<EditText
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/price"
+        android:text="abc"
+        />
+ 	
+ 	<TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price"
+        android:text="Tên sản phẩm:"
+        />
+    <EditText
+        android:id="@+id/product_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/product_name"
+        android:text="abc"
+        />
+ 	
+ 	<EditText
+        android:id="@+id/edit_ton_cuoi"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edit_ton_dau"
+        android:background="@color/white"
+        android:hint="Nhập tồn hiện tại"
+        android:numeric="decimal"
+        />
+ 	
+     <Button
+        android:id="@+id/dialogButtonYES"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text=" Cập nhật "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/edit_nhap"
+        />
+	<Button
+        android:id="@+id/dialogButtonNO"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text=" Hủy "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/edit_nhap"
+        android:layout_toRightOf="@+id/dialogButtonYES"
+        />
+	<Button
+        android:id="@+id/dialogButtonDelete"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text=" Delete "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/edit_nhap"
+        android:layout_toRightOf="@+id/dialogButtonNO"
+        android:visibility="invisible"
+        />
+</RelativeLayout>

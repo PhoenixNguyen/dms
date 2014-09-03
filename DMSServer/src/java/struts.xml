@@ -1,0 +1,1455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- FOR connect MVC not map struts2-->
+    <!--constant name="struts.convention.package.locators" value="rest"/>
+    <constant name="struts.convention.action.suffix" value="Controller"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="rest-default"/-->
+    
+    <package name="webresources" extends="hibernate-default" namespace="/webresources">
+        <action name="getCustomerForStaff" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getCustomer</result>
+        </action>
+        <action name="getData" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getData</result>
+        </action>
+        <action name="getCustomerList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getCustomerList</result>
+        </action>
+        <action name="getXml" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getXml</result>
+        </action>
+        
+        
+        <action name="getStaff" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getStaff</result>
+        </action>
+        
+        <action name="putJourney" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putJourney</result>
+        </action>
+        
+        <action name="getSchedule" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getSchedule</result>
+        </action>
+        
+        <action name="putLocation" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putLocation</result>
+        </action>
+        
+        <action name="getCustomersListSchedule" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getCustomersListSchedule</result>
+        </action>
+        
+        <action name="putSchedule" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putSchedule</result>
+        </action>
+        
+        <action name="getCustomersListStart" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getCustomersListStart</result>
+        </action>
+        
+        <action name="deleteSchedule" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/deleteSchedule</result>
+        </action>
+        
+        <action name="getProvidersIDList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getProvidersIDList</result>
+        </action>
+        
+        <action name="getProductsList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getProductsList</result>
+        </action>
+        
+        <action name="putTakeOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putTakeOrder</result>
+        </action>
+        
+        <action name="putOrdersDetailList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putOrdersDetailList</result>
+        </action>
+        
+        <action name="getTakeOrderList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getTakeOrderList</result>
+        </action>
+        
+        <action name="getTakeOrderDetailList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getTakeOrderDetailList</result>
+        </action>
+        
+        <action name="uploadFile" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/uploadFile</result>
+        </action>
+        
+        <action name="putImage" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/putImage</result>
+        </action>
+        
+        <action name="updateDetailOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/updateDetailOrder</result>
+        </action>
+        
+        <action name="deleteDetailOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/deleteDetailOrder</result>
+        </action>
+        
+        <action name="deleteOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/deleteOrder</result>
+        </action>
+        
+        
+        
+        <action name="getOrderData" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getOrderData</result>
+        </action>
+        
+        <action name="putSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putSaleOrder</result>
+        </action>
+        
+        <action name="getSaleOrderList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getSaleOrderList</result>
+        </action>
+        
+        <action name="getSaleOrderDetailList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getSaleOrderDetailList</result>
+        </action>
+        
+        <action name="putDetailReturnOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putDetailReturnOrder</result>
+        </action>
+        
+        <action name="getReturnOrderDetailList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getReturnOrderDetailList</result>
+        </action>
+        
+        <action name="putStock" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putStock</result>
+        </action>
+        
+        <action name="getStock" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getStock</result>
+        </action>
+        
+        <action name="getCustomerProduct" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getCustomerProduct</result>
+        </action>
+        
+        <action name="getCustomerProviderList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getCustomerProviderList</result>
+        </action>
+        
+        <action name="putStaffJourney" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putStaffJourney</result>
+        </action>
+        
+        <action name="putInventoryManagerDetail" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putInventoryManagerDetail</result>
+        </action>
+        
+        <action name="putInventoryManager" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putInventoryManager</result>
+        </action>
+        
+        <action name="getInventoryManagerDetailList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getInventoryManagerDetailList</result>
+        </action>
+        
+        <action name="getInventoryManagerList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/getInventoryManagerList</result>
+        </action>
+        
+        <action name="deleteDetailInventoryManager" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/deleteDetailInventoryManager</result>
+        </action>
+        
+        <action name="updateDetailInventoryManager" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateDetailInventoryManager</result>
+        </action>
+        
+        <action name="deleteInventoryManager" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/deleteInventoryManager</result>
+        </action>
+        
+        <action name="updateAddingTakeOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateAddingTakeOrder</result>
+        </action>
+        
+        <action name="addOrdersDetailForTakeOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/addOrdersDetailForTakeOrder</result>
+        </action>
+        
+        <action name="updateAddingInventory" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateAddingInventory</result>
+        </action>
+        
+        <action name="updateAddingInventoryDetail" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateAddingInventoryDetail</result>
+        </action>
+        
+        
+        <action name="updateAddingSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateAddingSaleOrder</result>
+        </action>
+        
+        <action name="updateAddingSaleOrderDetail" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateAddingSaleOrderDetail</result>
+        </action>
+        
+        <action name="putOriginalSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putOriginalSaleOrder</result>
+        </action>
+        <action name="putOriginalSaleOrderDetail" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/putOriginalSaleOrderDetail</result>
+        </action>
+        
+        <action name="updateDetailSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/updateDetailSaleOrder</result>
+        </action>
+        <action name="deleteDetailSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/deleteDetailSaleOrder</result>
+        </action>
+        
+        <action name="deleteSaleOrder" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">order/deleteSaleOrder</result>
+        </action>
+        
+        <action name="vd" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/vd</result>
+        </action>
+        
+        <action name="insertCustomer" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/insertCustomer</result>
+        </action>
+        
+        <action name="updateCustomer" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/updateCustomer</result>
+        </action>
+        
+        <action name="deleteCustomer" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/deleteCustomer</result>
+        </action>
+        
+        <action name="insertProduct" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/insertProduct</result>
+        </action>
+        
+        <action name="updateProduct" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/updateProduct</result>
+        </action>
+        
+        <action name="deleteProduct" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/deleteProduct</result>
+        </action>
+        
+        
+        <action name="updateStaff" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">input/updateStaff</result>
+        </action>
+    </package>
+    <package name="map"  extends="json-default,hibernate-default" namespace="/map">
+        <!--FOR CUSTOMERS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <action name="showMap" method="showMap" class="com.hp.action.ShowMapAction">
+            <result name="success">view-map.jsp</result>
+        </action>
+        
+        <action name="filterGiamDoc" method="showMap" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+              <param name="inputName">inputStream</param>
+          </result>
+        </action>
+        <action name="filterStaff" method="showMap" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+            <param name="inputName">inputStream</param>
+          </result>
+        </action>
+        
+<!--        FOR ROADS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <action name="staff-roads" method="showRoad" class="com.hp.action.ShowMapAction">
+            <result name="success">staff-roads.jsp</result>
+        </action>
+        <action name="filterGiamDoc2" method="showRoad" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <!--param name="root">userListStaff</param-->
+              <param name="contentType">application/json</param>
+<!--            <param name="inputName">inputStream</param>-->
+          </result>
+        </action>
+        <action name="filterStaff2" method="showRoad" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <!--param name="root">userListStaff</param-->
+              <param name="contentType">application/json</param>
+<!--            <param name="inputName">inputStream</param>-->
+          </result>
+        </action>
+        <action name="filterCustomer" method="showRoad" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <!--param name="root">userListStaff</param-->
+              <param name="contentType">application/json</param>
+<!--            <param name="inputName">inputStream</param>-->
+          </result>
+        </action>
+        
+        <action name="filterDate" method="showRoad" class="com.hp.action.ShowMapAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        <!--FOR SCHEDULES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <action name="showSchedule" method="showMap" class="com.hp.action.ShedulesAction">
+            <result name="success">view-schedules.jsp</result>
+        </action>
+        
+        <action name="filterGiamDoc3" method="showMap" class="com.hp.action.ShedulesAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+              <param name="inputName">inputStream</param>
+          </result>
+        </action>
+        <action name="filterStaff3" method="showMap" class="com.hp.action.ShedulesAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+            <param name="inputName">inputStream</param>
+          </result>
+        </action>
+        
+        <!-- CUSTOMER DETAIL-->
+        <action name="customerDetail" method="customerDetail" class="com.hp.action.ShowMapAction">
+            <result name="success">view-map.jsp</result>
+            <result name="input">view-map.jsp</result>
+        </action>
+        
+    </package>
+    
+    <package name="ajax" namespace="/map" extends="json-default">
+      
+        
+        
+    </package>
+    
+<!--    <package name="admin"  extends="json-default,hibernate-default" namespace="/admin">
+		
+        <action name="add-customer" method="addCustomerFromExcelFile" class="com.hp.action.CustomerAction">
+            <result name="success">add-customer-result.jsp</result>
+            <result name="input">add-customer-fail.jsp</result>
+            <result type="json">
+                <param name="contentType">application/json</param>
+            </result>
+            
+        </action>
+        
+        <action name="upload" method="saveFile" class="com.hp.action.CustomerAction">
+            
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result type="json">
+                <param name="contentType">application/json</param>
+            </result>
+            
+            <result name="success" type="redirect">displayCustomers</result>
+            <result name="input" type="redirect">displayCustomers</result>
+        </action>
+        
+        <action name="displayCustomers" method="displayCustomers" class="com.hp.action.CustomerAction">
+            <result name="success" >input-page.jsp</result>
+            <result name="input" >input-page.jsp</result>
+        </action>
+        
+        <action name="editCustomer" method="editCustomer" class="com.hp.action.CustomerAction">
+            <result name="success" >input-page.jsp</result>
+            <result name="input" >input-page.jsp</result>
+        </action>
+        
+        <action name="update-customer" method="updateCustomer" class="com.hp.action.CustomerAction">
+            <result name="success" type="redirect">displayCustomers</result>
+            <result name="input" >input-page.jsp</result>
+        </action>
+        
+        display staff
+        <action name="display-staffs" method="displayStaffs" class="com.hp.action.StaffsAction">
+            <result name="success" >input-staffs.jsp</result>
+            <result name="input" >input-staffs.jsp</result>
+        </action>
+        
+        <action name="edit-staff" method="editStaff" class="com.hp.action.StaffsAction">
+            <result name="success" >input-staffs.jsp</result>
+            <result name="input" >input-staffs.jsp</result>
+        </action>
+        
+        <action name="update-staff" method="updateStaff" class="com.hp.action.StaffsAction">
+            <result name="success" type="redirect">display-staffs</result>
+            <result name="input" >input-staffs.jsp</result>
+        </action>
+        
+        <action name="upload-staffs" method="saveFile" class="com.hp.action.StaffsAction">
+            
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+ 
+            <result name="success" type="redirect">display-staffs</result>
+            <result name="input" type="redirect">display-staffs</result>
+        </action>
+        
+        <action name="add-staff" method="addStaffFromExcelFile" class="com.hp.action.StaffsAction">
+
+            <result type="json">
+                <param name="contentType">application/json</param>
+            </result>
+            
+        </action>
+        
+        
+                display products
+        <action name="display-products" method="displayProducts" class="com.hp.action.ProductsAction">
+            <result name="success" >input-products.jsp</result>
+            <result name="input" >input-products.jsp</result>
+        </action>
+        
+        <action name="edit-product" method="editProduct" class="com.hp.action.ProductsAction">
+            <result name="success" >input-products.jsp</result>
+            <result name="input" >input-products.jsp</result>
+        </action>
+        
+        <action name="remove-product" method="removeProduct" class="com.hp.action.ProductsAction">
+            <result name="success" >input-products.jsp</result>
+            <result name="input" >input-products.jsp</result>
+        </action>
+        
+        <action name="update-product" method="updateProduct" class="com.hp.action.ProductsAction">
+            <result name="success" type="redirect">display-products</result>
+            <result name="input" >input-products.jsp</result>
+        </action>
+        
+        <action name="upload-products" method="saveFile" class="com.hp.action.ProductsAction">
+            
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+ 
+            <result name="success" type="redirect">display-products</result>
+            <result name="input" type="redirect">display-products</result>
+        </action>
+        
+        <action name="add-product" method="addProductFromExcelFile" class="com.hp.action.ProductsAction">
+
+            <result type="json">
+                <param name="contentType">application/json</param>
+            </result>
+            
+        </action>
+        
+        <action name="upload-product-image" method="uploadAnImage" class="com.hp.action.ProductsAction">
+            
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,image/jpg
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+ 
+            <result name="success" type="redirect">edit-product?id_product=${id_product}</result>
+            <result name="input" type="redirect">edit-product?id_product=${id_product}</result>
+        </action>
+        
+        
+                display Take Order ================================================================= 
+        <action name="display-take-order" method="loadTakeOrders" class="com.hp.action.TakeOrderAction">
+            <result name="success" >take-order-page.jsp</result>
+            <result name="input" >take-order-page.jsp</result>
+        </action>
+        
+        <action name="take-order-detail" method="loadTakeOrdersDetail" class="com.hp.action.TakeOrderAction">
+            <result name="success" >take-order-page.jsp</result>
+            <result name="input" >take-order-page.jsp</result>
+        </action>
+        
+        <action name="edit-take-order" method="editTakeOrder" class="com.hp.action.TakeOrderAction">
+            <result name="success" >edit-take-order.jsp</result>
+            <result name="input" >take-order-page.jsp</result>
+        </action>
+        
+        <action name="update-take-order" method="updateTakeOrder" class="com.hp.action.TakeOrderAction">
+            <result name="success" >edit-take-order.jsp</result>
+            <result name="input" >edit-take-order.jsp</result>
+        </action>
+        
+        
+        <action name="edit-take-order-detail" method="editTakeOrderDetail" class="com.hp.action.TakeOrderDetailAction">
+            <result name="success" >edit-take-order-detail.jsp</result>
+            <result name="input" >edit-take-order-detail.jsp</result>
+        </action>
+        
+        <action name="update-take-order-detail" method="updateTakeOrderDetail" class="com.hp.action.TakeOrderDetailAction">
+            <result name="success" >edit-take-order-detail.jsp</result>
+            <result name="input" >edit-take-order-detail.jsp</result>
+        </action>
+        
+        <action name="export-orders" method="getStaffsList" class="com.hp.action.TakeOrderAction">
+            <result name="success" >export-orders.jsp</result>
+            <result name="input" >export-orders.jsp</result>
+        </action>
+        
+        <action name="export-staff-xls" method="exportOrders" class="com.hp.action.TakeOrderAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=test.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >export-orders.jsp</result>
+        </action>
+        
+    </package>-->
+    <package name=""  extends="json-default,hibernate-default" namespace="/">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult" />
+        </result-types>
+        <interceptors>
+          <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
+        </interceptors>
+
+        <!--action name="login-success" method="loginStatus" class="com.hp.action.UserAction">
+            <result name="success" >home.jsp</result>
+            <result name="input" >index.jsp</result>
+        </action-->
+        <action name="login" method="login" class="com.hp.action.UserAction">
+            <result name="success" >home.jsp</result>
+            <result name="input" >index.jsp</result>
+        </action>
+        
+        <action name="home" method="home" class="com.hp.action.UserAction">
+            <result name="success" >home.jsp</result>
+            <result name="input" >index.jsp</result>
+        </action>
+        
+        <action name="logout" method="logout" class="com.hp.action.UserAction">
+            <result name="success" >index.jsp</result>
+            <result name="input" >index.jsp</result>
+        </action>
+        <!-- CUSTOMER  -->
+        <action name="customer-list" method="displayCustomers" class="com.hp.action.CustomerAction">
+            <result name="success">customer.jsp</result>
+            <result name="input" >customer.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="customer-detail" method="showDetail" class="com.hp.action.CustomerAction">
+            <result name="success">customer-detail.jsp?id_cus=${customer.stt}</result>
+            <result name="input" type="redirect">customer-list</result>
+            <result name="login" >index.jsp</result>
+            <result name="error" >error.jsp</result>
+        </action>
+        
+        <action name="new-customer" method="redirect" class="com.hp.action.CustomerAction">
+            <result name="success">customer-add.jsp</result>
+            <result name="input" >customer-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="save-customer" method="updateCustomer" class="com.hp.action.CustomerAction">
+            <result name="success" type="redirect">customer-detail?id_cus=${customer.stt}</result>
+            <result name="input" type="redirect">customer-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="edit-customer" method="editCustomer" class="com.hp.action.CustomerAction">
+            <result name="success">customer-edit.jsp</result>
+            <result name="input" >customer-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-customer" method="updateCustomer" class="com.hp.action.CustomerAction">
+            <result name="success" type="redirect">customer-detail?id_cus=${customer.stt}</result>
+            <result name="input" type="redirect">edit-customer?id_cus=${customer.stt}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-customer" method="deleteCustomer" class="com.hp.action.CustomerAction">
+            <result name="success" >customer.jsp</result>
+            <result name="input" >customer-detail.jsp?id_cus=${customer.stt}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="import-customer" method="redirect" class="com.hp.action.CustomerAction">
+            <result name="success">customer-import.jsp</result>
+            <result name="input" >customer-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="customer-template" method="getTemplate" class="com.hp.action.CustomerAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    application/vnd.ms-excel
+                </param>
+                <param name="inputName">customerTemplate</param>
+                <param name="contentDisposition">attachment;filename=template_import_khach_hang.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >customer-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="upload-customer" method="saveFile" class="com.hp.action.CustomerAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="success">customer-import-commit.jsp</result>
+            <result name="input" >customer-import-commit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="add-customer" method="addCustomerFromExcelFile" class="com.hp.action.CustomerAction">
+            <result name="success" type="json" />
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="search-customer" method="searchCustomers" class="com.hp.action.CustomerAction">
+            <result name="success">customer.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <!--PRODUCT-->
+        <action name="product-list" method="displayProducts" class="com.hp.action.ProductsAction">
+            <result name="success">product.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="product-detail" method="displayProduct" class="com.hp.action.ProductsAction">
+            <result name="success">product-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            <result name="error" >error.jsp</result>
+        </action>
+        
+        <action name="edit-product" method="displayProduct" class="com.hp.action.ProductsAction">
+            <result name="success">product-edit.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-product" method="updateProduct" class="com.hp.action.ProductsAction">
+            <result name="success" type="redirect">product-detail?id_pdct=${product.serial}</result>
+            <result name="input" type="redirect">edit-product?id_pdct=${product.serial}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="new-product" method="redirect" class="com.hp.action.ProductsAction">
+            <result name="success">product-add.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="save-product" method="updateProduct" class="com.hp.action.ProductsAction">
+            <result name="success" type="redirect">product-detail?id_pdct=${product.serial}</result>
+            <result name="input" >product-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-product" method="deleteProduct" class="com.hp.action.ProductsAction">
+            <result name="success" >product.jsp</result>
+            <result name="input" >product-detail.jsp?id_pdct=${product.serial}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+                
+        <action name="import-product" method="redirect" class="com.hp.action.ProductsAction">
+            <result name="success">product-import.jsp</result>
+            <result name="input" >product-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="product-template" method="getTemplate" class="com.hp.action.ProductsAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    application/vnd.ms-excel
+                </param>
+                <param name="inputName">productTemplate</param>
+                <param name="contentDisposition">attachment;filename=template_import_san_pham.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >product-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="upload-product" method="saveFile" class="com.hp.action.ProductsAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="success">product-import-commit.jsp</result>
+            <result name="input" >product-import-commit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="add-product" method="addProductFromExcelFile" class="com.hp.action.ProductsAction">
+            <result name="success" type="json" />
+            
+        </action>
+        
+        <action name="search-product" method="searchProducts" class="com.hp.action.ProductsAction">
+            <result name="success">product.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="change-image-product" method="redirect" class="com.hp.action.ProductsAction">
+            <result name="success">product-detail-image.jsp</result>
+            <result name="input" >product-detail-image.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="upload-product-image" method="uploadAnImage" class="com.hp.action.ProductsAction">
+            
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,image/jpg
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+ 
+            <result name="success" >product-detail-image.jsp</result>
+            <result name="input" >product-detail-image.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <!--TAKE ORDER-->
+        <action name="search-takeorder" method="searchTakeOrder" class="com.hp.action.TakeOrderAction">
+            <result name="success">take-order.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        <action name="take-order" method="loadTakeOrders" class="com.hp.action.TakeOrderAction">
+            <result name="success">take-order.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="take-order-detail" method="loadTakeOrdersDetail" class="com.hp.action.TakeOrderAction">
+            <result name="success">take-order-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="take-order-edit" method="loadTakeOrdersDetail" class="com.hp.action.TakeOrderAction">
+            <result name="success">take-order-edit.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-t-order" method="updateTakeOrder" class="com.hp.action.TakeOrderAction">
+            <result name="success" type="redirect">take-order-detail?id_tod=${takeOrder.id}</result>
+            <result name="input" >take-order-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <action name="edit-takeorder-detail" method="editTakeOrderDetail" class="com.hp.action.TakeOrderDetailAction">
+            <result name="success">take-order-detail-edit.jsp</result>
+            <result name="input" type="redirect">take-order-detail?id_tod=${takeOrder.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-takeorder-detail" method="updateTakeOrderDetail" class="com.hp.action.TakeOrderDetailAction">
+            <result name="success" type="redirect">take-order-detail?id_tod=${takeOrderDetail.takeOrderID}</result>
+            <result name="input" >take-order-detail-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-takeorder-detail" method="deleteTakeOrderDetail" class="com.hp.action.TakeOrderDetailAction">
+            <result name="success" type="redirect">take-order-detail?id_tod=${takeOrder.id}</result>
+            <result name="input" >take-order-detail-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-takeorder" method="deleteTakeOrderDetail" class="com.hp.action.TakeOrderAction">
+            <result name="success" >take-order.jsp</result>
+            <result name="input" >take-order-detail.jsp?id_tod=${takeOrder.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <!--STAFF-->
+        
+        <action name="search-staff" method="searchStaff" class="com.hp.action.StaffsAction">
+            <result name="success">staff.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="staff-list" method="displayStaffs" class="com.hp.action.StaffsAction">
+            <result name="success">staff.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="staff-detail" method="showDetail" class="com.hp.action.StaffsAction">
+            <result name="success">staff-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            <result name="error" >error.jsp</result>
+        </action>
+        
+        <action name="delete-staff" method="deleteStaff" class="com.hp.action.StaffsAction">
+            <result name="success">staff.jsp</result>
+            <result name="input" >staff-detail.jsp?id_st=${staff.getStt()}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="new-staff" method="redirect" class="com.hp.action.StaffsAction">
+            <result name="success">staff-add.jsp</result>
+            <result name="input" >staff-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="save-staff" method="updateStaff" class="com.hp.action.StaffsAction">
+            <result name="success">staff-detail.jsp?id_st=${staff.getStt()}</result>
+            <result name="input" >staff-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="edit-staff" method="editStaff" class="com.hp.action.StaffsAction">
+            <result name="success">staff-edit.jsp</result>
+            <result name="input" >staff-detail.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-staff" method="updateStaff" class="com.hp.action.StaffsAction">
+            <result name="success">staff-detail.jsp?id_st=${staff.getStt()}</result>
+            <result name="input" >staff-edit.jsp?id_st=${staff.getStt()}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="import-staff" method="redirect" class="com.hp.action.StaffsAction">
+            <result name="success">staff-import.jsp</result>
+            <result name="input" >staff-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="upload-staff" method="saveFile" class="com.hp.action.StaffsAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="success">staff-import-commit.jsp</result>
+            <result name="input" >staff-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="add-staff" method="addStaffFromExcelFile" class="com.hp.action.StaffsAction">
+            <result name="success" type="json" />
+            
+        </action>
+        
+        <action name="staff-template" method="getTemplate" class="com.hp.action.StaffsAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    application/vnd.ms-excel
+                </param>
+                <param name="inputName">staffTemplate</param>
+                <param name="contentDisposition">attachment;filename=template_import_nhan_vien.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >staff-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <!-- PROVIDER -->
+        
+        <action name="search-provider" method="searchProvider" class="com.hp.action.ProviderAction">
+            <result name="success">provider.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="provider-list" method="redirect" class="com.hp.action.ProviderAction">
+            <result name="success">provider.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            <result name="error" >error.jsp</result>
+        </action>
+        
+        <action name="provider-detail" method="displayProvider" class="com.hp.action.ProviderAction">
+            <result name="success">provider-detail.jsp</result>
+            <result name="input" >provider.jsp</result>
+            <result name="login" >index.jsp</result>
+            <result name="error" >error.jsp</result>
+        </action>
+        
+        <action name="edit-provider" method="displayProvider" class="com.hp.action.ProviderAction">
+            <result name="success">provider-edit.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-provider" method="updateProvider" class="com.hp.action.ProviderAction">
+            <result name="success" type="redirect">provider-detail?id_pvd=${provider.serial}</result>
+            <result name="input" type="redirect">edit-provider?id_pvd=${provider.serial}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="new-provider" method="redirect" class="com.hp.action.ProviderAction">
+            <result name="success">provider-add.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="save-provider" method="updateProvider" class="com.hp.action.ProviderAction">
+            <result name="success" type="redirect">provider-detail?id_pvd=${provider.serial}</result>
+            <result name="input" >provider-add.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-provider" method="deleteProvider" class="com.hp.action.ProviderAction">
+            <result name="success" >provider.jsp</result>
+            <result name="input" >provider-detail.jsp?id_pvd=${provider.serial}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+                
+        <action name="import-provider" method="redirect" class="com.hp.action.ProviderAction">
+            <result name="success">provider-import.jsp</result>
+            <result name="input" >provider-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="provider-template" method="getTemplate" class="com.hp.action.ProviderAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    application/vnd.ms-excel
+                </param>
+                <param name="inputName">providerTemplate</param>
+                <param name="contentDisposition">attachment;filename=template_import_nha_cung_cap.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >provider-import.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="upload-provider" method="saveFile" class="com.hp.action.ProviderAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    application/vnd.ms-excel
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="success">provider-import-commit.jsp</result>
+            <result name="input" >provider-import-commit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="add-provider" method="addProviderFromExcelFile" class="com.hp.action.ProviderAction">
+            <result name="success" type="json" />
+            
+        </action>
+        
+        
+        <!--INVENTORY MANAGER-->
+        
+        <action name="search-inventory" method="searchInventory" class="com.hp.action.InventoryManagerAction">
+            <result name="success">inventory-manager.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="inventory-manager" method="refresh" class="com.hp.action.InventoryManagerAction">
+            <result name="success">inventory-manager.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="inventory-manager-detail" method="loadInventoryManagerDetail" class="com.hp.action.InventoryManagerAction">
+            <result name="success">inventory-manager-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="inventory-manager-edit" method="loadInventoryManagerDetail" class="com.hp.action.InventoryManagerAction">
+            <result name="success">inventory-manager-edit.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-inventory-manager" method="updateInventoryManager" class="com.hp.action.InventoryManagerAction">
+            <result name="success" type="redirect">inventory-manager-detail?id_inv=${inventoryManager.id}</result>
+            <result name="input" >inventory-manager-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <action name="edit-inventory-manager-detail" method="editInventoryManagerDetail" class="com.hp.action.InventoryManagerDetailAction">
+            <result name="success">inventory-manager-detail-edit.jsp</result>
+            <result name="input" type="redirect">inventory-manager-detail?id_inv=${inventoryManager.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-inventory-manager-detail" method="updateInventoryManagerDetail" class="com.hp.action.InventoryManagerDetailAction">
+            <result name="success" type="redirect">inventory-manager-detail?id_inv=${inventoryManagerDetail.takeOrderID}</result>
+            <result name="input" >inventory-manager-detail-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-inventory-manager-detail" method="deleteInventoryManagerDetail" class="com.hp.action.InventoryManagerDetailAction">
+            <result name="success" type="redirect">inventory-manager-detail?id_inv=${inventoryManager.id}</result>
+            <result name="input" >inventory-manager-detail.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-inventory-manager" method="deleteInventoryManager" class="com.hp.action.InventoryManagerAction">
+            <result name="success" >inventory-manager.jsp</result>
+            <result name="input" >inventory-manager-detail.jsp?id_inv=${inventoryManager.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        
+        <!--SALE ORDER-->
+        
+        <action name="search-saleorder" method="searchSale" class="com.hp.action.SaleOrderAction">
+            <result name="success">sale-order.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+            
+        </action>
+        
+        <action name="sale-order" method="loadSaleOrders" class="com.hp.action.SaleOrderAction">
+            <result name="success">sale-order.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="sale-order-detail" method="loadSaleOrderDetail" class="com.hp.action.SaleOrderAction">
+            <result name="success">sale-order-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="sale-order-edit" method="loadSaleOrderDetail" class="com.hp.action.SaleOrderAction">
+            <result name="success">sale-order-edit.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-sale-order" method="updateSaleOrder" class="com.hp.action.SaleOrderAction">
+            <result name="success" type="redirect">sale-order-detail?id_so=${saleOrder.id}</result>
+            <result name="input" >sale-order-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <action name="edit-saleorder-detail" method="editSaleOrderDetail" class="com.hp.action.SaleOrderDetailAction">
+            <result name="success">sale-order-detail-edit.jsp</result>
+            <result name="input" type="redirect">sale-order-detail?id_sod=${saleOrder.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-saleorder-detail" method="updateSaleOrderDetail" class="com.hp.action.SaleOrderDetailAction">
+            <result name="success" type="redirect">sale-order-detail?id_so=${saleOrderDetail.takeOrderID}</result>
+            <result name="input" >sale-order-detail-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-saleorder-detail" method="deleteSaleOrderDetail" class="com.hp.action.SaleOrderDetailAction">
+            <result name="success" type="redirect">sale-order-detail?id_so=${saleOrder.id}</result>
+            <result name="input" >sale-order-detail-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-saleorder" method="deleteSaleOrder" class="com.hp.action.SaleOrderAction">
+            <result name="success" >sale-order.jsp</result>
+            <result name="input" >sale-order-detail.jsp?id_so=${saleOrder.id}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <!--Report-->
+                
+        <action name="report" method="refresh" class="com.hp.action.ReportAction">
+            <result name="success">report.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <!--Report TAKE ORDER-->
+        <action name="manager-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="staff-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="customer-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        <action name="filter-result" method="filterResult" class="com.hp.action.ReportTakeOrderAction">
+            <result name="success">report-takeorder.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-takeorder" method="refresh" class="com.hp.action.ReportTakeOrderAction">
+            <result name="success">report-takeorder.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="export-takeorder-xls" method="exportTakeOrderList" class="com.hp.action.ReportTakeOrderAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >report-takeorder.jsp</result>
+        </action>
+        
+        
+        <!--Report SALE ORDER-->
+        <action name="manager-filter-sale" method="filter" class="com.hp.action.ReportSaleOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="staff-filter-sale" method="filter" class="com.hp.action.ReportSaleOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="customer-filter-sale" method="filter" class="com.hp.action.ReportSaleOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        <action name="filter-result-sale" method="filterResult" class="com.hp.action.ReportSaleOrderAction">
+            <result name="success">report-saleorder.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-saleorder" method="refresh" class="com.hp.action.ReportSaleOrderAction">
+            <result name="success">report-saleorder.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="export-saleorder-xls" method="exportSaleOrderList" class="com.hp.action.ReportSaleOrderAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >report-saleorder.jsp</result>
+        </action>
+        
+        <!--Report SALE WITH PRODUCT-->
+        <action name="manager-filter-sale-product" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="staff-filter-sale-product" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="customer-filter-sale-product" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        <action name="filter-result-sale-product" method="filterResult" class="com.hp.action.ReportSaleWithProductsAction">
+            <result name="success">report-sale-products.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-sale-products" method="refresh" class="com.hp.action.ReportSaleWithProductsAction">
+            <result name="success">report-sale-products.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="export-sale-product-xls" method="exportSaleOrderList" class="com.hp.action.ReportSaleWithProductsAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >report-sale-products.jsp</result>
+        </action>
+        
+        
+        <!-- Report SCHEDULE -->
+        <action name="filter-result-schedule" method="filterResult" class="com.hp.action.ReportScheduleAction">
+            <result name="success">report-schedules.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-schedules" method="refresh" class="com.hp.action.ReportScheduleAction">
+            <result name="success">report-schedules.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <!-- Report IMAGES -->
+        <action name="filter-result-image" method="filterResult" class="com.hp.action.ReportImageAction">
+            <result name="success">report-images.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-images" method="refresh" class="com.hp.action.ReportImageAction">
+            <result name="success">report-images.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="update-image-profile" method="setProfileImage" class="com.hp.action.ReportImageAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        <!-- SYSTEM MANAGER -->
+        <action name="system-manager" method="refresh" class="com.hp.action.SystemManagerAction">
+            <result name="success">system-manager.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="admin-detail" method="adminDetail" class="com.hp.action.SystemManagerAction">
+            <result name="success">system-manager-admin-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="admin-change-password" method="changePassword" class="com.hp.action.SystemManagerAction">
+            <result name="success">system-manager-admin-change-password.jsp</result>
+            <result name="input" >system-manager-admin-change-password.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="admin-edit" method="adminDetail" class="com.hp.action.SystemManagerAction">
+            <result name="success">system-manager-admin-edit.jsp</result>
+            <result name="input" >system-manager-admin-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="admin-update" method="updateAdmin" class="com.hp.action.SystemManagerAction">
+            <result name="success" type="redirect">admin-detail?id_admin=${user.stt}</result>
+            <result name="input" >system-manager-admin-edit.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="delete-admin" method="deleteAdmin" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager.jsp</result>
+            <result name="input" >system-manager-admin-detail.jsp?id_admin=${user.stt}</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="add-user" method="refresh" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-new.jsp</result>
+            <result name="input" >system-manager-admin-new.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="save-user" method="saveUser" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-detail.jsp?id_admin=${user.stt}</result>
+            <result name="input" >system-manager-admin-new.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <action name="user-notify" method="refresh" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-notify.jsp</result>
+            <result name="input" >system-manager-admin-notify.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="user-notify-update" method="updateNotify" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-notify.jsp</result>
+            <result name="input" >system-manager-admin-notify.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="user-history" method="refresh" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-history.jsp</result>
+            <result name="input" >system-manager-admin-history.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="display-user-history" method="displayHistory" class="com.hp.action.SystemManagerAction">
+            <result name="success" >system-manager-admin-history.jsp</result>
+            <result name="input" >system-manager-admin-history.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        <!-- Report Staff history -->
+        <action name="filter-result-staff-history" method="filterResult" class="com.hp.action.StaffHistoryAction">
+            <result name="success">report-staff-history.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="report-staff-history" method="refresh" class="com.hp.action.StaffHistoryAction">
+            <result name="success">report-staff-history.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+    </package>
+    
+    <package name="maps"  extends="json-default,hibernate-default" namespace="/maps">
+        
+        <!-- FITER PARAMETER-->
+        <action name="manager-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="staff-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        <action name="customer-filter" method="filter" class="com.hp.action.ReportTakeOrderAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
+        
+        <action name="view-locations" method="refresh" class="com.hp.action.ViewLocationsAction">
+            <result name="success">view-locations.jsp</result>
+            <result name="input" type="redirect">../home.jsp</result>
+            <result name="login" type="redirect">../index.jsp</result>
+        </action>
+        
+        <action name="filter-result" method="filterResult" class="com.hp.action.ViewLocationsAction">
+            <result name="success">view-locations.jsp</result>
+            <result name="input" type="redirect">../home.jsp</result>
+            <result name="login" type="redirect">../index.jsp</result>
+        </action>
+        
+        <!-- JOURNEY -->
+        <action name="view-journeys" method="refresh" class="com.hp.action.ViewJourneysAction">
+            <result name="success">view-journeys.jsp</result>
+            <result name="input" type="redirect">../home.jsp</result>
+            <result name="login" type="redirect">../index.jsp</result>
+        </action>
+        
+        <action name="filter-result-journey" method="filterResult" class="com.hp.action.ViewJourneysAction">
+            <result name="success">view-journeys.jsp</result>
+            <result name="input" type="redirect">../home.jsp</result>
+            <result name="login" type="redirect">../index.jsp</result>
+        </action>
+    </package>
+    
+    
+    
+    <package name="user"  extends="json-default,hibernate-default" namespace="/user">
+        <action name="login" method="login" class="com.hp.action.UserAction">
+            <result name="success" >/home.jsp</result>
+            <result name="input" >/index.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+    </package>
+</struts>
