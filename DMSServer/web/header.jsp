@@ -52,11 +52,11 @@
         <script type="text/javascript" src="modules/ModComments/ModCommentsCommon.js"></script>
         <!-- END -->
         
-<!--        Header-->
-        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="hdrNameBg">
+        <!--        Header hdrNameBg-->
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class=""> 
             <tbody>
                 <tr>
-                    <td valign="top"><img src="themes/softed/images/vtiger-crm.gif" alt="HOSCO-MANAGEMENT" title="HOSCO-MANAGEMENT" border="0"></td>
+                    <td valign="top"><img src="themes/softed/images/home-icon.png" alt="HOSCO-MANAGEMENT" title="HOSCO-MANAGEMENT" border="0"></td> <!--vtiger-crm.gif-->
                     <td width="100%" align="center">
                         <%
                             Announcement announcement = (Announcement)session.getAttribute("announcement");
@@ -114,7 +114,7 @@
                                     </s:set>
                                     
                                     <s:if test="#attr.PERMISSION != 0">
-                                    <td class="tabSeperator"><img src="themes/images/spacer.gif" width="2px" height="28px"></td>    
+                                    <td class="tabSeperator"><img src="themes/images/spacer.gif" width="1px" height="28px"></td>    
                                     <td <s:if test="#page == 'home'"> class="tabSelected" </s:if> <s:else>class="tabUnSelected"</s:else> onmouseover="fnDropDown(this, 'My Home Page_sub');" onmouseout="fnHideDrop('My Home Page_sub');" align="center" nowrap=""><a href="home">Trang chủ</a><img src="themes/softed/images/menuDnArrow.gif" border="0" style="padding-left:5px"></td>
                                     <td class="tabSeperator"><img src="themes/images/spacer.gif"></td>
                                     <td <s:if test="#page == 'staff'"> class="tabSelected" </s:if> <s:else>class="tabUnSelected"</s:else> onmouseover="fnDropDown(this, 'Tools_sub');" onmouseout="fnHideDrop('Tools_sub');" align="center" nowrap=""><a href="staff-list">Nhân viên</a><img src="themes/softed/images/menuDnArrow.gif" border="0" style="padding-left:5px"></td>
@@ -210,7 +210,7 @@
                 <tbody>
         <!--            <tr><td><a href="" class="drop_down">Chiến dịch</a></td></tr>-->
                     <tr><td><a href="customer-list" class="drop_down">Khách hàng</a></td></tr>
-                    <tr><td><a href="/DMS/maps/view-locations" class="drop_down">Xem vị trí</a></td></tr>
+                    <tr><td><a href="maps/view-locations" class="drop_down">Xem vị trí</a></td></tr>
                 </tbody>
             </table>
         </div>

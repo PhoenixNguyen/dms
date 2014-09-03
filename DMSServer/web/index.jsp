@@ -57,8 +57,9 @@
             <!-- Login Starts -->
             <table border="0" cellspacing="0" cellpadding="0" width=700>
                 <tr>
-                    <td class="bg" width="50%">
-                        <img src="themes/images/hoscoName.gif" alt="HOSCO-MANAGEMENT" title="HOSCO-MANAGEMENT">
+                    <td class="bg" width="50%" style="height: 50px; padding: 5px; font-size: large; font-weight: normal;">
+<!--                        <img src="themes/images/home-icon.png" alt="HOSCO-MANAGEMENT" title="HOSCO-MANAGEMENT">-->
+                        HỆ THỐNG QUẢN LÝ PHÂN PHỐI
                     </td>
                     <td class="bg" align="right" width="50%">
                     </td>

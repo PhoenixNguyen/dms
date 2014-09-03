@@ -11,29 +11,29 @@
 <html>
     <head>
         <title>Quản lý hành trình</title>
-        <link REL="SHORTCUT ICON" HREF="/DMS/themes/images/vtigercrm_icon.ico">
+        <link REL="SHORTCUT ICON" HREF="${pageContext.request.contextPath}/themes/images/vtigercrm_icon.ico">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <style type="text/css">
 
         </style>
         <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
             </script>-->
-        <script type="text/javascript" src="/DMS/jscalendar/calendar.js"></script>
-        <script type="text/javascript" src="/DMS/jscalendar/calendar-setup.js"></script>
-        <script type="text/javascript" src="/DMS/jscalendar/lang/calendar-vn.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/jscalendar/calendar.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/jscalendar/calendar-setup.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/jscalendar/lang/calendar-vn.js"></script>
         
-        <script language="JavaScript" type="text/javascript" src="/DMS/include/js/general.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/include/js/general.js"></script>
         
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/jquery.min.js"></script>
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/wz_jsgraphics.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/wz_jsgraphics.js"></script>
 
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/ajax_option.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_option.js"></script>
         
         
-        <link rel="stylesheet" type="text/css" href="/DMS/jscalendar/calendar-win2k-cold-1.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jscalendar/calendar-win2k-cold-1.css">
 <!--        <script type='text/javascript' src="http://www.walterzorn.de/en/scripts/wz_jsgraphics.js"></script>-->
         
-        <link rel="stylesheet" type="text/css" href="/DMS/js/maps/map.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/maps/map.css">
         <script type="text/javascript"
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGEhKh7kMB8aYZpl2nY6jAFo9td-iVA7k&sensor=true">
         </script>
@@ -384,7 +384,7 @@
                                 <td align=right><input name="date" id="jscal_field_date_start" type="text" size="10" class="importBox" style="width:70px;margin-left: 30px;" value="<s:property value="date"/>"></td>
                                 <td valign=absmiddle align=right>
                                     <img style="margin-left: -110px;margin-top: -5px;position: absolute;
-                                            "src="/DMS/themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_start">
+                                            "src="${pageContext.request.contextPath}/themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_start">
                                     <font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
                                     <script type="text/javascript">
                                         Calendar.setup({
@@ -429,7 +429,7 @@
                                             }
                                             " name="button" >
                     </td>
-                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='/DMS/customer-list'"></td>
+                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/customer-list'"></td>
                 </tr>
                 </table>
             </form>
@@ -446,7 +446,7 @@
                                     <s:date name="thoiGian" id="createdDateId" format="HH:mm:ss dd-MM-yyyy "/>
                 
                                 <li onmouseover="onGetLocation(this, <s:property value="viDo"/> , <s:property value="kinhDo"/>);" onmouseout="out();">
-                                    <img class="bgr" src="/DMS/js/maps/map.jpg" >
+                                    <img class="bgr" src="${pageContext.request.contextPath}/js/maps/map.jpg" >
                                     <!--                                    <h2><span></span></h2>--><br>
 <!--                                    <span class="name"></span>-->
                                     <p id="name"><s:property value="maNhanVien"/> : <s:property value="%{createdDateId}"/></p>

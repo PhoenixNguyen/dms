@@ -11,21 +11,21 @@
 <html>
     <head>
         <title>Xem vị trí khách hàng</title>
-        <link REL="SHORTCUT ICON" HREF="/DMS/themes/images/vtigercrm_icon.ico">
+        <link REL="SHORTCUT ICON" HREF="${pageContext.request.contextPath}/themes/images/vtigercrm_icon.ico">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <style type="text/css">
 
         </style>
         <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
             </script>-->
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/jquery.min.js"></script>
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/wz_jsgraphics.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/wz_jsgraphics.js"></script>
 
-        <script language="JavaScript" type="text/javascript" src="/DMS/js/ajax_option.js"></script>
+        <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_option.js"></script>
         
 <!--        <script type='text/javascript' src="http://www.walterzorn.de/en/scripts/wz_jsgraphics.js"></script>-->
         
-        <link rel="stylesheet" type="text/css" href="/DMS/js/maps/map.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/maps/map.css">
         <script type="text/javascript"
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGEhKh7kMB8aYZpl2nY6jAFo9td-iVA7k&sensor=true">
         </script>
@@ -300,7 +300,7 @@
                 
                 <tr>
                     <td  ><input name="generatenw" value=" Lọc kết quả " class="crmbutton small create" type="submit" ></td>
-                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='/DMS/customer-list'"></td>
+                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/customer-list'"></td>
                 </tr>
                 </table>
             </form>
@@ -354,7 +354,7 @@
 <!--                                            Neu co se break-->
                                             <s:if test="#breakLoop == false">
                                                 <s:if test="maDoiTuong == customerID " >
-                                                    <img src="/DMS/db_customers/<s:property value="customerID"/>/<s:property value="name"/>"  title="<s:property value="name"/>"/>
+                                                    <img src="${pageContext.request.contextPath}/db_customers/<s:property value="customerID"/>/<s:property value="name"/>"  title="<s:property value="name"/>"/>
                                                     <s:set var = "breakLoop" value = "true" />
                                                 </s:if>
                                                 
@@ -362,7 +362,7 @@
                                         </s:iterator>
 <!--                                        Neu ko co se gan mac dinh-->
                                         <s:if test="#breakLoop == false">
-                                            <img class="bgr" src="/DMS/js/maps/map.jpg" title="ảnh mặc định">
+                                            <img class="bgr" src="${pageContext.request.contextPath}/js/maps/map.jpg" title="ảnh mặc định">
                                             
                                         </s:if>
                                     <!--                                    <h2><span></span></h2>--><br>

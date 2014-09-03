@@ -122,8 +122,10 @@
                                                         <table border="0" cellspacing="1" cellpadding="3" width="100%" class="lvt small">
                                                             <!-- Table Headers -->
                                                             <tbody>
-                                                                <tr>
-                                                                    Hệ thống quản lý phân phối - Thông báo:
+                                                                <tr >
+                                                                    <td style="height: 40px; font-size: 18px;">
+                                                                        Thông báo từ ban quản trị:
+                                                                    </td>
                                                                 </tr>
                                                                 
                                                                 <!-- Table Contents -->

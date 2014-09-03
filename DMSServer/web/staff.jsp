@@ -12,9 +12,9 @@
 <html>
     <head>
         <title>admin - Nhân viên - Nhân viên - Phần mềm quản lý HOSCO-MANAGEMENT</title>
-        <link rel="SHORTCUT ICON" href="/DMS/themes/images/vtigercrm_icon.ico">  
-        <style type="text/css">@import url("/DMS/themes/softed/style.css");</style>
-        <link rel="stylesheet" type="text/css" media="all" href="/DMS/jscalendar/calendar-win2k-cold-1.css">
+        <link rel="SHORTCUT ICON" href="themes/images/vtigercrm_icon.ico">  
+        <style type="text/css">@import url("themes/softed/style.css");</style>
+        <link rel="stylesheet" type="text/css" media="all" href="jscalendar/calendar-win2k-cold-1.css">
         <!-- ActivityReminder customization for callback -->
 
         <style type="text/css">div.fixedLay1 { position:fixed; }</style>

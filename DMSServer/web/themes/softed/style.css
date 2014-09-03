@@ -114,7 +114,7 @@
 .tabSeperator {
 	background: #fff url(images/toolbar-div.png) bottom no-repeat;
 	background-color:#fff;
-	width:2px;
+	//width:2px;
 }
 
 .tabSelected, .tabUnSelected {
