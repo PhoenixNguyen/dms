@@ -141,7 +141,7 @@
                                                             <tbody>
                                                                 <tr>
                                                             <b><s:property value="%{#index.index + 1}"/>. </b> <span style="color: #0070BA"><s:property value="content" /></span><br>
-                                                            <span style="font-size: 13px"><s:property value="date" /> - Từ: <b><i><s:property value="creater" /></i></b> <br></span>
+                                                            <span style="font-size: 11px"><s:property value="date" /> - Từ: <b><i><s:property value="creater" /></i></b> <br></span>
                                                                 
 <!--                                                                    Chọn menu <b>Nhân viên</b> để quản lý nhân viên, các chức năng chính: <br>-->
 <!--                                                                    <p style="margin-left: 20px;">1.1. Thêm, sửa xóa nhân viên, thêm nhân viên bằng file excel (số lượng lớn)<br>

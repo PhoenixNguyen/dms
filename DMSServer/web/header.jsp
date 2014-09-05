@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link REL="SHORTCUT ICON" HREF="themes/images/vtigercrm_icon123.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>

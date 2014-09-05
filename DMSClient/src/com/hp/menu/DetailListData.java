@@ -18,7 +18,8 @@ public class DetailListData {
 	public static final DetailsList[] MENU_LIST = {
 		new DetailsList("Hồ sơ cá nhân", 0, null),
 		new DetailsList("Hồ sơ", R.drawable.ic_menu_contact, ProfileActivity.class),
-		new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class),
+		new DetailsList("Lịch công tác", R.drawable.effective_writing, Schedule_CalendarActivity.class),
+		//new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class),
 		
 		new DetailsList("Đầu vào", 0, null),
 		new DetailsList("Sản phẩm", R.drawable.ic_menu_products, ProductManagerActivity.class),

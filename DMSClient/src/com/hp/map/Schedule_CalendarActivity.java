@@ -412,8 +412,8 @@ public class Schedule_CalendarActivity extends MainMenuActivity {
 			// Print dates of the current week
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 			String itemvalue;
-			event = Utility.readCalendarEvent(Schedule_CalendarActivity.this);
-			Log.d("=====Event====", event.toString());
+//			event = Utility.readCalendarEvent(Schedule_CalendarActivity.this);
+//			Log.d("=====Event====", event.toString());
 			Log.d("=====Date ARRAY====", Utility.startDates.toString());
 
 			for (int i = 0; i < Utility.startDates.size(); i++) {

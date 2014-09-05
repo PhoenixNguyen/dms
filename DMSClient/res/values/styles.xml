@@ -17,4 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+   	<style name="DMSTheme" parent="AppBaseTheme">
+   	    <item name="android:homeAsUpIndicator">@drawable/ic_drawer</item>
+	</style>
 </resources>

@@ -40,9 +40,14 @@ public class MainMenuActivity extends Activity  {
 		
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setIcon(R.drawable.ic_drawer);
+		getActionBar().setLogo(R.drawable.ic_launcher);
+		//getActionBar().setIcon(R.drawable.ic_drawer);
 		
-		//supportActionBar.setHomeButtonEnabled(true);
+		//getActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer1);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		
 	}
 
 //	@Override

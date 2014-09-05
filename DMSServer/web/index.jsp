@@ -12,7 +12,7 @@
     <head>
         <link REL="SHORTCUT ICON" HREF="themes/images/vtigercrm_icon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOSCO-MANAGEMENT</title>
+        <title>HỆ THỐNG QUẢN LÝ PHÂN PHỐI</title>
 
         <style type="text/css">@import url("include/style.css");</style>
         <style type="text/css">@import url("themes/softed/style.css");</style>

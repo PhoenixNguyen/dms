@@ -411,34 +411,39 @@ containing a value of this type.
         public static final int ic_action_refresh=0x7f02003b;
         public static final int ic_action_search=0x7f02003c;
         public static final int ic_drawer=0x7f02003d;
-        public static final int ic_launcher=0x7f02003e;
-        public static final int ic_menu_about=0x7f02003f;
-        public static final int ic_menu_contact=0x7f020040;
-        public static final int ic_menu_customers=0x7f020041;
-        public static final int ic_menu_database=0x7f020042;
-        public static final int ic_menu_orders=0x7f020043;
-        public static final int ic_menu_picture=0x7f020044;
-        public static final int ic_menu_products=0x7f020045;
-        public static final int ic_menu_profile=0x7f020046;
-        public static final int ic_plusone_medium_off_client=0x7f020047;
-        public static final int ic_plusone_small_off_client=0x7f020048;
-        public static final int ic_plusone_standard_off_client=0x7f020049;
-        public static final int ic_plusone_tall_off_client=0x7f02004a;
-        public static final int icon=0x7f02004b;
-        public static final int icon_logout=0x7f02004c;
-        public static final int image_button_down=0x7f02004d;
-        public static final int image_button_up=0x7f02004e;
-        public static final int list_item_background=0x7f02004f;
-        public static final int logo=0x7f020050;
-        public static final int logo2=0x7f020051;
-        public static final int picker_middle=0x7f020052;
-        public static final int repeat_bg=0x7f020053;
-        public static final int selector=0x7f020054;
-        public static final int table_border=0x7f020055;
-        public static final int table_border2=0x7f020056;
-        public static final int table_order_detail=0x7f020057;
-        public static final int up_button=0x7f020058;
-        public static final int up_button_press=0x7f020059;
+        public static final int ic_drawer1=0x7f02003e;
+        public static final int ic_launcher=0x7f02003f;
+        public static final int ic_launcher144=0x7f020040;
+        public static final int ic_launcher_48=0x7f020041;
+        public static final int ic_launcher_72=0x7f020042;
+        public static final int ic_launcher_96=0x7f020043;
+        public static final int ic_menu_about=0x7f020044;
+        public static final int ic_menu_contact=0x7f020045;
+        public static final int ic_menu_customers=0x7f020046;
+        public static final int ic_menu_database=0x7f020047;
+        public static final int ic_menu_orders=0x7f020048;
+        public static final int ic_menu_picture=0x7f020049;
+        public static final int ic_menu_products=0x7f02004a;
+        public static final int ic_menu_profile=0x7f02004b;
+        public static final int ic_plusone_medium_off_client=0x7f02004c;
+        public static final int ic_plusone_small_off_client=0x7f02004d;
+        public static final int ic_plusone_standard_off_client=0x7f02004e;
+        public static final int ic_plusone_tall_off_client=0x7f02004f;
+        public static final int icon=0x7f020050;
+        public static final int icon_logout=0x7f020051;
+        public static final int image_button_down=0x7f020052;
+        public static final int image_button_up=0x7f020053;
+        public static final int list_item_background=0x7f020054;
+        public static final int logo=0x7f020055;
+        public static final int logo2=0x7f020056;
+        public static final int picker_middle=0x7f020057;
+        public static final int repeat_bg=0x7f020058;
+        public static final int selector=0x7f020059;
+        public static final int table_border=0x7f02005a;
+        public static final int table_border2=0x7f02005b;
+        public static final int table_order_detail=0x7f02005c;
+        public static final int up_button=0x7f02005d;
+        public static final int up_button_press=0x7f02005e;
     }
     public static final class id {
         public static final int CancelDialog=0x7f060069;
@@ -928,6 +933,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b0001;
+        public static final int DMSTheme=0x7f0b0002;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;
