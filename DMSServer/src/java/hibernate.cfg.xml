@@ -52,5 +52,7 @@
         <mapping class="com.hp.domain.History" />
         <mapping class="com.hp.domain.StaffHistory" />
         
+        <mapping class="com.hp.domain.Calendar" />
+        
   </session-factory>
 </hibernate-configuration>

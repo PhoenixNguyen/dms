@@ -230,5 +230,30 @@ public class StaffDAOImpl implements StaffDAO{
         
         return courses;
     }
+
+    @Override
+    public Staff loadStaff(String pID) {
+        Session session = getSessionFactory().openSession();
+        Transaction transaction;
+        transaction = session.beginTransaction();
+        
+        boolean result = false;
+        Staff staff = null;
+        try{
+            
+            String sql = "from Staff where lower(id)= '"+pID.toLowerCase()+"' and status= true ";
+            Query query = (Query) session.createQuery(sql);
+
+            staff = (Staff)query.uniqueResult();
+                        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        
+        return staff;
+    }
     
 }

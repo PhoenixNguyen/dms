@@ -250,6 +250,7 @@
         <action name="updateStaff" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
             <result name="success">input/updateStaff</result>
         </action>
+        
     </package>
     <package name="map"  extends="json-default,hibernate-default" namespace="/map">
         <!--FOR CUSTOMERS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -1391,7 +1392,10 @@
             <result name="login" >index.jsp</result>
         </action>
         
-        
+        <!-- CALENDAR -->
+        <action name="view-calendars" method="displayCalendars" class="com.hp.action.CalendarAction">
+            <result name="success">view/calendar/calendars.jsp</result>
+        </action>
     </package>
     
     <package name="maps"  extends="json-default,hibernate-default" namespace="/maps">

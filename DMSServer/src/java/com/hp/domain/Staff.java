@@ -6,11 +6,15 @@
 
 package com.hp.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.hibernate.validator.Length;
@@ -25,7 +29,7 @@ import org.hibernate.validator.Valid;
 
 @Entity
 @Table(name="tb_nhanvien")
-public class Staff {
+public class Staff implements Serializable {
     @Id
     @GeneratedValue
     
@@ -64,7 +68,7 @@ public class Staff {
     
     @Column(name="nhanvien_permission")
     private Integer permission;
-
+    
     public Integer getPermission() {
         return permission;
     }

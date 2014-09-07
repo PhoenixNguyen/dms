@@ -26,6 +26,8 @@ public interface StaffDAO {
     //getList staff objects
     public List<Staff> getListStaff();
     public Staff loadStaff(int pID);
+    public Staff loadStaff(String pID);
+    
     public boolean update(Staff pStaff);
     public boolean saveOrUpdate(Staff pStaff);
             
