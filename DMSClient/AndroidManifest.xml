@@ -185,6 +185,20 @@
          <activity
             android:name="com.hp.map.ProfileChangePWActivity"
             android:label="Thay đổi mật khẩu" />
+         
+         <activity
+            android:name="com.hp.map.CalendarManagerActivity"
+            android:label="@string/calendar_manager" 
+            
+        	/>
+         
+         <activity
+            android:name="com.hp.map.CalendarAdditionActivity"
+            android:label="@string/calendar_addition" 
+            
+        	/>
+         
+         
     </application>
 
 </manifest>

@@ -146,4 +146,25 @@
 	<string name="cus_fax">Fax</string>
 	<string name="cus_note">Ghi chú</string>
 	
+	<!-- Calendar -->
+	<string name="calendar_manager">Lịch công tác</string>
+	<string name="calendar_manager_detail">Chi tiết lịch công tác</string>
+	
+	<string name="calendar_addition">Thêm mới lịch công tác</string>
+	<string name="hint_content">Nội dung công việc</string>
+	
+	<string name="date_picker">Chọn ngày</string>
+	<string name="time_picker">Chọn thời gian</string>
+	
+	<string-array name="cities_array">
+        <item>Hà Nội</item>
+        <item>Hà Nam</item>
+        <item>Hải Phòng</item>
+        <item>Nam Định</item>
+        <item>Quảng Ninh</item>
+        <item>Thái Bình</item>
+        <item>Bắc Ninh</item>
+        <item>Ninh Bình</item>
+    </string-array>
+    
 </resources>

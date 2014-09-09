@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/com/hp/calendar/CalendarArrayAdapter.java=UTF-8
+encoding//src/com/hp/calendar/OrdersManagerDetailArrayAdapter.java=UTF-8
 encoding//src/com/hp/customer/CustomerArrayAdapter.java=UTF-8
+encoding//src/com/hp/map/CalendarManagerActivity.java=UTF-8
 encoding//src/com/hp/map/CustomerAdditionActivity.java=UTF-8
 encoding//src/com/hp/map/CustomerEditerActivity.java=UTF-8
 encoding//src/com/hp/map/CustomerListActivity.java=UTF-8
@@ -37,6 +40,7 @@ encoding//src/com/hp/map/TakeOrdersManagerActivity.java=UTF-8
 encoding//src/com/hp/menu/DetailListData.java=UTF-8
 encoding//src/com/hp/order_manager/OrdersManagerArrayAdapter.java=UTF-8
 encoding//src/com/hp/order_manager/OrdersManagerDetailArrayAdapter.java=UTF-8
+encoding//src/com/hp/rest/CalendarAPI.java=UTF-8
 encoding//src/com/hp/rest/CustomerAPI.java=UTF-8
 encoding//src/com/hp/rest/ProductAPI.java=UTF-8
 encoding//src/com/hp/rest/ProviderAPI.java=UTF-8
