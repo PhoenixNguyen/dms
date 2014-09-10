@@ -22,10 +22,14 @@ public class Calendar implements Serializable{
      *         1: Completed
      */
     
+	public static int INIT_STATUS = 0;
+	public static int COMPLETED_STATUS = 1;
+	
     private int stt;
     
     private Staff staff;
-    private Date calendarDate;
+
+	private Date calendarDate;
     private String province;
     private String content;
     
@@ -43,6 +47,20 @@ public class Calendar implements Serializable{
     
     private String note;
 
+    public Calendar(Staff staff, Date calendarDate, String province,
+			String content, int status) {
+		super();
+		this.staff = staff;
+		this.calendarDate = calendarDate;
+		this.province = province;
+		this.content = content;
+		this.status = status;
+	}
+    
+    public Calendar(){
+    	
+    }
+    
     public int getStt() {
         return stt;
     }

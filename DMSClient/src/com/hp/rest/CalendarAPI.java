@@ -20,11 +20,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.hp.calendar.CalendarArrayAdapter;
 import com.hp.customer.CustomerArrayAdapter;
 import com.hp.domain.Calendar;
 import com.hp.domain.Customer;
 import com.hp.domain.Staff;
 import com.hp.domain.TakeOrder;
+import com.hp.map.CalendarAdditionActivity;
 import com.hp.map.CalendarManagerActivity;
 import com.hp.map.CustomerListActivity;
 import com.hp.map.CustomerMapActivity;
@@ -42,7 +44,7 @@ public class CalendarAPI {
 
 	// ///////////////// LOAD
 	// /////////////////////////////////////////////////////////////////////////////
-//	public static class PutTakeOrderTask extends
+//	public static class PutCalendarTask extends
 //			AsyncTask<Void, Void, String> {
 //		Context context;
 //		String method1;
@@ -177,129 +179,153 @@ public class CalendarAPI {
 //	}
 	
 	// ///////////////// DELETE AND INSERT AND
-		// EDIT/////////////////////////////////////////////////////////////////////////////
-//		public static class ModifyTakeOrderTask extends
-//				AsyncTask<Void, Void, String> {
-//			Context context;
-//			String method;
-//			TakeOrder takeOrder;
-//			OrdersManagerArrayAdapter adapter;
-//			ListView ordersListView;
-//			
-//			TakeOrdersManagerActivity activity;
-//			
-//			public ModifyTakeOrderTask(Context context, String method,
-//					TakeOrder takeOrder, OrdersManagerArrayAdapter adapter,  ListView ordersListView,
-//					TakeOrdersManagerActivity activity) {
-//				this.context = context;
-//				this.method = method;
-//				this.takeOrder = takeOrder;
-//				this.ordersListView = ordersListView;
-//				this.activity = activity;
-//			}
-//
-//			ProgressDialog dialog;
-//
-//			protected void onPreExecute() {
-//				dialog = ProgressDialog.show(context, "", "Đang xử lý ... ", true);
-//			}
-//
-//			protected String doInBackground(Void... params) {
-//				// do something
-//				if (CheckingInternet.isOnline()) {
-//					System.out.println("Internet access!!____________________");
-//				} else {
-//					
-//					System.out.println("NO Internet access!!____________________");
-//
-//					return "nointernet";
-//
-//				}
-//
-//				// Deleting
-//				ClientResponse response = Rest.mService
-//						.path("webresources")
-//						.path(method)
-//						.accept("application/json")
-//						.type("application/json")
-//						.post(ClientResponse.class, ConvertObjectToString(takeOrder));
-//
-//				String output = response.toString();
-//				System.out.println("input 1: " + output);
-//
-//				if ((response.getStatus() == 200)
-//						&& (response.getEntity(String.class).compareTo("true") == 0)) {
-//
-//					return "success";
-//				} else {
-//
-//					return "fail";
-//				}
-//				// =====================================================================================
-//
-//			}
-//
-//			protected void onPostExecute(String result) {
-//				if (result.equals("success")) {
-//					// do something
-//					
-//					Toast.makeText(context, "Đã xóa ", Toast.LENGTH_SHORT)
-//								.show();
-//					
-//					activity.dialog.dismiss();
-//					
-//					//Refresh
-//			        activity.getOrderList();
-//			        adapter = new OrdersManagerArrayAdapter(context,
-//							android.R.layout.simple_list_item_1, takeOrderList);
-//					ordersListView.setAdapter(adapter);
-//
-//					
-//				} else if (result.equals("nointernet")) {
-//					Toast.makeText(context,
-//							"Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!",
-//							Toast.LENGTH_SHORT).show();
-//				} else if (result.equals("fail")) {
-//					
-//						Toast.makeText(
-//								context,
-//								"Không thể xóa. Dữ liệu đang được sử dụng cho đối tượng khác",
-//								Toast.LENGTH_SHORT).show();
-//				} else {
-//					
-//					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
-//
-//				}
-//				
-//				dialog.dismiss();
-//			}
-//
-//			public String ConvertObjectToString(TakeOrder takeOrder) {
-//				ObjectMapper mapper = new ObjectMapper();
-//				String cusStr = new String();
-//
-//				try {
-//
-//					cusStr = mapper.writeValueAsString(takeOrder);
-//
-//				} catch (JsonGenerationException ex) {
-//
-//					ex.printStackTrace();
-//
-//				} catch (JsonMappingException ex) {
-//
-//					ex.printStackTrace();
-//
-//				} catch (IOException ex) {
-//
-//					ex.printStackTrace();
-//
-//				}
-//
-//				return cusStr;
-//			}
-//
-//		}
+		// /////////////////////////////////////////////////////////////////////////////
+		public static class ModifyCalendarTask extends
+				AsyncTask<Void, Void, String> {
+			public static String ACTION_DELETE = "delete";
+			public static String ACTION_EDIT = "edit";
+			public static String ACTION_ADD = "add";
+			
+			Context context;
+			String action;
+			String method;
+			Calendar calendar;
+			CalendarArrayAdapter adapter;
+			ListView calendarListView;
+			
+			CalendarManagerActivity activity;
+			CalendarAdditionActivity addActivity;
+			
+			public ModifyCalendarTask(Context context,String action, String method,
+					Calendar calendar, CalendarArrayAdapter adapter,  ListView calendarListView,
+					CalendarManagerActivity activity, CalendarAdditionActivity addActivity) {
+				this.context = context;
+				this.action = action;
+				this.method = method;
+				this.calendar = calendar;
+				this.calendarListView = calendarListView;
+				this.activity = activity;
+				this.addActivity = addActivity;
+				
+			}
+
+			ProgressDialog dialog;
+
+			protected void onPreExecute() {
+				dialog = ProgressDialog.show(context, "", "Đang xử lý ... ", true);
+			}
+
+			protected String doInBackground(Void... params) {
+				// do something
+				if (CheckingInternet.isOnline()) {
+					System.out.println("Internet access!!____________________");
+				} else {
+					
+					System.out.println("NO Internet access!!____________________");
+
+					return "nointernet";
+
+				}
+
+				// Deleting
+				ClientResponse response = Rest.mService
+						.path("webresources")
+						.path(method)
+						.accept("application/json")
+						.type("application/json")
+						.post(ClientResponse.class, ConvertObjectToString(calendar));
+
+				String output = response.toString();
+				System.out.println("input 1: " + output);
+
+				if ((response.getStatus() == 200)
+						&& (response.getEntity(String.class).compareTo("true") == 0)) {
+
+					return "success";
+				} else {
+
+					return "fail";
+				}
+				// =====================================================================================
+
+			}
+
+			protected void onPostExecute(String result) {
+				if (result.equals("success")) {
+					// do something
+					
+					if(action.equalsIgnoreCase(ACTION_DELETE)){
+						Toast.makeText(context, "Đã xóa ", Toast.LENGTH_SHORT)
+									.show();
+						
+						activity.dialog.dismiss();
+						
+						//Refresh
+				        activity.getCalendarList();
+				        adapter = new CalendarArrayAdapter(context,
+								android.R.layout.simple_list_item_1, calendarList);
+				        calendarListView.setAdapter(adapter);
+					}
+					
+					if(action.equalsIgnoreCase(ACTION_ADD)){
+						Toast.makeText(context, "Thêm lịch làm việc thành công ", Toast.LENGTH_SHORT)
+									.show();
+						
+						//addActivity.dialog.dismiss();
+					}
+					
+					if(action.equalsIgnoreCase(ACTION_EDIT)){
+						Toast.makeText(context, "Sửa lịch làm việc thành công ", Toast.LENGTH_SHORT)
+									.show();
+						
+						//activity.dialog.dismiss();
+					}
+					
+				} else if (result.equals("nointernet")) {
+					Toast.makeText(context,
+							"Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!",
+							Toast.LENGTH_SHORT).show();
+				} else if (result.equals("fail")) {
+					
+						Toast.makeText(
+								context,
+								"Không thể xóa. Dữ liệu đang được sử dụng cho đối tượng khác",
+								Toast.LENGTH_SHORT).show();
+				} else {
+					
+					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+
+				}
+				
+				dialog.dismiss();
+			}
+
+			public String ConvertObjectToString(Calendar calendar) {
+				ObjectMapper mapper = new ObjectMapper();
+				String cusStr = new String();
+
+				try {
+
+					cusStr = mapper.writeValueAsString(calendar);
+
+				} catch (JsonGenerationException ex) {
+					
+					ex.printStackTrace();
+					return "";
+				} catch (JsonMappingException ex) {
+
+					ex.printStackTrace();
+					return "";
+				} catch (IOException ex) {
+
+					ex.printStackTrace();
+					return "";
+				}
+
+				return cusStr;
+			}
+
+		}
 		
 		
 		// ///////////////// LOADING

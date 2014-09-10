@@ -1,9 +1,14 @@
 package com.hp.map;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.hp.rest.CalendarAPI.ModifyCalendarTask;
+import com.hp.rest.Rest;
+
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -13,6 +18,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -20,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -27,12 +34,16 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 	public Context context = this;
 	private Spinner cities_spinner;
 	
-	private Spinner date_spinner;
-	private Spinner time_spinner;
+	public Spinner date_spinner;
+	public Spinner time_spinner;
+	
+	public EditText calendar_content;
 	
 	protected void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.calendar_addition);
+		
+		calendar_content = (EditText) findViewById(R.id.calendar_content);
 		
 		cities_spinner = (Spinner) findViewById(R.id.cities_spinner);
 		date_spinner = (Spinner) findViewById(R.id.pick_date);
@@ -43,8 +54,8 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 		time_spinner.setOnItemSelectedListener(this);
 		
 		spinnerAdapter(cities_spinner);
-		dateSpinnerAdapter(date_spinner);
-		timeSpinnerAdapter(time_spinner);
+		dateSpinnerAdapter(date_spinner, new Date());
+		timeSpinnerAdapter(time_spinner, new Date());
 		
 		date_spinner.setOnTouchListener(new OnTouchListener() {
 
@@ -68,6 +79,51 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
         });
 	}
 	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+	    int itemId = item.getItemId();
+	    switch (itemId) {
+	    case android.R.id.home:
+	    	menuDialog();
+
+	        // Toast.makeText(this, "home pressed", Toast.LENGTH_LONG).show();
+	        break;
+	        
+	    case R.id.action_save:
+	    	saveCalendar();
+            return true;
+               
+        default:
+            return super.onOptionsItemSelected(item);
+
+	    }
+
+	    return true;
+	}
+	
+	private void saveCalendar() {
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		
+		String content = calendar_content.getText().toString();
+		String province = cities_spinner.getSelectedItem().toString();
+		String date = date_spinner.getSelectedItem().toString(); 
+		String time = time_spinner.getSelectedItem().toString();
+		
+		System.out.println(content + " || " +province+ " || " +date+ " || " + time);
+		
+		com.hp.domain.Calendar calendar = null;
+		try {
+			calendar = new com.hp.domain.Calendar(Rest.mStaff, df.parse(date), province, content, com.hp.domain.Calendar.INIT_STATUS);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModifyCalendarTask addCalendar = new ModifyCalendarTask(this, ModifyCalendarTask.ACTION_ADD, "putCalendar", calendar, null, null, null, this);
+		addCalendar.execute();
+		
+	}
+
 	private void spinnerAdapter(Spinner spinner) {
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -79,23 +135,23 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 		
 	}
 	
-	private void dateSpinnerAdapter(Spinner spinner) {
+	public void dateSpinnerAdapter(Spinner spinner, Date time) {
 		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-		String []dates = {df.format(new Date())};
+		String []dates = {df.format(time)};
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, dates);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,   android.R.layout.simple_spinner_item, dates);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
 		
 	}
-	private void timeSpinnerAdapter(Spinner spinner) {
+	public void timeSpinnerAdapter(Spinner spinner, Date time) {
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-		String []times = {df.format(new Date())};
+		String []times = {df.format(time)};
 		
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, times);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,   android.R.layout.simple_spinner_item, times);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
@@ -129,7 +185,8 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 	    newFragment.show(getFragmentManager(), "timePicker");
 	}
 	
-	public static class DatePickerFragment extends DialogFragment
+	@SuppressLint("ValidFragment")
+	public class DatePickerFragment extends DialogFragment
 		    implements DatePickerDialog.OnDateSetListener {
 		
 		@Override
@@ -138,18 +195,21 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 		final Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH);
-		int day = c.get(Calendar.DAY_OF_MONTH);
+		int day = c.get(Calendar.DATE);
 		
 		// Create a new instance of DatePickerDialog and return it
 		return new DatePickerDialog(getActivity(), this, year, month, day);
 		}
 		
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 		// Do something with the date chosen by the user
+			dateSpinnerAdapter(date_spinner, new Date(year -1900, month, day));
 		}
 	}
 	
-	public static class TimePickerFragment extends DialogFragment
+	@SuppressLint("ValidFragment")
+	public class TimePickerFragment extends DialogFragment
 	    implements TimePickerDialog.OnTimeSetListener {
 	
 		@Override
@@ -164,8 +224,10 @@ public class CalendarAdditionActivity extends MainMenuActivity implements OnItem
 				DateFormat.is24HourFormat(getActivity()));
 		}
 		
+		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 		// Do something with the time chosen by the user
+			timeSpinnerAdapter(time_spinner, new Date(0, 0, 0, hourOfDay, minute, 0));
 		}
 	}
 }
