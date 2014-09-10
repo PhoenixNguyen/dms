@@ -118,7 +118,7 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 
 	public void init(){
 		activityClass = TakeOrdersDetailManagerActivity.class;
-		getList = "getTakeOrderList";
+		getList = "getCalendarList";
 		deleteValue = "deleteOrder";
 	}
 

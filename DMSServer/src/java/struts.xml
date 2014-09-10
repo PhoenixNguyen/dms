@@ -251,6 +251,10 @@
             <result name="success">input/updateStaff</result>
         </action>
         
+        
+        <action name="getCalendarList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/getCalendarList</result>
+        </action>
     </package>
     <package name="map"  extends="json-default,hibernate-default" namespace="/map">
         <!--FOR CUSTOMERS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->

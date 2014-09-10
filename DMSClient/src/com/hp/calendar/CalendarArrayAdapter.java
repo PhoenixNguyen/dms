@@ -1,12 +1,13 @@
 package com.hp.calendar;
 
-import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hp.common.Utility;
 import com.hp.domain.Calendar;
-import com.hp.domain.TakeOrder;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -32,6 +33,8 @@ public class CalendarArrayAdapter extends ArrayAdapter<Calendar>{
 	    this.originalList.addAll(pValues);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
+	@SuppressWarnings("deprecation")
 	public View getView(int position, View convertView, ViewGroup parent){
 		FeatureView featureView;
         if (convertView instanceof FeatureView) {
@@ -46,15 +49,16 @@ public class CalendarArrayAdapter extends ArrayAdapter<Calendar>{
         }
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
-
-        featureView.setTitleId(values.get(position).getCalendarDate() + "");
-        featureView.setDescriptionId(values.get(position).getContent());
-        featureView.setValue("");
-        featureView.setStaff("");
+        
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        
+        featureView.setTitleId(Utility.displayDayOfWeek(values.get(position).getCalendarDate().getDay()) + ", "+ df.format(values.get(position).getCalendarDate()));
+        featureView.setProvince("Địa điểm: " + values.get(position).getProvince());
+        featureView.setDescription("Công việc: " + values.get(position).getContent());
+        featureView.setStatus(values.get(position).getStatus());
         
         return featureView;
 	}
-	
 	
 	@Override
 	   public Filter getFilter() {

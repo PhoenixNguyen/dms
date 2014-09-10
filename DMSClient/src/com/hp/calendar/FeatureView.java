@@ -21,6 +21,7 @@ import com.hp.map.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -36,7 +37,7 @@ public final class FeatureView extends FrameLayout {
 
         LayoutInflater layoutInflater =
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        layoutInflater.inflate(R.layout.feature_orders_manager, this);
+        layoutInflater.inflate(R.layout.feature_view_calendar, this);
     }
 
     /**
@@ -53,12 +54,19 @@ public final class FeatureView extends FrameLayout {
      *
      * @param descriptionId the resource id of the description of the demo
      */
-    public synchronized void setDescriptionId(String descriptionId) {
-        ((TextView) (findViewById(R.id.description))).setText(descriptionId);
+    public synchronized void setProvince(String province) {
+        ((TextView) (findViewById(R.id.province))).setText(province);
     }
     
-    public synchronized void setValue(String value) {
-        ((TextView) (findViewById(R.id.value))).setText(value);
+    public synchronized void setDescription(String description) {
+        ((TextView) (findViewById(R.id.description))).setText(description);
+    }
+    
+    public synchronized void setStatus(int status) {
+    	if(status == 0)
+    		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.exclamation);
+    	if(status == 1)
+    		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.tick);
     }
     
     public synchronized void setStaff(String value) {

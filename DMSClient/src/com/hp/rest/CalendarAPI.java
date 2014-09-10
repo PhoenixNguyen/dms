@@ -338,35 +338,32 @@ public class CalendarAPI {
 
 				}
 
-				// Deleting
-//				ClientResponse response = Rest.mService
-//						.path("webresources")
-//						.path(method)
-//						.accept("application/json")
-//						.type("application/json")
-//						.post(ClientResponse.class, staff);
-//
-//				String output = response.toString();
-//				System.out.println("input 1: " + output);
-//
-//				if (response.getStatus() != 200) {
-//
-//					return "nodata";
-//				} else {
-//
-//					String re = response.getEntity(String.class);
-//					System.out.println("________________ " + re);
-//
-//					// Convert
-//					if (ConvertStringToObjectList(re))
-//						return "success";
-//					else
-//						return "nodata";
-//				}
+				// handling
+				ClientResponse response = Rest.mService
+						.path("webresources")
+						.path(method)
+						.accept("application/json")
+						.type("application/json")
+						.post(ClientResponse.class, staff);
+
+				String output = response.toString();
+				System.out.println("input 1: " + output);
+
+				if (response.getStatus() != 200) {
+
+					return "nodata";
+				} else {
+
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
+
+					// Convert
+					if (ConvertStringToObjectList(re))
+						return "success";
+					else
+						return "nodata";
+				}
 				
-				if (ConvertStringToObjectList())
-					return "success";
-				return "nodata";
 				// =====================================================================================
 
 			}
@@ -392,47 +389,47 @@ public class CalendarAPI {
 				dialog.dismiss();
 			}
 
-			public boolean ConvertStringToObjectList() {
+			public boolean ConvertStringToObjectList(String input) {
 				// pair to object
-//				ObjectMapper mapper = new ObjectMapper();
-//
-//				try {
-//					calendarList = mapper.readValue(
-//							input,
-//							TypeFactory.defaultInstance().constructCollectionType(
-//									List.class, Calendar.class));
-//					// System.out.println("++++++++++++++ mdt "+customerList.get(0).getmMaDoiTuong());
-//				} catch (JsonGenerationException e) {
-//					e.printStackTrace();
-//					return false;
-//				} catch (JsonMappingException e) {
-//					e.printStackTrace();
-//					return false;
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//					return false;
-//				}
+				ObjectMapper mapper = new ObjectMapper();
+
+				try {
+					calendarList = mapper.readValue(
+							input,
+							TypeFactory.defaultInstance().constructCollectionType(
+									List.class, Calendar.class));
+					// System.out.println("++++++++++++++ mdt "+customerList.get(0).getmMaDoiTuong());
+				} catch (JsonGenerationException e) {
+					e.printStackTrace();
+					return false;
+				} catch (JsonMappingException e) {
+					e.printStackTrace();
+					return false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					return false;
+				}
 				
-				Staff staff = new Staff();
-				staff.setId("001");
-				staff.setName("HP");
-				
-				Calendar calendar = new Calendar();
-				calendar.setCalendarDate(new Date());
-				calendar.setContent("Hello demo");
-				calendar.setStaff(staff);
-				
-				Staff staff2 = new Staff();
-				staff2.setId("001");
-				staff2.setName("HP");
-				
-				Calendar calendar2 = new Calendar();
-				calendar2.setCalendarDate(new Date());
-				calendar2.setContent("Hello demo");
-				calendar2.setStaff(staff2);
-				
-				calendarList.add(calendar);
-				calendarList.add(calendar2);
+//				Staff staff = new Staff();
+//				staff.setId("001");
+//				staff.setName("HP");
+//				
+//				Calendar calendar = new Calendar();
+//				calendar.setCalendarDate(new Date());
+//				calendar.setContent("Hello demo");
+//				calendar.setStaff(staff);
+//				
+//				Staff staff2 = new Staff();
+//				staff2.setId("001");
+//				staff2.setName("HP");
+//				
+//				Calendar calendar2 = new Calendar();
+//				calendar2.setCalendarDate(new Date());
+//				calendar2.setContent("Hello demo");
+//				calendar2.setStaff(staff2);
+//				
+//				calendarList.add(calendar);
+//				calendarList.add(calendar2);
 				
 				return true;
 			}

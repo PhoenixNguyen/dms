@@ -7,6 +7,7 @@
 package com.hp.dao;
 
 import com.hp.domain.Calendar;
+import com.hp.domain.Staff;
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public interface CalendarDAO {
     public boolean delete(Calendar calendar);
     public Calendar getCalendar(int id);
     
+    public List<Calendar> getCalendarList(Staff staff);
 }
