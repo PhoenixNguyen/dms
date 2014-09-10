@@ -167,4 +167,9 @@
         <item>Ninh Bình</item>
     </string-array>
     
+	<!-- TimeKeeper -->
+	<string name="time_picker">Máy chấm công</string>
+	<string name="timekeeping_time">Ngày</string>
+	<string name="timekeeping_check">Chấm công ngay</string>
+	
 </resources>

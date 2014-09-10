@@ -11,6 +11,7 @@ import com.hp.map.SaleManagerActivity;
 import com.hp.map.SaleOrdersManagerActivity;
 import com.hp.map.Schedule_CalendarActivity;
 import com.hp.map.TakeOrdersManagerActivity;
+import com.hp.map.TimeKeeperActivity;
 public class DetailListData {
 	public DetailListData(){
 		
@@ -20,7 +21,8 @@ public class DetailListData {
 		new DetailsList("Hồ sơ cá nhân", 0, null),
 		new DetailsList("Hồ sơ", R.drawable.ic_menu_contact, ProfileActivity.class),
 		new DetailsList("Lịch công tác", R.drawable.effective_writing, CalendarManagerActivity.class),
-		//new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class),
+		//new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class), <-- OLD
+		new DetailsList("Chấm công", R.drawable.time_keeper, TimeKeeperActivity.class),
 		
 		new DetailsList("Đầu vào", 0, null),
 		new DetailsList("Sản phẩm", R.drawable.ic_menu_products, ProductManagerActivity.class),

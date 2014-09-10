@@ -443,8 +443,9 @@ containing a value of this type.
         public static final int table_border=0x7f02005a;
         public static final int table_border2=0x7f02005b;
         public static final int table_order_detail=0x7f02005c;
-        public static final int up_button=0x7f02005d;
-        public static final int up_button_press=0x7f02005e;
+        public static final int time_keeper=0x7f02005d;
+        public static final int up_button=0x7f02005e;
+        public static final int up_button_press=0x7f02005f;
     }
     public static final class id {
         public static final int CancelDialog=0x7f06006d;
@@ -453,12 +454,12 @@ containing a value of this type.
         public static final int DateTimePicker=0x7f060054;
         public static final int ResetDateTime=0x7f06006c;
         public static final int SetDateTime=0x7f06006b;
-        public static final int action_add=0x7f0600b2;
-        public static final int action_done=0x7f0600b3;
-        public static final int action_edit=0x7f0600b4;
-        public static final int action_over_flow=0x7f0600ac;
-        public static final int action_save=0x7f0600ab;
-        public static final int action_websearch=0x7f0600b1;
+        public static final int action_add=0x7f0600b4;
+        public static final int action_done=0x7f0600b5;
+        public static final int action_edit=0x7f0600b6;
+        public static final int action_over_flow=0x7f0600ae;
+        public static final int action_save=0x7f0600ad;
+        public static final int action_websearch=0x7f0600b3;
         public static final int address=0x7f060094;
         public static final int btnLogin=0x7f060051;
         public static final int button=0x7f0600a9;
@@ -527,9 +528,9 @@ containing a value of this type.
         public static final int id_search=0x7f06007b;
         public static final int idlaber=0x7f0600a2;
         public static final int image=0x7f06004c;
-        public static final int init_order=0x7f0600ad;
+        public static final int init_order=0x7f0600af;
         public static final int input_text=0x7f060037;
-        public static final int inventory_manager=0x7f0600af;
+        public static final int inventory_manager=0x7f0600b1;
         public static final int job=0x7f060095;
         public static final int left_drawer=0x7f060007;
         public static final int legal_info=0x7f06004d;
@@ -543,7 +544,7 @@ containing a value of this type.
         public static final int ma_kh=0x7f06008f;
         public static final int manager=0x7f060098;
         public static final int map=0x7f06003d;
-        public static final int menu_legal=0x7f0600b0;
+        public static final int menu_legal=0x7f0600b2;
         public static final int menu_list_view=0x7f060053;
         public static final int min_container=0x7f060065;
         public static final int min_display=0x7f060067;
@@ -611,12 +612,14 @@ containing a value of this type.
         public static final int stock_id_value=0x7f06009d;
         public static final int sum=0x7f060017;
         public static final int sum_value=0x7f060018;
-        public static final int take_picture=0x7f0600ae;
+        public static final int take_picture=0x7f0600b0;
         public static final int tax=0x7f060016;
         public static final int ten_kh=0x7f060090;
         public static final int terrain=0x7f060003;
         public static final int text=0x7f060021;
         public static final int thoi_gian=0x7f060091;
+        public static final int time_check=0x7f0600ac;
+        public static final int time_keeper=0x7f0600ab;
         public static final int title=0x7f060008;
         public static final int total=0x7f06000d;
         public static final int total_name=0x7f06007f;
@@ -682,6 +685,7 @@ containing a value of this type.
         public static final int stock_manager_dialog=0x7f03002e;
         public static final int take_images=0x7f03002f;
         public static final int take_order_feature=0x7f030030;
+        public static final int time_keeper=0x7f030031;
     }
     public static final class menu {
         public static final int customer_manager_menu=0x7f0c0000;
@@ -915,7 +919,11 @@ containing a value of this type.
         public static final int stock_manager=0x7f07006d;
         public static final int take_images=0x7f070067;
         public static final int text_label=0x7f070025;
+        /**  TimeKeeper 
+         */
         public static final int time_picker=0x7f070084;
+        public static final int timekeeping_check=0x7f070086;
+        public static final int timekeeping_time=0x7f070085;
         /**  For Login 
          */
         public static final int username_label=0x7f070022;

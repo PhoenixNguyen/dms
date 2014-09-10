@@ -198,7 +198,11 @@
             
         	/>
          
-         
+         <activity
+            android:name="com.hp.map.TimeKeeperActivity"
+            android:label="@string/time_picker" 
+            
+        	/>
     </application>
 
 </manifest>
