@@ -10,9 +10,10 @@
     	android:layout_height="wrap_content"
     	android:minHeight="60dp"
     	android:text="@string/timekeeping_time"
-    	android:textSize="15sp"
+    	android:textSize="20sp"
     	android:padding="5dp"
     	android:background="#C67439"
+    	android:textStyle="bold"
 	    />
 	<Button 
 	    android:id="@+id/time_check"
@@ -20,12 +21,15 @@
 	    android:layout_height="wrap_content"
 	    android:text="@string/timekeeping_check"
 	    android:padding="5dp"
-	    
+	    android:onClick="timeKeeping"
 	    />
 	<LinearLayout
+	    android:id="@+id/times_timekeeping"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
+	    android:orientation="vertical" 
+	    android:layout_marginTop="10dp"
+	    >
 	    
     </LinearLayout>
 	
