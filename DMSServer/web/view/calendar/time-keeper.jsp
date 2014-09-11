@@ -44,7 +44,7 @@
                                     <tr>
                                         <td style="padding: 10px; text-align: left;" width="70%">
                                             <span class="moduleName">
-                                                Kế hoạch
+                                                Báo cáo chấm công
                                             </span>&nbsp;&nbsp;
                                             <!--                                            <input type="button" name="custReport" value="Sửa Báo cáo" class="crmButton small edit" onClick="editReport('20');">-->
                                             <br>
@@ -104,8 +104,10 @@
                                                                     <td class='rptCellLabel'>Stt</td>
                                                                     <td class='rptCellLabel'>Mã nhân viên</td>
                                                                     <td class='rptCellLabel'>Tên nhân viên</td>
-                                                                    <td class='rptCellLabel'>Thời gian chấm công</td>
+                                                                    
                                                                     <td class='rptCellLabel'>Vị trí</td>
+                                                                    <td class='rptCellLabel'>Thời gian chấm công</td>
+                                                                    <td class='rptCellLabel'>Số giờ</td>
                                                                 </tr>
                                                                 
                                                                 
@@ -115,9 +117,10 @@
                                                                     <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
                                                                     <td class='rptData'><s:property value="staff.getId()"/></td>
                                                                     <td class='rptData'><s:property value="staff.name"/></td>
-                                                                    <td class='rptData'><s:property value="%{dateconverted}"/></td>
-                                                                    <td class='rptData'><s:property value="province"/></td>
                                                                     
+                                                                    <td class='rptData'><s:property value="province"/></td>
+                                                                    <td class='rptData'><s:property value="%{dateconverted}"/></td>
+                                                                    <td class='rptData'><s:property value="timeBetween"/> Giờ</td>
                                                                 </tr>
                                                                 
                                                                 </s:iterator>

@@ -10,15 +10,22 @@ import com.hp.dao.CalendarDAO;
 import com.hp.dao.CalendarDAOImpl;
 import com.hp.dao.StaffDAO;
 import com.hp.dao.StaffDAOImpl;
+import com.hp.dao.TimeKeeperDAO;
+import com.hp.dao.TimeKeeperDAOImpl;
 import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
+import com.hp.domain.TimeKeeper;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.HOURS;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -89,5 +96,82 @@ public class UtilitiesHandle {
         
         CalendarDAO calendarDAO = new CalendarDAOImpl();
         return Response.status(200).entity(calendarDAO.saveOrUpdate(calendar) + "").build();
+    }
+    
+    @POST
+    @Path("/getTimeKeeperList")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<TimeKeeper> getTimeKeeperList(String pData) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String[] total = null;
+        String staffId = "";
+        String date = "";
+        try{
+            total = pData.split("::");
+            staffId = total[0];
+            date = total[1];
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        Staff staff = new Staff();
+        StaffDAO staffDAO = new StaffDAOImpl();
+        staff = staffDAO.loadStaff(staffId);
+        
+        if(staff == null)
+            return null;
+        
+        TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
+        
+        return timeKeeperDAO.getTimeKeeperList(staff, df.parse(date));
+        
+    }
+    
+    @POST
+    @Path("/putTimeKeeper")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response putTimeKeeper( String pData ) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        
+        ObjectMapper mapper = new ObjectMapper();
+        TimeKeeper timeKeeper = new TimeKeeper();
+        try {
+                timeKeeper = mapper.readValue(pData, TimeKeeper.class);
+                
+        } catch (JsonGenerationException e) {
+                e.printStackTrace();
+        } catch (JsonMappingException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+        
+        if(timeKeeper == null)
+            return Response.status(200).entity("false").build();
+        
+        TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
+        List<TimeKeeper> todayList = timeKeeperDAO.getTimeKeeperList(timeKeeper.getStaff(), df.parse(df.format(timeKeeper.getTimeAt())));
+        
+        if(todayList != null && todayList.size() > 0){
+            TimeKeeper start = todayList.get(0);
+            
+            int diffInDays = (int)( (timeKeeper.getTimeAt().getTime() - start.getTimeAt().getTime()) / (1000 * 60 * 60 * 24) );
+            
+            long duration  = timeKeeper.getTimeAt().getTime() - start.getTimeAt().getTime();
+
+            long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+            long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+            long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
+
+            System.out.println("diffInSeconds: " + diffInSeconds + " diffInMinutes: " + diffInMinutes + " diffInHours: " + diffInHours);     
+            
+            DecimalFormat dc = new DecimalFormat("####0.0");
+            System.out.println((int)diffInHours + Float.parseFloat(dc.format(diffInMinutes/60f)));
+            timeKeeper.setTimeBetween( (int)diffInHours + Float.parseFloat(dc.format(diffInMinutes/60f)));
+        }
+        return Response.status(200).entity(timeKeeperDAO.saveOrUpdate(timeKeeper) + "").build();
     }
 }

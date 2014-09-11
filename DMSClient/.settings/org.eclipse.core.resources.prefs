@@ -51,6 +51,7 @@ encoding//src/com/hp/rest/SaleOrderAPI.java=UTF-8
 encoding//src/com/hp/rest/ScheduleAPI.java=UTF-8
 encoding//src/com/hp/rest/TakeOrderAPI.java=UTF-8
 encoding//src/com/hp/rest/TakeOrderDetailAPI.java=UTF-8
+encoding//src/com/hp/rest/TimeKeeperAPI.java=UTF-8
 encoding//src/com/hp/rest/UserAPI.java=UTF-8
 encoding//src/com/hp/sale_order/AppSectionsPagerAdapter.java=UTF-8
 encoding//src/com/hp/sale_order/ReturnOrderFragment.java=UTF-8

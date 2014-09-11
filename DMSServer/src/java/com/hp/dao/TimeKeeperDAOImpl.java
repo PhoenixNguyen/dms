@@ -7,15 +7,16 @@
 package com.hp.dao;
 
 import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
-import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
 import com.hp.domain.TimeKeeper;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -50,7 +51,7 @@ public class TimeKeeperDAOImpl implements TimeKeeperDAO{
         
         List<TimeKeeper> courses = null;
         try{
-                courses = session.createQuery("from TimeKeeper ").list();
+                courses = session.createQuery("from TimeKeeper order by staff asc, timeAt asc").list();
             
         }catch(Exception e){
             e.printStackTrace();
@@ -143,7 +144,29 @@ public class TimeKeeperDAOImpl implements TimeKeeperDAO{
 
     @Override
     public List<TimeKeeper> getTimeKeeperList(Staff staff, Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            
+            Criteria criteria = session.createCriteria(TimeKeeper.class);
+            criteria.add(Restrictions.eq("staff", staff));
+            criteria.add(Restrictions.between("timeAt", date, c.getTime()));
+            criteria.addOrder(Order.asc("timeAt"));
+            return criteria.list();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        finally {
+            session.close();
+        }
+        
+        return null;
     }
     
 }

@@ -44,7 +44,7 @@
                                     <tr>
                                         <td style="padding: 10px; text-align: left;" width="70%">
                                             <span class="moduleName">
-                                                Kế hoạch
+                                                Kế hoạch công tác tuần
                                             </span>&nbsp;&nbsp;
                                             <!--                                            <input type="button" name="custReport" value="Sửa Báo cáo" class="crmButton small edit" onClick="editReport('20');">-->
                                             <br>

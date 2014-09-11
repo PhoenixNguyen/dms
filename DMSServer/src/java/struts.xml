@@ -259,6 +259,15 @@
         <action name="putCalendar" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
             <result name="success">utility/putCalendar</result>
         </action>
+        
+        <action name="getTimeKeeperList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/getTimeKeeperList</result>
+        </action>
+        
+        <action name="putTimeKeeper" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/putTimeKeeper</result>
+        </action>
+        
     </package>
     <package name="map"  extends="json-default,hibernate-default" namespace="/map">
         <!--FOR CUSTOMERS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
