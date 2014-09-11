@@ -10,8 +10,11 @@ import com.hp.dao.CalendarDAO;
 import com.hp.dao.CalendarDAOImpl;
 import com.hp.dao.StaffDAO;
 import com.hp.dao.StaffDAOImpl;
+import com.hp.dao.TimeKeeperDAO;
+import com.hp.dao.TimeKeeperDAOImpl;
 import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
+import com.hp.domain.TimeKeeper;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +24,14 @@ import java.util.List;
  *
  * @author HP
  */
-public class CalendarAction extends ActionSupport{
+public class TimeKeeperAction extends ActionSupport{
     private CalendarDAO calendarDAO = new CalendarDAOImpl();
     private StaffDAO staffDAO = new StaffDAOImpl();
+    private TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
     
-    private List<Calendar> calendarList = new ArrayList<Calendar>();
+    private List<TimeKeeper> timeKeeperList = new ArrayList<TimeKeeper>();
 
-    public String displayCalendars(){
+    public String displayTimeKeeping(){
 //        Staff staff = staffDAO.loadStaff("cau_giay");
 //        Calendar calendar = new Calendar();//calendarDAO.getCalendar(1);
 //        calendar.setCalendarDate(new Date());
@@ -37,18 +41,16 @@ public class CalendarAction extends ActionSupport{
 //        calendar.setStaff(staff);
 //        calendarDAO.saveOrUpdate(calendar);
         
-        calendarList = calendarDAO.getCalendarList();
+        timeKeeperList = timeKeeperDAO.getTimeKeeperList();
         
         return SUCCESS;
     }
     
-    public List<Calendar> getCalendarList() {
-        return calendarList;
+    public List<TimeKeeper> getTimeKeeperList() {
+        return timeKeeperList;
     }
 
-    public void setCalendarList(List<Calendar> calendarList) {
-        this.calendarList = calendarList;
+    public void setTimeKeeperList(List<TimeKeeper> timeKeeperList) {
+        this.timeKeeperList = timeKeeperList;
     }
-    
-    
 }

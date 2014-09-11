@@ -1404,6 +1404,10 @@
         <action name="view-calendars" method="displayCalendars" class="com.hp.action.CalendarAction">
             <result name="success">view/calendar/calendars.jsp</result>
         </action>
+        
+        <action name="view-timekeeping" method="displayTimeKeeping" class="com.hp.action.TimeKeeperAction">
+            <result name="success">view/calendar/time-keeper.jsp</result>
+        </action>
     </package>
     
     <package name="maps"  extends="json-default,hibernate-default" namespace="/maps">
