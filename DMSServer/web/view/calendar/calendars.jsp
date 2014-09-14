@@ -113,7 +113,7 @@
                                                                 
                                                                 
                                                                 <s:iterator value="calendarList" status="index">
-                                                                <s:date id="dateconverted" name="calendarDate" format="HH:mm:ss dd-MM-yyyy"/>
+                                                                <s:date id="dateconverted" name="calendarDate" format="dd-MM-yyyy"/>
                                                                 <tr>
                                                                     <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
                                                                     <td class='rptData'><s:property value="staff.getId()"/></td>

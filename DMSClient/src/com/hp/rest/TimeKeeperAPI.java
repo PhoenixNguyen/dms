@@ -11,6 +11,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -213,11 +214,20 @@ public class TimeKeeperAPI {
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
-				if ((response.getStatus() == 200)
-						&& (response.getEntity(String.class).compareTo("true") == 0)) {
+				String result = "";
+				if (response.getStatus() == 200)
+						result = response.getEntity(String.class);
+				
+				if (result.equalsIgnoreCase("true")){
 
 					return "success";
-				} else {
+				} 
+				else
+					if (result.equalsIgnoreCase("nocalendar")){
+
+						return "nocalendar";
+					}
+				else {
 
 					return "fail";
 				}
@@ -237,7 +247,13 @@ public class TimeKeeperAPI {
 					}
 					
 					
-				} else if (result.equals("nointernet")) {
+				}else
+					if (result.equals("nocalendar")) {
+						Toast.makeText(context, "Không tồn tại lịch công tác cho ngày hôm nay tại địa điểm này. Hãy lên kế hoạch trước! ", Toast.LENGTH_SHORT)
+						.show();
+					}
+				
+				else if (result.equals("nointernet")) {
 					Toast.makeText(context,
 							"Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!",
 							Toast.LENGTH_SHORT).show();
@@ -308,6 +324,7 @@ public class TimeKeeperAPI {
 				dialog = ProgressDialog.show(context, "", "Đang xử lý ... ", true);
 			}
 
+			@SuppressLint("SimpleDateFormat")
 			protected String doInBackground(Void... params) {
 				// do something
 				if (CheckingInternet.isOnline()) {

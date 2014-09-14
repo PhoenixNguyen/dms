@@ -238,14 +238,25 @@ public class CalendarAPI {
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
-				if ((response.getStatus() == 200)
-						&& (response.getEntity(String.class).compareTo("true") == 0)) {
+				//
+				String result = "";
+				if (response.getStatus() == 200)
+						result = response.getEntity(String.class);
+				
+				if (result.equalsIgnoreCase("true")){
 
 					return "success";
-				} else {
+				} 
+				else
+					if (result.equalsIgnoreCase("existcalendar")){
+
+						return "existcalendar";
+					}
+				else {
 
 					return "fail";
 				}
+				//
 				// =====================================================================================
 
 			}
@@ -281,7 +292,14 @@ public class CalendarAPI {
 						//activity.dialog.dismiss();
 					}
 					
-				} else if (result.equals("nointernet")) {
+				} 
+				else if (result.equals("existcalendar")) {
+					Toast.makeText(context,
+							"Ngày làm việc ngày này và địa điểm hiện tại đã tồn tại lịch công tác. Hãy chọn ngày khác!",
+							Toast.LENGTH_LONG).show();
+				}
+				
+				else if (result.equals("nointernet")) {
 					Toast.makeText(context,
 							"Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!",
 							Toast.LENGTH_SHORT).show();

@@ -153,7 +153,7 @@
 	<string name="calendar_addition">Thêm mới lịch công tác</string>
 	<string name="hint_content">Nội dung công việc</string>
 	
-	<string name="date_picker">Chọn ngày</string>
+	<string name="date_picker">Chọn ngày:</string>
 	<string name="time_picker">Chọn thời gian</string>
 	
 	<string-array name="cities_array">

@@ -11,20 +11,16 @@ import org.json.JSONObject;
 
 import com.hp.domain.TimeKeeper;
 import com.hp.gps.HttpHelper;
+import com.hp.gps.MapLocation;
 import com.hp.gps.MyLocationListener;
+import com.hp.gps.Unicode2NoSign;
 import com.hp.rest.Rest;
 import com.hp.rest.TimeKeeperAPI;
 import com.hp.rest.TimeKeeperAPI.GetTimeKeeperTask;
 import com.hp.rest.TimeKeeperAPI.ModifyTimeKeeperTask;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -185,10 +181,29 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			return ;
 			
 		}
+		
+		String cityPut = "";
 		//End Get City
+		for(String cityCore : MapLocation.getAllCityOfVietNam()){
+			if(city.toLowerCase().indexOf(Unicode2NoSign.convert(cityCore).toLowerCase()) != -1 ||
+					city.toLowerCase().indexOf(Unicode2NoSign.convert(cityCore).replace(" ", "").toLowerCase()) != -1 ){
+				
+				cityPut = cityCore;
+				
+				Log.v("CITY PUT: ", cityPut);
+				break;
+			}
+		}
+		
+		Log.v("CITY PUT: ", cityPut);
+		
+		if(cityPut.equals("")){
+			Toast.makeText(this, "Không xác định được thành phố, hãy liên lạc với nhà sản xuất. Xin cảm ơn!", Toast.LENGTH_SHORT).show();
+			return ;
+		}
 		
 		TimeKeeper timeKeeper = new TimeKeeper(Rest.mStaff, Timestamp.valueOf(df.format(new Date())), 
-				city, 0, "");
+				cityPut, 0, "");
 		
 		ModifyTimeKeeperTask addTimeKeeper = new ModifyTimeKeeperTask(this, ModifyTimeKeeperTask.ACTION_ADD, "putTimeKeeper", timeKeeper, this);
 		addTimeKeeper.execute();

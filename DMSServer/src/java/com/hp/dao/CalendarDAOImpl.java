@@ -7,13 +7,16 @@
 package com.hp.dao;
 
 import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
+import com.hp.common.Unicode2NoSign;
 import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -111,4 +114,25 @@ public class CalendarDAOImpl implements CalendarDAO{
         return null;
     }
     
+    @Override
+    public List<Calendar> getCalendarList(String city, Date date) {
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Criteria criteria = session.createCriteria(Calendar.class);
+            criteria.add(Restrictions.eq("calendarDate", date));
+            criteria.add(Restrictions.eq("province", city));
+            
+            return criteria.list();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        
+        finally {
+            session.close();
+        }
+        
+    }
 }

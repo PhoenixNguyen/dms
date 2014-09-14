@@ -8,6 +8,7 @@ package com.hp.dao;
 
 import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +23,7 @@ public interface CalendarDAO {
     public Calendar getCalendar(int id);
     
     public List<Calendar> getCalendarList(Staff staff);
+    
+    public List<Calendar> getCalendarList(String city, Date date);
+    
 }

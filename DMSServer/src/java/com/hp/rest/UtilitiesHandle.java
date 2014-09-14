@@ -73,6 +73,7 @@ public class UtilitiesHandle {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putCalendar( String pData ) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CalendarDAO calendarDAO = new CalendarDAOImpl();
         
         ObjectMapper mapper = new ObjectMapper();
         Calendar calendar = new Calendar();
@@ -90,11 +91,16 @@ public class UtilitiesHandle {
         if(calendar == null)
             return Response.status(200).entity("false").build();
         
+        List<Calendar> calendarList = calendarDAO.getCalendarList(calendar.getProvince(), calendar.getCalendarDate());
+        
+        if(calendarList != null && calendarList.size() > 0){
+            return Response.status(200).entity("existcalendar").build();
+        }
+        
         Date today = new Date();
         calendar.setCreatedTime(Timestamp.valueOf(dateFormat.format(today)));
         calendar.setUpdatedTime(Timestamp.valueOf(dateFormat.format(today)));
         
-        CalendarDAO calendarDAO = new CalendarDAOImpl();
         return Response.status(200).entity(calendarDAO.saveOrUpdate(calendar) + "").build();
     }
     
@@ -151,6 +157,14 @@ public class UtilitiesHandle {
         
         if(timeKeeper == null)
             return Response.status(200).entity("false").build();
+        
+        //Check calendar
+        CalendarDAO calendarDAO = new CalendarDAOImpl();
+        List<Calendar> calendarList = calendarDAO.getCalendarList(timeKeeper.getProvince(), timeKeeper.getTimeAt());
+        
+        if(calendarList == null || calendarList.size() == 0){
+            return Response.status(200).entity("nocalendar").build();
+        }
         
         TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
         List<TimeKeeper> todayList = timeKeeperDAO.getTimeKeeperList(timeKeeper.getStaff(), df.parse(df.format(timeKeeper.getTimeAt())));
