@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -36,6 +37,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -80,10 +82,14 @@ public class LoginActivity extends Activity {
         		
         TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
         
+        
         mUsername = (EditText)findViewById(R.id.username);
         mUsername.setText("ba_dinh");//ba_dinhtu_liem
         mPassword = (EditText)findViewById(R.id.password);
         mPassword.setText("111111");//111111
+        
+        
+        Log.e("App pre","nnj");
         
         Button btnLogin = (Button)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -151,12 +157,13 @@ public class LoginActivity extends Activity {
 
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             MyLocationListener locListen = new MyLocationListener();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 50, locListen);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, locListen);
 
             threadLooper = Looper.myLooper();
 
             Looper.loop();  // loop until "quit()" is called.
-
+            Log.e("get location ", " lan 1 ");
+            
             // remove the update listener to prevent the locationManager from calling it.
             locationManager.removeUpdates(locListen);
         }
@@ -165,6 +172,7 @@ public class LoginActivity extends Activity {
     private class MyLocationListener implements LocationListener {      
         @Override
         public void onLocationChanged(Location location) {
+        	Log.e("get location ", " lan 2 ");
         	if(location!= null && location.getLatitude()> 0){
         		System.out.println("latitude20: " + location.getLatitude() + " longitude20: " + location.getLongitude());
         		

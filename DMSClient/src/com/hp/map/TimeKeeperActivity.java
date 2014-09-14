@@ -2,25 +2,38 @@ package com.hp.map;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.hp.domain.TimeKeeper;
+import com.hp.gps.HttpHelper;
+import com.hp.gps.MyLocationListener;
 import com.hp.rest.Rest;
 import com.hp.rest.TimeKeeperAPI;
-import com.hp.rest.CalendarAPI.ModifyCalendarTask;
 import com.hp.rest.TimeKeeperAPI.GetTimeKeeperTask;
 import com.hp.rest.TimeKeeperAPI.ModifyTimeKeeperTask;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TimeKeeperActivity extends MainMenuActivity{
 	
@@ -29,6 +42,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	public String getList;
 	public TextView total_time;
 	
+	@SuppressLint("SimpleDateFormat")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_keeper);
@@ -41,10 +55,44 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		
 		time_keeper.setText("Chấm công ngày: " + df.format(new Date()));
 		
+		//gps = new GPS(this);
+		
 		init();
 		getTimeKeepingList();
+		
+		getCurrentLocation();
+		
+		getAddress();
 	}
 	
+	private void getCurrentLocation() {
+		// Get the location manager
+		  LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		  // Define the criteria how to select the location provider
+		  Criteria criteria = new Criteria();
+		  criteria.setAccuracy(Criteria.ACCURACY_COARSE);	//default
+		  
+		  criteria.setCostAllowed(false); 
+		  // get the best provider depending on the criteria
+		  String provider = locationManager.getBestProvider(criteria, false);
+	    
+		  // the last known location of this provider
+		  Location location = locationManager.getLastKnownLocation(provider);
+
+		  MyLocationListener mylistener = new MyLocationListener();
+	
+		  if (location != null) {
+			  mylistener.onLocationChanged(location);
+		  } else {
+			  // leads to the settings because there is no last known location
+			  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			  startActivity(intent);
+		  }
+		  // location updates: at least 1 meter and 200millsecs change
+		  locationManager.requestLocationUpdates(provider, 100, 0, mylistener);
+		
+	}
+
 	private void init() {
 		
 		getList = "getTimeKeeperList";
@@ -58,6 +106,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	        
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	public void displayTimeKeepings(){
 		//reset
 		times_timekeeping.removeAllViews();
@@ -81,7 +130,12 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			
 			params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			TextView times1_txt = new TextView(this);
-			times1_txt.setText("" + df.format(timeKeeper.getTimeAt()));
+			
+			Calendar c = Calendar.getInstance();
+			c.setTime(timeKeeper.getTimeAt());
+			c.add(Calendar.HOUR, -7);
+			
+			times1_txt.setText("" + df.format(c.getTime()));
 			times1_txt.setTextSize(18);
 			
 			times1.addView(times1_img);
@@ -94,10 +148,74 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		total_time.setText("Tổng số giờ làm việc " + hours + " giờ.");
 	}
 	
+	@SuppressLint("SimpleDateFormat")
+	public String getAddress(){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
+			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
+			return "";
+		}
+		//Toast.makeText(this, String.valueOf(MyLocationListener.location.getLatitude()) + " " +String.valueOf(MyLocationListener.location.getLongitude()), Toast.LENGTH_SHORT).show();
+		
+		//Get City
+		String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+		        + MyLocationListener.location.getLatitude() + "," + MyLocationListener.location.getLongitude() + "&sensor=false";
+		JSONObject jsonObj;
+		String City = "";
+		String address = "";
+	     try {
+	      
+	      jsonObj = new JSONObject(HttpHelper.makeRequest(url));
+
+	      String Status = jsonObj.getString("status");
+	      if (Status.equalsIgnoreCase("OK")) {
+		       JSONArray Results = jsonObj.getJSONArray("results");
+		       JSONObject zero = Results.getJSONObject(0);
+		       
+		       address = zero.getString("formatted_address").toString();
+		       
+		       String[] long_name = address.split(",");
+		       
+		       int number = long_name.length - 2;
+		       City = long_name[number];
+		       Log.d(" CityName _______________________________ ---> ", City + "");
+		       System.out.println("CityName _______________________________ --->" + City + "");
+		       
+		       //Toast.makeText(this, "CityName: " + City, Toast.LENGTH_SHORT).show();
+		       
+		       if (!City.equals("")) {
+		        //finish_service();
+		       }
+	      }
+
+	     } catch (JSONException e) {
+	    	 e.printStackTrace();
+	     }
+		//End Get City
+		
+	     if(!address.equals("")){
+	    	 time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
+	    			 "_____________________________________ \n" +
+	    			 "Vị trí hiện tại của bạn: " + " \n" + address);
+	     }
+	     
+	     return City;
+	}
+	@SuppressLint("SimpleDateFormat")
 	public void timeKeeping(View v){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//Get City
+		String city = getAddress();
+		if(city.equals("")){
+			Toast.makeText(this, "Đang xác định thành phố ...", Toast.LENGTH_SHORT).show();
+			return ;
+			
+		}
+		//End Get City
+		
 		TimeKeeper timeKeeper = new TimeKeeper(Rest.mStaff, Timestamp.valueOf(df.format(new Date())), 
-				"Hà Nội", 0, "");
+				city, 0, "");
 		
 		ModifyTimeKeeperTask addTimeKeeper = new ModifyTimeKeeperTask(this, ModifyTimeKeeperTask.ACTION_ADD, "putTimeKeeper", timeKeeper, this);
 		addTimeKeeper.execute();
@@ -111,4 +229,6 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		item.setVisible(false);
 		return true;
 	}
+	
+	
 }

@@ -412,54 +412,55 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 	}
 
 	public void button_filter(View view){
+		Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
 		
-		if(result_string_start == null || result_string_end == null)
-			return;
-		
-		filter = true;
-		calendarListFilter.clear();
-		
-		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		DateFormat dateFormat2 = new SimpleDateFormat("MMM/dd/yyyy HH:mm:ss");
-		
-		Date startDate = null;
-		Date endDate = null;
-		try {
-			startDate = dateFormat2.parse(result_string_start);
-			endDate = dateFormat2.parse(result_string_end);
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(startDate);
-		
-		for(int i = 0; i < CalendarAPI.calendarList.size(); i++){
-			Date compare = null;
-			try {
-				if(CalendarAPI.calendarList.get(i).getCalendarDate() == null)
-					continue;
-				String date = CalendarAPI.calendarList.get(i).getCalendarDate().toString();
-				
-				compare = dateFormat1.parse(date);
-				
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(compare);
-			if(compare.after(startDate) 
-					&& compare.before(endDate)){
-				
-				calendarListFilter.add(CalendarAPI.calendarList.get(i));
-				//System.out.println(CalendarAPI.calendarList.get(i).getStt());
-			}
-		}
-		
-		adapter = new CalendarArrayAdapter(this,
-				android.R.layout.simple_list_item_1, calendarListFilter);
-		calendarListView.setAdapter(adapter);
-		//onResume();
+//		if(result_string_start == null || result_string_end == null)
+//			return;
+//		
+//		filter = true;
+//		calendarListFilter.clear();
+//		
+//		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		DateFormat dateFormat2 = new SimpleDateFormat("MMM/dd/yyyy HH:mm:ss");
+//		
+//		Date startDate = null;
+//		Date endDate = null;
+//		try {
+//			startDate = dateFormat2.parse(result_string_start);
+//			endDate = dateFormat2.parse(result_string_end);
+//			
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(startDate);
+//		
+//		for(int i = 0; i < CalendarAPI.calendarList.size(); i++){
+//			Date compare = null;
+//			try {
+//				if(CalendarAPI.calendarList.get(i).getCalendarDate() == null)
+//					continue;
+//				String date = CalendarAPI.calendarList.get(i).getCalendarDate().toString();
+//				
+//				compare = dateFormat1.parse(date);
+//				
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			System.out.println(compare);
+//			if(compare.after(startDate) 
+//					&& compare.before(endDate)){
+//				
+//				calendarListFilter.add(CalendarAPI.calendarList.get(i));
+//				//System.out.println(CalendarAPI.calendarList.get(i).getStt());
+//			}
+//		}
+//		
+//		adapter = new CalendarArrayAdapter(this,
+//				android.R.layout.simple_list_item_1, calendarListFilter);
+//		calendarListView.setAdapter(adapter);
+//		//onResume();
 		
 	}
 	public void onDateChanged(Calendar c) {

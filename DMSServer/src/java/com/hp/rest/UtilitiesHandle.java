@@ -169,8 +169,8 @@ public class UtilitiesHandle {
             System.out.println("diffInSeconds: " + diffInSeconds + " diffInMinutes: " + diffInMinutes + " diffInHours: " + diffInHours);     
             
             DecimalFormat dc = new DecimalFormat("####0.0");
-            System.out.println((int)diffInHours + Float.parseFloat(dc.format(diffInMinutes/60f)));
-            timeKeeper.setTimeBetween( (int)diffInHours + Float.parseFloat(dc.format(diffInMinutes/60f)));
+            System.out.println(Float.parseFloat(dc.format(diffInMinutes/60f)));
+            timeKeeper.setTimeBetween( Float.parseFloat(dc.format(diffInMinutes/60f)));
         }
         return Response.status(200).entity(timeKeeperDAO.saveOrUpdate(timeKeeper) + "").build();
     }

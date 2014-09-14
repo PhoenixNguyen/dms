@@ -174,10 +174,13 @@ public class CustomerListActivity extends MainMenuActivity{
 		dialog.setContentView(v);
 		dialog.setTitle("Lựa chọn của bạn");
 		
-		final Button edit = (Button)dialog.findViewById(R.id.edit);
-		final Button detail = (Button)dialog.findViewById(R.id.detail);
-		final Button delete = (Button)dialog.findViewById(R.id.delete);
+		final Button edit = (Button)dialog.findViewById(R.id.detail);
+		final Button detail = (Button)dialog.findViewById(R.id.delete); detail.setText("Xem chi tiết");
+		final Button delete = (Button)dialog.findViewById(R.id.edit);
 		final Button cancel = (Button)dialog.findViewById(R.id.cancel);
+		
+		edit.setVisibility(View.INVISIBLE);
+		delete.setVisibility(View.INVISIBLE);
 		
 		edit.setOnClickListener(new OnClickListener() {
 			
