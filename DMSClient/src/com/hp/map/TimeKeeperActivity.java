@@ -60,38 +60,10 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		init();
 		getTimeKeepingList();
 		
-		getCurrentLocation();
-		
 		getAddress();
 	}
 	
-	private void getCurrentLocation() {
-		// Get the location manager
-		  LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		  // Define the criteria how to select the location provider
-		  Criteria criteria = new Criteria();
-		  criteria.setAccuracy(Criteria.ACCURACY_COARSE);	//default
-		  
-		  criteria.setCostAllowed(false); 
-		  // get the best provider depending on the criteria
-		  String provider = locationManager.getBestProvider(criteria, false);
-	    
-		  // the last known location of this provider
-		  Location location = locationManager.getLastKnownLocation(provider);
-
-		  MyLocationListener mylistener = new MyLocationListener();
 	
-		  if (location != null) {
-			  mylistener.onLocationChanged(location);
-		  } else {
-			  // leads to the settings because there is no last known location
-			  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-			  startActivity(intent);
-		  }
-		  // location updates: at least 1 meter and 200millsecs change
-		  locationManager.requestLocationUpdates(provider, 100, 0, mylistener);
-		
-	}
 
 	private void init() {
 		

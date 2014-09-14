@@ -1,19 +1,30 @@
 package com.hp.rest;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.widget.EditText;
+import android.provider.Settings;
 import android.widget.Toast;
 
+import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
+import com.hp.gps.MyLocationListener;
 import com.hp.map.LoginActivity;
 import com.hp.map.ProfileActivity;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
@@ -45,7 +56,8 @@ public class UserAPI {
     		dialog = ProgressDialog.show(context, "",
   				  "Đang đăng nhập", true);
 		}
-        protected String doInBackground(Void... params)
+        @SuppressWarnings("static-access")
+		protected String doInBackground(Void... params)
         {
             //do something  
 			if(CheckingInternet.isOnline()){
@@ -103,7 +115,9 @@ public class UserAPI {
             	//System.out.println(" ++ :: "+ getData.customerList.get(0).getMaDoiTuong());
             	
 				//Run thread to do backgroud send location
-				activity.doBackground();
+				//activity.doBackground();
+            	updateCurrentLocation(activity);
+            	
 				// TODO Auto-generated method stub
 				Intent i = new Intent(activity.getApplicationContext(), ProfileActivity.class);
 				activity.startActivity(i);
@@ -148,6 +162,33 @@ public class UserAPI {
         }
     } 
 	
+	private static void updateCurrentLocation(Activity activity) {
+		// Get the location manager
+		  LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+		  // Define the criteria how to select the location provider
+		  Criteria criteria = new Criteria();
+		  criteria.setAccuracy(Criteria.ACCURACY_COARSE);	//default
+		  
+		  criteria.setCostAllowed(false); 
+		  // get the best provider depending on the criteria
+		  String provider = locationManager.getBestProvider(criteria, false);
+	    
+		  // the last known location of this provider
+		  Location location = locationManager.getLastKnownLocation(provider);
+
+		  MyLocationListener mylistener = new MyLocationListener();
+	
+		  if (location != null) {
+			  mylistener.onLocationChanged(location);
+		  } else {
+			  // leads to the settings because there is no last known location
+			  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			  activity.startActivity(intent);
+		  }
+		  // location updates: at least 1 meter and 200millsecs change
+		  locationManager.requestLocationUpdates(provider, 10000, 50, mylistener);
+		
+	}
 	
 	//EDIT STAFF
 	public static class EditUserTask extends AsyncTask<Void,Void,String>
