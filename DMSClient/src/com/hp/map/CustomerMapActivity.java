@@ -330,7 +330,7 @@ public class CustomerMapActivity extends FragmentActivity
 				if(selectedValue.activityClass != null){
 					//if sigout
 					if(selectedValue.activityClass == LoginActivity.class){
-						LoginActivity.threadLooper.quit();
+						//LoginActivity.threadLooper.quit();
 					}
 					startActivity(new Intent(context, selectedValue.activityClass));
 				}

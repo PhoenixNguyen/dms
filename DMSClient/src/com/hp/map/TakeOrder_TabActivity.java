@@ -126,7 +126,7 @@ public class TakeOrder_TabActivity extends TabActivity{
 				if(selectedValue.activityClass != null){
 					//if sigout
 					if(selectedValue.activityClass == LoginActivity.class){
-						LoginActivity.threadLooper.quit();
+						//LoginActivity.threadLooper.quit();
 					}
 					startActivity(new Intent(context, selectedValue.activityClass));
 				}

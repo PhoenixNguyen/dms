@@ -66,9 +66,6 @@ public class LoginActivity extends Activity {
 	
 	private Context context = this;
 	
-	private Thread thread = new ThreadClass();
-    public static Looper threadLooper = null;
-    
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,131 +114,14 @@ public class LoginActivity extends Activity {
             }
         });
         
-       
-        
     }
     
-    public void doBackground(){
-
-    	// Begin the location reading thread.
-        thread.start();
-
-        // do UI stuff in here
-        // never sleep in UI thread.  Example only.
-        try {
-            Thread.sleep(0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-//        // end the thread.
-//        threadLooper.quit();
-//        // quit the activity
-//        this.finish();
-        //getLocation();
-        
-    }
-
     @SuppressLint("NewApi")
 	static <T> T[] append(T[] arr, T element) {
         final int N = arr.length;
         arr = Arrays.copyOf(arr, N + 1);
         arr[N] = element;
         return arr;
-    }
-    
-    private class ThreadClass extends Thread {
-        @Override
-        public void run() {
-            Looper.prepare();
-
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            MyLocationListener locListen = new MyLocationListener();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, locListen);
-
-            threadLooper = Looper.myLooper();
-
-            Looper.loop();  // loop until "quit()" is called.
-            Log.e("get location ", " lan 1 ");
-            
-            // remove the update listener to prevent the locationManager from calling it.
-            locationManager.removeUpdates(locListen);
-        }
-    }
-
-    private class MyLocationListener implements LocationListener {      
-        @Override
-        public void onLocationChanged(Location location) {
-        	Log.e("get location ", " lan 2 ");
-        	if(location!= null && location.getLatitude()> 0){
-        		System.out.println("latitude20: " + location.getLatitude() + " longitude20: " + location.getLongitude());
-        		
-        		//SEND
-        		pụtJourney((float)location.getLatitude(), (float)location.getLongitude());
-        	}
-            /* Do very intensive work here */
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-        
-        ///
-        public void pụtJourney(float pX, float pY){
-        	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    		Date date = new Date();
-    		String datestr = dateFormat.format(date);
-        	RoadManagement roadManagement = new RoadManagement(Rest.mStaff.getId(), Rest.mStaff.getName(), 
-        			Timestamp.valueOf(datestr), pX, pY, "");
-        	
-        	ObjectMapper mapper = new ObjectMapper();
-            String objectStr = new String();
-
-    		try {
-
-    			objectStr = mapper.writeValueAsString(roadManagement);
-
-    		} catch (JsonGenerationException ex) {
-
-    			ex.printStackTrace();
-
-    		} catch (JsonMappingException ex) {
-
-    			ex.printStackTrace();
-
-    		} catch (IOException ex) {
-
-    			ex.printStackTrace();
-
-    		}
-
-    		//Order ---------------------------------------------------------------
-    		ClientResponse response = Rest.mService.path("webresources").path("putStaffJourney").accept("application/json")
-    		.type("application/json").post(ClientResponse.class, objectStr);
-    	
-    	    String output = response.toString();
-    	    System.out.println("input 1: " + output);
-    	
-    	    if ((response.getStatus() == 200) && (response.getEntity(String.class).compareTo("true") == 0)) {
-    	        //Toast.makeText(context, "Đã lưu", Toast.LENGTH_SHORT).show();
-    	        // refresh customers
-    	    	System.out.println("Đã gửi");
-    	
-    	    }else
-    	    	System.out.println("Không thể gửi");
-    	    	//Toast.makeText(context, "Không thể gửi, hãy xem lại kết nối", Toast.LENGTH_SHORT).show();
-    	
-    	    System.out.println("Server response .... \n");
-    	    System.out.println("input 0: " + output);
-        }
     }
     
     @Override

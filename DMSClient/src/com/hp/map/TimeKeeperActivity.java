@@ -42,12 +42,14 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	public String getList;
 	public TextView total_time;
 	
+	private SimpleDateFormat df;
+	
 	@SuppressLint("SimpleDateFormat")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_keeper);
 		
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		df = new SimpleDateFormat("dd/MM/yyyy");
 		
 		times_timekeeping = (LinearLayout)findViewById(R.id.times_timekeeping);
 		time_keeper = (TextView)findViewById(R.id.time_keeper);
@@ -107,7 +109,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			c.setTime(timeKeeper.getTimeAt());
 			c.add(Calendar.HOUR, -7);
 			
-			times1_txt.setText("" + df.format(c.getTime()));
+			times1_txt.setText("  " + df.format(c.getTime()));
 			times1_txt.setTextSize(18);
 			
 			times1.addView(times1_img);
@@ -122,7 +124,6 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	
 	@SuppressLint("SimpleDateFormat")
 	public String getAddress(){
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
 			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
