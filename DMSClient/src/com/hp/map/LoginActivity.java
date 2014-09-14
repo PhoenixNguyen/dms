@@ -79,12 +79,20 @@ public class LoginActivity extends Activity {
         		
         TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
         
-        
         mUsername = (EditText)findViewById(R.id.username);
-        mUsername.setText("ba_dinh");//ba_dinhtu_liem
         mPassword = (EditText)findViewById(R.id.password);
-        mPassword.setText("111111");//111111
         
+        SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+        String username = sp.getString("username", null);
+        String password = sp.getString("password", null);
+        if(username != null && password != null){
+        	mUsername.setText(username);//ba_dinhtu_liem
+            mPassword.setText(password);//111111 
+        }
+        else{
+        	mUsername.setText("");//ba_dinhtu_liem
+            mPassword.setText("");//111111
+        }
         
         Log.e("App pre","nnj");
         

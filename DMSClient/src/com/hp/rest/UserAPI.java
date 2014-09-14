@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -122,6 +123,13 @@ public class UserAPI {
 				Intent i = new Intent(activity.getApplicationContext(), ProfileActivity.class);
 				activity.startActivity(i);
 	        	//new ThreatRealtime("hello").start();
+				
+				//Save passwork
+				SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sp.edit();
+				editor.putString("username", Rest.mStaff.getId());
+				editor.putString("password", Rest.mStaff.getPw());
+				editor.commit();
 	        	
             }
             else
