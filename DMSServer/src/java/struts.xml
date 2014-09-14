@@ -1417,6 +1417,15 @@
         <action name="view-timekeeping" method="displayTimeKeeping" class="com.hp.action.TimeKeeperAction">
             <result name="success">view/calendar/time-keeper.jsp</result>
         </action>
+        
+        <action name="filter-result-timekeeping" method="filterResult" class="com.hp.action.TimeKeeperAction">
+            <result name="success">view/calendar/time-keeper.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        
     </package>
     
     <package name="maps"  extends="json-default,hibernate-default" namespace="/maps">

@@ -63,7 +63,96 @@
                         </table>
 
                         <!-- Generate Report UI Filter -->
-                        
+                        <table class="small reportGenerateTable" align="center" cellpadding="5" cellspacing="0" width="95%" border=0>
+                            <tr>
+                                <td align=center class=small>
+                                    <form id="sub_form" method="get" action="filter-result-timekeeping">
+                                    <table border=0 cellspacing=0 cellpadding=0 width=80%>
+                                        <tr>
+                                            <td align=left class=small><b>Chọn Giám đốc</b></td><td class=small>&nbsp;</td>
+                                            <td align=left class=small><b>Chọn Nhân viên </b></td><td class=small>&nbsp;</td>
+                                            <td align=left class=small><b>Ngày bắt đầu </b></td><td class=small>&nbsp;</td>
+                                            <td align=left class=small><b>Ngày kết thúc </b>
+                                        </tr>
+                                        <tr>
+                                            <s:push value="pushInfo">
+                                            <td align="left" width="20%">
+                                                <select name="pushInfo.managerID"  class="small" style="width:98%" onchange="onClickManager(options[selectedIndex].text , 'take');">
+                                                    <option value="">--select--</option>
+                                                    <s:iterator value="userListGiamDoc" status="index" >
+                                                        <s:if test="pushInfo.managerID == userListGiamDoc.get(#index.index)">
+                                                            <option value="<s:property />" selected="selected"><s:property /></option>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <option value="<s:property />"><s:property /></option>
+                                                        </s:else>
+                                                    </s:iterator>
+                                                </select>
+                                            </td>
+                                            <td class=small>&nbsp;</td>
+                                            
+                                            <td align="left" width="20%">
+                                                <select name="pushInfo.staffID" class="small" style="width:98%" onchange="onClickStaff(options[selectedIndex].text , 'take');" id="staff">
+                                                    <option value="">--select--</option>
+                                                    <s:iterator value="userListStaff" status="index" >
+                                                        
+                                                        <s:if test="pushInfo.staffID == userListStaff.get(#index.index)">
+                                                            <option value="<s:property />" selected="selected"><s:property /></option>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <option value="<s:property />"><s:property /></option>
+                                                        </s:else>
+
+                                                        
+                                                    </s:iterator>
+                                                </select>
+                                            </td>
+                                            <td class=small>&nbsp;</td>
+                                            
+                                            </s:push>
+                                            <td align=left width="20%">
+                                                <table border=0 cellspacing=0 cellpadding=2>
+                                                    <tr>
+                                                        <s:date format="dd-MM-yyyy" id="dateconverted" name="startDate"/>
+                                                        <td align=left><input name="startDate" id="jscal_field_date_start" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="startDate"/>"></td>
+                                                        <td valign=absmiddle align=left>
+                                                            <img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_start">
+                                                            <font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
+                                                            <script type="text/javascript">
+                                                                Calendar.setup({
+                                                                    inputField: "jscal_field_date_start", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_start", singleClick: true, step: 1
+                                                                });
+                                                                
+                                                            </script>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align=left class=small>&nbsp;</td>
+                                            <td align=left width=20%>
+                                                <table border=0 cellspacing=0 cellpadding=2>
+                                                    <tr>
+                                                        <td align=left><input name="endDate" id="jscal_field_date_end" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="endDate"/>"></td>
+                                                        <td valign=absmiddle align=left><img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_end"><font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
+                                                            <script type="text/javascript">
+                                                                Calendar.setup({
+                                                                    inputField: "jscal_field_date_end", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_end", singleClick: true, step: 1
+                                                                });
+                                                            </script>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" colspan="8" style="padding:5px"><input name="generatenw" value=" Xem báo cáo " class="crmbutton small create" type="submit" ></td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
 
 
                         <div style="display: block;" id="Generate" align="center">
@@ -112,7 +201,7 @@
                                                                 
                                                                 
                                                                 <s:iterator value="timeKeeperList" status="index">
-                                                                <s:date id="dateconverted" name="timeAt" format="HH:mm:ss dd-MM-yyyy"/>
+                                                                <s:date id="dateconverted" name="timeAt" format="dd-MM-yyyy HH:mm:ss"/>
                                                                 <tr>
                                                                     <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
                                                                     <td class='rptData'><s:property value="staff.getId()"/></td>

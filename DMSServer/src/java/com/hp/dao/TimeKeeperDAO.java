@@ -25,4 +25,6 @@ public interface TimeKeeperDAO {
     
     public List<TimeKeeper> getTimeKeeperList(Staff staff);
     public List<TimeKeeper> getTimeKeeperList(Staff staff, Date date);
+    
+    public List<TimeKeeper> getTimeKeeperList(String pManagerID, String pStaff, Date pFromDate, Date pToDate);
 }

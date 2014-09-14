@@ -168,5 +168,44 @@ public class TimeKeeperDAOImpl implements TimeKeeperDAO{
         
         return null;
     }
-    
+ 
+    @Override
+    public List<TimeKeeper> getTimeKeeperList(String pManagerID, String pStaff, Date pFromDate, Date pToDate) {
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Criteria criteria = session.createCriteria(TimeKeeper.class);
+            Criteria criteriaInner = criteria.createCriteria("staff");
+            
+            if(pStaff!=null && !pStaff.equals("")){
+                criteriaInner.add(Restrictions.eq("id", pStaff));
+            }
+            else
+                if(pManagerID!= null && !pManagerID.equals("")){
+                    criteriaInner.add(Restrictions.eq("manager", pManagerID));
+                }
+            
+            if(pFromDate != null){
+                criteria.add(Restrictions.ge("timeAt", pFromDate));
+            }
+            
+            if(pToDate != null){
+                criteria.add(Restrictions.le("timeAt", pToDate));
+            }
+            
+            criteria.addOrder(Order.asc("timeAt"));
+            System.err.println(criteria.toString());
+            
+            return criteria.list();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        
+        finally {
+            session.close();
+        }
+        
+    }
 }

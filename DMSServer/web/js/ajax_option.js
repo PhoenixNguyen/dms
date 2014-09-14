@@ -22,10 +22,10 @@ function onClickManager(x , y) {
         options.find('option')
                 .remove()
                 .end();
-        options.append($("<option />").val("-1").text("--select--"));
+        options.append($("<option />").val("").text("--select--"));
         $.each(divisionList, function(k, v) {
 
-            options.append($("<option />").val(k).text(v));
+            options.append($("<option />").val(v).text(v));
         });
         
         //Set customer is null
@@ -33,7 +33,7 @@ function onClickManager(x , y) {
         customer.find('option')
                 .remove()
                 .end();
-        customer.append($("<option />").val("-1").text("--select--"));
+        customer.append($("<option />").val("").text("--select--"));
     }
     );
 }
@@ -62,10 +62,10 @@ function onClickStaff(x , y) {
         options.find('option')
                 .remove()
                 .end();
-        options.append($("<option />").val("-1").text("--select--"));
+        options.append($("<option />").val("").text("--select--"));
         $.each(divisionList, function(k, v) {
 
-            options.append($("<option />").val(k).text(v));
+            options.append($("<option />").val(v).text(v));
         });
     }
     );
