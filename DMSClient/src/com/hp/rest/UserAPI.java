@@ -125,11 +125,21 @@ public class UserAPI {
 	        	//new ThreatRealtime("hello").start();
 				
 				//Save passwork
-				SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
-				SharedPreferences.Editor editor = sp.edit();
-				editor.putString("username", Rest.mStaff.getId());
-				editor.putString("password", Rest.mStaff.getPw());
-				editor.commit();
+				if(activity.remember_me.isChecked()){
+					SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = sp.edit();
+					editor.putString("username", Rest.mStaff.getId());
+					editor.putString("password", Rest.mStaff.getPw());
+					editor.commit();
+				}
+				else{
+					SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = sp.edit();
+					editor.putString("username", "");
+					editor.putString("password", "");
+					editor.commit();
+				}
+				
 	        	
             }
             else

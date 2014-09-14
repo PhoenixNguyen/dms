@@ -42,6 +42,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,8 @@ public class LoginActivity extends Activity {
 	EditText mUsername;
 	EditText mPassword;
 	
+	public CheckBox remember_me;
+	
 	private Context context = this;
 	
     @SuppressLint("NewApi")
@@ -81,6 +84,8 @@ public class LoginActivity extends Activity {
         
         mUsername = (EditText)findViewById(R.id.username);
         mPassword = (EditText)findViewById(R.id.password);
+        
+        remember_me = (CheckBox)findViewById(R.id.remember_me);
         
         SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
         String username = sp.getString("username", null);

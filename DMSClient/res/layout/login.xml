@@ -73,6 +73,16 @@
 		  		android:layout_marginTop="5dip"
 		  		android:singleLine="true"
 		  		android:password="true"/>
+		  
+		  <CheckBox android:id="@+id/remember_me" 
+		      	android:layout_width="fill_parent"
+		  		android:layout_height="wrap_content"
+		  		android:layout_marginTop="5dip"
+		  		android:singleLine="true"
+		  		android:text="Ghi nhớ đăng nhập"
+		  		android:checked="true"
+		  		/>
+		  
 		  <!-- Login button -->	
 		  <Button android:id="@+id/btnLogin" 
 		  		android:layout_width="fill_parent"
