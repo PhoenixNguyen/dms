@@ -16,6 +16,7 @@ import com.hp.rest.CalendarAPI;
 import com.hp.rest.CalendarAPI.GetCalendarTask;
 import com.hp.rest.Rest;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -73,6 +74,9 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 	public String deleteValue;
 	
 	public static Calendar selectedValue;
+	
+	@SuppressLint("SimpleDateFormat")
+	SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -326,12 +330,28 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
                  
         // Update demo edittext when the "OK" button is clicked
         ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new OnClickListener() {
-         public void onClick(View v) {
+         @SuppressLint("SimpleDateFormat")
+		public void onClick(View v) {
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
-               result_string_start = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
-               start.setText(result_string_start);
+               //reset
+               if(mDateTimePicker.getYear()== 0){
+            	   start.setText("Từ");
+            	   result_string_start = null;
+               }
+               else{
+               
+	               result_string_start = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getYear());
+	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+	               
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               try {
+	            	   start.setText(df.format(df2.parse(result_string_start)));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+               }
                mDateTimeDialog.dismiss();
          }
          });
@@ -374,12 +394,27 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
                  
         // Update demo edittext when the "OK" button is clicked
         ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new OnClickListener() {
-         public void onClick(View v) {
+         @SuppressLint("SimpleDateFormat")
+		public void onClick(View v) {
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
-               result_string_end = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
-               end.setText(result_string_end);
+               //reset
+               if(mDateTimePicker.getYear()== 0){
+            	   end.setText("Đến");
+            	   result_string_end = null;
+               }
+               else{
+	               result_string_end = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" +  String.valueOf(mDateTimePicker.getYear());
+	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+	               
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               try {
+	            	   end.setText(df.format(df2.parse(result_string_end)));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+               }
                mDateTimeDialog.dismiss();
          }
          });
@@ -411,57 +446,79 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
         mDateTimeDialog.show();                
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	public void button_filter(View view){
-		Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
 		
-//		if(result_string_start == null || result_string_end == null)
-//			return;
-//		
-//		filter = true;
-//		calendarListFilter.clear();
-//		
-//		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		DateFormat dateFormat2 = new SimpleDateFormat("MMM/dd/yyyy HH:mm:ss");
-//		
-//		Date startDate = null;
-//		Date endDate = null;
-//		try {
-//			startDate = dateFormat2.parse(result_string_start);
-//			endDate = dateFormat2.parse(result_string_end);
-//			
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(startDate);
-//		
-//		for(int i = 0; i < CalendarAPI.calendarList.size(); i++){
-//			Date compare = null;
-//			try {
-//				if(CalendarAPI.calendarList.get(i).getCalendarDate() == null)
-//					continue;
-//				String date = CalendarAPI.calendarList.get(i).getCalendarDate().toString();
-//				
-//				compare = dateFormat1.parse(date);
-//				
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			System.out.println(compare);
-//			if(compare.after(startDate) 
-//					&& compare.before(endDate)){
-//				
-//				calendarListFilter.add(CalendarAPI.calendarList.get(i));
-//				//System.out.println(CalendarAPI.calendarList.get(i).getStt());
-//			}
-//		}
-//		
-//		adapter = new CalendarArrayAdapter(this,
-//				android.R.layout.simple_list_item_1, calendarListFilter);
-//		calendarListView.setAdapter(adapter);
-//		//onResume();
 		
+		filter = true;
+		calendarListFilter.clear();
+		
+		DateFormat dateFormat2 = new SimpleDateFormat("dd/MMM/yyyy");
+		
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			if(result_string_start != null)
+				startDate = dateFormat2.parse(result_string_start);
+			
+			if(result_string_end != null )
+				endDate = dateFormat2.parse(result_string_end);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(startDate);
+		
+		for(int i = 0; i < CalendarAPI.calendarList.size(); i++){
+			
+			if(CalendarAPI.calendarList.get(i).getCalendarDate() == null)
+				continue;
+			Date compare = CalendarAPI.calendarList.get(i).getCalendarDate();
+				
+			System.out.println(compare);
+			if(checkDate(compare, startDate, endDate)){
+				
+				calendarListFilter.add(CalendarAPI.calendarList.get(i));
+				//System.out.println(CalendarAPI.calendarList.get(i).getStt());
+			}
+		}
+		
+		adapter = new CalendarArrayAdapter(this,
+				android.R.layout.simple_list_item_1, calendarListFilter);
+		calendarListView.setAdapter(adapter);
+		//onResume();
+		
+	}
+	
+	private boolean checkDate(Date compare, Date startDate, Date endDate){
+		
+		Date end = null;
+		if(endDate != null){
+			java.util.Calendar c = java.util.Calendar.getInstance();
+			c.setTime(endDate);
+			c.add(java.util.Calendar.DATE, 1);
+			
+			end = c.getTime();
+		}
+		if(compare != null && startDate != null && end != null && compare.after(startDate) 
+				&& compare.before(end)){
+			return true;
+		}
+		if(compare != null && startDate != null && end == null && compare.after(startDate) 
+				){
+			return true;
+		}
+		if(compare != null && startDate == null && end != null  
+				&& compare.before(end)){
+			return true;
+		}
+		if(compare != null && startDate == null && end == null  
+				){
+			return true;
+		}
+		return false;
 	}
 	public void onDateChanged(Calendar c) {
 		// TODO Auto-generated method stub

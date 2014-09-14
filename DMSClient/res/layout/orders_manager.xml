@@ -43,15 +43,10 @@
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal" 
 		    >
-		    <TextView 
-	        android:layout_weight="0.2"
-	        android:layout_width= "0dip"
-	        android:layout_height="wrap_content"
-	        android:text="Lọc"
-	        />
+		    
 		    <EditText 
 		        android:id="@+id/start"
-		        android:layout_weight="0.3"
+		        android:layout_weight="0.35"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
 		        android:text="Từ"
@@ -67,7 +62,7 @@
 		        />
 		    <EditText 
 		        android:id="@+id/end"
-		        android:layout_weight="0.3"
+		        android:layout_weight="0.35"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
 		        android:text="Đến"
@@ -86,7 +81,7 @@
 		        android:layout_weight="0.2"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
-		        android:text="Ok"
+		        android:text="Lọc"
 		        android:onClick="button_filter"
 		        />
 	    </LinearLayout>

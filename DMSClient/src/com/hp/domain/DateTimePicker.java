@@ -407,11 +407,22 @@ public class DateTimePicker extends RelativeLayout {
 		
 		public void reset() {
 			cal = Calendar.getInstance();
-			initFilterNumericDigit();
-			initData();
-			sendToDisplay();
+			//initFilterNumericDigit();
+			//initData();
+			resetData();
+			
+			//sendToDisplay();
 		}
 
+		public void resetData() {
+			cal = Calendar.getInstance();
+			month_display.setText("0");
+			date_display.setText("0");
+			year_display.setText("0"); 
+			hour_display.setText("0"); //String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) 
+			min_display.setText("0");//String.valueOf(cal.get(Calendar.MINUTE))
+		}
+		
 		synchronized private void sendToListener() {
 
 			if (mTimeWatcher != null) { 
@@ -496,7 +507,7 @@ public class DateTimePicker extends RelativeLayout {
 		}
 		
 		public int getDay() {
-			return Integer.parseInt(date_display.getText().toString());
+			return Integer.parseInt(date_display.getText().toString() ==""?"0":date_display.getText().toString());
 		}
 		
 		public String getMonth() { 

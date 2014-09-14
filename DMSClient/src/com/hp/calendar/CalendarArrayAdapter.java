@@ -50,7 +50,7 @@ public class CalendarArrayAdapter extends ArrayAdapter<Calendar>{
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
         
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         
         featureView.setTitleId(Utility.displayDayOfWeek(values.get(position).getCalendarDate().getDay()) + ", "+ df.format(values.get(position).getCalendarDate()));
         featureView.setProvince("Địa điểm: " + values.get(position).getProvince());

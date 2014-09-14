@@ -31,6 +31,7 @@ import com.hp.rest.TakeOrderAPI.ModifyTakeOrderTask;
 import com.hp.schedule.ListViewSchedules;
 import com.sun.jersey.api.client.ClientResponse;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.SearchManager;
@@ -90,6 +91,9 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 	public String deleteValue;
 	
 	public static TakeOrder selectedValue;
+	
+	@SuppressLint("SimpleDateFormat")
+	SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -343,12 +347,29 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
                  
         // Update demo edittext when the "OK" button is clicked
         ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new OnClickListener() {
-         public void onClick(View v) {
+         @SuppressLint("SimpleDateFormat")
+		public void onClick(View v) {
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
-               result_string_start = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
-               start.setText(result_string_start);
+               //reset
+               if(mDateTimePicker.getYear()== 0){
+            	   start.setText("Từ");
+            	   result_string_start = null;
+               }
+               else{
+            	   
+	               result_string_start = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getYear());
+	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+	               
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               
+	               try {
+	            	   start.setText(df.format(df2.parse(result_string_start)));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+               }
                mDateTimeDialog.dismiss();
          }
          });
@@ -391,12 +412,28 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
                  
         // Update demo edittext when the "OK" button is clicked
         ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new OnClickListener() {
-         public void onClick(View v) {
+         @SuppressLint("SimpleDateFormat")
+		public void onClick(View v) {
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
-               result_string_end = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
-               end.setText(result_string_end);
+               //reset
+               if(mDateTimePicker.getYear()== 0){
+            	   end.setText("Đến");
+            	   result_string_end = null;
+               }
+               else{
+	               result_string_end = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getYear());
+	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+	               
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               
+	               try {
+	            	   end.setText(df.format(df2.parse(result_string_end)));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+               }
                mDateTimeDialog.dismiss();
          }
          });
@@ -430,20 +467,19 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 
 	public void button_filter(View view){
 		
-		if(result_string_start == null || result_string_end == null)
-			return;
-		
 		filter = true;
 		takeOrderListFilter.clear();
 		
 		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		DateFormat dateFormat2 = new SimpleDateFormat("MMM/dd/yyyy HH:mm:ss");
+		DateFormat dateFormat2 = new SimpleDateFormat("dd/MMM/yyyy");
 		
 		Date startDate = null;
 		Date endDate = null;
 		try {
-			startDate = dateFormat2.parse(result_string_start);
-			endDate = dateFormat2.parse(result_string_end);
+			if(result_string_start != null)
+				startDate = dateFormat2.parse(result_string_start);
+			if(result_string_end != null)
+				endDate = dateFormat2.parse(result_string_end);
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -465,8 +501,7 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 				e.printStackTrace();
 			}
 			System.out.println(compare);
-			if(compare.after(startDate) 
-					&& compare.before(endDate)){
+			if(checkDate(compare, startDate, endDate)){
 				
 				takeOrderListFilter.add(TakeOrderAPI.takeOrderList.get(i));
 				System.out.println(TakeOrderAPI.takeOrderList.get(i).getId());
@@ -478,6 +513,35 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 		ordersListView.setAdapter(adapter);
 		//onResume();
 		
+	}
+	
+	private boolean checkDate(Date compare, Date startDate, Date endDate){
+		
+		Date end = null;
+		if(endDate != null){
+			java.util.Calendar c = java.util.Calendar.getInstance();
+			c.setTime(endDate);
+			c.add(java.util.Calendar.DATE, 1);
+			
+			end = c.getTime();
+		}
+		if(compare != null && startDate != null && end != null && compare.after(startDate) 
+				&& compare.before(end)){
+			return true;
+		}
+		if(compare != null && startDate != null && end == null && compare.after(startDate) 
+				){
+			return true;
+		}
+		if(compare != null && startDate == null && end != null  
+				&& compare.before(end)){
+			return true;
+		}
+		if(compare != null && startDate == null && end == null  
+				){
+			return true;
+		}
+		return false;
 	}
 	@Override
 	public void onDateChanged(Calendar c) {

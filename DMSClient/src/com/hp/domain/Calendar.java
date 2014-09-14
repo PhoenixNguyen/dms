@@ -47,6 +47,12 @@ public class Calendar implements Serializable{
     
     private String note;
 
+    @Override
+	public String toString() {
+		return "Calendar [calendarDate=" + calendarDate + ", province="
+				+ province + ", content=" + content + "]";
+	}
+    
     public Calendar(Staff staff, Date calendarDate, String province,
 			String content, int status) {
 		super();
