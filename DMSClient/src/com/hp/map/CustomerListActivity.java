@@ -1,31 +1,21 @@
 package com.hp.map;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+import java.util.List;
 
 import com.hp.customer.CustomerArrayAdapter;
 import com.hp.domain.Customer;
-import com.hp.order.ProductArrayAdapter;
-import com.hp.rest.Rest;
+import com.hp.gps.MapLocation;
 import com.hp.rest.CustomerAPI;
+import com.hp.rest.Rest;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
 import com.hp.rest.CustomerAPI.ModifyCustomerTask;
-import com.hp.schedule.ListViewSchedules;
-import com.sun.jersey.api.client.ClientResponse;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,20 +24,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class CustomerListActivity extends MainMenuActivity{
+public class CustomerListActivity extends MainMenuActivity implements OnItemSelectedListener{
+	
+	public static String LOAD_CUSTOMER = "getAllCustomers";
 	
 	private ListView listView;
 	private Context context = this;
@@ -57,6 +46,8 @@ public class CustomerListActivity extends MainMenuActivity{
 	public CustomerArrayAdapter customerAdapter;
 	
 	public static Customer customer;
+	
+	private Spinner cities_spinner;
 	
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +59,11 @@ public class CustomerListActivity extends MainMenuActivity{
 //        actionBar.setDisplayShowHomeEnabled(false);
 //        actionBar.setDisplayShowTitleEnabled(false);
         
+		cities_spinner = (Spinner) findViewById(R.id.cities_spinner);
 		input_text = (EditText)findViewById(R.id.input_text);
+		
+		cities_spinner.setOnItemSelectedListener(this);
+		spinnerAdapter(cities_spinner);
 		
 		input_text.addTextChangedListener(new TextWatcher() {
 			
@@ -151,8 +146,22 @@ public class CustomerListActivity extends MainMenuActivity{
 	    return true;
 	}
 	
+	private void spinnerAdapter(Spinner spinner) {
+		
+		List<String> cities = new ArrayList<String>();
+		cities.addAll(MapLocation.getAllCityOfVietNam());
+		cities.add(0, "Tất cả");
+		
+		ArrayAdapter<String> allCities = new ArrayAdapter<String>(this,
+			     android.R.layout.simple_spinner_dropdown_item, cities);
+		
+		// Apply the adapter to the spinner
+		spinner.setAdapter(allCities);
+		
+	}
+	
 	public void refreshCustomers(){
-		GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
+		GetCustomerListTask getData = new GetCustomerListTask(context, LOAD_CUSTOMER, Rest.mStaff.getId(), //getCustomersListStart
 			    true, customerAdapter, listView, this);
         getData.execute();
 	}
@@ -160,7 +169,7 @@ public class CustomerListActivity extends MainMenuActivity{
 		//System.out.println("____UPDAte list " + Rest.customerList.size());
 		//Update list customer
 		//Rest.getCustomersList(Rest.mStaff.getId());
-		GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
+		GetCustomerListTask getData = new GetCustomerListTask(context, LOAD_CUSTOMER, Rest.mStaff.getId(), //getCustomersListStart
 				listView, customerAdapter, customer,
 				this, true);
     	getData.execute();
@@ -276,7 +285,7 @@ public class CustomerListActivity extends MainMenuActivity{
 		ModifyCustomerTask deleteData = new ModifyCustomerTask(context, "deleteCustomer", customer, false);
 		deleteData.execute();
     	
-        GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
+        GetCustomerListTask getData = new GetCustomerListTask(context, LOAD_CUSTOMER, Rest.mStaff.getId(), //getCustomersListStart
 		    true, customerAdapter, listView, this);
         getData.execute();
 		
@@ -290,5 +299,46 @@ public class CustomerListActivity extends MainMenuActivity{
         arr[N] = element;
         return arr;
     }
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		String spinnerValue = cities_spinner.getSelectedItem().toString();
+		
+		List<Customer> filters = new ArrayList<Customer>();
+		
+		if(!spinnerValue.equalsIgnoreCase("Tất cả"))
+			for(Customer cus : CustomerAPI.customerList){
+				if(cus.getTinhThanh() != null && cus.getTinhThanh().equalsIgnoreCase(spinnerValue)){
+					filters.add(cus);
+				}
+			}
+		else{
+			filters.addAll(CustomerAPI.customerList);
+		}
+		
+		//List view
+		listView = (ListView)findViewById(R.id.list);
+		customerAdapter = new CustomerArrayAdapter(context, filters);
+		listView.setAdapter(customerAdapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+		     @Override
+		     public void onItemClick(AdapterView<?> a, View v,int position, long id) 
+		     {
+		    	customer = (Customer) listView.getAdapter().getItem(position);
+		    	
+		    	//open dialog
+		    	choiceDialog(customer);
+		      }
+		});
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 		
 }

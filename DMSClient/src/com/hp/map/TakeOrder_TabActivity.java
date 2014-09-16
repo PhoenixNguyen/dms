@@ -18,6 +18,8 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -85,6 +87,13 @@ public class TakeOrder_TabActivity extends TabActivity{
 	    return super.onKeyUp(keyCode, event);
 	}
 	
+//	public boolean onCreateOptionsMenu(Menu menu){
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.customer_manager_menu, menu);
+//		
+//		return true;
+//	}
+	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 
@@ -95,7 +104,9 @@ public class TakeOrder_TabActivity extends TabActivity{
 
 	        // Toast.makeText(this, "home pressed", Toast.LENGTH_LONG).show();
 	        break;
-
+//	    case R.id.action_save:
+//	    	//TakeOrder_AmountActivity.saveOrder();
+//            return true;
 	    }
 
 	    return true;

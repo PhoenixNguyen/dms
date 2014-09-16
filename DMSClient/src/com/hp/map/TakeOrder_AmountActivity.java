@@ -24,6 +24,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -143,6 +146,7 @@ public class TakeOrder_AmountActivity extends Activity implements OnClickListene
 			
 		}
 		
+			
 	}
 	
 	public void init(){
@@ -156,6 +160,23 @@ public class TakeOrder_AmountActivity extends Activity implements OnClickListene
 	   this.onCreate(null);
 	}
 
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+	    int itemId = item.getItemId();
+	    switch (itemId) {
+	        
+	    case R.id.action_save:
+	    	saveOrder();
+            return true;
+               
+        default:
+            return super.onOptionsItemSelected(item);
+
+	    }
+
+	}
+	
 	public void setDiscount(View view){
 		final Dialog dialog = new Dialog(context);
 		dialog.setContentView(R.layout.order_product_dialog);
@@ -220,144 +241,146 @@ public class TakeOrder_AmountActivity extends Activity implements OnClickListene
 		dialog.show();
 	}
 	
-	
+	private void saveOrder(){
+		//Create order:
+		if(numberTotal == 0)
+			return;
+		
+		//If add more products into take order ========================================================
+		if(TakeOrder_ProductActivity.add_take_order_detail){
+				//Set order ID
+				for(int i = 0; i < TakeOrder_ReViewActivity.takeOrderDetailList.size(); i++){
+					
+					TakeOrder_ReViewActivity.takeOrderDetailList.get(i).setTakeOrderID(
+							TakeOrder_ProductActivity.take_order_id);
+				}
+				
+				// Send
+				ObjectMapper mapper = new ObjectMapper();
+		        String orderDetailList = new String();
+		        String TakeOrderStr = new String();
+		        TakeOrder order = null;
+		        for(int i = 0; i < TakeOrderAPI.takeOrderList.size(); i++){
+		        	if(TakeOrderAPI.takeOrderList.get(i).getId().compareTo(
+		        			TakeOrder_ProductActivity.take_order_id) == 0){
+		        		order = TakeOrderAPI.takeOrderList.get(i);
+		        		order.setDiscount(Float.parseFloat(discount_percent.getText().toString()));
+		        		order.setAfterPrivate(pricesTotal - discount);
+		        		order.setNote(note.getText().toString());
+		        		
+		        		break;
+		        	}
+		        }
+				try {
+					TakeOrderStr = mapper.writeValueAsString(order);
+					orderDetailList = mapper.writeValueAsString(TakeOrder_ReViewActivity.takeOrderDetailList);
+					
+				} catch (JsonGenerationException ex) {
+
+					ex.printStackTrace();
+
+				} catch (JsonMappingException ex) {
+
+					ex.printStackTrace();
+
+				} catch (IOException ex) {
+
+					ex.printStackTrace();
+
+				}
+				
+				String update_main_command = "updateAddingTakeOrder";
+				String update_detail_command = "addOrdersDetailForTakeOrder";
+				
+				//If update Inventory
+				if(TakeOrdersDetailManagerActivity.add_detail == 1){
+					update_main_command = "updateAddingInventory";
+					update_detail_command = "updateAddingInventoryDetail";
+				}
+				else
+				
+				//If update Sale order
+				if(TakeOrdersDetailManagerActivity.add_detail == 2){
+					update_main_command = "updateAddingSaleOrder";
+					update_detail_command = "updateAddingSaleOrderDetail";
+				}
+				//UPDATE
+				//Order ---------------------------------------------------------------
+				
+				PutTakeOrderTask puttData = new PutTakeOrderTask(context, update_main_command, update_detail_command, 
+						TakeOrderStr, orderDetailList, Rest.mStaff.getId(), this, true
+					    );
+				puttData.execute();
+			      
+			
+			return;
+		}
+		
+		//NEW
+		/////////////////////////////////////////////////////////////////////////////=========================
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new  Date();
+		String date2 = df.format(date);
+		
+		String orderID = CustomerMapActivity.mSelectedCustomer.getMaDoiTuong()+"-" + date2;
+		
+		TakeOrder order = new TakeOrder(orderID
+				, Timestamp.valueOf(date2), Timestamp.valueOf(date2)
+				, CustomerMapActivity.mSelectedCustomer.getMaDoiTuong()
+				, CustomerMapActivity.mSelectedCustomer.getDoiTuong()
+				, CustomerMapActivity.mSelectedCustomer.getDiaChi()
+				, CustomerMapActivity.mSelectedCustomer.getDienThoai()
+				, CustomerMapActivity.mSelectedCustomer.getDiaChi()
+				, ""
+				
+				, 0
+				, pricesTotal - discount, pricesTotal - discount
+				, Integer.parseInt(discount_percent.getText().toString())
+				, 0, Timestamp.valueOf(date2), Timestamp.valueOf(date2)
+				, Rest.mStaff.getId(), Rest.mStaff.getId());
+		
+		//Set order ID
+		for(int i = 0; i < TakeOrder_ReViewActivity.takeOrderDetailList.size(); i++){
+			TakeOrder_ReViewActivity.takeOrderDetailList.get(i).setTakeOrderID(orderID);
+		}
+		
+		// Send
+		ObjectMapper mapper = new ObjectMapper();
+        String TakeOrderStr = new String();
+        String orderDetailList = new String();
+
+		try {
+
+			TakeOrderStr = mapper.writeValueAsString(order);
+			orderDetailList = mapper.writeValueAsString(TakeOrder_ReViewActivity.takeOrderDetailList);
+			
+		} catch (JsonGenerationException ex) {
+
+			ex.printStackTrace();
+
+		} catch (JsonMappingException ex) {
+
+			ex.printStackTrace();
+
+		} catch (IOException ex) {
+
+			ex.printStackTrace();
+
+		}
+       
+		PutTakeOrderTask puttData = new PutTakeOrderTask(context, putData, putDataDetail, 
+				TakeOrderStr, orderDetailList, Rest.mStaff.getId(), this, false
+			    );
+		puttData.execute();
+
+//        
+        ////////////////////////// save order detail//////////////////////////////////
+	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if(v == save){
-			//Create order:
-			if(numberTotal == 0)
-				return;
-			
-			//If add more products into take order ========================================================
-			if(TakeOrder_ProductActivity.add_take_order_detail){
-					//Set order ID
-					for(int i = 0; i < TakeOrder_ReViewActivity.takeOrderDetailList.size(); i++){
-						
-						TakeOrder_ReViewActivity.takeOrderDetailList.get(i).setTakeOrderID(
-								TakeOrder_ProductActivity.take_order_id);
-					}
-					
-					// Send
-					ObjectMapper mapper = new ObjectMapper();
-			        String orderDetailList = new String();
-			        String TakeOrderStr = new String();
-			        TakeOrder order = null;
-			        for(int i = 0; i < TakeOrderAPI.takeOrderList.size(); i++){
-			        	if(TakeOrderAPI.takeOrderList.get(i).getId().compareTo(
-			        			TakeOrder_ProductActivity.take_order_id) == 0){
-			        		order = TakeOrderAPI.takeOrderList.get(i);
-			        		order.setDiscount(Float.parseFloat(discount_percent.getText().toString()));
-			        		order.setAfterPrivate(pricesTotal - discount);
-			        		order.setNote(note.getText().toString());
-			        		
-			        		break;
-			        	}
-			        }
-					try {
-						TakeOrderStr = mapper.writeValueAsString(order);
-						orderDetailList = mapper.writeValueAsString(TakeOrder_ReViewActivity.takeOrderDetailList);
-						
-					} catch (JsonGenerationException ex) {
-
-						ex.printStackTrace();
-
-					} catch (JsonMappingException ex) {
-
-						ex.printStackTrace();
-
-					} catch (IOException ex) {
-
-						ex.printStackTrace();
-
-					}
-					
-					String update_main_command = "updateAddingTakeOrder";
-					String update_detail_command = "addOrdersDetailForTakeOrder";
-					
-					//If update Inventory
-					if(TakeOrdersDetailManagerActivity.add_detail == 1){
-						update_main_command = "updateAddingInventory";
-						update_detail_command = "updateAddingInventoryDetail";
-					}
-					else
-					
-					//If update Sale order
-					if(TakeOrdersDetailManagerActivity.add_detail == 2){
-						update_main_command = "updateAddingSaleOrder";
-						update_detail_command = "updateAddingSaleOrderDetail";
-					}
-					//UPDATE
-					//Order ---------------------------------------------------------------
-					
-					PutTakeOrderTask puttData = new PutTakeOrderTask(context, update_main_command, update_detail_command, 
-							TakeOrderStr, orderDetailList, Rest.mStaff.getId(), this, true
-						    );
-					puttData.execute();
-				      
-				
-				return;
-			}
-			
-			//NEW
-			/////////////////////////////////////////////////////////////////////////////=========================
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = new  Date();
-			String date2 = df.format(date);
-			
-			String orderID = CustomerMapActivity.mSelectedCustomer.getMaDoiTuong()+"-" + date2;
-			
-			TakeOrder order = new TakeOrder(orderID
-					, Timestamp.valueOf(date2), Timestamp.valueOf(date2)
-					, CustomerMapActivity.mSelectedCustomer.getMaDoiTuong()
-					, CustomerMapActivity.mSelectedCustomer.getDoiTuong()
-					, CustomerMapActivity.mSelectedCustomer.getDiaChi()
-					, CustomerMapActivity.mSelectedCustomer.getDienThoai()
-					, CustomerMapActivity.mSelectedCustomer.getDiaChi()
-					, ""
-					
-					, 0
-					, pricesTotal - discount, pricesTotal - discount
-					, Integer.parseInt(discount_percent.getText().toString())
-					, 0, Timestamp.valueOf(date2), Timestamp.valueOf(date2)
-					, Rest.mStaff.getId(), Rest.mStaff.getId());
-			
-			//Set order ID
-			for(int i = 0; i < TakeOrder_ReViewActivity.takeOrderDetailList.size(); i++){
-				TakeOrder_ReViewActivity.takeOrderDetailList.get(i).setTakeOrderID(orderID);
-			}
-			
-			// Send
-			ObjectMapper mapper = new ObjectMapper();
-	        String TakeOrderStr = new String();
-	        String orderDetailList = new String();
-
-			try {
-
-				TakeOrderStr = mapper.writeValueAsString(order);
-				orderDetailList = mapper.writeValueAsString(TakeOrder_ReViewActivity.takeOrderDetailList);
-				
-			} catch (JsonGenerationException ex) {
-
-				ex.printStackTrace();
-
-			} catch (JsonMappingException ex) {
-
-				ex.printStackTrace();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-	       
-			PutTakeOrderTask puttData = new PutTakeOrderTask(context, putData, putDataDetail, 
-					TakeOrderStr, orderDetailList, Rest.mStaff.getId(), this, false
-				    );
-			puttData.execute();
-
-//	        
-	        ////////////////////////// save order detail//////////////////////////////////
+			saveOrder();
 	        
 		}
 	}

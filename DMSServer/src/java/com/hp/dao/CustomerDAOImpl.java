@@ -339,8 +339,11 @@ public class CustomerDAOImpl implements CustomerDAO {
         List<Customer> courses = null;
         try{
             courses = session.createQuery("from Customer order by maDoiTuong").list();
+            if(courses != null)
+                System.err.println("CO: " + courses.size());
         }catch(Exception e){
             e.printStackTrace();
+            return null;
         }
         finally {
             session.close();

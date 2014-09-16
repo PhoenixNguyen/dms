@@ -441,6 +441,15 @@ public class GenericResource {
     }
     
     @POST
+    @Path("/getAllCustomers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Customer> getAllCustomers(String pStaff ) {
+
+        CustomerDAO customerDAO = new CustomerDAOImpl();
+        return customerDAO.getListCustomer();
+    }
+    
+    @POST
     @Path("/deleteSchedule")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteSchedule( String pTmp ) {

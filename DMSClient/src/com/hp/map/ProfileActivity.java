@@ -1,5 +1,6 @@
 package com.hp.map;
 
+import com.hp.rest.CustomerAPI.GetCustomerListTask;
 import com.hp.rest.Rest;
 
 import android.app.Activity;
@@ -64,6 +65,15 @@ public class ProfileActivity extends MainMenuActivity{
 		if(Rest.mStaff.getPermission() == 3)
 			permission.setText("Nhân viên lấy vị trí");
 		
+		
+		Intent i = getIntent();
+		if(i != null){
+			int val = i.getIntExtra("login", 0);
+			if(val == 1){
+				GetCustomerListTask getData = new GetCustomerListTask(context, CustomerListActivity.LOAD_CUSTOMER, Rest.mStaff.getId()); //getCustomersListStart
+            	getData.execute();
+			}
+		}
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu){

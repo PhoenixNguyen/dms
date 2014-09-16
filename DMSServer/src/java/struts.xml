@@ -101,6 +101,9 @@
             <result name="success">generic/deleteOrder</result>
         </action>
         
+        <action name="getAllCustomers" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">generic/getAllCustomers</result>
+        </action>
         
         
         <action name="getOrderData" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">

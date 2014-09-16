@@ -170,10 +170,6 @@ public class CustomerMapActivity extends FragmentActivity
         if(Rest.mStaff.getPermission() == 1 || Rest.mStaff.getPermission() == 3)
         	sendLocation.setVisibility(View.VISIBLE);
         
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setHomeButtonEnabled(true);
-//        getActionBar().setIcon(R.drawable.ic_drawer);
-        
         //Action bar
         getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setLogo(R.drawable.ic_launcher);
@@ -216,11 +212,11 @@ public class CustomerMapActivity extends FragmentActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        MenuItem item = menu.findItem(R.id.init_order);
-        if(!compareLocation())
-        	item.setEnabled(false);
-        else
-        	item.setEnabled(true);
+//        MenuItem item = menu.findItem(R.id.init_order);
+//        if(!compareLocation())
+//        	item.setEnabled(false);
+//        else
+//        	item.setEnabled(true);
         return true;
         
     }

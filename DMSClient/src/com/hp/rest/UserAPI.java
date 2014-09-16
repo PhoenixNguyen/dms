@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
 import com.hp.gps.MyLocationListener;
+import com.hp.map.CustomerListActivity;
 import com.hp.map.LoginActivity;
 import com.hp.map.ProfileActivity;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
@@ -96,8 +97,10 @@ public class UserAPI {
 				System.out.println("________________ " + re);
 
 				// Convert
-				if (convertStringToObject(re))
+				if (convertStringToObject(re)){
 					return "success";
+					
+				}
 				else
 					return "nodata";
 			}
@@ -109,18 +112,14 @@ public class UserAPI {
         protected void onPostExecute(String result)
         {
             if (result.equals("success")){
-                //do something
-            	
-            	GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId());
-            	getData.execute();
-            	//System.out.println(" ++ :: "+ getData.customerList.get(0).getMaDoiTuong());
-            	
 				//Run thread to do backgroud send location
 				//activity.doBackground();
             	updateCurrentLocation(activity);
             	
 				// TODO Auto-generated method stub
 				Intent i = new Intent(activity.getApplicationContext(), ProfileActivity.class);
+				i.putExtra("login", 1);
+				
 				activity.startActivity(i);
 	        	//new ThreatRealtime("hello").start();
 				
@@ -246,9 +245,6 @@ public class UserAPI {
 				return "nointernet";
 				
 			}
-							
-	
-			
 			
 			// Getting
 			ClientResponse response = Rest.mService.path("webresources")
