@@ -16,16 +16,12 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainMenuActivity extends Activity  {
 
@@ -38,13 +34,8 @@ public class MainMenuActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_main);
 		
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setLogo(R.drawable.ic_launcher);
-		//getActionBar().setIcon(R.drawable.ic_drawer);
-		
-		//getActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer1);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
@@ -84,6 +75,7 @@ public class MainMenuActivity extends Activity  {
 	    return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void menuDialog(){
 		final Dialog dialog = new Dialog(this);
 		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

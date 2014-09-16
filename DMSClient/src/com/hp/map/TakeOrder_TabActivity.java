@@ -27,6 +27,7 @@ import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
 
+@SuppressWarnings("deprecation")
 public class TakeOrder_TabActivity extends TabActivity{
 	
 	public Context context = this; 
@@ -39,7 +40,8 @@ public class TakeOrder_TabActivity extends TabActivity{
 		setContentView(R.layout.order_tab);
 		
 		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setIcon(R.drawable.ic_drawer);
+		getActionBar().setLogo(R.drawable.ic_launcher);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Resources recource = getResources();
 		TabHost tabHost = getTabHost();

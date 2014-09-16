@@ -154,8 +154,6 @@ public class CustomerMapActivity extends FragmentActivity
     public static double mX;
     public static double mY;
     
-    String mUrl = "http://masterpro02.hosco.com.vn:8080/DMSProject/webresources/putJourney"; 
-    
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
 	@Override
@@ -176,6 +174,12 @@ public class CustomerMapActivity extends FragmentActivity
 //        getActionBar().setHomeButtonEnabled(true);
 //        getActionBar().setIcon(R.drawable.ic_drawer);
         
+        //Action bar
+        getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setLogo(R.drawable.ic_launcher);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+        // /Action bar
+		
         //Get POSITION
         Intent i = getIntent();
         customerSelected = null;
@@ -258,7 +262,12 @@ public class CustomerMapActivity extends FragmentActivity
         case R.id.inventory_manager:
             inventoryManager();
             return true;
-       
+        
+        //Action bar
+        case android.R.id.home:
+	    	menuDialog();
+	    	return true;
+	        
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -267,10 +276,8 @@ public class CustomerMapActivity extends FragmentActivity
     //Left menu ============================================
     public boolean onKeyUp(int keyCode, KeyEvent event) {
 	    if (keyCode == KeyEvent.KEYCODE_MENU) {
-	        // ........
-	    	//Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
-	    	menuDialog();
 	    	
+	    	menuDialog();
 	        return true;
 	    }
 	    return super.onKeyUp(keyCode, event);
