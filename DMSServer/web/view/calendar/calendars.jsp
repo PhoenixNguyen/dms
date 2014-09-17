@@ -109,6 +109,9 @@
                                                                     <td class='rptCellLabel'>Nội dung</td>
                                                                     <td class='rptCellLabel'>Báo cáo</td>
                                                                     <td class='rptCellLabel'>Cộng tác viên</td>
+                                                                    
+                                                                    <td class='rptCellLabel'>Trạng thái</td>
+                                                                    <td class='rptCellLabel'>Hành động</td>
                                                                 </tr>
                                                                 
                                                                 
@@ -124,6 +127,26 @@
                                                                     <td class='rptData'><s:property value="report"/></td>
                                                                     <td class='rptData'><s:property value="contributor"/></td>
                                                                     
+                                                                    <td class='rptData' style="text-align: center">
+                                                                        <s:if test="status == 0">
+                                                                            <img src="${pageContext.request.contextPath}/themes/images/exclamation.png" title="Khởi tạo" >
+                                                                        </s:if>
+                                                                        <s:if test="status == 1">
+                                                                            <img src="${pageContext.request.contextPath}/themes/images/request.png" title="Đã đề nghị" >
+                                                                        </s:if>
+                                                                        <s:if test="status == 2">
+                                                                            <img src="${pageContext.request.contextPath}/themes/images/completed.png" title="Hoàn thành" >
+                                                                        </s:if>
+                                                                    </td>
+                                                                    
+                                                                    <td class='rptData'>
+                                                                        <a href="#" title="Sửa">
+                                                                            <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
+                                                                        </a>
+                                                                        <a href="#" title="Xóa">
+                                                                            <img src="${pageContext.request.contextPath}/themes/images/delete.png" title="" >
+                                                                        </a>
+                                                                    </td>
                                                                 </tr>
                                                                 
                                                                 </s:iterator>
