@@ -7,16 +7,16 @@
 package com.hp.dao;
 
 import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
-import com.hp.common.Unicode2NoSign;
 import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -51,7 +51,7 @@ public class CalendarDAOImpl implements CalendarDAO{
         
         List<Calendar> courses = null;
         try{
-                courses = session.createQuery("from Calendar ").list();
+                courses = session.createQuery("from Calendar order by calendarDate desc").list();
             
         }catch(Exception e){
             e.printStackTrace();
@@ -65,12 +65,42 @@ public class CalendarDAOImpl implements CalendarDAO{
 
     @Override
     public boolean update(Calendar calendar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+    
+        try{
+            session.update(calendar);
+            session.getTransaction().commit();
+        }catch(HibernateException e){
+            transaction.rollback();
+            return false;
+        }
+        finally {
+            session.close();
+        }
+        
+        return true;
     }
 
     @Override
     public boolean delete(Calendar calendar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+    
+        try{
+            Query query = session.createQuery("delete Calendar where stt = " + calendar.getStt());
+            query.executeUpdate();
+            
+            session.getTransaction().commit();
+        }catch(HibernateException e){
+            transaction.rollback();
+            return false;
+        }
+        finally {
+            session.close();
+        }
+        
+        return true;
     }
 
     @Override
@@ -100,7 +130,7 @@ public class CalendarDAOImpl implements CalendarDAO{
         try{
             Criteria criteria = session.createCriteria(Calendar.class);
             criteria.add(Restrictions.eq("staff", staff));
-            
+            criteria.addOrder(Order.desc("calendarDate"));
             return criteria.list();
         }
         catch(Exception e){

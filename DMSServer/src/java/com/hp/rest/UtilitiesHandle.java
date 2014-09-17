@@ -105,6 +105,79 @@ public class UtilitiesHandle {
     }
     
     @POST
+    @Path("/updateCalendar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateCalendar( String pData ) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CalendarDAO calendarDAO = new CalendarDAOImpl();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        Calendar calendar = new Calendar();
+        try {
+                calendar = mapper.readValue(pData, Calendar.class);
+                
+        } catch (JsonGenerationException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        } catch (JsonMappingException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        } catch (IOException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        }
+        
+        if(calendar == null)
+            return Response.status(200).entity("false").build();
+        
+        //Read only
+        if(calendarDAO.getCalendar(calendar.getStt()).getStatus() != 0){
+            return Response.status(200).entity("readonly").build();
+        }
+        
+        calendar.setStatus(1);
+        
+        Date today = new Date();
+        calendar.setUpdatedTime(Timestamp.valueOf(dateFormat.format(today)));
+        
+        return Response.status(200).entity(calendarDAO.update(calendar) + "").build();
+    }
+    
+    @POST
+    @Path("/deleteCalendar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteCalendar( String pData ) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CalendarDAO calendarDAO = new CalendarDAOImpl();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        Calendar calendar = new Calendar();
+        try {
+                calendar = mapper.readValue(pData, Calendar.class);
+                
+        } catch (JsonGenerationException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        } catch (JsonMappingException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        } catch (IOException e) {
+                e.printStackTrace();
+                return Response.status(200).entity("false").build();
+        }
+        
+        if(calendar == null)
+            return Response.status(200).entity("false").build();
+        
+        //Read only
+        if(calendarDAO.getCalendar(calendar.getStt()).getStatus() != 0){
+            return Response.status(200).entity("readonly").build();
+        }
+        
+        return Response.status(200).entity(calendarDAO.delete(calendar) + "").build();
+    }
+    
+    @POST
     @Path("/getTimeKeeperList")
     @Consumes(MediaType.APPLICATION_JSON)
     public List<TimeKeeper> getTimeKeeperList(String pData) throws ParseException {

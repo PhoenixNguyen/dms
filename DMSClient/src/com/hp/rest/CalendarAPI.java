@@ -2,7 +2,6 @@ package com.hp.rest;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -12,31 +11,14 @@ import org.codehaus.jackson.map.type.TypeFactory;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.hp.calendar.CalendarArrayAdapter;
-import com.hp.customer.CustomerArrayAdapter;
 import com.hp.domain.Calendar;
-import com.hp.domain.Customer;
-import com.hp.domain.Staff;
-import com.hp.domain.TakeOrder;
 import com.hp.map.CalendarAdditionActivity;
 import com.hp.map.CalendarManagerActivity;
-import com.hp.map.CustomerListActivity;
-import com.hp.map.CustomerMapActivity;
-import com.hp.map.InventoryManagerDetailActivity;
-import com.hp.map.R;
-import com.hp.map.TakeOrder_AmountActivity;
-import com.hp.map.TakeOrder_ProductActivity;
-import com.hp.map.TakeOrdersDetailManagerActivity;
-import com.hp.map.TakeOrdersManagerActivity;
-import com.hp.order_manager.OrdersManagerArrayAdapter;
 import com.sun.jersey.api.client.ClientResponse;
 
 public class CalendarAPI {
@@ -203,6 +185,7 @@ public class CalendarAPI {
 				this.action = action;
 				this.method = method;
 				this.calendar = calendar;
+				this.adapter = adapter;
 				this.calendarListView = calendarListView;
 				this.activity = activity;
 				this.addActivity = addActivity;
@@ -252,6 +235,12 @@ public class CalendarAPI {
 
 						return "existcalendar";
 					}
+					else
+						if (result.equalsIgnoreCase("readonly")){
+
+							return "readonly";
+						}
+				
 				else {
 
 					return "fail";
@@ -266,7 +255,27 @@ public class CalendarAPI {
 					// do something
 					
 					if(action.equalsIgnoreCase(ACTION_DELETE)){
-						Toast.makeText(context, "Đã xóa ", Toast.LENGTH_SHORT)
+						Toast.makeText(context, "Xóa lịch công tác thành công ", Toast.LENGTH_SHORT)
+									.show();
+						
+						activity.dialogCommit.dismiss();
+						
+						//Refresh
+				        activity.getCalendarList();
+				        adapter = new CalendarArrayAdapter(context,
+								android.R.layout.simple_list_item_1, calendarList);
+				        calendarListView.setAdapter(adapter);
+					}
+					
+					if(action.equalsIgnoreCase(ACTION_ADD)){
+						Toast.makeText(context, "Thêm lịch công tác thành công ", Toast.LENGTH_SHORT)
+									.show();
+						
+						//addActivity.dialog.dismiss();
+					}
+					
+					if(action.equalsIgnoreCase(ACTION_EDIT)){
+						Toast.makeText(context, "Đề nghị hoàn thành công tác thành công", Toast.LENGTH_SHORT)
 									.show();
 						
 						activity.dialog.dismiss();
@@ -278,24 +287,16 @@ public class CalendarAPI {
 				        calendarListView.setAdapter(adapter);
 					}
 					
-					if(action.equalsIgnoreCase(ACTION_ADD)){
-						Toast.makeText(context, "Thêm lịch làm việc thành công ", Toast.LENGTH_SHORT)
-									.show();
-						
-						//addActivity.dialog.dismiss();
-					}
-					
-					if(action.equalsIgnoreCase(ACTION_EDIT)){
-						Toast.makeText(context, "Sửa lịch làm việc thành công ", Toast.LENGTH_SHORT)
-									.show();
-						
-						//activity.dialog.dismiss();
-					}
-					
 				} 
 				else if (result.equals("existcalendar")) {
 					Toast.makeText(context,
 							"Ngày làm việc ngày này và địa điểm hiện tại đã tồn tại lịch công tác. Hãy chọn ngày khác!",
+							Toast.LENGTH_LONG).show();
+				}
+				
+				else if (result.equals("readonly")) {
+					Toast.makeText(context,
+							"Lịch công tác đã đề nghị, không thể tác động!",
 							Toast.LENGTH_LONG).show();
 				}
 				
@@ -307,7 +308,7 @@ public class CalendarAPI {
 					
 						Toast.makeText(
 								context,
-								"Không thể xóa. Dữ liệu đang được sử dụng cho đối tượng khác",
+								"Lỗi không xác định, hãy thử lại sau",
 								Toast.LENGTH_SHORT).show();
 				} else {
 					

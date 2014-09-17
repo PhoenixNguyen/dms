@@ -11,9 +11,9 @@ import com.hp.calendar.CalendarArrayAdapter;
 import com.hp.domain.Calendar;
 import com.hp.domain.DateTimePicker;
 import com.hp.domain.DateTimePicker.DateWatcher;
-import com.hp.domain.TakeOrder;
 import com.hp.rest.CalendarAPI;
 import com.hp.rest.CalendarAPI.GetCalendarTask;
+import com.hp.rest.CalendarAPI.ModifyCalendarTask;
 import com.hp.rest.Rest;
 
 import android.annotation.SuppressLint;
@@ -157,7 +157,6 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 	    case android.R.id.home:
 	    	menuDialog();
 
-	        // Toast.makeText(this, "home pressed", Toast.LENGTH_LONG).show();
 	        break;
 	        
 	    case R.id.action_add:
@@ -205,14 +204,18 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 					long id) {
 				System.out.println("Click!");
 				selectedValue = (Calendar) calendarListView.getAdapter().getItem(position);
-		    	 //addCustomerDialog(selectedValue);
+				if(selectedValue.getStatus() == 0)
+					addCustomerDialog(selectedValue);
+				else
+					Toast.makeText(context, "Lịch công tác đã đề nghị không thể tác động!", Toast.LENGTH_LONG).show();
 				
 			}
 		});
 	}
 	
-	public void addCustomerDialog(final TakeOrder selectedValue){
-		final Dialog dialog = new Dialog(context);
+	public Dialog dialog;
+	public void addCustomerDialog(final Calendar selectedValue){
+		dialog = new Dialog(context);
 		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = li.inflate(R.layout.customer_selected_dialog, null, false);
 		dialog.setContentView(v);
@@ -220,24 +223,20 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 		dialog.setTitle("Lựa chọn của bạn: ");
 	
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonYES);
-		dialogButton.setText("Hiển thị chi tiết");
+		dialogButton.setText("Hoàn thành");
 		// if button is clicked, close the custom dialog
 		dialogButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// show the map
-				Intent intent = new Intent(getApplicationContext(),
-						activityClass);
-								
-				startActivity(intent);
-		        
-				dialog.dismiss();
+				selectedValue.setStatus(1);
+				ModifyCalendarTask editCalendar = new ModifyCalendarTask(context, ModifyCalendarTask.ACTION_EDIT, "updateCalendar", selectedValue, adapter, calendarListView, CalendarManagerActivity.this, null);
+				editCalendar.execute();
 			}
 		});
 
 		//Delete a schedule
 		Button dialogDeleteButton = (Button) dialog.findViewById(R.id.dialogButtonNO);
-		dialogDeleteButton.setText("Xóa bản ghi");
+		dialogDeleteButton.setText("Xóa lịch");
 		// if button is clicked, close the custom dialog
 		dialogDeleteButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -251,16 +250,16 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 		
 	}
 	
-	public Dialog dialog;
-	public void commitDialog(final TakeOrder selectedValue){
-		dialog = new Dialog(context);
+	public Dialog dialogCommit;
+	public void commitDialog(final Calendar selectedValue){
+		dialogCommit = new Dialog(context);
 		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = li.inflate(R.layout.customer_selected_dialog, null, false);
-		dialog.setContentView(v);
+		dialogCommit.setContentView(v);
 		
-		dialog.setTitle("Cảnh báo, xóa bản ghi! ");
+		dialogCommit.setTitle("Cảnh báo, xóa lịch! ");
 	
-		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonYES);
+		Button dialogButton = (Button) dialogCommit.findViewById(R.id.dialogButtonYES);
 		dialogButton.setText("Chấp nhận");
 		// if button is clicked, close the custom dialog
 		
@@ -268,25 +267,25 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 			@Override
 			public void onClick(View v) {
 				//Sys
-//				ModifyTakeOrderTask deleteData = new ModifyTakeOrderTask(context, deleteValue, selectedValue, 
-//						adapter, ordersListView, CalendarManagerActivity.this);
-//				deleteData.execute();
+				
+				ModifyCalendarTask deleteCalendar = new ModifyCalendarTask(context, ModifyCalendarTask.ACTION_DELETE, "deleteCalendar", selectedValue, adapter, calendarListView, CalendarManagerActivity.this, null);
+				deleteCalendar.execute();
 								
 			}
 		});
 
 		//Delete a schedule
-		Button dialogDeleteButton = (Button) dialog.findViewById(R.id.dialogButtonNO);
+		Button dialogDeleteButton = (Button) dialogCommit.findViewById(R.id.dialogButtonNO);
 		dialogDeleteButton.setText("Hủy");
 		// if button is clicked, close the custom dialog
 		dialogDeleteButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 							
-				dialog.dismiss();
+				dialogCommit.dismiss();
 			}
 		});
-		dialog.show();
+		dialogCommit.show();
 		
 	}
 	

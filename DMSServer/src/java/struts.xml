@@ -263,6 +263,14 @@
             <result name="success">utility/putCalendar</result>
         </action>
         
+        <action name="updateCalendar" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/updateCalendar</result>
+        </action>
+        
+        <action name="deleteCalendar" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/deleteCalendar</result>
+        </action>
+        
         <action name="getTimeKeeperList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
             <result name="success">utility/getTimeKeeperList</result>
         </action>
@@ -270,6 +278,8 @@
         <action name="putTimeKeeper" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
             <result name="success">utility/putTimeKeeper</result>
         </action>
+        
+        
         
     </package>
     <package name="map"  extends="json-default,hibernate-default" namespace="/map">

@@ -63,10 +63,17 @@ public final class FeatureView extends FrameLayout {
     }
     
     public synchronized void setStatus(int status) {
+    	//Init
     	if(status == 0)
     		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.exclamation);
+    	
+    	//Request
     	if(status == 1)
-    		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.tick);
+    		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.request);
+    	
+    	//Approve
+    	if(status == 2)
+    		((ImageView) (findViewById(R.id.status))).setImageResource(R.drawable.completed);
     }
     
     public synchronized void setStaff(String value) {
