@@ -93,23 +93,26 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			times1.setOrientation(LinearLayout.HORIZONTAL);
 			times1.setLayoutParams(params);
 			
+			//Time
 			params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			ImageView times1_img = new ImageView(this);
-			times1_img.setImageResource(R.drawable.tick);
-			times1_img.setLayoutParams(params);
-			
-			params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			params.weight = 0.7f;
 			TextView times1_txt = new TextView(this);
-			
 			Calendar c = Calendar.getInstance();
 			c.setTime(timeKeeper.getTimeAt());
 			c.add(Calendar.HOUR, -7);
-			
 			times1_txt.setText("  " + df.format(c.getTime()));
 			times1_txt.setTextSize(18);
 			
-			times1.addView(times1_img);
+			//Status
+			params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			params.weight = 0.3f;
+			ImageView times1_img = new ImageView(this);
+			times1_img.setImageResource(R.drawable.ok);
+			times1_img.setLayoutParams(params);
+			
+			//Add
 			times1.addView(times1_txt);
+			times1.addView(times1_img);
 			
 			times_timekeeping.addView(times1);
 			
