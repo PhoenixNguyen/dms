@@ -20,7 +20,7 @@
         <!--[if lte IE 6]>
         <style type="text/css">div.fixedLay { poview/calendar/footer.jspsition:absolute; }</style>
         <![endif]-->
-
+        
         <!-- End -->
     </head>
     <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" class="small">
@@ -187,7 +187,13 @@
                                                     <tr><td colspan="2">&nbsp;</td></tr>
                                                     <tr>
                                                         <td colspan="2">
-
+                                                            
+                                                            <script type="text/javascript">
+                                                                $(document).ready(function(){
+                                                                    //$(".edit_calendar_popup").leanModal();
+                                                                    $('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".modal_close" });	
+                                                                });
+                                                            </script>
                                                             <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="80%">
                                                                 <tr>
                                                                     <td class='rptCellLabel'>Stt</td>
@@ -229,12 +235,13 @@
                                                                     </td>
                                                                     
                                                                     <td class='rptData'>
-                                                                        <a href="#" title="Sửa">
+                                                                        <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa">
                                                                             <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
                                                                         </a>
                                                                         <a href="#" title="Xóa">
                                                                             <img src="${pageContext.request.contextPath}/themes/images/delete.png" title="" >
                                                                         </a>
+                                                                        
                                                                     </td>
                                                                 </tr>
                                                                 
@@ -242,6 +249,89 @@
                                                                 
                                                                 
                                                             </table>
+                                                                
+                                                            <style>
+                                                                
+                                                                #edit_calendar_popup{
+                                                                    width: 804px;
+                                                                    padding-bottom: 2px;
+
+                                                                    display:none;
+
+
+                                                                    background: #FFF;
+                                                                    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+                                                                    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+
+                                                                }
+                                                            </style>
+                                                            
+                                                            <div id="edit_calendar_popup">
+                                                                <div id="popup-header">
+                                                                    <h2>Cập nhật lịch công tác</h2>
+                                                                    <a class="modal_close" href="#"></a>
+                                                                </div>
+                                                                
+                                                                <table width="100%">
+                                                                    <tr>
+                                                                        <td style="width: 35%; vertical-align: top" >
+                                                                            <div id="popup-body">
+                                                                                <label for="">Mã nhân viên</label>
+                                                                                <label for="">ba_dinh</label>
+                                                                            </div>
+                                                                            <div id="popup-body">
+                                                                                <label for="">Tên nhân viên</label>
+                                                                                <label for="">Lương Quốc</label>
+                                                                            </div>
+
+                                                                            <div id="popup-body">
+                                                                                <label for="">Ngày lập</label>
+                                                                                <label for="">26-04-2014</label>
+                                                                            </div>
+                                                                            <div id="popup-body">
+                                                                                <label for="">Tỉnh thành</label>
+                                                                                <label for="">Hà Nội</label>
+                                                                            </div>
+
+                                                                            <div id="popup-body">
+                                                                                <label for="">Nội dung</label>
+                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: top">
+                                                                            <div id="popup-body">
+                                                                                <label for="">Cộng tác viên</label>
+                                                                                <input id="" name="" type="text" />
+                                                                            </div>
+
+                                                                            <div id="popup-body">
+                                                                                <label for="">Hỗ trợ</label>
+                                                                                <input id="" name="" type="text" />
+                                                                            </div>
+
+                                                                            <div id="popup-body">
+                                                                                <label for="">Công tác</label>
+                                                                                <input id="" name="" type="text" />
+                                                                            </div>
+
+                                                                            <div id="popup-body">
+                                                                                <label for="">Báo cáo</label>
+                                                                                <textArea id="" name="vc" cols="5" rows="5" ></textarea>
+                                                                            </div>
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                <div id="popup-footer">
+                                                                    <button type="submit">Cập nhật &raquo;</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
                                                             <script type='text/javascript' id='__reportrun_directoutput_recordcount_script'>
                                                                 if ($('_reportrun_total'))
                                                                     $('_reportrun_total').innerHTML = 3;

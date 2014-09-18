@@ -16,7 +16,6 @@ import com.hp.dao.UserDAO;
 import com.hp.dao.UserDAOImpl;
 import com.hp.domain.Calendar;
 import com.hp.domain.PushInfo;
-import com.hp.domain.Staff;
 import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import static com.opensymphony.xwork2.Action.SUCCESS;
