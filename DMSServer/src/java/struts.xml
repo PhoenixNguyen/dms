@@ -1425,10 +1425,20 @@
         <!-- CALENDAR -->
         <action name="view-calendars" method="displayCalendars" class="com.hp.action.CalendarAction">
             <result name="success">view/calendar/calendars.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="calendar-filter-result" method="filterResult" class="com.hp.action.CalendarAction">
+            <result name="success">view/calendar/calendars.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
         </action>
         
         <action name="view-timekeeping" method="displayTimeKeeping" class="com.hp.action.TimeKeeperAction">
             <result name="success">view/calendar/time-keeper.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
         </action>
         
         <action name="filter-result-timekeeping" method="filterResult" class="com.hp.action.TimeKeeperAction">
@@ -1436,7 +1446,6 @@
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
-        
         
         
     </package>

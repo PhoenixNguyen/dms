@@ -165,4 +165,44 @@ public class CalendarDAOImpl implements CalendarDAO{
         }
         
     }
+    
+    @Override
+    public List<Calendar> getCalendarList(String pManagerID, String pStaff, Date pFromDate, Date pToDate) {
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Criteria criteria = session.createCriteria(Calendar.class);
+            Criteria criteriaInner = criteria.createCriteria("staff");
+            
+            if(pStaff!=null && !pStaff.equals("")){
+                criteriaInner.add(Restrictions.eq("id", pStaff));
+            }
+            else
+                if(pManagerID!= null && !pManagerID.equals("")){
+                    criteriaInner.add(Restrictions.eq("manager", pManagerID));
+                }
+            
+            if(pFromDate != null){
+                criteria.add(Restrictions.ge("calendarDate", pFromDate));
+            }
+            
+            if(pToDate != null){
+                criteria.add(Restrictions.le("calendarDate", pToDate));
+            }
+            
+            criteria.addOrder(Order.asc("calendarDate"));
+            System.err.println(criteria.toString());
+            
+            return criteria.list();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        
+        finally {
+            session.close();
+        }
+        
+    }
 }
