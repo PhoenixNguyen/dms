@@ -188,12 +188,6 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             
-                                                            <script type="text/javascript">
-                                                                $(document).ready(function(){
-                                                                    //$(".edit_calendar_popup").leanModal();
-                                                                    $('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".modal_close" });	
-                                                                });
-                                                            </script>
                                                             <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="80%">
                                                                 <tr>
                                                                     <td class='rptCellLabel'>Stt</td>
@@ -212,15 +206,17 @@
                                                                 
                                                                 <s:iterator value="calendarList" status="index">
                                                                 <s:date id="dateconverted" name="calendarDate" format="dd-MM-yyyy"/>
+                                                                <s:date id="createdTimeConverted" name="createdTime" format="dd-MM-yyyy HH:mm:ss"/>
                                                                 <tr>
                                                                     <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
-                                                                    <td class='rptData'><s:property value="staff.getId()"/></td>
+                                                                    <td class='rptData'>${staff.id}</td>
                                                                     <td class='rptData'><s:property value="staff.name"/></td>
                                                                     <td class='rptData'><s:property value="%{dateconverted}"/></td>
                                                                     <td class='rptData'><s:property value="province"/></td>
                                                                     <td class='rptData'><s:property value="content"/></td>
                                                                     <td class='rptData'><s:property value="report"/></td>
                                                                     <td class='rptData'><s:property value="contributor"/></td>
+                                                                    
                                                                     
                                                                     <td class='rptData' style="text-align: center">
                                                                         <s:if test="status == 0">
@@ -235,7 +231,10 @@
                                                                     </td>
                                                                     
                                                                     <td class='rptData'>
-                                                                        <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa">
+                                                                        <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa"
+                                                                           id="${stt}" staffID="${staff.id}" staffName="${staff.name}" date="${dateconverted}" province="${province}" content="${content}"
+                                                                           contributor="${contributor}" support="${support}" mission="${mission}" report="${report}" createdTime="${createdTimeConverted}"
+                                                                           >
                                                                             <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
                                                                         </a>
                                                                         <a href="#" title="Xóa">
@@ -249,7 +248,49 @@
                                                                 
                                                                 
                                                             </table>
-                                                                
+                                                            <script type="text/javascript">
+                                                                $(document).ready(function(){
+                                                                    //$(".edit_calendar_popup").leanModal();
+                                                                    $('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".modal_close" });	
+                                                                    
+                                                                    $('.edit_calendar_popup').live('click', function(){
+                                                                       //alert($(this).attr('createdTime')) ;
+                                                                       //$('form[name=edit_calendar]').trigger('reset');
+                                                                       
+                                                                       $('form[name=edit_calendar] .createdTime').html($(this).attr('createdTime'));
+                                                                       $('form[name=edit_calendar] .staffId').html($(this).attr('staffId'));
+                                                                       $('form[name=edit_calendar] .staffName').html($(this).attr('staffName'));
+                                                                       $('form[name=edit_calendar] .calendarDate').html($(this).attr('date'));
+                                                                       $('form[name=edit_calendar] .province').html($(this).attr('province'));
+                                                                       $('form[name=edit_calendar] .content').html($(this).attr('content'));
+                                                                       
+                                                                       $('form[name=edit_calendar] input[name=id]').val($(this).attr('id'));
+                                                                       
+                                                                       $('form[name=edit_calendar] input[name=contributor]').val($(this).attr('contributor'));//
+                                                                       $('form[name=edit_calendar] input[name=support]').val($(this).attr('support'));
+                                                                       $('form[name=edit_calendar] input[name=mission]').val($(this).attr('mission'));
+                                                                       $('form[name=edit_calendar] textarea[name=report]').val($(this).attr('report'));
+                                                                       
+                                                                    });
+                                                                    
+                                                                    $('form[name=edit_calendar]').submit(function(){
+                                                                        $.ajax({
+                                                                           url: $(this).attr('action'),
+                                                                           type: 'POST',
+                                                                           data : $(this).serializeArray(),
+                                                                           
+                                                                           success: function (data) {
+                                                                               alert(data);
+                                                                               if(data.indexOf('thành công') !== -1){
+                                                                                   location.reload();
+                                                                               }
+                                                                           }
+                                                                           
+                                                                        });
+                                                                        return false;
+                                                                    });
+                                                                });
+                                                            </script>    
                                                             <style>
                                                                 
                                                                 #edit_calendar_popup{
@@ -271,65 +312,72 @@
                                                                     <h2>Cập nhật lịch công tác</h2>
                                                                     <a class="modal_close" href="#"></a>
                                                                 </div>
-                                                                
-                                                                <table width="100%">
-                                                                    <tr>
-                                                                        <td style="width: 35%; vertical-align: top" >
-                                                                            <div id="popup-body">
-                                                                                <label for="">Mã nhân viên</label>
-                                                                                <label for="">ba_dinh</label>
-                                                                            </div>
-                                                                            <div id="popup-body">
-                                                                                <label for="">Tên nhân viên</label>
-                                                                                <label for="">Lương Quốc</label>
-                                                                            </div>
+                                                                <form method="post" action="edit-calendar-ajax" name="edit_calendar">
+                                                                    <input type="hidden" name="id" value=""/>
+                                                                    <table width="100%">
+                                                                        <tr>
+                                                                            <td style="width: 35%; vertical-align: top" >
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Ngày lập</label>
+                                                                                    <label class="createdTime" for=""></label>
+                                                                                </div>
 
-                                                                            <div id="popup-body">
-                                                                                <label for="">Ngày lập</label>
-                                                                                <label for="">26-04-2014</label>
-                                                                            </div>
-                                                                            <div id="popup-body">
-                                                                                <label for="">Tỉnh thành</label>
-                                                                                <label for="">Hà Nội</label>
-                                                                            </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Mã nhân viên</label>
+                                                                                    <label class="staffId" for="">ba_dinh</label>
+                                                                                </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Tên nhân viên</label>
+                                                                                    <label class="staffName" for="">Lương Quốc</label>
+                                                                                </div>
 
-                                                                            <div id="popup-body">
-                                                                                <label for="">Nội dung</label>
-                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: top">
-                                                                            <div id="popup-body">
-                                                                                <label for="">Cộng tác viên</label>
-                                                                                <input id="" name="" type="text" />
-                                                                            </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Lịch ngày</label>
+                                                                                    <label class="calendarDate" for="">26-04-2014</label>
+                                                                                </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Tỉnh thành</label>
+                                                                                    <label class="province" for="">Hà Nội</label>
+                                                                                </div>
 
-                                                                            <div id="popup-body">
-                                                                                <label for="">Hỗ trợ</label>
-                                                                                <input id="" name="" type="text" />
-                                                                            </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Nội dung</label>
+    <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
+                                                                                    <span class="content" style="text-align: left; color: #222; font-size: 1.3em; padding-top: 8px; display: block; background-color: #F7F7F7; float: left;">
+                                                                                       Đưa đón khách hàng đi du lịch tại hạ long Đưa đón khách hàng đi du lịch tại hạ long
+                                                                                    </span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: top">
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Cộng tác viên</label>
+                                                                                    <input name="contributor" type="text" />
+                                                                                </div>
 
-                                                                            <div id="popup-body">
-                                                                                <label for="">Công tác</label>
-                                                                                <input id="" name="" type="text" />
-                                                                            </div>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Hỗ trợ</label>
+                                                                                    <input name="support" type="text" />
+                                                                                </div>
 
-                                                                            <div id="popup-body">
-                                                                                <label for="">Báo cáo</label>
-                                                                                <textArea id="" name="vc" cols="5" rows="5" ></textarea>
-                                                                            </div>
-                                                                            
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                                
-                                                                
-                                                                
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Công tác</label>
+                                                                                    <input name="mission" type="text" />
+                                                                                </div>
+
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Báo cáo</label>
+                                                                                    <textArea name="report" cols="5" rows="5" ></textarea>
+                                                                                </div>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
                                                                 
                                                                 <div id="popup-footer">
                                                                     <button type="submit">Cập nhật &raquo;</button>
                                                                 </div>
-                                                                
+                                                                    
+                                                                </form>
                                                             </div>
                                                             
                                                             <script type='text/javascript' id='__reportrun_directoutput_recordcount_script'>

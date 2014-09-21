@@ -21,12 +21,15 @@ import static com.opensymphony.xwork2.Action.LOGIN;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -113,6 +116,25 @@ public class CalendarAction extends ActionSupport{
                 start, end);
         
         return SUCCESS;
+    }
+    
+    public String edit() throws IOException{
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
+        
+        HttpSession session = request.getSession();
+        
+        String id = StringUtils.trimToEmpty(request.getParameter("id"));
+        String contributor = StringUtils.trimToEmpty(request.getParameter("contributor"));
+        String support = StringUtils.trimToEmpty(request.getParameter("support"));
+        String mission = StringUtils.trimToEmpty(request.getParameter("mission"));
+        String report = StringUtils.trimToEmpty(request.getParameter("report"));
+        
+        System.out.println("ID: "+id);
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("text/html; charset=UTF-8");
+        response.getOutputStream().write("Cập nhật lịch công tác thành công".getBytes("UTF-8"));
+        return null;
     }
     
     public List<Calendar> getCalendarList() {

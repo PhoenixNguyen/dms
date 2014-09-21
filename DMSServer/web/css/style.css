@@ -60,8 +60,8 @@ li { padding-left: 20px;  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); line-height: 
 #strengths li { background: url(../img/strength.png) 0 4px no-repeat; }
 #weaknesses li { background: url(../img/weakness.png) 0 4px no-repeat; }
 
-a:link, a:visited { color: #D0E4EF; text-decoration: underline; }
-a:hover, a:active { color: #D0E4EF; text-decoration: none; }
+/*a:link, a:visited { color: #D0E4EF; text-decoration: underline; }*/
+/*a:hover, a:active { color: #D0E4EF; text-decoration: none; }*/
 
 
 pre { display: block; font-size: 1.2em; color: #17516E;font-family: "Courier", "Courier New"; background: #90BCD4; padding: 12px; margin-bottom: 22px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
