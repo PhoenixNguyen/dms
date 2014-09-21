@@ -164,13 +164,51 @@ public class CalendarAction extends ActionSupport{
             if(status != -1)
                 calendar.setStatus(status);
             
-            if(calendarDAO.update(calendar))
+            if(calendarDAO.update(calendar)){
                 response.getOutputStream().write("Cập nhật lịch công tác thành công".getBytes("UTF-8"));
-            return null;
+                return null;
+            }
         }
         
         response.getOutputStream().write("Cập nhật lịch công tác thất bại, hãy thử lại sau!".getBytes("UTF-8"));
         
+        return null;
+    }
+    
+    public String delete() throws IOException{
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
+        
+        HttpSession session = request.getSession();
+        
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("text/html; charset=UTF-8");
+        
+        String id = StringUtils.trimToEmpty(request.getParameter("id"));
+        
+        int stt = 0;
+        try{
+            stt = Integer.parseInt(id);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            response.getOutputStream().write("Lỗi không xác định, hãy thử lại sau!".getBytes("UTF-8"));
+            return null;
+        }
+        
+        Calendar calendar = null;
+        if(stt > 0)
+            calendar = calendarDAO.getCalendar(stt);
+        
+        if(calendar != null && calendar.getStatus() != 2){
+            
+            if(calendarDAO.delete(calendar)){
+                response.getOutputStream().write("Xóa lịch công tác thành công".getBytes("UTF-8"));
+                return null;
+            }
+        }
+        
+        response.getOutputStream().write("Xóa lịch công tác thất bại, hãy thử lại sau!".getBytes("UTF-8"));
         return null;
     }
     

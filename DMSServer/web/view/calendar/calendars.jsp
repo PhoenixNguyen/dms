@@ -238,7 +238,7 @@
                                                                            >
                                                                             <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
                                                                         </a>
-                                                                        <a href="#" title="Xóa">
+                                                                        <a href="javascript:void(0)" class="delete_popup" id="${stt}" status="${status}" title="Xóa">
                                                                             <img src="${pageContext.request.contextPath}/themes/images/delete.png" title="" >
                                                                         </a>
                                                                         
@@ -285,10 +285,39 @@
                                                                     });
                                                                     
                                                                     $('form[name=edit_calendar]').submit(function(){
+                                                                        if(!confirm('Bạn chắc chắn muốn cập nhật'))
+                                                                            return;
                                                                         $.ajax({
                                                                            url: $(this).attr('action'),
                                                                            type: 'POST',
                                                                            data : $(this).serializeArray(),
+                                                                           
+                                                                           success: function (data) {
+                                                                               alert(data);
+                                                                               if(data.indexOf('thành công') !== -1){
+                                                                                   location.reload();
+                                                                               }
+                                                                           }
+                                                                           
+                                                                        });
+                                                                        return false;
+                                                                    });
+                                                                    
+                                                                    $('.delete_popup').live('click', function(){
+                                                                        var id = $(this).attr('id');
+                                                                        
+                                                                        if($(this).attr('status') == 2){
+                                                                            alert('Không thể xóa lịch làm việc, lịch này đã hoàn thành.');
+                                                                            return;
+                                                                        }
+                                                                        
+                                                                        if(!confirm('Bạn chắc chắn muốn xóa!'))
+                                                                            return;
+                                                                        
+                                                                        $.ajax({
+                                                                           url: 'delete-calendar-ajax',
+                                                                           type: 'POST',
+                                                                           data : 'id=' + id,
                                                                            
                                                                            success: function (data) {
                                                                                alert(data);

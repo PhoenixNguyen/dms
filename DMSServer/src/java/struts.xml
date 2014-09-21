@@ -1442,6 +1442,13 @@
           </result>
         </action>
         
+        <action name="delete-calendar-ajax" method="delete" class="com.hp.action.CalendarAction"  >
+              
+          <result  type="json" >
+              <param name="contentType">application/json</param>
+          </result>
+        </action>
+        
         <action name="view-timekeeping" method="displayTimeKeeping" class="com.hp.action.TimeKeeperAction">
             <result name="success">view/calendar/time-keeper.jsp</result>
             <result name="input" >home.jsp</result>
