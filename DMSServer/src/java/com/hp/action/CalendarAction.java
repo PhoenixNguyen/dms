@@ -22,6 +22,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,16 +125,52 @@ public class CalendarAction extends ActionSupport{
         
         HttpSession session = request.getSession();
         
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("text/html; charset=UTF-8");
+        
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
         String id = StringUtils.trimToEmpty(request.getParameter("id"));
         String contributor = StringUtils.trimToEmpty(request.getParameter("contributor"));
         String support = StringUtils.trimToEmpty(request.getParameter("support"));
         String mission = StringUtils.trimToEmpty(request.getParameter("mission"));
         String report = StringUtils.trimToEmpty(request.getParameter("report"));
+        String statusParam = StringUtils.trimToEmpty(request.getParameter("status"));
         
-        System.out.println("ID: "+id);
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("text/html; charset=UTF-8");
-        response.getOutputStream().write("Cập nhật lịch công tác thành công".getBytes("UTF-8"));
+        int stt = 0;
+        int status = -1;
+        try{
+            stt = Integer.parseInt(id);
+            status = Integer.parseInt(statusParam);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            response.getOutputStream().write("Lỗi không xác định, hãy thử lại sau!".getBytes("UTF-8"));
+            return null;
+        }
+        
+        Calendar calendar = null;
+        if(stt > 0)
+            calendar = calendarDAO.getCalendar(stt);
+        
+        if(calendar != null && calendar.getStatus() != 2){
+            calendar.setContributor(contributor);
+            calendar.setMission(mission);
+            calendar.setReport(report);
+            calendar.setSupport(support);
+            
+            calendar.setUpdatedTime(Timestamp.valueOf(df.format(new Date())));
+            
+            if(status != -1)
+                calendar.setStatus(status);
+            
+            if(calendarDAO.update(calendar))
+                response.getOutputStream().write("Cập nhật lịch công tác thành công".getBytes("UTF-8"));
+            return null;
+        }
+        
+        response.getOutputStream().write("Cập nhật lịch công tác thất bại, hãy thử lại sau!".getBytes("UTF-8"));
+        
         return null;
     }
     

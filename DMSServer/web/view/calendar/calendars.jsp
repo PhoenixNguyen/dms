@@ -234,6 +234,7 @@
                                                                         <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa"
                                                                            id="${stt}" staffID="${staff.id}" staffName="${staff.name}" date="${dateconverted}" province="${province}" content="${content}"
                                                                            contributor="${contributor}" support="${support}" mission="${mission}" report="${report}" createdTime="${createdTimeConverted}"
+                                                                           status="${status}"
                                                                            >
                                                                             <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
                                                                         </a>
@@ -270,7 +271,17 @@
                                                                        $('form[name=edit_calendar] input[name=support]').val($(this).attr('support'));
                                                                        $('form[name=edit_calendar] input[name=mission]').val($(this).attr('mission'));
                                                                        $('form[name=edit_calendar] textarea[name=report]').val($(this).attr('report'));
+                                                                       $('form[name=edit_calendar] select[name=status]').val($(this).attr('status'));
                                                                        
+                                                                       $('form[name=edit_calendar] .action').html('Cập nhật &raquo;');
+                                                                       $('form[name=edit_calendar] button').prop('type', 'submit');
+                                                                       $('form[name=edit_calendar] .action').attr('onclick', null);
+                                                                       
+                                                                       if($(this).attr('status') == 2){
+                                                                            $('form[name=edit_calendar] .action').html('Đóng &raquo;');
+                                                                            $('form[name=edit_calendar] button').prop('type', 'button');
+                                                                            $('form[name=edit_calendar] .action').attr('onclick', '$("#edit_calendar_popup .modal_close").click();');
+                                                                        }
                                                                     });
                                                                     
                                                                     $('form[name=edit_calendar]').submit(function(){
@@ -368,13 +379,21 @@
                                                                                     <label for="">Báo cáo</label>
                                                                                     <textArea name="report" cols="5" rows="5" ></textarea>
                                                                                 </div>
-
+                                                                                
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Trạng thái</label>
+                                                                                    <select name="status">
+                                                                                        <option value="0">Khởi tạo</option>
+                                                                                        <option value="1">Đề nghị</option>
+                                                                                        <option value="2">Hoàn thành</option>
+                                                                                    </select>
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
                                                                 
                                                                 <div id="popup-footer">
-                                                                    <button type="submit">Cập nhật &raquo;</button>
+                                                                    <button class="action" type="submit" >Cập nhật &raquo;</button>
                                                                 </div>
                                                                     
                                                                 </form>

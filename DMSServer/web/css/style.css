@@ -130,9 +130,9 @@ pre { display: block; font-size: 1.2em; color: #17516E;font-family: "Courier", "
 #popup-body label { display: block; float: left; width: 100px; padding-top: 8px; color: #222; font-size: 1.3em; text-align: left;  }
 #popup-body input { width: 344px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
 #popup-body textArea { width: 344px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
+#popup-body select { width: 344px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
 
-
-#popup-body { position: relative;  padding: 14px 20px; text-align: right; }
+#popup-body { position: relative;  padding-left: 15px; text-align: left; }
 popup-footer {  overflow: hidden; padding: 12px 20px 12px 130px; }
 
 #signup .txt-fld { position: relative; width: 364px; padding: 14px 20px; border-bottom: 1px solid #EEE; text-align: right; }
