@@ -1424,13 +1424,13 @@
         
         <!-- CALENDAR -->
         <action name="view-calendars" method="displayCalendars" class="com.hp.action.CalendarAction">
-            <result name="success">view/calendar/calendars.jsp</result>
+            <result name="success">view/staff/calendars.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
         
         <action name="calendar-filter-result" method="filterResult" class="com.hp.action.CalendarAction">
-            <result name="success">view/calendar/calendars.jsp</result>
+            <result name="success">view/staff/calendars.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
@@ -1450,18 +1450,29 @@
         </action>
         
         <action name="view-timekeeping" method="displayTimeKeeping" class="com.hp.action.TimeKeeperAction">
-            <result name="success">view/calendar/time-keeper.jsp</result>
+            <result name="success">view/staff/time-keeper.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
         
         <action name="filter-result-timekeeping" method="filterResult" class="com.hp.action.TimeKeeperAction">
-            <result name="success">view/calendar/time-keeper.jsp</result>
+            <result name="success">view/staff/time-keeper.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="interrupted-time" method="loadPage" class="com.hp.action.InterruptedTimeAction">
+            <result name="success">view/staff/interrupted-time.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
         
+        <action name="interrupted-time-filter" method="discoverInterruption" class="com.hp.action.InterruptedTimeAction">
+            <result name="success">view/staff/interrupted-time.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        <!--========================================================================================================-->
     </package>
     
     <package name="maps"  extends="json-default,hibernate-default" namespace="/maps">

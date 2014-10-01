@@ -126,6 +126,97 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
         return result;
     }
     
+    public List<List<RoadManagement>> getRoad(String pGiamDoc, String pNhanVien, String pMaKhachHang, String pDate, String toDate){
+        List<List<RoadManagement>> result = new ArrayList<List<RoadManagement>>();
+        try{
+            String datefinal="";
+            String toDatefinal="";
+            System.out.println(" DATE: " + pDate); 
+            if(pDate != null && pDate.compareTo("")!= 0 ){
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                
+                Date date = sdf.parse(pDate);
+                datefinal = sdf2.format(date);
+                
+                Date to_date = sdf.parse(toDate);
+                toDatefinal = sdf2.format(to_date);
+                
+                System.out.println(" DATECONVERT: " + datefinal );
+            }
+            
+            if(pNhanVien != null){
+
+                //Lay danh sach ID khach hang cua giam doc
+                List<RoadManagement> tmp = new ArrayList<RoadManagement>();
+                if(datefinal.compareTo("") == 0)
+                    tmp = session.createQuery("from RoadManagement where maNhanVien='"+pNhanVien+"' order by thoiGian").list();
+                else
+                    tmp = session.createQuery("from RoadManagement where maNhanVien='"+pNhanVien+"'"
+                            + "  and cast (thoiGian as date) BETWEEN '"+datefinal+"' and '" + toDatefinal + "' order by thoiGian").list();
+
+                if(tmp.size() > 0)
+                    result.add(tmp);
+                
+                return result;
+            }
+            else 
+            if(pGiamDoc != null){
+                //Lay danh sach ID nhan vien cua giam doc
+                List<String> nhanvien = null;
+                nhanvien = session.createQuery("select id "
+                        + "from Staff "
+                        + "where manager ='"+pGiamDoc+"' order by id"
+                        ).list();
+                for(int i= 0; i < nhanvien.size(); i++){
+                    List<RoadManagement> tmp = new ArrayList<RoadManagement>();
+                    if(datefinal.compareTo("") == 0)
+                        tmp = session.createQuery("from RoadManagement where maNhanVien='"+nhanvien.get(i)+"' order by thoiGian").list();
+                    else
+                        tmp = session.createQuery("from RoadManagement where maNhanVien='"+nhanvien.get(i)+"'"
+                                + " and cast (thoiGian as date) BETWEEN '"+datefinal+"' and '" + toDatefinal + "' order by thoiGian").list();
+                    
+                    if(tmp.size() > 0)
+                        result.add(tmp);
+                }
+                return result;
+            }
+            
+            
+            else{
+                List<String> nhanvien = null;
+                nhanvien = session.createQuery("select id "
+                        + "from Staff order by id"
+                        ).list();
+                
+                    List<RoadManagement> tmp = new ArrayList<RoadManagement>();
+                    if(datefinal.compareTo("") == 0)
+                        tmp = session.createQuery("from RoadManagement order by maNhanVien, thoiGian").list();
+                    else
+                        tmp = session.createQuery("select rm from RoadManagement as rm where "
+                                + " cast (rm.thoiGian as date) BETWEEN '"+datefinal+"' and '" + toDatefinal + "' order by rm.maNhanVien, rm.thoiGian").list();
+                    
+                    if(tmp.size() > 0)
+                        for(String nv : nhanvien){
+                            List<RoadManagement> rmNV = new ArrayList<RoadManagement>();
+                            for(RoadManagement rm : tmp){
+                                if( nv.equalsIgnoreCase(rm.getMaNhanVien()))
+                                    rmNV.add(rm);
+                            }
+                            if(rmNV.size() > 0)
+                                result.add(rmNV);
+                        }
+                        
+                //}                
+                return result;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
     //Add customer  
     @Override
     public boolean saveOrUpdate(RoadManagement pRoadManagement){
