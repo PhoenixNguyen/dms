@@ -40,9 +40,7 @@ public class UserAPI {
 		String password;
 		LoginActivity activity;
 		
-		
     	ProgressDialog dialog;
-    	
     	public AuthenticateUserTask(Context context, String username, String password,
     			LoginActivity activity){
     		
@@ -52,7 +50,6 @@ public class UserAPI {
     		this.password = password;
     		this.activity = activity;
     	}
-    	
     	
     	protected void onPreExecute() {
     		dialog = ProgressDialog.show(context, "",
@@ -73,7 +70,6 @@ public class UserAPI {
 				
 			}
 							
-	
 			// Connect server
 	        new Rest("").connectWebservices();
 	        
