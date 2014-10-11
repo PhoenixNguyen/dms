@@ -14,6 +14,7 @@ import com.hp.gps.HttpHelper;
 import com.hp.gps.MapLocation;
 import com.hp.gps.MyLocationListener;
 import com.hp.gps.Unicode2NoSign;
+import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 import com.hp.rest.TimeKeeperAPI;
 import com.hp.rest.TimeKeeperAPI.GetTimeKeeperTask;
@@ -123,6 +124,17 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	
 	@SuppressLint("SimpleDateFormat")
 	public String getAddress(){
+		//check internet
+		if(CheckingInternet.isOnline()){
+			System.out.println("Internet access!!____________________");
+		}
+		else{
+											
+			System.out.println("NO Internet access!!____________________");
+			Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+			return null;
+			
+		}
 		
 		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
 			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
@@ -180,6 +192,9 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//Get City
 		String city = getAddress();
+		if(city == null)
+			return;
+		
 		if(city.equals("")){
 			Toast.makeText(this, "Đang xác định thành phố ...", Toast.LENGTH_SHORT).show();
 			return ;
