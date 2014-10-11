@@ -85,14 +85,24 @@ public class TakeOrderAPI {
 			}
 
 			// Getting
-			ClientResponse response1 = Rest.mService.path("webresources")
+			ClientResponse response1 = null;	
+			ClientResponse response2 = null;
+			try{
+
+				response1 = Rest.mService.path("webresources")
 					.path(method1).accept("application/json")
 					.type("application/json").post(ClientResponse.class, content1);
-			System.out.println("________________ " + response1.toString());
 
-			ClientResponse response2 = Rest.mService.path("webresources")
+				response2 = Rest.mService.path("webresources")
 					.path(method2).accept("application/json")
 					.type("application/json").post(ClientResponse.class, content2);
+			
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
+			System.out.println("________________ " + response1.toString());
 			System.out.println("________________ " + response2.toString());
 			
 			if (response1.getStatus() != 200 || (response1.getEntity(String.class).compareTo("true") != 0)) {
@@ -141,34 +151,12 @@ public class TakeOrderAPI {
 				Toast.makeText(context, "Lỗi không mong muốn: Không thể lưu bản ghi chi tiết này, hãy thử lại", Toast.LENGTH_SHORT).show();
 
 			}
-			
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
 			
 			dialog.dismiss();
 		}
-
-//		public boolean ConvertStringToObjectList(String input) {
-//			// pair to object
-//			ObjectMapper mapper = new ObjectMapper();
-//
-//			try {
-//				customerList = mapper.readValue(
-//						input,
-//						TypeFactory.defaultInstance().constructCollectionType(
-//								List.class, Customer.class));
-//				// System.out.println("++++++++++++++ mdt "+customerList.get(0).getmMaDoiTuong());
-//			} catch (JsonGenerationException e) {
-//				e.printStackTrace();
-//				return false;
-//			} catch (JsonMappingException e) {
-//				e.printStackTrace();
-//				return false;
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//				return false;
-//			}
-//
-//			return true;
-//		}
 
 	}
 	
@@ -213,12 +201,20 @@ public class TakeOrderAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, ConvertObjectToString(takeOrder));
+
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
 
 				String output = response.toString();
 				System.out.println("input 1: " + output);
@@ -261,7 +257,12 @@ public class TakeOrderAPI {
 								context,
 								"Không thể xóa. Dữ liệu đang được sử dụng cho đối tượng khác",
 								Toast.LENGTH_SHORT).show();
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -296,7 +297,6 @@ public class TakeOrderAPI {
 			}
 
 		}
-		
 		
 		// ///////////////// LOADING
 		///////////////////////////////////////////////////////////////////////////////
@@ -335,13 +335,21 @@ public class TakeOrderAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, staff);
 
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -375,7 +383,11 @@ public class TakeOrderAPI {
 				} else if (result.equals("nodata")) {
 					Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 							.show();
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 

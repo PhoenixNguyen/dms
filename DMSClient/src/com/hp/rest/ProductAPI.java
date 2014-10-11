@@ -45,20 +45,6 @@ public class ProductAPI {
 		int mProviderIndex;
 		EditText search;
 		
-
-//		// Delete
-//		boolean delete;
-//		CustomerArrayAdapter customerAdapter;
-//		ListView listView;
-//
-//		// insert
-//		Customer customer;
-//		boolean insert;
-//
-//		// update location
-//		boolean updateLocation;
-//		CustomerMapActivity activity;
-
 		public GetProductListTask(Context context, String method,
 				ProductArrayAdapter adapter, ListView listView, 
 				boolean mManager, int mProviderIndex, EditText search) {
@@ -71,38 +57,6 @@ public class ProductAPI {
 			this.mProviderIndex = mProviderIndex; 
 			this.search = search; 
 		}
-
-		// public GetProductListTask(Context context, String method, String
-		// staff, boolean delete,
-		// CustomerArrayAdapter customerAdapter, ListView listView){
-		// this.context = context;
-		// this.method = method;
-		// this.staff = staff;
-		//
-		// this.delete = delete;
-		// this.customerAdapter = customerAdapter;
-		// this.listView = listView;
-		// }
-		//
-		// public GetProductListTask(Context context, String method, String
-		// staff, boolean insert, Customer customer){
-		// this.context = context;
-		// this.method = method;
-		// this.staff = staff;
-		//
-		// this.insert = insert;
-		// this.customer = customer;
-		// }
-		//
-		// public GetProductListTask(Context context, String method, String
-		// staff, boolean updateLocation, CustomerMapActivity activity){
-		// this.context = context;
-		// this.method = method;
-		// this.staff = staff;
-		//
-		// this.updateLocation = updateLocation;
-		// this.activity = activity;
-		// }
 
 		ProgressDialog dialog;
 
@@ -129,10 +83,18 @@ public class ProductAPI {
 				}
 	
 				// Getting
-				ClientResponse response = Rest.mService.path("webresources")
-						.path(method).accept("application/json")
-						.type("application/json")
-						.post(ClientResponse.class, ProviderAPI.providersList.get(k).getId());
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService.path("webresources")
+							.path(method).accept("application/json")
+							.type("application/json")
+							.post(ClientResponse.class, ProviderAPI.providersList.get(k).getId());
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				System.out.println("________________ " + response.toString());
 	
 				if (response.getStatus() != 200) {
@@ -218,25 +180,6 @@ public class ProductAPI {
 
 		protected void onPostExecute(String result) {
 			if (result.equals("success")) {
-				// do something
-				// if(delete){
-				// customerAdapter = new CustomerArrayAdapter(context,
-				// CustomerAPI.customerList);
-				// listView.setAdapter(customerAdapter);
-				// }
-				// if(insert){
-				// //Switch
-				// Intent t = new Intent(context, CustomerMapActivity.class);
-				// t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
-				//
-				// context.startActivity(t);
-				// }
-				// if(updateLocation){
-				// activity.setUpMap();
-				// }
-
-				// If mProductsMap have not contained this key then import this
-				// list
 				
 			    // Something after add all product =====================================================================
 				adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
@@ -279,7 +222,12 @@ public class ProductAPI {
 			} else if (result.equals("nodata")) {
 				Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 						.show();
-			} else {
+			} 
+			else if (result.equals("nohost")){
+        		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+        	}
+			
+			else {
 				
 				Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -364,8 +312,15 @@ public class ProductAPI {
 		}
 		
 		//Deleting
-		ClientResponse response = Rest.mService.path("webresources").path(method).accept("application/json")
+		ClientResponse response = null;	
+		try{
+			response = Rest.mService.path("webresources").path(method).accept("application/json")
 				.type("application/json").post(ClientResponse.class, ConvertObjectToString(product));
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return "nohost";
+		}
 		
 		String output = response.toString();
 		System.out.println("input 1: " + output);
@@ -408,7 +363,12 @@ public class ProductAPI {
 					else
 						Toast.makeText(context, "Không thể lưu dữ liệu. Mã Sản phẩm không được trống và không trùng với Sản phẩm khác", Toast.LENGTH_SHORT).show();
 				}
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+			
 			else
+				
 			{       
 			 				
 			 Toast.makeText(context, "", Toast.LENGTH_SHORT).show();

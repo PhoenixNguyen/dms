@@ -79,9 +79,16 @@ public class ScheduleAPI {
 			}
 
 			// Getting
-			ClientResponse response = Rest.mService.path("webresources")
+			ClientResponse response = null;	
+			try{
+				response = Rest.mService.path("webresources")
 					.path(method).accept("application/json")
 					.type("application/json").post(ClientResponse.class, info);
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			System.out.println("________________ " + response.toString());
 
 			if (response.getStatus() != 200 || response.getLength() < 2 ) {
@@ -144,7 +151,12 @@ public class ScheduleAPI {
 						.show();
 				
 				
-			} else {
+			} 
+			else if (result.equals("nohost")){
+        		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+        	}
+			
+			else {
 				
 				Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -217,13 +229,19 @@ public class ScheduleAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;	
+				try{
+					response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, info);
-
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -259,7 +277,12 @@ public class ScheduleAPI {
 								"Không thể xóa dữ liệu. Lịch này đã tồn tại ở dữ liệu khác!",
 								Toast.LENGTH_SHORT).show();
 					
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -338,9 +361,17 @@ public class ScheduleAPI {
 				}
 
 				// Getting
-				ClientResponse response = Rest.mService.path("webresources")
+				ClientResponse response = null;	
+				try{
+					response = Rest.mService.path("webresources")
 						.path(method).accept("application/json")
 						.type("application/json").post(ClientResponse.class, info);
+
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				System.out.println("________________ " + response.toString());
 
 				if (response.getStatus() != 200) {
@@ -385,7 +416,11 @@ public class ScheduleAPI {
 				} else if (result.equals("nodata")) {
 					Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 							.show();
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -462,9 +497,18 @@ public class ScheduleAPI {
 				}
 
 				// Getting
-				ClientResponse response = Rest.mService.path("webresources")
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService.path("webresources")
 						.path(method).accept("application/json")
 						.type("application/json").post(ClientResponse.class, ConvertListToString(info));
+
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				System.out.println("________________ " + response.toString());
 
 				if (response.getStatus() != 200  ) {
@@ -500,7 +544,11 @@ public class ScheduleAPI {
 					Toast.makeText(context, "Giá trị trống", Toast.LENGTH_SHORT).show();
 					
 					
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 

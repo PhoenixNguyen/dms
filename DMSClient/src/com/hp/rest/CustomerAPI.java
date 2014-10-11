@@ -133,11 +133,17 @@ public class CustomerAPI {
 			}
 
 			// Getting
-			ClientResponse response = Rest.mService.path("webresources")
-					.path(method).accept("application/json")
-					.type("application/json").post(ClientResponse.class, staff);
-			System.out.println("________________ " + response.toString());
-
+			ClientResponse response = null;
+			try{
+				response = Rest.mService.path("webresources")
+						.path(method).accept("application/json")
+						.type("application/json").post(ClientResponse.class, staff);
+				System.out.println("________________ " + response.toString());
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			if (response.getStatus() != 200) {
 
 				return "nodata";
@@ -207,7 +213,11 @@ public class CustomerAPI {
 			} else if (result.equals("nodata")) {
 				Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 						.show();
-			} else {
+			} 
+			else if (result.equals("nohost")){
+        		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+        	}
+			else {
 				dialog.dismiss();
 				Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -277,13 +287,19 @@ public class CustomerAPI {
 			}
 
 			// Deleting
-			ClientResponse response = Rest.mService
-					.path("webresources")
-					.path(method)
-					.accept("application/json")
-					.type("application/json")
-					.post(ClientResponse.class, ConvertObjectToString(customer));
-
+			ClientResponse response = null;
+			try{
+				response = Rest.mService
+						.path("webresources")
+						.path(method)
+						.accept("application/json")
+						.type("application/json")
+						.post(ClientResponse.class, ConvertObjectToString(customer));
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			String output = response.toString();
 			System.out.println("input 1: " + output);
 
@@ -327,7 +343,12 @@ public class CustomerAPI {
 							context,
 							"Không thể lưu dữ liệu. Mã KH không được trống và không trùng với khách hàng khác",
 							Toast.LENGTH_SHORT).show();
-			} else {
+			} 
+			else if (result.equals("nohost")){
+        		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+        	}
+			
+			else {
 				
 				Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -405,13 +426,21 @@ public class CustomerAPI {
 			
 			System.out.println(data.getTenKhachHang());
 			// uploading
-			ClientResponse response = Rest.mService
-					.path("webresources")
-					.path(method)
-					.accept("application/json")
-					.type("application/json")
-					.post(ClientResponse.class, ConvertObjectToString(data));
+			
+			ClientResponse response = null;
+			try{
+				response = Rest.mService
+						.path("webresources")
+						.path(method)
+						.accept("application/json")
+						.type("application/json")
+						.post(ClientResponse.class, ConvertObjectToString(data));
 
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			String output = response.toString();
 			System.out.println("input 1: " + output);
 
@@ -444,7 +473,12 @@ public class CustomerAPI {
 						context,
 						"Không thể gửi dữ liệu. Có lỗi xảy ra, hãy thử lại sau",
 						Toast.LENGTH_SHORT).show();
-			} else {
+			} 
+			else if (result.equals("nohost")){
+        		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+        	}
+			
+			else {
 				//dialog.dismiss();
 				Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 

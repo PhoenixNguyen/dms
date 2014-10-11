@@ -71,13 +71,21 @@ public class TakeOrderDetailAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, ConvertObjectToString(takeOrderDetail));
 
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -120,6 +128,9 @@ public class TakeOrderDetailAPI {
 								"Không thể cập nhật dữ liệu. Bản ghi này này đã tồn tại ở dữ liệu khác!",
 								Toast.LENGTH_SHORT).show();
 				}
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
 					else
 						Toast.makeText(
 								context,
@@ -192,13 +203,21 @@ public class TakeOrderDetailAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;	
+				try{
+
+					response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, orderID);
 
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -232,7 +251,11 @@ public class TakeOrderDetailAPI {
 				} else if (result.equals("nodata")) {
 					Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 							.show();
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 

@@ -26,8 +26,9 @@ public class Rest {
 
 		ClientConfig config = new DefaultClientConfig();
 	    Client client = Client.create(config);
+	    client.setConnectTimeout(10000);
+	    client.setReadTimeout(10000);
 	    
-	    	
 	    mService = client.resource(getBaseURI());
 	    // Fluent interfaces
 //	    System.out.println(mService.path("webresources").path("getData").accept(MediaType.TEXT_PLAIN).get(ClientResponse.class).toString());

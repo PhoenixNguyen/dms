@@ -23,142 +23,6 @@ import com.sun.jersey.api.client.ClientResponse;
 
 public class CalendarAPI {
 	public static List<Calendar> calendarList = new ArrayList<Calendar>();
-
-	// ///////////////// LOAD
-	// /////////////////////////////////////////////////////////////////////////////
-//	public static class PutCalendarTask extends
-//			AsyncTask<Void, Void, String> {
-//		Context context;
-//		String method1;
-//		String method2;
-//		String staff;
-//		String content1;
-//		String content2;
-//		
-//		TakeOrder_AmountActivity activity;
-//		boolean update;
-//
-//		public PutTakeOrderTask(Context context, String method1, String method2, 
-//				String content1, String content2, String staff,
-//				TakeOrder_AmountActivity activity, boolean update) {
-//			this.context = context;
-//			this.method1 = method1;
-//			this.method2 = method2;
-//			this.staff = staff;
-//			this.content1 = content1;
-//			this.content2 = content2;
-//			
-//			this.activity = activity;
-//			this.update = update;
-//		}
-//
-//		
-//		
-//		ProgressDialog dialog;
-//
-//		protected void onPreExecute() {
-//			dialog = ProgressDialog.show(context, "", "Đang xử lý ... ", true);
-//		}
-//
-//		protected String doInBackground(Void... params) {
-//			// do something
-//			if (CheckingInternet.isOnline()) {
-//				System.out.println("Internet access!!____________________");
-//			} else {
-//				
-//				System.out.println("NO Internet access!!____________________");
-//
-//				return "nointernet";
-//
-//			}
-//
-//			// Getting
-//			ClientResponse response1 = Rest.mService.path("webresources")
-//					.path(method1).accept("application/json")
-//					.type("application/json").post(ClientResponse.class, content1);
-//			System.out.println("________________ " + response1.toString());
-//
-//			ClientResponse response2 = Rest.mService.path("webresources")
-//					.path(method2).accept("application/json")
-//					.type("application/json").post(ClientResponse.class, content2);
-//			System.out.println("________________ " + response2.toString());
-//			
-//			if (response1.getStatus() != 200 || (response1.getEntity(String.class).compareTo("true") != 0)) {
-//
-//				return "nodata1";
-//			} 
-//			else
-//				if (response2.getStatus() != 200 || (response2.getEntity(String.class).compareTo("0") == 0)) {
-//
-//					return "nodata2";
-//				}
-//			else {
-//				
-//				return "success";
-//			}
-//			// =====================================================================================
-//
-//		}
-//
-//		protected void onPostExecute(String result) {
-//			if (result.equals("success")) {
-//				// do something
-//				
-//				Toast.makeText(context, "Đã lưu", Toast.LENGTH_SHORT).show();
-//				
-//				//RESET
-//				activity.resetValue();
-//				
-//				if(update){
-//		            TakeOrder_ProductActivity.add_take_order_detail = false;
-//		            TakeOrder_ProductActivity.timeLine = true;
-//		            TakeOrdersDetailManagerActivity.add_detail = 0;
-//				}
-//				
-//			} else if (result.equals("nointernet")) {
-//				Toast.makeText(context,
-//						"Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!",
-//						Toast.LENGTH_SHORT).show();
-//			} else if (result.equals("nodata1")) {
-//				Toast.makeText(context, "Lỗi không mong muốn: Không thể lưu bản ghi này, hãy thử lại", Toast.LENGTH_SHORT)
-//						.show();
-//			} else 
-//				if (result.equals("nodata2"))
-//			{
-//				
-//				Toast.makeText(context, "Lỗi không mong muốn: Không thể lưu bản ghi chi tiết này, hãy thử lại", Toast.LENGTH_SHORT).show();
-//
-//			}
-//			
-//			
-//			dialog.dismiss();
-//		}
-//
-////		public boolean ConvertStringToObjectList(String input) {
-////			// pair to object
-////			ObjectMapper mapper = new ObjectMapper();
-////
-////			try {
-////				customerList = mapper.readValue(
-////						input,
-////						TypeFactory.defaultInstance().constructCollectionType(
-////								List.class, Customer.class));
-////				// System.out.println("++++++++++++++ mdt "+customerList.get(0).getmMaDoiTuong());
-////			} catch (JsonGenerationException e) {
-////				e.printStackTrace();
-////				return false;
-////			} catch (JsonMappingException e) {
-////				e.printStackTrace();
-////				return false;
-////			} catch (IOException e) {
-////				e.printStackTrace();
-////				return false;
-////			}
-////
-////			return true;
-////		}
-//
-//	}
 	
 	// ///////////////// DELETE AND INSERT AND
 		// /////////////////////////////////////////////////////////////////////////////
@@ -211,13 +75,19 @@ public class CalendarAPI {
 				}
 
 				// Deleting
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;
+				try{
+				    response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, ConvertObjectToString(calendar));
-
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -310,7 +180,13 @@ public class CalendarAPI {
 								context,
 								"Lỗi không xác định, hãy thử lại sau",
 								Toast.LENGTH_SHORT).show();
-				} else {
+				} 
+				else
+                	if (result.equals("nohost")){
+                		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+                	}
+				
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -384,13 +260,19 @@ public class CalendarAPI {
 				}
 
 				// handling
-				ClientResponse response = Rest.mService
+				ClientResponse response = null;
+				try{
+				   response = Rest.mService
 						.path("webresources")
 						.path(method)
 						.accept("application/json")
 						.type("application/json")
 						.post(ClientResponse.class, staff);
-
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
+				}
+				
 				String output = response.toString();
 				System.out.println("input 1: " + output);
 
@@ -425,7 +307,12 @@ public class CalendarAPI {
 				} else if (result.equals("nodata")) {
 					Toast.makeText(context, "Không có dữ liệu!", Toast.LENGTH_SHORT)
 							.show();
-				} else {
+				} 
+				else if (result.equals("nohost")){
+            		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+            	}
+				
+				else {
 					
 					Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
@@ -454,27 +341,6 @@ public class CalendarAPI {
 					e.printStackTrace();
 					return false;
 				}
-				
-//				Staff staff = new Staff();
-//				staff.setId("001");
-//				staff.setName("HP");
-//				
-//				Calendar calendar = new Calendar();
-//				calendar.setCalendarDate(new Date());
-//				calendar.setContent("Hello demo");
-//				calendar.setStaff(staff);
-//				
-//				Staff staff2 = new Staff();
-//				staff2.setId("001");
-//				staff2.setName("HP");
-//				
-//				Calendar calendar2 = new Calendar();
-//				calendar2.setCalendarDate(new Date());
-//				calendar2.setContent("Hello demo");
-//				calendar2.setStaff(staff2);
-//				
-//				calendarList.add(calendar);
-//				calendarList.add(calendar2);
 				
 				return true;
 			}

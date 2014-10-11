@@ -83,9 +83,17 @@ public class UserAPI {
 			
 			
 			// Getting
-			ClientResponse response = Rest.mService.path("webresources")
+			ClientResponse response = null;
+			
+			try{
+				response = Rest.mService.path("webresources")
 					.path("getStaff").accept("application/json")
 					.type("application/json").post(ClientResponse.class, username +"::" + password);
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			System.out.println("________________ " + response.toString());
 
 			if (response.getStatus() != 200) {
@@ -145,12 +153,16 @@ public class UserAPI {
             	if (result.equals("nointernet")){
             		Toast.makeText(context, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();
             	}
-           else
-           {       
-        	   					
-        	   Toast.makeText(context, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-				
-           }
+            	else
+                	if (result.equals("nohost")){
+                		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+                	}
+		           else
+		           {       
+		        	   					
+		        	   Toast.makeText(context, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+						
+		           }
             
             dialog.dismiss();
         }   
@@ -247,9 +259,16 @@ public class UserAPI {
 			}
 			
 			// Getting
-			ClientResponse response = Rest.mService.path("webresources")
+			ClientResponse response = null;
+			try{
+			response = Rest.mService.path("webresources")
 					.path(method).accept("application/json")
 					.type("application/json").post(ClientResponse.class, convertObjectToString(staff));
+			}catch(Exception e){
+				e.printStackTrace();
+				return "nohost";
+			}
+			
 			System.out.println("________________ " + response.toString());
 
 			if (response.getStatus() != 200) {
@@ -288,6 +307,10 @@ public class UserAPI {
 					
 					Toast.makeText(context, "Không thể lưu dữ liệu. hãy thử lại sau", Toast.LENGTH_SHORT).show();
 				}
+				else
+                	if (result.equals("nohost")){
+                		Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+                	}
 			else
 			{       
 			 				

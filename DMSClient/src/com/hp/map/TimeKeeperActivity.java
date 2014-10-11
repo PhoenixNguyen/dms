@@ -146,6 +146,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		       JSONObject zero = Results.getJSONObject(0);
 		       
 		       address = zero.getString("formatted_address").toString();
+		       System.out.println("Full address _______________________________ --->" + address + "");
 		       
 		       String[] long_name = address.split(",");
 		       
