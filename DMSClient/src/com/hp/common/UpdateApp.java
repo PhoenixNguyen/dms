@@ -61,6 +61,7 @@ protected Void doInBackground(String... arg0) {
 
 
         } catch (Exception e) {
+        	e.printStackTrace();
             Log.e("UpdateAPP", "Update error! " + e.getMessage());
         }
     return null;

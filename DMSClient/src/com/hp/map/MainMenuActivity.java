@@ -44,7 +44,7 @@ public class MainMenuActivity extends Activity  {
 		//Auto update
 		UpdateApp atualizaApp = new UpdateApp();
         atualizaApp.setContext(getApplicationContext());
-        atualizaApp.execute("https://github.com/PhoenixNguyen/dms/dms.apk");
+        atualizaApp.execute("https://raw.githubusercontent.com/PhoenixNguyen/dms/master/app/dms.apk");
 	}
 
 //	@Override
