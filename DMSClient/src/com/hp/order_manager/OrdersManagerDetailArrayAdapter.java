@@ -46,17 +46,19 @@ public class OrdersManagerDetailArrayAdapter extends ArrayAdapter<TakeOrderDetai
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
 
-        featureView.setName(values.get(position).getProductName());
-        featureView.setId(values.get(position).getProductID());
-        featureView.setNumber(values.get(position).getNumber() + " x " + 
-        		(values.get(position).getAfterOrderPrice() - values.get(position).getAfterOrderPrice() * 
-        		values.get(position).getDiscount() / 100));
-        featureView.setValue((new BigDecimal(values.get(position).getPriceTotal())).toString()); 
-        
-        featureView.setOriginalPrice(values.get(position).getAfterOrderPrice()+"");
-        featureView.setDiscount(values.get(position).getDiscount() + "");
-        
-        featureView.setPromoionalProduct(values.get(position).getPromotionalProductMount()+"");
+        if(values != null){
+	        featureView.setName(values.get(position).getProductName());
+	        featureView.setId(values.get(position).getProductID());
+	        featureView.setNumber(values.get(position).getNumber() + " x " + 
+	        		(values.get(position).getAfterOrderPrice() - values.get(position).getAfterOrderPrice() * 
+	        		values.get(position).getDiscount() / 100));
+	        featureView.setValue((new BigDecimal(values.get(position).getPriceTotal())).toString()); 
+	        
+	        featureView.setOriginalPrice(values.get(position).getAfterOrderPrice()+"");
+	        featureView.setDiscount(values.get(position).getDiscount() + "");
+	        
+	        featureView.setPromoionalProduct(values.get(position).getPromotionalProductMount()+"");
+        }
         return featureView;
 	}
 	

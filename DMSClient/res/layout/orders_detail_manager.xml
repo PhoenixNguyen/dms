@@ -24,12 +24,12 @@
 	        android:layout_height="wrap_content"
 	        android:visibility="gone"
 	        />
-    	<TextView 
+    	<!-- TextView 
 	        android:id="@+id/discount"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:visibility="gone"
-	        />
+	        /-->
     	<TextView 
 	        android:id="@+id/valuetotal"
 	        android:layout_width="match_parent"

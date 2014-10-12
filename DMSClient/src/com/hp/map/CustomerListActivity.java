@@ -183,15 +183,15 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 		dialog.setContentView(v);
 		dialog.setTitle("Lựa chọn của bạn");
 		
-		final Button edit = (Button)dialog.findViewById(R.id.detail);
-		final Button detail = (Button)dialog.findViewById(R.id.delete); detail.setText("Xem chi tiết");
-		final Button delete = (Button)dialog.findViewById(R.id.edit);
+		//final Button edit = (Button)dialog.findViewById(R.id.detail);
+		final Button detail = (Button)dialog.findViewById(R.id.detail); detail.setText("Xem chi tiết");
+		//final Button delete = (Button)dialog.findViewById(R.id.edit);
 		final Button cancel = (Button)dialog.findViewById(R.id.cancel);
 		
-		edit.setVisibility(View.INVISIBLE);
-		delete.setVisibility(View.INVISIBLE);
+		//edit.setVisibility(View.INVISIBLE);
+		//delete.setVisibility(View.INVISIBLE);
 		
-		edit.setOnClickListener(new OnClickListener() {
+		/*edit.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -200,7 +200,7 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 				dialog.dismiss();
 			}
 		});
-		
+		*/
 		detail.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -214,7 +214,7 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 			}
 		});
 		
-		delete.setOnClickListener(new OnClickListener() {
+		/*delete.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
@@ -222,7 +222,7 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 						comfirmDeleteDialog(customer);
 						dialog.dismiss();
 					}
-				});
+				});*/
 		
 		cancel.setOnClickListener(new OnClickListener() {
 			
@@ -244,17 +244,17 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 		dialog.setContentView(v);
 		dialog.setTitle("Lựa chọn của bạn");
 		
-		final Button edit = (Button)dialog.findViewById(R.id.edit);
+		//final Button edit = (Button)dialog.findViewById(R.id.edit);
 		final Button detail = (Button)dialog.findViewById(R.id.detail);
-		final Button delete = (Button)dialog.findViewById(R.id.delete);
-		delete.setVisibility(View.GONE);
+		//final Button delete = (Button)dialog.findViewById(R.id.delete);
+		//delete.setVisibility(View.GONE);
 		final Button cancel = (Button)dialog.findViewById(R.id.cancel);
 		cancel.setVisibility(View.GONE);
 		
-		edit.setText("Chấp nhận");
+		//edit.setText("Chấp nhận");
 		detail.setText("Hủy");
 		
-		edit.setOnClickListener(new OnClickListener() {
+		/*edit.setOnClickListener(new OnClickListener() {
 					
 			@Override
 			public void onClick(View v) {
@@ -262,7 +262,7 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 				deleteCustomer(customer);
 				dialog.dismiss();
 			}
-		});
+		});*/
 		detail.setOnClickListener(new OnClickListener() {
 			
 			@Override

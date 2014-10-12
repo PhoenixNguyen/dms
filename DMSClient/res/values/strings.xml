@@ -122,7 +122,7 @@
 	<string name="action_check_updates">Kiểm tra cập nhật</string>
 	
 	<!-- stock_manager -->
-	<string name="stock_manager">Quản lý kho</string>
+	<string name="stock_manager">Quản lý tồn kho</string>
 	
 	<!-- Product dialog -->
 	<string name="product_name">Tên sản phẩm</string>

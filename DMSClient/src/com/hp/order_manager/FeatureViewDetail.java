@@ -76,9 +76,9 @@ public final class FeatureViewDetail extends FrameLayout {
     }
     
     public synchronized void setPromoionalProduct(String value) {
-        ((TextView) (findViewById(R.id.promotional_product_title))).setVisibility(View.VISIBLE);
+        //((TextView) (findViewById(R.id.promotional_product_title))).setVisibility(View.VISIBLE);
         TextView promotional_product = (TextView) (findViewById(R.id.promotional_product));
-        promotional_product.setVisibility(View.VISIBLE);
+        //promotional_product.setVisibility(View.VISIBLE);
         promotional_product.setText(value);
     }
 }

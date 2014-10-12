@@ -28,9 +28,9 @@ public class DetailListData {
 		new DetailsList("Sản phẩm", R.drawable.ic_menu_products, ProductManagerActivity.class),
 		new DetailsList("Khách hàng", R.drawable.ic_menu_customers, CustomerListActivity.class),
 		
-		new DetailsList("Hóa đơn", 0, null),
+		new DetailsList("Quản lý đơn hàng", 0, null),
 		new DetailsList("Hóa đơn đặt hàng", R.drawable.ic_menu_orders, TakeOrdersManagerActivity.class),
-		new DetailsList("Quản lý kho", R.drawable.ic_menu_database, InventoryManagerActivity.class),
+		new DetailsList("Quản lý tồn kho", R.drawable.ic_menu_database, InventoryManagerActivity.class),
 //		new DetailsList("Quản lý bán hàng", R.drawable.ic_menu_database, SaleManagerActivity.class),
 		
 		

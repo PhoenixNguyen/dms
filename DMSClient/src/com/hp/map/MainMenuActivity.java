@@ -1,6 +1,7 @@
 package com.hp.map;
 
 
+import com.hp.common.UpdateApp;
 import com.hp.menu.DetailListData;
 import com.hp.menu.DetailsList;
 import com.hp.menu.DialogArrayAdapter;
@@ -34,11 +35,16 @@ public class MainMenuActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_main);
 		
-		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setLogo(R.drawable.ic_launcher);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if(getActionBar() != null){
+			getActionBar().setHomeButtonEnabled(true);
+			getActionBar().setLogo(R.drawable.ic_launcher);
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 		
-		
+		//Auto update
+		UpdateApp atualizaApp = new UpdateApp();
+        atualizaApp.setContext(getApplicationContext());
+        atualizaApp.execute("http://serverurl/appfile.apk");
 	}
 
 //	@Override

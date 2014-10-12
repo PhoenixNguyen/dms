@@ -147,6 +147,8 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.order_menu, menu);
 		
+		MenuItem item = menu.findItem(R.id.action_add);
+		item.setVisible(false);
 		return true;
 	}
 	
@@ -173,8 +175,6 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 	    switch (itemId) {
 	    case android.R.id.home:
 	    	menuDialog();
-
-	        // Toast.makeText(this, "home pressed", Toast.LENGTH_LONG).show();
 	        break;
 	        
 	    case R.id.action_add:

@@ -1,58 +1,31 @@
 package com.hp.map;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
-
-import com.hp.domain.TakeOrder;
 import com.hp.domain.TakeOrderDetail;
-import com.hp.order_manager.OrdersManagerArrayAdapter;
 import com.hp.order_manager.OrdersManagerDetailArrayAdapter;
-import com.hp.rest.Rest;
-import com.hp.rest.CustomerAPI.GetCustomerListTask;
-import com.hp.rest.CustomerAPI.ModifyCustomerTask;
 import com.hp.rest.TakeOrderDetailAPI;
 import com.hp.rest.TakeOrderDetailAPI.GetTakeOrderDetailTask;
 import com.hp.rest.TakeOrderDetailAPI.ModifyTakeOrderDetailTask;
-import com.sun.jersey.api.client.ClientResponse;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable.Orientation;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TableRow.LayoutParams;
 
-public class TakeOrdersDetailManagerActivity extends Activity{
+public class TakeOrdersDetailManagerActivity extends MainMenuActivity{
 	
 	//add_detail= 0 if update takeorder, add_detail= 1 if update inventory, add_detail= 2 if update sale order
 	public static int add_detail = 0;
@@ -81,19 +54,22 @@ public class TakeOrdersDetailManagerActivity extends Activity{
 			title.setText("Mã HĐ: "+order_id);
 			
 			TextView cus_id0 = (TextView)findViewById(R.id.cus_id);
-			TextView discount0 = (TextView)findViewById(R.id.discount);
+			//TextView discount0 = (TextView)findViewById(R.id.discount);
 			TextView valuetotal0 = (TextView)findViewById(R.id.valuetotal);
 			TextView note2 = (TextView)findViewById(R.id.note);
 			
 			cus_id0.setVisibility(View.VISIBLE);
-			discount0.setVisibility(View.VISIBLE);
+			//discount0.setVisibility(View.VISIBLE);
 			valuetotal0.setVisibility(View.VISIBLE);
 			note2.setVisibility(View.VISIBLE);
 			
 			cus_id0.setText("Mã KH: " + TakeOrdersManagerActivity.selectedValue.getCustomerID());
-			discount0.setText("Giảm giá (%): " + TakeOrdersManagerActivity.selectedValue.getDiscount());
+			//discount0.setText("Giảm giá (%): " + TakeOrdersManagerActivity.selectedValue.getDiscount());
 			valuetotal0.setText("Tổng giá trị: " + new BigDecimal(TakeOrdersManagerActivity.selectedValue.getAfterPrivate()).toString());
-			note2.setText("Ghi chú: " + TakeOrdersManagerActivity.selectedValue.getNote());
+			if(TakeOrdersManagerActivity.selectedValue.getNote() != null)
+				note2.setText("Ghi chú: " + TakeOrdersManagerActivity.selectedValue.getNote());
+			else
+				note2.setText("Ghi chú: ");
 		}
 		//init item commons
 		init();
@@ -127,9 +103,9 @@ public class TakeOrdersDetailManagerActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Take appropriate action for each action item click
         switch (item.getItemId()) {
-//        case R.id.action_search:
-//        	
-//            return true;
+        case android.R.id.home:
+	    	menuDialog();
+	    	return true;
         case R.id.action_add:
         	newOrderDetail();
             return true;
@@ -144,11 +120,9 @@ public class TakeOrdersDetailManagerActivity extends Activity{
 
 	    int itemId = item.getItemId();
 	    switch (itemId) {
-//	    case android.R.id.home:
-//	    	menuDialog();
-//
-//	        // Toast.makeText(this, "home pressed", Toast.LENGTH_LONG).show();
-//	        break;
+	    case android.R.id.home:
+	    	menuDialog();
+	    	return true;
 	        
 	    case R.id.action_add:
         	newOrderDetail();
@@ -187,6 +161,7 @@ public class TakeOrdersDetailManagerActivity extends Activity{
 	}
 
 	
+	@SuppressWarnings("deprecation")
 	public void addCustomerDialog(final TakeOrderDetail selectedValue, final int position){
 		final Dialog dialog = new Dialog(context);
 		dialog.setContentView(R.layout.order_product_dialog);
