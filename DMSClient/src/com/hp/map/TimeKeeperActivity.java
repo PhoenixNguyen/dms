@@ -9,11 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.hp.common.HttpHelper;
+import com.hp.common.Unicode2NoSign;
 import com.hp.domain.TimeKeeper;
-import com.hp.gps.HttpHelper;
 import com.hp.gps.MapLocation;
 import com.hp.gps.MyLocationListener;
-import com.hp.gps.Unicode2NoSign;
 import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 import com.hp.rest.TimeKeeperAPI;

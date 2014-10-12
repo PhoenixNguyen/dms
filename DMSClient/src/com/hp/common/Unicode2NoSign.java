@@ -1,4 +1,4 @@
-package com.hp.gps;
+package com.hp.common;
 
 public class Unicode2NoSign {
 

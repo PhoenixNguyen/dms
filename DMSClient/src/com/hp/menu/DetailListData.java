@@ -10,6 +10,7 @@ import com.hp.map.R;
 import com.hp.map.SaleManagerActivity;
 import com.hp.map.SaleOrdersManagerActivity;
 import com.hp.map.Schedule_CalendarActivity;
+import com.hp.map.SoftwareInformation;
 import com.hp.map.TakeOrdersManagerActivity;
 import com.hp.map.TimeKeeperActivity;
 public class DetailListData {
@@ -35,7 +36,7 @@ public class DetailListData {
 		
 		
 		new DetailsList("Thông tin", 0, null),
-		new DetailsList("Phần mềm", R.drawable.ic_menu_about, null),
+		new DetailsList("Phần mềm", R.drawable.ic_menu_about, SoftwareInformation.class),
 		new DetailsList("Thoát", R.drawable.icon_logout, LoginActivity.class),
 		
 	};

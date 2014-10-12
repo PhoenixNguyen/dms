@@ -41,10 +41,6 @@ public class MainMenuActivity extends Activity  {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 		
-		//Auto update
-		UpdateApp atualizaApp = new UpdateApp();
-        atualizaApp.setContext(getApplicationContext());
-        atualizaApp.execute("https://raw.githubusercontent.com/PhoenixNguyen/dms/master/app/dms.apk");
 	}
 
 //	@Override

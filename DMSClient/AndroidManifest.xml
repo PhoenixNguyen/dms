@@ -203,6 +203,12 @@
             android:label="@string/time_picker" 
             
         	/>
+         
+         <activity
+            android:name="com.hp.map.SoftwareInformation"
+            android:label="Thông tin phần mềm" 
+            
+        	/>
     </application>
 
 </manifest>
