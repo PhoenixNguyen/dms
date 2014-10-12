@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,16 +17,6 @@ public class UpdateApp extends AsyncTask<String,Void,Void>{
 private Context context;
 public void setContext(Context contextf){
     context = contextf;
-}
-
-ProgressDialog dialog;
-
-protected void onPreExecute() {
-	dialog = ProgressDialog.show(context, "",
-			  "Đang kiểm tra phiên bản!", true);
-}
-protected void onPostExecute(String result){
-	dialog.dismiss();
 }
 
 @Override
