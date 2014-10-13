@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/src/java/com/hp/action/ViewStaffCurrentLocation.java</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/web/maps/view-journeys.jsp</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/web/maps/view-locations.jsp</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/src/java/com/hp/action/ViewLocationsAction.java</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/src/java/com/hp/dao/UserDAOImpl.java</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/web/view/staff/current-location.jsp</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/web/header.jsp</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/web/customer-add.jsp</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/src/java/com/hp/dao/RoadManagementDAOImpl.java</file>
+            <file>file:/D:/PROJECT/Outcourcing/hosco/dms/DMSServer/src/java/com/hp/domain/RoadManagement.java</file>
+        </group>
     </open-files>
 </project-private>

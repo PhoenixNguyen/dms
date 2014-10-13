@@ -136,6 +136,9 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			
 		}
 		
+		if(MyLocationListener.location == null)
+			return "";
+		
 		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
 			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
 			return "";

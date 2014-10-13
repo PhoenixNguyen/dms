@@ -217,11 +217,13 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 	public void addCustomerDialog(final Calendar selectedValue){
 		dialog = new Dialog(context);
 		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = li.inflate(R.layout.customer_selected_dialog, null, false);
+		View v = li.inflate(R.layout.submit_dialog, null, false);
 		dialog.setContentView(v);
 		
 		dialog.setTitle("Lựa chọn của bạn: ");
-	
+		
+		final EditText report = (EditText) dialog.findViewById(R.id.report);
+		
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonYES);
 		dialogButton.setText("Hoàn thành");
 		// if button is clicked, close the custom dialog
@@ -229,6 +231,9 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 			@Override
 			public void onClick(View v) {
 				selectedValue.setStatus(1);
+				if(report != null)
+					selectedValue.setReport(report.getText().toString());
+				
 				ModifyCalendarTask editCalendar = new ModifyCalendarTask(context, ModifyCalendarTask.ACTION_EDIT, "updateCalendar", selectedValue, adapter, calendarListView, CalendarManagerActivity.this, null);
 				editCalendar.execute();
 			}
