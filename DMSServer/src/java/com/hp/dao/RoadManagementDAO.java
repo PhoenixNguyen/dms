@@ -7,6 +7,7 @@
 package com.hp.dao;
 
 import com.hp.domain.RoadManagement;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,4 +19,6 @@ public interface RoadManagementDAO {
     public List<List<RoadManagement>> getRoad(String pGiamDoc, String pNhanVien, String pMaKhachHang, String pDate, String toDate);
             
     public boolean saveOrUpdate(RoadManagement pRoadManagement);
+    
+    public List<RoadManagement> findLocationByTime(Date time);
 }

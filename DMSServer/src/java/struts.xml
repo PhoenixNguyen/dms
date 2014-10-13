@@ -1472,6 +1472,21 @@
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
         </action>
+        
+        <action name="current-location" method="displayCurrLocation" class="com.hp.action.ViewStaffCurrentLocation">
+            <result name="success">view/staff/current-location.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="current-location-filter" method="filterResult" class="com.hp.action.ViewStaffCurrentLocation">
+            <result name="success">view/staff/current-location.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        
+        
         <!--========================================================================================================-->
     </package>
     

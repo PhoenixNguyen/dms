@@ -231,13 +231,13 @@ public class UtilitiesHandle {
         if(timeKeeper == null)
             return Response.status(200).entity("false").build();
         
-        //Check calendar
+        //Check calendar exist
         CalendarDAO calendarDAO = new CalendarDAOImpl();
-        List<Calendar> calendarList = calendarDAO.getCalendarList(timeKeeper.getProvince(), timeKeeper.getTimeAt());
-        
-        if(calendarList == null || calendarList.size() == 0){
-            return Response.status(200).entity("nocalendar").build();
-        }
+//        List<Calendar> calendarList = calendarDAO.getCalendarList(timeKeeper.getProvince(), timeKeeper.getTimeAt());
+//        
+//        if(calendarList == null || calendarList.size() == 0){
+//            return Response.status(200).entity("nocalendar").build();
+//        }
         
         TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
         List<TimeKeeper> todayList = timeKeeperDAO.getTimeKeeperList(timeKeeper.getStaff(), df.parse(df.format(timeKeeper.getTimeAt())));

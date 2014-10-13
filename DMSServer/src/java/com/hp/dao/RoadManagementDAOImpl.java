@@ -8,6 +8,7 @@ package com.hp.dao;
 
 import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
+import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
 import static com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory.getSessionFactory;
 import com.hp.domain.Customer;
 import com.hp.domain.RoadManagement;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -236,5 +238,42 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
         }
         
         return true;
+    }
+    
+    public List<RoadManagement> findLocationByTime(Date time){
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        List<RoadManagement> results = null;
+        try{
+            String timeToCompare = "";
+            if(time != null){
+                
+                timeToCompare = df.format(time);
+                System.out.println("date: " + timeToCompare);
+            }
+            else{
+                timeToCompare = df.format(new Date());
+            }
+            
+            String query = "select rm from RoadManagement as rm where rm.thoiGian in ("
+                    + " select max(thoiGian) "
+                    + " from RoadManagement"
+                    + " where thoiGian <= '" + timeToCompare +"' "
+                    + " group by maNhanVien"
+                    + ")";
+             
+            results = session.createQuery(query).list();
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        
+        finally {
+            session.close();
+        }
+        
+        return results;
     }
 }

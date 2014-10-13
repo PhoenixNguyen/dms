@@ -46,8 +46,10 @@
 
         <script src="<%=request.getContextPath()%>/js/jquery.leanModal.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.datetimepicker.js"></script>
 
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/jquery.datetimepicker.css" />
         <!-- asterisk Integration -->
         <!-- END -->
 
@@ -132,7 +134,7 @@
                                     <td class="tabSeperator"><img src="themes/images/spacer.gif"></td>
                                     <td <s:if test="#page == 'report'"> class="tabSelected" </s:if> <s:else>class="tabUnSelected"</s:else> onmouseover="fnDropDown(this, 'Analytics_sub');" onmouseout="fnHideDrop('Analytics_sub');" align="center" nowrap=""><a href="report">Phân tích</a><img src="themes/softed/images/menuDnArrow.gif" border="0" style="padding-left:5px"></td>
                                     <td class="tabSeperator"><img src="themes/images/spacer.gif"></td>
-                                    <td <s:if test="#page == 'inventory'"> class="tabSelected" </s:if> <s:else>class="tabUnSelected"</s:else> onmouseover="fnDropDown(this, 'Inventory_sub');" onmouseout="fnHideDrop('Inventory_sub');" align="center" nowrap=""><a href="product-list">Tồn kho</a><img src="themes/softed/images/menuDnArrow.gif" border="0" style="padding-left:5px"></td>
+                                    <td <s:if test="#page == 'inventory'"> class="tabSelected" </s:if> <s:else>class="tabUnSelected"</s:else> onmouseover="fnDropDown(this, 'Inventory_sub');" onmouseout="fnHideDrop('Inventory_sub');" align="center" nowrap=""><a href="product-list">Quản lý tồn kho</a><img src="themes/softed/images/menuDnArrow.gif" border="0" style="padding-left:5px"></td>
 
                                     
                                     <td class="tabSeperator"><img src="themes/images/spacer.gif"></td>
@@ -248,7 +250,7 @@
                 <tbody>
                     <tr><td><a href="product-list" class="drop_down">Sản phẩm</a></td></tr>
                     <tr><td><a href="provider-list" class="drop_down">Nhà cung cấp</a></td></tr>
-                    <tr><td><a href="inventory-manager" class="drop_down">Tồn kho</a></td></tr>
+                    <tr><td><a href="inventory-manager" class="drop_down">Quản lý tồn kho</a></td></tr>
         <!--            <tr><td><a href="" class="drop_down">Bảng giá</a></td></tr>
                     <tr><td><a href="" class="drop_down">Nhập hàng</a></td></tr>
                     <tr><td><a href="" class="drop_down">Đặt hàng</a></td></tr>
@@ -269,6 +271,8 @@
                     <tr><td><a href="report-staff-history" class="drop_down">Quản lý chăm sóc khách hàng</a></td></tr>
                     
                     <tr><td><a href="interrupted-time" class="drop_down">Báo cáo gián đoạn</a></td></tr>
+                    
+                    <tr><td><a href="current-location" class="drop_down">Xem vị trí hiện tại</a></td></tr>
 
                 </tbody>
             </table>
