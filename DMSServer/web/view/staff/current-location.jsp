@@ -202,10 +202,14 @@
                             <option><s:property/></option>
                         </s:iterator>
                     </select>-->
-                    <input id="datetimepicker" type="text" style="padding: 5px; width: 85%;" >
+                    <input id="datetimepicker" type="text" name="date_time" value="<s:property value="%{#parameters.date_time}"/>" style="padding: 5px; width: 85%;" >
                     <script type="text/javascript">
                         
-                        jQuery('#datetimepicker').datetimepicker();
+                        jQuery('#datetimepicker').datetimepicker({
+                            format:'Y-m-d H:i',
+                            lang:'vi'
+                            
+                        });
                         
                     </script>
                 <tr>
@@ -277,7 +281,7 @@
                                         </s:if>
                                     <!--                                    <h2><span></span></h2>--><br>
 <!--                                    <span class="name"></span>-->
-                                    <p id="name"><a style="color: white" href="filter-result?page=0&customer_id=<s:property value="maNhanVien"/>"><s:property value="maNhanVien"/></a></p>
+                                    <p id="name"><a style="color: white" href="#"><s:property value="maNhanVien"/></a></p>
                                 </li>
                                 
                                 </s:iterator>

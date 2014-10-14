@@ -79,8 +79,12 @@ public class ViewStaffCurrentLocation extends ActionSupport{
         
         Date date = null;
         if(!date_time.equalsIgnoreCase("")){
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            try{
             date = df.parse(date_time);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             System.out.println("date: " + date);
 
         }
