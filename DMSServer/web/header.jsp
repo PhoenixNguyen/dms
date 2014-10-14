@@ -273,6 +273,8 @@
                     <tr><td><a href="interrupted-time" class="drop_down">Báo cáo gián đoạn</a></td></tr>
                     
                     <tr><td><a href="current-location" class="drop_down">Xem vị trí hiện tại</a></td></tr>
+                    
+                    <tr><td><a href="calculate-distance" class="drop_down">Tính quãng đường đi</a></td></tr>
 
                 </tbody>
             </table>

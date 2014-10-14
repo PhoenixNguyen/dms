@@ -1485,7 +1485,17 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="calculate-distance" method="calculateDistance" class="com.hp.action.CalculateDistanceAction">
+            <result name="success">view/staff/calculate-distance.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
         
+        <action name="filter-calculate-distance" method="filterResult" class="com.hp.action.CalculateDistanceAction">
+            <result name="success">view/staff/calculate-distance.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
         
         <!--========================================================================================================-->
     </package>
