@@ -145,11 +145,43 @@
                                                     </tr>
                                                 </table>
                                             </td>
+                                            
                                         </tr>
                                         <tr>
-                                            <td align="center" colspan="8" style="padding:5px"><input name="generatenw" value=" Xem báo cáo " class="crmbutton small create" type="submit" ></td>
+                                            <td align="center" colspan="8" style="padding:5px"></td>
                                         </tr>
                                     </table>
+                                    <table border=0 cellspacing=0 cellpadding=0 width=40%>
+                                        <tr>
+                                            <td align=left class=small><b>Loại trừ từ</b></td>
+                                            <td align=left class=small><b>Loại trừ đến</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td align=left  width=20%>
+                                                <input id="exceptionFrom" style="float: left;" type="text" name="exceptionFrom" value="<s:property value="%{#parameters.exceptionFrom}"/>" placeholder="Loại trừ từ"/>  
+                                            </td>
+                                            <td align=left  width=20%>
+                                                <input id="exceptionTo" style="float: left;" type="text" name="exceptionTo" value="<s:property value="%{#parameters.exceptionTo}"/>" placeholder="Loại trừ đến"/>  
+                                            </td>
+                                        </tr>
+                                    </table>
+                                                                       
+                                                        
+                                    <script type="text/javascript">
+                                        jQuery('#exceptionFrom').datetimepicker({
+                                            format:'d-m-Y H:i',
+                                            lang:'vi'
+
+                                        });
+                                        jQuery('#exceptionTo').datetimepicker({
+                                            format:'d-m-Y H:i',
+                                            lang:'vi'
+
+                                        });
+                                    </script>
+                                                        
+                                     <br/><br/>
+                                     <input name="generatenw" value=" Xem báo cáo " class="crmbutton small create" type="submit" >
                                     </form>
                                 </td>
                             </tr>

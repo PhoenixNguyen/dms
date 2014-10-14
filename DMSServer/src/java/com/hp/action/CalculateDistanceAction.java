@@ -19,7 +19,9 @@ import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,6 +47,9 @@ public class CalculateDistanceAction extends ActionSupport{
     
     private String startDate;
     private String endDate;
+    
+    private String exceptionFrom;
+    private String exceptionTo;
     
     public String calculateDistance(){
     
@@ -97,11 +102,29 @@ public class CalculateDistanceAction extends ActionSupport{
                 for(int j = 0; j < (list.size() - 1); j ++){
                     RoadManagement location1 = list.get(j);
                     RoadManagement location2 = list.get(j+1);
+                    if(exceptionFrom != null && !exceptionFrom.equals("") && exceptionTo != null && !exceptionTo.equals("")){
+                        System.out.println("exceptionFrom: " + exceptionFrom + "exceptionTo: " + exceptionTo);
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        Date from = null;
+                        Date to = null;
+                        try{
+                            from = df.parse(exceptionFrom);
+                            to = df.parse(exceptionTo);
+                            
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        
+                        if(from!=null && to != null){
+                            if(location1.getThoiGian().after(from) && location1.getThoiGian().before(to))
+                                continue;
+                        }
+                    }
                     
                     distance += calculateDistance(location1.getViDo(), location1.getKinhDo(), location2.getViDo(), location2.getKinhDo());
                     interval += (location2.getThoiGian().getTime() - location1.getThoiGian().getTime());
                     
-                    System.out.println("Y= " + list.get(j).getThoiGian() + " Time(" + j +"): " + interval);
+                    //System.out.println("Y= " + list.get(j).getThoiGian() + " Time(" + j +"): " + interval);
                 }
                 
                 locationDistance.setDistance(distance);
@@ -184,5 +207,21 @@ public class CalculateDistanceAction extends ActionSupport{
 
     public void setLocationDistanceList(List<LocationDistance> locationDistance) {
         this.locationDistanceList = locationDistance;
+    }
+    
+    public String getExceptionFrom() {
+        return exceptionFrom;
+    }
+
+    public void setExceptionFrom(String exceptionFrom) {
+        this.exceptionFrom = exceptionFrom;
+    }
+
+    public String getExceptionTo() {
+        return exceptionTo;
+    }
+
+    public void setExceptionTo(String exceptionTo) {
+        this.exceptionTo = exceptionTo;
     }
 }
