@@ -55,5 +55,8 @@
         <mapping class="com.hp.domain.Calendar" />
         <mapping class="com.hp.domain.TimeKeeper" />
         
+        <mapping class="com.hp.domain.ForLeave" />
+        <mapping class="com.hp.domain.SetLunch" />
+        
   </session-factory>
 </hibernate-configuration>

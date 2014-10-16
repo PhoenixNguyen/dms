@@ -10,14 +10,14 @@ import com.hp.dao.CalendarDAO;
 import com.hp.dao.CalendarDAOImpl;
 import com.hp.dao.CustomerDAO;
 import com.hp.dao.CustomerDAOImpl;
+import com.hp.dao.ForLeaveDAO;
+import com.hp.dao.ForLeaveDAOImpl;
 import com.hp.dao.StaffDAO;
 import com.hp.dao.StaffDAOImpl;
-import com.hp.dao.TimeKeeperDAO;
-import com.hp.dao.TimeKeeperDAOImpl;
 import com.hp.dao.UserDAO;
 import com.hp.dao.UserDAOImpl;
+import com.hp.domain.ForLeave;
 import com.hp.domain.PushInfo;
-import com.hp.domain.TimeKeeper;
 import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -36,12 +36,12 @@ import org.apache.struts2.ServletActionContext;
  *
  * @author HP
  */
-public class TimeKeeperAction extends ActionSupport{
+public class ForLeaveAction extends ActionSupport{
     private CalendarDAO calendarDAO = new CalendarDAOImpl();
     private StaffDAO staffDAO = new StaffDAOImpl();
-    private TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
+    private ForLeaveDAO forLeaveDAO = new ForLeaveDAOImpl();
     
-    private List<TimeKeeper> timeKeeperList = new ArrayList<TimeKeeper>();
+    private List<ForLeave> forLeaveList = new ArrayList<ForLeave>();
 
     public PushInfo pushInfo = new PushInfo();
     User user = new User();
@@ -56,7 +56,7 @@ public class TimeKeeperAction extends ActionSupport{
     private String startDate;
     private String endDate;
     
-    public String displayTimeKeeping(){
+    public String displayForLeave(){
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         HttpSession session = request.getSession();
         
@@ -102,11 +102,7 @@ public class TimeKeeperAction extends ActionSupport{
                 start = df.parse(startDate);
             
             if(!endDate.equals("")){
-                Calendar c = Calendar.getInstance();
-                c.setTime(df.parse(endDate));
-                c.add(Calendar.DAY_OF_MONTH, 1);
-                
-                end = c.getTime();
+                end = df.parse(endDate);
             }
             
         }
@@ -114,18 +110,18 @@ public class TimeKeeperAction extends ActionSupport{
             
         }
         
-        System.err.println(start + " " + end);
-        timeKeeperList = timeKeeperDAO.getTimeKeeperList(pushInfo.getManagerID(), pushInfo.getStaffID(), 
+        System.out.println(start + " " + end);
+        forLeaveList = forLeaveDAO.getForLeaveList(pushInfo.getManagerID(), pushInfo.getStaffID(), 
                 start, end);
         
         return SUCCESS;
     }
-    public List<TimeKeeper> getTimeKeeperList() {
-        return timeKeeperList;
+    public List<ForLeave> getForLeaveList() {
+        return forLeaveList;
     }
 
-    public void setTimeKeeperList(List<TimeKeeper> timeKeeperList) {
-        this.timeKeeperList = timeKeeperList;
+    public void setForLeaveList(List<ForLeave> forLeaveList) {
+        this.forLeaveList = forLeaveList;
     }
     
     public List<String> getUserListGiamDoc() {

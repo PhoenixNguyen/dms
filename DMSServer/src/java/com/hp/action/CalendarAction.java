@@ -65,7 +65,7 @@ public class CalendarAction extends ActionSupport{
             return LOGIN;
         }
         
-        calendarList = calendarDAO.getCalendarList();
+        //calendarList = calendarDAO.getCalendarList();
         userListGiamDoc = userDAO.getListUser(2);
         
         return SUCCESS;

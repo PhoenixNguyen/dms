@@ -275,6 +275,9 @@
                     <tr><td><a href="current-location" class="drop_down">Xem vị trí hiện tại</a></td></tr>
                     
                     <tr><td><a href="calculate-distance" class="drop_down">Tính quãng đường đi</a></td></tr>
+                    
+                    <tr><td><a href="view-set-lunch" class="drop_down">Báo cơm văn phòng</a></td></tr>
+                    <tr><td><a href="view-for-leave" class="drop_down">Xin nghỉ phép</a></td></tr>
 
                 </tbody>
             </table>

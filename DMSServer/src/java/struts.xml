@@ -1497,6 +1497,29 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="view-set-lunch" method="displaySetLunch" class="com.hp.action.SetLunchAction">
+            <result name="success">view/staff/set-lunch.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="filter-result-setlunch" method="filterResult" class="com.hp.action.SetLunchAction">
+            <result name="success">view/staff/set-lunch.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="view-for-leave" method="displayForLeave" class="com.hp.action.ForLeaveAction">
+            <result name="success">view/staff/for-leave.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="filter-result-forleave" method="filterResult" class="com.hp.action.ForLeaveAction">
+            <result name="success">view/staff/for-leave.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
         <!--========================================================================================================-->
     </package>
     
