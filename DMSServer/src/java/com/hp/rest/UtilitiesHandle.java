@@ -365,7 +365,7 @@ public class UtilitiesHandle {
         List<ForLeave> forLeaveList = forLeaveDAO.getForLeaveList(forLeave.getStaff(), forLeave.getTimeAt());
         
         if(forLeaveList != null && forLeaveList.size() > 0){
-            return Response.status(200).entity("existfoleave").build();
+            return Response.status(200).entity("existforleave").build();
         }
         
         Date today = new Date();

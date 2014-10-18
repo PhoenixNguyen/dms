@@ -17,10 +17,26 @@ import java.util.Date;
 public class ForLeave {
     private int stt;
     private Staff staff;
-    private Date timeAt;
+	private Date timeAt;
     private Timestamp createdTime;
     private String content;
     private String note;
+
+    public ForLeave(){}
+    public ForLeave(Staff staff, Date timeAt, String content, String note) {
+		super();
+		this.staff = staff;
+		this.timeAt = timeAt;
+		this.content = content;
+		this.note = note;
+	}
+    
+    @Override
+	public String toString() {
+		return "ForLeave [staff=" + staff + ", timeAt=" + timeAt
+				+ ", createdTime=" + createdTime + ", content=" + content
+				+ ", note=" + note + "]";
+	}
 
     public int getStt() {
         return stt;

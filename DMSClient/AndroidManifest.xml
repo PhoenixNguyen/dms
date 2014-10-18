@@ -221,8 +221,16 @@
             android:label="Đặt cơm văn phòng" 
             
         	/>
-       	
-       	
+       	<activity
+            android:name="com.hp.map.ForLeaveManagerActivity"
+            android:label="Nghỉ phép" 
+            
+        	/>
+       	<activity
+            android:name="com.hp.map.ForLeaveAdditionActivity"
+            android:label="Nghỉ phép" 
+            
+        	/>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.hp.menu;
 
 import com.hp.map.CalendarManagerActivity;
 import com.hp.map.CustomerListActivity;
+import com.hp.map.ForLeaveManagerActivity;
 import com.hp.map.InventoryManagerActivity;
 import com.hp.map.LoginActivity;
 import com.hp.map.ProductManagerActivity;
@@ -26,6 +27,7 @@ public class DetailListData {
 		//new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class), <-- OLD
 		new DetailsList("Chấm công", R.drawable.time_keeper, TimeKeeperActivity.class),
 		new DetailsList("Đặt cơm", R.drawable.time_keeper, SetLunchManagerActivity.class),
+		new DetailsList("Nghỉ phép", R.drawable.time_keeper, ForLeaveManagerActivity.class),
 		
 		new DetailsList("Đầu vào", 0, null),
 		new DetailsList("Sản phẩm", R.drawable.ic_menu_products, ProductManagerActivity.class),
