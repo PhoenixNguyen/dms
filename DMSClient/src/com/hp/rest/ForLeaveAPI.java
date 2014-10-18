@@ -128,13 +128,6 @@ public class ForLeaveAPI {
 						Toast.makeText(context, "Xóa lịch công tác thành công ", Toast.LENGTH_SHORT)
 									.show();
 						
-						//activity.dialogCommit.dismiss();
-						
-						//Refresh
-//				        activity.getCalendarList();
-//				        adapter = new CalendarArrayAdapter(context,
-//								android.R.layout.simple_list_item_1, calendarList);
-//				        calendarListView.setAdapter(adapter);
 					}
 					
 					if(action.equalsIgnoreCase(ACTION_ADD)){
@@ -148,13 +141,6 @@ public class ForLeaveAPI {
 						Toast.makeText(context, "Đề nghị hoàn thành công tác thành công", Toast.LENGTH_SHORT)
 									.show();
 						
-//						activity.dialog.dismiss();
-//						
-//						//Refresh
-//				        activity.getCalendarList();
-//				        adapter = new CalendarArrayAdapter(context,
-//								android.R.layout.simple_list_item_1, calendarList);
-//				        calendarListView.setAdapter(adapter);
 					}
 					
 				} 

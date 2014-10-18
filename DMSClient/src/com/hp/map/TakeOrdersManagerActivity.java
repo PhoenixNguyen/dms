@@ -66,8 +66,8 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 
 	private TextView id[];
 	//public static List<TakeOrder> takeOrderList = new ArrayList<TakeOrder>();
-	private List<TakeOrder> takeOrderListFilter = new ArrayList<TakeOrder>();
-	private boolean filter = false;
+	protected List<TakeOrder> takeOrderListFilter = new ArrayList<TakeOrder>();
+	public boolean filter = false;
 	
 	public ListView ordersListView;
 
@@ -79,8 +79,8 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 	private EditText start;
 	private EditText end;
 	
-	private String result_string_start;
-	private String result_string_end;
+	protected String result_string_start;
+	protected String result_string_end;
 	
 	public Context context = this;
 	
@@ -485,22 +485,25 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(startDate);
+		System.out.println("startDate2: "+startDate);
 		
 		for(int i = 0; i < TakeOrderAPI.takeOrderList.size(); i++){
 			Date compare = null;
 			try {
 				if(TakeOrderAPI.takeOrderList.get(i).getOrderEstablishDate() == null)
 					continue;
-				String date = TakeOrderAPI.takeOrderList.get(i).getOrderEstablishDate().toString();
 				
-				compare = dateFormat1.parse(date);
+				Calendar c = Calendar.getInstance();
+				c.setTime(TakeOrderAPI.takeOrderList.get(i).getOrderEstablishDate());
+				c.add(Calendar.HOUR_OF_DAY, -7);
 				
-			} catch (ParseException e) {
+				compare = c.getTime();
+				
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(compare);
+			System.out.println("compare: " + compare);
 			if(checkDate(compare, startDate, endDate)){
 				
 				takeOrderListFilter.add(TakeOrderAPI.takeOrderList.get(i));
@@ -515,7 +518,7 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 		
 	}
 	
-	private boolean checkDate(Date compare, Date startDate, Date endDate){
+	protected boolean checkDate(Date compare, Date startDate, Date endDate){
 		
 		Date end = null;
 		if(endDate != null){

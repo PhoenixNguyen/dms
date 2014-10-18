@@ -26,8 +26,8 @@ public class DetailListData {
 		new DetailsList("Lịch công tác", R.drawable.effective_writing, CalendarManagerActivity.class),
 		//new DetailsList("Lên kế hoạch", R.drawable.effective_writing, Schedule_CalendarActivity.class), <-- OLD
 		new DetailsList("Chấm công", R.drawable.time_keeper, TimeKeeperActivity.class),
-		new DetailsList("Đặt cơm", R.drawable.time_keeper, SetLunchManagerActivity.class),
-		new DetailsList("Nghỉ phép", R.drawable.time_keeper, ForLeaveManagerActivity.class),
+		new DetailsList("Đặt cơm", R.drawable.setlunch, SetLunchManagerActivity.class),
+		new DetailsList("Nghỉ phép", R.drawable.forleave, ForLeaveManagerActivity.class),
 		
 		new DetailsList("Đầu vào", 0, null),
 		new DetailsList("Sản phẩm", R.drawable.ic_menu_products, ProductManagerActivity.class),

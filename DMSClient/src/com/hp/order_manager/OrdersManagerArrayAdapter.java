@@ -1,11 +1,15 @@
 package com.hp.order_manager;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hp.common.Utility;
 import com.hp.domain.TakeOrder;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -31,6 +35,7 @@ public class OrdersManagerArrayAdapter extends ArrayAdapter<TakeOrder>{
 	    this.originalList.addAll(pValues);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	public View getView(int position, View convertView, ViewGroup parent){
 		FeatureView featureView;
         if (convertView instanceof FeatureView) {
@@ -46,7 +51,10 @@ public class OrdersManagerArrayAdapter extends ArrayAdapter<TakeOrder>{
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
 
-        featureView.setTitleId(values.get(position).getId());
+        DateFormat fm = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        if(values.get(position).getOrderEstablishDate() != null)
+        	featureView.setTitleId(fm.format(Utility.convertToLocalTime(values.get(position).getOrderEstablishDate())));
+        
         featureView.setDescriptionId(values.get(position).getCustomerName());
         featureView.setValue((new BigDecimal(values.get(position).getAfterPrivate())).toString());
         featureView.setStaff("Người tạo: " + values.get(position).getCreater());

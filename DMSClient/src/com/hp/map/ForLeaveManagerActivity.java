@@ -41,7 +41,6 @@ import com.hp.rest.Rest;
 
 public class ForLeaveManagerActivity extends MainMenuActivity implements OnClickListener, DateWatcher {
 	private TextView id[];
-	//public static List<TakeOrder> takeOrderList = new ArrayList<TakeOrder>();
 	private List<ForLeave> forLeaveListFilter = new ArrayList<ForLeave>();
 	private boolean filter = false;
 	
@@ -181,10 +180,6 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 		if (getForLeaveList(filter).size() == 0) {
 			return;
 		}
-		// List<Product> productsList = new ArrayList<Product>();
-		// Product product = new Product(1, "Welcome", "Welcome",
-		// "Choose providers list");
-		// productsList.add(product);
 
 		forLeaveListView = (ListView) findViewById(R.id.list_view_product);
 		adapter = new ForLeaveArrayAdapter(this,
@@ -308,11 +303,6 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 			if (v == id[i]) {
 				System.out.println("click: " + i + " "
 						+ id[i].getText().toString());
-//				Intent intent = new Intent(getApplicationContext(),
-//						TakeOrdersDetailManagerActivity.class);
-//				intent.putExtra("ORDER_ID", id[i].getText().toString());
-//				
-//				startActivity(intent);
 			}
 	}
 
