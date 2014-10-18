@@ -231,8 +231,12 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 			@Override
 			public void onClick(View v) {
 				selectedValue.setStatus(1);
-				if(report != null)
+				if(report != null && !report.getText().toString().equals(""))
 					selectedValue.setReport(report.getText().toString());
+				else{
+					Toast.makeText(context, "Hãy nhập nội dung báo cáo", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				
 				ModifyCalendarTask editCalendar = new ModifyCalendarTask(context, ModifyCalendarTask.ACTION_EDIT, "updateCalendar", selectedValue, adapter, calendarListView, CalendarManagerActivity.this, null);
 				editCalendar.execute();
