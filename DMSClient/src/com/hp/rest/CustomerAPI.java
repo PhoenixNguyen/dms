@@ -199,7 +199,11 @@ public class CustomerAPI {
 					    	
 					    	customerActivity.customer = customer;
 					    	//open dialog
-					    	customerActivity.choiceDialog(customer);
+					    	//customerActivity.choiceDialog(customer);
+					    	Intent t = new Intent(context, CustomerMapActivity.class);
+					        t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
+					        
+					        customerActivity.startActivity(t);
 					      }
 					});
 				}

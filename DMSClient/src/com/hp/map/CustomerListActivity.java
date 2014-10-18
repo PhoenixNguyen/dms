@@ -176,66 +176,66 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
     	
 	}
 	
-	public void choiceDialog(final Customer customer){
-		final Dialog dialog = new Dialog(context);
-		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = li.inflate(R.layout.customer_comfirm_dialog, null, false);
-		dialog.setContentView(v);
-		dialog.setTitle("Lựa chọn của bạn");
-		
-		//final Button edit = (Button)dialog.findViewById(R.id.detail);
-		final Button detail = (Button)dialog.findViewById(R.id.detail); detail.setText("Xem chi tiết");
-		//final Button delete = (Button)dialog.findViewById(R.id.edit);
-		final Button cancel = (Button)dialog.findViewById(R.id.cancel);
-		
-		//edit.setVisibility(View.INVISIBLE);
-		//delete.setVisibility(View.INVISIBLE);
-		
-		/*edit.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(context, CustomerEditerActivity.class));
-				dialog.dismiss();
-			}
-		});
-		*/
-		detail.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-				        Intent t = new Intent(context, CustomerMapActivity.class);
-				        t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
-				        
-				        startActivity(t);
-				        dialog.dismiss();
-			}
-		});
-		
-		/*delete.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						comfirmDeleteDialog(customer);
-						dialog.dismiss();
-					}
-				});*/
-		
-		cancel.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				dialog.dismiss();
-			}
-		});
-
-		
-		dialog.show();
-	}
+//	public void choiceDialog(final Customer customer){
+//		final Dialog dialog = new Dialog(context);
+//		LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//		View v = li.inflate(R.layout.customer_comfirm_dialog, null, false);
+//		dialog.setContentView(v);
+//		dialog.setTitle("Lựa chọn của bạn:.");
+//		
+//		//final Button edit = (Button)dialog.findViewById(R.id.detail);
+//		final Button detail = (Button)dialog.findViewById(R.id.detail); detail.setText("Xem chi tiết");
+//		//final Button delete = (Button)dialog.findViewById(R.id.edit);
+//		final Button cancel = (Button)dialog.findViewById(R.id.cancel);
+//		
+//		//edit.setVisibility(View.INVISIBLE);
+//		//delete.setVisibility(View.INVISIBLE);
+//		
+//		/*edit.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				startActivity(new Intent(context, CustomerEditerActivity.class));
+//				dialog.dismiss();
+//			}
+//		});
+//		*/
+//		detail.setOnClickListener(new OnClickListener() {
+//					
+//					@Override
+//					public void onClick(View v) {
+//						// TODO Auto-generated method stub
+//				        Intent t = new Intent(context, CustomerMapActivity.class);
+//				        t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
+//				        
+//				        startActivity(t);
+//				        dialog.dismiss();
+//			}
+//		});
+//		
+//		/*delete.setOnClickListener(new OnClickListener() {
+//					
+//					@Override
+//					public void onClick(View v) {
+//						// TODO Auto-generated method stub
+//						comfirmDeleteDialog(customer);
+//						dialog.dismiss();
+//					}
+//				});*/
+//		
+//		cancel.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				dialog.dismiss();
+//			}
+//		});
+//
+//		
+//		dialog.show();
+//	}
 	
 	public void comfirmDeleteDialog(final Customer customer){
 		final Dialog dialog = new Dialog(context);
@@ -330,7 +330,11 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 		    	customer = (Customer) listView.getAdapter().getItem(position);
 		    	
 		    	//open dialog
-		    	choiceDialog(customer);
+		    	//choiceDialog(customer);
+		    	Intent t = new Intent(context, CustomerMapActivity.class);
+		        t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
+		        
+		        startActivity(t);
 		      }
 		});
 	}
