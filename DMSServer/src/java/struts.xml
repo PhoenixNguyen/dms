@@ -278,7 +278,22 @@
         <action name="putTimeKeeper" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
             <result name="success">utility/putTimeKeeper</result>
         </action>
+       
+        <action name="getSetLunchList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/getSetLunchList</result>
+        </action>
         
+        <action name="putSetLunch" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/putSetLunch</result>
+        </action>
+        
+        <action name="getForLeaveList" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/getForLeaveList</result>
+        </action>
+        
+        <action name="putForLeave" method="getCustomerForStaff" class="com.hp.action.WebServicesAction">
+            <result name="success">utility/putForLeave</result>
+        </action>
         
         
     </package>

@@ -209,6 +209,20 @@
             android:label="Thông tin phần mềm" 
             
         	/>
+        	
+       	<activity
+            android:name="com.hp.map.SetLunchManagerActivity"
+            android:label="Đặt cơm văn phòng" 
+            
+        	/>
+        	
+       	<activity
+            android:name="com.hp.map.SetLunchAdditionActivity"
+            android:label="Đặt cơm văn phòng" 
+            
+        	/>
+       	
+       	
     </application>
 
 </manifest>

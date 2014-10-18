@@ -8,11 +8,17 @@ package com.hp.rest;
 
 import com.hp.dao.CalendarDAO;
 import com.hp.dao.CalendarDAOImpl;
+import com.hp.dao.ForLeaveDAO;
+import com.hp.dao.ForLeaveDAOImpl;
+import com.hp.dao.SetLunchDAO;
+import com.hp.dao.SetLunchDAOImpl;
 import com.hp.dao.StaffDAO;
 import com.hp.dao.StaffDAOImpl;
 import com.hp.dao.TimeKeeperDAO;
 import com.hp.dao.TimeKeeperDAOImpl;
 import com.hp.domain.Calendar;
+import com.hp.domain.ForLeave;
+import com.hp.domain.SetLunch;
 import com.hp.domain.Staff;
 import com.hp.domain.TimeKeeper;
 import java.io.IOException;
@@ -260,5 +266,111 @@ public class UtilitiesHandle {
             timeKeeper.setTimeBetween( Float.parseFloat(dc.format(diffInMinutes/60f)));
         }
         return Response.status(200).entity(timeKeeperDAO.saveOrUpdate(timeKeeper) + "").build();
+    }
+    
+    @POST
+    @Path("/getSetLunchList")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<SetLunch> getSetLunchList(String pData) {
+        ObjectMapper mapper = new ObjectMapper();
+        Staff staff = new Staff();
+        StaffDAO staffDAO = new StaffDAOImpl();
+        staff = staffDAO.loadStaff(pData);
+        
+        if(staff == null)
+            return null;
+        
+        SetLunchDAO setLunchDAO = new SetLunchDAOImpl();
+        
+        return setLunchDAO.getSetLunchList(staff);
+        
+    }
+    
+    @POST
+    @Path("/putSetLunch")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response putSetLunch( String pData ) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SetLunchDAO setLunchDAO = new SetLunchDAOImpl();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        SetLunch setLunch = new SetLunch();
+        try {
+                setLunch = mapper.readValue(pData, SetLunch.class);
+                
+        } catch (JsonGenerationException e) {
+                e.printStackTrace();
+        } catch (JsonMappingException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+        
+        if(setLunch == null)
+            return Response.status(200).entity("false").build();
+        
+        List<SetLunch> setLunchList = setLunchDAO.getSetLunchList(setLunch.getStaff(), setLunch.getTimeAt());
+        
+        if(setLunchList != null && setLunchList.size() > 0){
+            return Response.status(200).entity("existsetlunch").build();
+        }
+        
+        Date today = new Date();
+        setLunch.setCreatedTime(Timestamp.valueOf(dateFormat.format(today)));
+        
+        return Response.status(200).entity(setLunchDAO.saveOrUpdate(setLunch) + "").build();
+    }
+    
+    @POST
+    @Path("/getForLeaveList")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<ForLeave> getForLeaveList(String pData) {
+        ObjectMapper mapper = new ObjectMapper();
+        Staff staff = new Staff();
+        StaffDAO staffDAO = new StaffDAOImpl();
+        staff = staffDAO.loadStaff(pData);
+        
+        if(staff == null)
+            return null;
+        
+        ForLeaveDAO forLeaveDAO = new ForLeaveDAOImpl();
+        
+        return forLeaveDAO.getForLeaveList(staff);
+        
+    }
+    
+    @POST
+    @Path("/putForLeave")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response putForLeave( String pData ) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ForLeaveDAO forLeaveDAO = new ForLeaveDAOImpl();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        ForLeave forLeave = new ForLeave();
+        try {
+                forLeave = mapper.readValue(pData, ForLeave.class);
+                
+        } catch (JsonGenerationException e) {
+                e.printStackTrace();
+        } catch (JsonMappingException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+        
+        if(forLeave == null)
+            return Response.status(200).entity("false").build();
+        
+        List<ForLeave> forLeaveList = forLeaveDAO.getForLeaveList(forLeave.getStaff(), forLeave.getTimeAt());
+        
+        if(forLeaveList != null && forLeaveList.size() > 0){
+            return Response.status(200).entity("existfoleave").build();
+        }
+        
+        Date today = new Date();
+        forLeave.setCreatedTime(Timestamp.valueOf(dateFormat.format(today)));
+        
+        return Response.status(200).entity(forLeaveDAO.saveOrUpdate(forLeave) + "").build();
     }
 }
