@@ -139,8 +139,6 @@ public class SaleOrderAction extends ActionSupport implements ModelDriven{
 //        t.setMCustomerID(null);
 //        t.setMCreater(null);
 //        t.setMEditer(null);
-        if(saleOrder.getDiscount() == null)
-            saleOrder.setDiscount(0f);
         
         saleOrder.setAfterPrivate(saleOrder.getBeforePrice() - saleOrder.getBeforePrice() * saleOrder.getDiscount()/100);
         saleOrder.setOrderEditDate(Timestamp.valueOf(time));
