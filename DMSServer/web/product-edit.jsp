@@ -126,7 +126,7 @@
 
                             <hr noshade="" size="1">
                             <br> 
-                            <form name="EditView" method="POST"  action="update-product?id_pdct=<s:property value="product.serial"/>" onsubmit="" id="sub_form">
+                            <form name="EditView" method="GET"  action="update-product?id_pdct=<s:property value="product.serial"/>" onsubmit="" id="sub_form">
                                 <!--                        enctype="multipart/form-data"-->
                                 <input type="hidden" name="product.serial" value="<s:property value="product.serial"/>">
 
@@ -213,7 +213,7 @@
                                                                                             </td>
 
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
-                                                                                                <input  type="text" tabindex="" name="product.barcode" id="product_no" value="<s:property value="product.barcode"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'">
+                                                                                                <input name="product.barcode" tabindex="" class="detailedViewTextBox" type="text" style="border:1px solid #bababa;" size="11" maxlength="100" value="<s:property value="product.barcode"/>">
                                                                                             </td>
 
                                                                                             <td width="20%" class="dvtCellLabel" align="right"><font color="red"></font>Thương hiệu </td>
@@ -274,7 +274,7 @@
                                                                                             </td>
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
 
-                                                                                                <input name="importPrices" tabindex="" class="detailedViewTextBox" type="text" style="border:1px solid #bababa;"  value="<s:property value="product.importPrices"/>">
+                                                                                                <input name="importPrices" tabindex="" class="detailedViewTextBox" type="number" style="border:1px solid #bababa;"  value="<s:property value="getText('{0,number,###0}',{product.importPrices})"/>">
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr style="height:25px">
@@ -314,8 +314,8 @@
                                                                                             </td>
                                                                                             <td width="30%" align="left" class="dvtCellInfo">				
                                                                                                 <span id="multiple_currencies">
-                                                                                                    <input readonly="" name="product.exportPrices" id="unit_price" tabindex="" type="text" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox';
-                                                                                                            updateUnitPrice('unit_price', 'curname1');" value="<s:property value="product.exportPrices"/>" >
+                                                                                                    <input readonly="" name="product.exportPrices" id="unit_price" tabindex="" type="number" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox';
+                                                                                                            updateUnitPrice('unit_price', 'curname1');" value="<s:property value="getText('{0,number,#,##0}',{product.exportPrices})"/>" >
                                                                                                     &nbsp;
                                                                                                     <!--                                                                                            <a href="javascript:void(0);" onclick="updateUnitPrice('unit_price', 'curname1');
                                                                                                                                                                                                         toggleShowHide('currency_class', 'multiple_currencies');">thêm tiền tệ »</a>-->
@@ -367,7 +367,7 @@
                                                                                             <td width="20%" class="dvtCellLabel" align="right"><font color="red"></font>Thuế (%) </td>
 
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
-                                                                                                <input type="text" tabindex="" name="vatTax" id="commissionrate" value="<s:property value="product.vatTax"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'">
+                                                                                                <input name="product.vatTax" tabindex="" class="detailedViewTextBox" type="number" style="border:1px solid #bababa;"  value="<s:property value="getText('{0,number,###0}',{product.vatTax})"/>">
                                                                                             </td>
                                                                                         </tr>
                                                                                         
@@ -457,7 +457,7 @@
                     //2. tax
                     var tax_length = form.vatTax.value.length;
                     var tax_value = form.vatTax.value;
-                    
+                   
                     if (trim(tax_value) == "") {
                         alert("Hãy nhập thuế giá trị gia tăng.");
                         return false;

@@ -27,7 +27,7 @@ public class TakeOrder {
     @GeneratedValue
     
     @Column(name="hoadondathang_stt")
-    private Integer serial;
+    private int serial;
 
     @Column(name="hoadondathang_ma_hoa_don")
     private String id;
@@ -49,15 +49,15 @@ public class TakeOrder {
     private String shippingVehicle;
     
     @Column(name="hoadondathang_thue")
-    private Float tax;
+    private float tax;
     @Column(name="hoadondathang_tien_truoc_thue")
-    private Float beforePrice;
+    private float beforePrice;
     @Column(name="hoadondathang_tien_sau_thue")
-    private Float afterPrivate;
+    private float afterPrivate;
     
     
     @Column(name="hoadondathang_giam_gia")
-    private Float discount;
+    private float discount;
     @Column(name="hoadondathang_trang_thai_don_hang")
     private Integer orderStatus;
     @Column(name="hoadondathang_ngay_tao_hoa_don")
@@ -72,11 +72,11 @@ public class TakeOrder {
     private String note;
 
     
-    public Integer getSerial() {
+    public int getSerial() {
         return serial;
     }
 
-    public void setSerial(Integer serial) {
+    public void setSerial(int serial) {
         this.serial = serial;
     }
 
@@ -152,35 +152,35 @@ public class TakeOrder {
         this.shippingVehicle = shippingVehicle;
     }
 
-    public Float getTax() {
+    public float getTax() {
         return tax;
     }
 
-    public void setTax(Float tax) {
+    public void setTax(float tax) {
         this.tax = tax;
     }
 
-    public Float getBeforePrice() {
+    public float getBeforePrice() {
         return beforePrice;
     }
 
-    public void setBeforePrice(Float beforePrice) {
+    public void setBeforePrice(float beforePrice) {
         this.beforePrice = beforePrice;
     }
 
-    public Float getAfterPrivate() {
+    public float getAfterPrivate() {
         return afterPrivate;
     }
 
-    public void setAfterPrivate(Float afterPrivate) {
+    public void setAfterPrivate(float afterPrivate) {
         this.afterPrivate = afterPrivate;
     }
 
-    public Float getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Float discount) {
+    public void setDiscount(float discount) {
         this.discount = discount;
     }
 

@@ -66,7 +66,7 @@ public class ProductsAction extends ActionSupport implements ModelDriven{
         
     private String productID = new String();
     
-    @Valid
+    //@Valid
     public Product product = new Product();
 
     @Valid
@@ -449,13 +449,11 @@ public class ProductsAction extends ActionSupport implements ModelDriven{
         request.setCharacterEncoding("UTF8");
         providerIDList = providerDAO.getProvidersIDList();
         
-        System.out.println("id_product: "+product.getSerial());
+        System.out.println("id_product: "+product.getSerial() + " ma vach: " +product.getBarcode() + " vat= " +
+                request.getParameter("product.vatTax"));
         
         //update price
-        if(product.getVatTax() == null)
-            product.setVatTax(0f);
-        if(product.getImportPrices() != null)
-            product.setExportPrices(product.getImportPrices() + product.getImportPrices()* product.getVatTax()/100);
+        product.setExportPrices(product.getImportPrices() + product.getImportPrices()* product.getVatTax()/100);
         
         //new product
         if(product.getSerial() <= 0){

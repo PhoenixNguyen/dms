@@ -229,10 +229,9 @@ public class TakeOrderAction extends ActionSupport implements ModelDriven{
         return SUCCESS;
     }
     
-    public String updateTakeOrder() throws UnsupportedEncodingException{
+    public String updateTakeOrder(){
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         HttpSession session = request.getSession();
-        request.setCharacterEncoding("UTF8");
         
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");        
         Calendar cal = Calendar.getInstance();

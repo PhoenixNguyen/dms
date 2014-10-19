@@ -25,47 +25,47 @@ public class TakeOrderDetail {
     @GeneratedValue
     
     @Column(name="chitietdondathang_stt")
-    private Integer serial;
+    private int serial;
 
     @Column(name="chitietdondathang_ma_hoa_don")
     private String takeOrderID;
     @Column(name="chitietdondathang_dong")
-    private Integer line;
+    private int line;
     @Column(name="chitietdondathang_ma_hang")
     private String productID;
     @Column(name="chitietdondathang_ma_vach")
     private String barcode;
     @Column(name="chitietdondathang_ten_san_pham")
     private String productName;
-    @Column(name="chitietdondathang_don_gia_sau_thue", nullable = true)
-    private Float afterOrderPrice;
-    @Column(name="chitietdondathang_don_gia_truoc_thue", nullable = true)
-    private Float beforeOrderPrice;
-    @Column(name="chitietdondathang_thue", nullable = true)
-    private Float tax;
-    @Column(name="chitietdondathang_giam_gia" , nullable = true)
-    private Integer discount;
-    @Column(name="chitietdondathang_thanh_tien", nullable = true)
-    private Float priceTotal;
-    @Column(name="chitietdondathang_ma_kho", nullable = true)
+    @Column(name="chitietdondathang_don_gia_sau_thue")
+    private float afterOrderPrice;
+    @Column(name="chitietdondathang_don_gia_truoc_thue")
+    private float beforeOrderPrice;
+    @Column(name="chitietdondathang_thue")
+    private float tax;
+    @Column(name="chitietdondathang_giam_gia")
+    private int discount;
+    @Column(name="chitietdondathang_thanh_tien")
+    private float priceTotal;
+    @Column(name="chitietdondathang_ma_kho")
     private String stockID;
     @Column(name="chitietdondathang_so_luong")
-    private Integer number;
+    private int number;
     @Column(name="chitietdondathang_don_vi_tinh")
     private String unit;
-    @Column(name="chitietdondathang_ty_gia", nullable = true)
-    private Float exchangeRate;
+    @Column(name="chitietdondathang_ty_gia")
+    private float exchangeRate;
     @Column(name="chitietdondathang_ghi_chu")
     private String note;
     @Column(name="chitietdondathang_hang_khuyen_mai")
     private int promotionalProductMount;
 
     
-    public Integer getSerial() {
+    public int getSerial() {
         return serial;
     }
 
-    public void setSerial(Integer serial) {
+    public void setSerial(int serial) {
         this.serial = serial;
     }
 
@@ -77,11 +77,11 @@ public class TakeOrderDetail {
         this.takeOrderID = takeOrderID;
     }
 
-    public Integer getLine() {
+    public int getLine() {
         return line;
     }
 
-    public void setLine(Integer line) {
+    public void setLine(int line) {
         this.line = line;
     }
 
@@ -109,43 +109,43 @@ public class TakeOrderDetail {
         this.productName = productName;
     }
 
-    public Float getAfterOrderPrice() {
+    public float getAfterOrderPrice() {
         return afterOrderPrice;
     }
 
-    public void setAfterOrderPrice(Float afterOrderPrice) {
+    public void setAfterOrderPrice(float afterOrderPrice) {
         this.afterOrderPrice = afterOrderPrice;
     }
 
-    public Float getBeforeOrderPrice() {
+    public float getBeforeOrderPrice() {
         return beforeOrderPrice;
     }
 
-    public void setBeforeOrderPrice(Float beforeOrderPrice) {
+    public void setBeforeOrderPrice(float beforeOrderPrice) {
         this.beforeOrderPrice = beforeOrderPrice;
     }
 
-    public Float getTax() {
+    public float getTax() {
         return tax;
     }
 
-    public void setTax(Float tax) {
+    public void setTax(float tax) {
         this.tax = tax;
     }
 
-    public Integer getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
 
-    public Float getPriceTotal() {
+    public float getPriceTotal() {
         return priceTotal;
     }
 
-    public void setPriceTotal(Float priceTotal) {
+    public void setPriceTotal(float priceTotal) {
         this.priceTotal = priceTotal;
     }
 
@@ -157,11 +157,11 @@ public class TakeOrderDetail {
         this.stockID = stockID;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -173,11 +173,11 @@ public class TakeOrderDetail {
         this.unit = unit;
     }
 
-    public Float getExchangeRate() {
+    public float getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Float exchangeRate) {
+    public void setExchangeRate(float exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 

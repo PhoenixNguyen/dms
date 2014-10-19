@@ -30,7 +30,7 @@ public class Product {
     @GeneratedValue
     
     @Column(name="sanpham_stt")
-    private Integer serial;
+    private int serial;
     
     @NotEmpty(message = "Mã sản phẩm không được trống")
 //    @Pattern(regex="[A-Za-z0-9\\._]+",message="Mã sản phẩm chỉ chứa a-z, A-Z, 0-9, ., _")
@@ -50,11 +50,11 @@ public class Product {
     @Column(name="sanpham_dinh_luong")
     private String quantification;
     @Column(name="sanpham_thue")
-    private Float vatTax;
+    private float vatTax;
     @Column(name="sanpham_gia_nhap")
-    private Float importPrices;
+    private float importPrices;
     @Column(name="sanpham_gia_ban")
-    private Float exportPrices;
+    private float exportPrices;
     @Column(name="sanpham_nha_cung_cap")
     private String provider;
     @Column(name="sanpham_mo_ta")
@@ -62,11 +62,11 @@ public class Product {
     @Column(name="sanpham_anh_san_pham")
     private String productImage;
 
-    public Integer getSerial() {
+    public int getSerial() {
         return serial;
     }
 
-    public void setSerial(Integer serial) {
+    public void setSerial(int serial) {
         this.serial = serial;
     }
 
@@ -126,27 +126,27 @@ public class Product {
         this.quantification = quantification;
     }
 
-    public Float getVatTax() {
+    public float getVatTax() {
         return vatTax;
     }
 
-    public void setVatTax(Float vatTax) {
+    public void setVatTax(float vatTax) {
         this.vatTax = vatTax;
     }
 
-    public Float getImportPrices() {
+    public float getImportPrices() {
         return importPrices;
     }
 
-    public void setImportPrices(Float importPrices) {
+    public void setImportPrices(float importPrices) {
         this.importPrices = importPrices;
     }
 
-    public Float getExportPrices() {
+    public float getExportPrices() {
         return exportPrices;
     }
 
-    public void setExportPrices(Float exportPrices) {
+    public void setExportPrices(float exportPrices) {
         this.exportPrices = exportPrices;
     }
 

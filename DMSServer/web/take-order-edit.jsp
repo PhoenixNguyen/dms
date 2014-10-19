@@ -264,7 +264,7 @@
                                                                                                 Chiết khấu (%)			
                                                                                             </td>
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
-                                                                                                <input name="discount"  class="detailedViewTextBox" type="text" style="border:1px solid #bababa;" value="<s:property value="takeOrder.getDiscount()"/>">
+                                                                                                <input name="takeOrder.discount"  class="detailedViewTextBox" type="text" style="border:1px solid #bababa;" value="<s:property value="takeOrder.getDiscount()"/>">
                                                                                                 
                                                                                             </td>
 
@@ -274,12 +274,13 @@
 
                                                                                             <td width="20%" class="dvtCellLabel" align="right"><font color="red"></font>Tiền hàng </td>
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
-                                                                                                <input readonly="" type="text" tabindex="" name="takeOrder.beforePrice" id="exciseduty" value="<s:property value="getText('{0,number,#,##0.00}',{takeOrder.getBeforePrice()})"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'"></td>
+                                                                                                <input readonly="" type="number" tabindex="" name="takeOrder.beforePrice" id="exciseduty" value="<s:property value="getText('{0,number,###0}',{takeOrder.getBeforePrice()})"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'">
+                                                                                            </td>
                                                                                             <td width="20%" class="dvtCellLabel" align="right">
                                                                                                 <font color="red"></font>Tiền phải trả		
                                                                                             </td>
                                                                                             <td width="30%" align="left" class="dvtCellInfo">
-                                                                                                <input readonly="" type="text" tabindex="" name="takeOrder.afterPrivate" id="exciseduty" value="<s:property value="getText('{0,number,#,##0.00}',{takeOrder.getAfterPrivate()})"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'">
+                                                                                                <input readonly="" type="number" tabindex="" name="takeOrder.afterPrivate" id="exciseduty" value="<s:property value="getText('{0,number,###0}',{takeOrder.getAfterPrivate()})"/>" class="detailedViewTextBox" onfocus="this.className = 'detailedViewTextBoxOn'" onblur="this.className = 'detailedViewTextBox'">
                                                                                                 <!--                                                                                        <input name="account_id" type="hidden" value="139">&nbsp;<img src="themes/softed/images/select.gif" alt="Chọn" title="Chọn" language="javascript" onclick="return window.open( & quot; index.php?module = Accounts & amp; action = Popup & amp; popuptype = specific_account_address & amp; form = TasksEditView & amp; form_submit = false & amp; fromlink = & quot; , & quot; test & quot; , & quot; width = 640, height = 602, resizable = 0, scrollbars = 0 & quot; );" align="absmiddle" style="cursor:hand;cursor:pointer">
                                                                                                                                                                                         <input type="image" src="themes/images/clear_field.gif" alt="Làm sạch" title="Làm sạch" language="javascript" onclick="this.form.account_id.value = ''; this.form.account_name.value = ''; return false;" align="absmiddle" style="cursor:hand;cursor:pointer">-->
                                                                                             </td>
@@ -309,7 +310,6 @@
                                                                                                 <!--                                                                                        <input name="account_id" type="hidden" value="139">&nbsp;<img src="themes/softed/images/select.gif" alt="Chọn" title="Chọn" language="javascript" onclick="return window.open( & quot; index.php?module = Accounts & amp; action = Popup & amp; popuptype = specific_account_address & amp; form = TasksEditView & amp; form_submit = false & amp; fromlink = & quot; , & quot; test & quot; , & quot; width = 640, height = 602, resizable = 0, scrollbars = 0 & quot; );" align="absmiddle" style="cursor:hand;cursor:pointer">
                                                                                                                                                                                         <input type="image" src="themes/images/clear_field.gif" alt="Làm sạch" title="Làm sạch" language="javascript" onclick="this.form.account_id.value = ''; this.form.account_name.value = ''; return false;" align="absmiddle" style="cursor:hand;cursor:pointer">-->
                                                                                             </td>
-            <!--                                                                                <td class="dvtCellInfo" align="left" width="25%&quot;">&nbsp;<s:property value="takeOrder.getMOrderEstablishDate()"/></td>-->
 
                                                                                         </tr>	
 
