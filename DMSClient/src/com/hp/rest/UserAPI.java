@@ -1,6 +1,9 @@
 package com.hp.rest;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,6 +22,9 @@ import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.widget.Toast;
@@ -118,7 +124,6 @@ public class UserAPI {
             if (result.equals("success")){
 				//Run thread to do backgroud send location
 				//activity.doBackground();
-            	updateCurrentLocation(activity);
             	
 				// TODO Auto-generated method stub
 				Intent i = new Intent(activity.getApplicationContext(), ProfileActivity.class);
@@ -142,6 +147,11 @@ public class UserAPI {
 					editor.putString("password", "");
 					editor.commit();
 				}
+				
+				//To enable st auto
+				//enableConditions(context);
+				//update location
+				updateCurrentLocation(activity);
 				
 	        	
             }
@@ -187,6 +197,32 @@ public class UserAPI {
         }
     } 
 	
+	
+	private static void setMobileDataEnabled(Context context, boolean enabled) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchFieldException, NoSuchMethodException {
+	    final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    final Class conmanClass = Class.forName(conman.getClass().getName());
+	    final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+	    iConnectivityManagerField.setAccessible(true);
+	    final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+	    final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+	    final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+	    setMobileDataEnabledMethod.setAccessible(true);
+
+	    setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled);
+	}
+	
+	private static void turnGPSOn(Context context){
+	    String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+	    if(!provider.contains("gps")){ //if gps is disabled
+	        final Intent poke = new Intent();
+	        poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider"); 
+	        poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+	        poke.setData(Uri.parse("3")); 
+	        context.sendBroadcast(poke);
+	    }
+	}
+	
 	private static void updateCurrentLocation(Activity activity) {
 		// Get the location manager
 		  LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
@@ -199,7 +235,7 @@ public class UserAPI {
 		  String provider = locationManager.getBestProvider(criteria, false);
 	    
 		  // the last known location of this provider
-		  Location location = locationManager.getLastKnownLocation(provider);
+		  Location location = null;//locationManager.getLastKnownLocation(provider);
 
 		  MyLocationListener mylistener = new MyLocationListener();
 	
