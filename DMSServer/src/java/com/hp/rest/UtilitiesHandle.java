@@ -6,10 +6,13 @@
 
 package com.hp.rest;
 
+import com.hp.common.HttpHelper;
 import com.hp.dao.CalendarDAO;
 import com.hp.dao.CalendarDAOImpl;
 import com.hp.dao.ForLeaveDAO;
 import com.hp.dao.ForLeaveDAOImpl;
+import com.hp.dao.RoadManagementDAO;
+import com.hp.dao.RoadManagementDAOImpl;
 import com.hp.dao.SetLunchDAO;
 import com.hp.dao.SetLunchDAOImpl;
 import com.hp.dao.StaffDAO;
@@ -18,6 +21,7 @@ import com.hp.dao.TimeKeeperDAO;
 import com.hp.dao.TimeKeeperDAOImpl;
 import com.hp.domain.Calendar;
 import com.hp.domain.ForLeave;
+import com.hp.domain.RoadManagement;
 import com.hp.domain.SetLunch;
 import com.hp.domain.Staff;
 import com.hp.domain.TimeKeeper;
@@ -42,6 +46,9 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 /**
  *
  * @author HP
@@ -146,7 +153,63 @@ public class UtilitiesHandle {
         Date today = new Date();
         calendar.setUpdatedTime(Timestamp.valueOf(dateFormat.format(today)));
         
+        //get city in this day
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
+        
+        List<List<RoadManagement>> roads = roadManagementDAO.getRoad(null, calendar.getStaff().getId(), null, sdf.format(today));
+        String cities = "";
+        if(roads != null && roads.size() > 0){
+            List<RoadManagement> roads1 = roads.get(0);
+            if(roads1 != null && roads1.size() > 0)
+            for(RoadManagement rm : roads1){
+                String city = getAddress(rm);
+                if(cities.indexOf(city) != -1)
+                    cities += ", " + city;
+            }
+        }
+        if(!cities.equalsIgnoreCase(""))
+            calendar.setNote(cities);
+        
         return Response.status(200).entity(calendarDAO.update(calendar) + "").build();
+    }
+    
+    private String getAddress(RoadManagement last) {
+        String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+		        + last.getViDo() + "," + last.getKinhDo() + "&sensor=false";
+            JSONObject jsonObj;
+            String City = "";
+            String address = "";
+         try {
+
+          jsonObj = new JSONObject(HttpHelper.makeRequest(url));
+
+          String Status = jsonObj.getString("status");
+          if (Status.equalsIgnoreCase("OK")) {
+                   JSONArray Results = jsonObj.getJSONArray("results");
+                   JSONObject zero = Results.getJSONObject(0);
+
+                   address = zero.getString("formatted_address").toString();
+
+                   String[] long_name = address.split(",");
+
+                   int number = long_name.length - 2;
+                   City = long_name[number];
+                   //System.out.println("CityName _______________________________ --->" + City + "");
+
+                   //Toast.makeText(this, "CityName: " + City, Toast.LENGTH_SHORT).show();
+
+                   if (!City.equals("")) {
+                       return City;
+                    //finish_service();
+                   }
+          }
+
+         } catch (JSONException e) {
+             e.printStackTrace();
+             return "";
+         }
+         return "";
     }
     
     @POST

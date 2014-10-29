@@ -248,7 +248,7 @@
                                                                         <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa"
                                                                            id="${stt}" staffID="${staff.id}" staffName="${staff.name}" date="${dateconverted}" province="${province}" content="${content}"
                                                                            contributor="${contributor}" support="${support}" mission="${mission}" report="${report}" createdTime="${createdTimeConverted}"
-                                                                           status="${status}"
+                                                                           status="${status}" cities ="${note}"
                                                                            >
                                                                             <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
                                                                         </a>
@@ -278,6 +278,7 @@
                                                                        $('form[name=edit_calendar] .calendarDate').html($(this).attr('date'));
                                                                        $('form[name=edit_calendar] .province').html($(this).attr('province'));
                                                                        $('form[name=edit_calendar] .content').html($(this).attr('content'));
+                                                                       $('form[name=edit_calendar] .cities').html($(this).attr('cities'));
                                                                        
                                                                        $('form[name=edit_calendar] input[name=id]').val($(this).attr('id'));
                                                                        
@@ -399,6 +400,14 @@
     <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
                                                                                     <span class="content" style="text-align: left; color: #222; font-size: 1.3em; padding-top: 8px; display: block; background-color: #F7F7F7; float: left;">
                                                                                        Đưa đón khách hàng đi du lịch tại hạ long Đưa đón khách hàng đi du lịch tại hạ long
+                                                                                    </span>
+                                                                                </div>
+                                                                                <br/>
+                                                                                <div id="popup-body">
+                                                                                    <label for="">Thành phố</label>
+    <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
+                                                                                    <span class="cities" style="text-align: left; color: #222; font-size: 1.3em; padding-top: 8px; display: block; background-color: #F7F7F7; float: left;">
+                                                                                       HÀ Nội
                                                                                     </span>
                                                                                 </div>
                                                                             </td>

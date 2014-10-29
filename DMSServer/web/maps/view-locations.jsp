@@ -104,6 +104,7 @@
             }
 
             function bindInfoWindow(marker, map, infowindow, html, Ltitle) {
+               
                 google.maps.event.addListener(marker, 'click', function() {
                     infowindow.setContent(html);
                     infowindow.open(map, marker);
@@ -205,7 +206,7 @@
             </div>
 
             <div id="filter">
-                <form id="sub_form" method="POST" action="filter-result?page=0">
+                <form id="sub_form" method="get" action="filter-result?page=0">
                 <table border=0 cellspacing=0 cellpadding=0 width="200px">
                                             
                     <tr align=left class=small><b>Chọn Giám đốc</b></tr>
