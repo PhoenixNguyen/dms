@@ -7,10 +7,12 @@
 package com.hp.action;
 
 import com.hp.common.City;
+import com.hp.common.HttpHelper;
 import com.hp.dao.RoadManagementDAO;
 import com.hp.dao.RoadManagementDAOImpl;
 import com.hp.dao.UserDAO;
 import com.hp.dao.UserDAOImpl;
+import com.hp.domain.LastLocation;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
@@ -24,6 +26,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -42,6 +47,16 @@ public class ViewStaffCurrentLocation extends ActionSupport{
     List<RoadManagement> currLocations = new ArrayList<RoadManagement>();
     List<String> cities = new ArrayList<String>();
 
+    List<LastLocation> lastLocations = new ArrayList<LastLocation>();
+
+    public List<LastLocation> getLastLocations() {
+        return lastLocations;
+    }
+
+    public void setLastLocations(List<LastLocation> lastLocations) {
+        this.lastLocations = lastLocations;
+    }
+    
     public List<String> getCities() {
         return cities;
     }
@@ -90,12 +105,61 @@ public class ViewStaffCurrentLocation extends ActionSupport{
         }
         
         currLocations = roadManagementDAO.findLocationByTime(date);
-            if(currLocations != null)
-                 System.out.println("currLocations: " + currLocations.size());
         
+        List<RoadManagement> lastRoads = roadManagementDAO.findLocationByTime(null);
+        
+        if(currLocations != null && currLocations.size() > 0){
+             //System.out.println("currLocations: " + currLocations.size());
+            for(RoadManagement rm : currLocations){
+                for(RoadManagement last : lastRoads){
+                    if(last.getMaNhanVien().equalsIgnoreCase(rm.getMaNhanVien())){
+                        lastLocations.add(new LastLocation(rm.getMaNhanVien(), getAddress(rm), getAddress(last), last.getThoiGian()));
+                        break;
+                     }
+                }
+            }
+        }
         return SUCCESS;
      }
-     
+    
+    private String getAddress(RoadManagement last) {
+        String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+		        + last.getViDo() + "," + last.getKinhDo() + "&sensor=false";
+            JSONObject jsonObj;
+            String City = "";
+            String address = "";
+         try {
+
+          jsonObj = new JSONObject(HttpHelper.makeRequest(url));
+
+          String Status = jsonObj.getString("status");
+          if (Status.equalsIgnoreCase("OK")) {
+                   JSONArray Results = jsonObj.getJSONArray("results");
+                   JSONObject zero = Results.getJSONObject(0);
+
+                   address = zero.getString("formatted_address").toString();
+
+                   String[] long_name = address.split(",");
+
+                   int number = long_name.length - 2;
+                   City = long_name[number];
+                   //System.out.println("CityName _______________________________ --->" + City + "");
+
+                   //Toast.makeText(this, "CityName: " + City, Toast.LENGTH_SHORT).show();
+
+                   if (!address.equals("")) {
+                       return address;
+                    //finish_service();
+                   }
+          }
+
+         } catch (JSONException e) {
+             e.printStackTrace();
+             return "";
+         }
+         return "";
+    }
+    
     public String getCity() {
         return city;
     }

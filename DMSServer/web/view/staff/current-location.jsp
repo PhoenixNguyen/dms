@@ -33,6 +33,8 @@
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGEhKh7kMB8aYZpl2nY6jAFo9td-iVA7k&sensor=true">
         </script>
         
+        <script src="<%=request.getContextPath()%>/js/date.js" type="text/javascript"></script>
+        
         <script type="text/javascript">
             
             var arr = new Array();
@@ -70,18 +72,35 @@
                 var infowindow = new google.maps.InfoWindow({
                     content: ''
                 });
-
-                var contentString = [
-            <s:iterator value="currLocations" status="status">
-                    <s:date name="thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
-                    '<div style="width:250px;">Mã nhân viên: <s:property value="maNhanVien"/>' + '<br/>' +
-                    'Tên nhân viên: <s:property value="tenNhanVien"/>' + '<br/>' +
-                    'Thời gian: <s:property value="%{createdDateId}"/>' + '<br/>' +
-                    'Ghi chú: <s:property value="ghiChu"/>' + '<br/>' +
-                    'Tọa độ X: <s:property value="viDo"/> <br/> \n'+
-                    'Tọa độ Y: <s:property value="kinhDo"/> <br/>   </div>',
+                
+                
+                var contentString = [];
+                
+                //alert(<s:property value="lastLocations.size()"/>);
+                
+            <s:iterator value="currLocations" status="status" var="curr">
+                <s:iterator value="lastLocations" status="status2" var="last">
+                    
+                    <s:if test="#curr.maNhanVien == #last.maNhanVien">
+                        
+                        <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
+                        <s:date name="#last.timeLast" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
+                            
+                        contentString.push(
+                            '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
+                            '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
+                            '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
+                            '<b>Ghi chú:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
+                            '<b>Vị trí:</b> <s:property value="#last.address"/> <br/> \n'+
+                            '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
+                            <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.lastAddress"/> <br/> \n\
+                            </div>'
+                        );
+                    </s:if>
+                    
+                </s:iterator>
             </s:iterator>
-                ];
+                
 
                 for (i = 0; i < Customers.length; i++) {
                     size = 15;
@@ -125,6 +144,7 @@
                 var point = overlay.getProjection().fromLatLngToContainerPixel(end); 
                 return point;
             }
+            
             
         </script>
         
@@ -195,7 +215,7 @@
             </div>
 
             <div id="filter">
-                <form id="sub_form" method="get" action="current-location-filter?page=0">
+                <form id="sub_form" name="filterForm" method="get" action="current-location-filter?page=0">
                 <table border=0 cellspacing=0 cellpadding=0 width="200px">
 <!--                    <select style="padding: 5px; width: 92%;">
                         <s:iterator value="cities">
@@ -204,6 +224,13 @@
                     </select>-->
                     <input id="datetimepicker" type="text" name="date_time" value="<s:property value="%{#parameters.date_time}"/>" style="padding: 5px; width: 85%;" >
                     <script type="text/javascript">
+                        
+                        var startDate = '<s:property value="%{#parameters.date_time}"/>';
+                        var todayDate = new Date();
+                        var today = todayDate.toString('yyyy-MM-dd HH:mm');
+                        if (startDate == '')
+                            $('form[name=filterForm] input[name=date_time]').val(today);
+
                         
                         jQuery('#datetimepicker').datetimepicker({
                             format:'Y-m-d H:i',
