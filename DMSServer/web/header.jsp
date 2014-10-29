@@ -59,6 +59,8 @@
         <script type="text/javascript" src="modules/ModComments/ModCommentsCommon.js"></script>
         <!-- END -->
         
+        <script src="<%=request.getContextPath()%>/js/date.js" type="text/javascript"></script>
+        
         <!--        Header hdrNameBg-->
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class=""> 
             <tbody>

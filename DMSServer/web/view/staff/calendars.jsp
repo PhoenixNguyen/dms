@@ -66,7 +66,7 @@
                         <table class="small reportGenerateTable" align="center" cellpadding="5" cellspacing="0" width="95%" border=0>
                             <tr>
                                 <td align=center class=small>
-                                    <form id="sub_form" method="get" action="calendar-filter-result">
+                                    <form id="sub_form" name="filterForm" method="get" action="calendar-filter-result">
                                     <table border=0 cellspacing=0 cellpadding=0 width=80%>
                                         <tr>
                                             <td align=left class=small><b>Chọn Giám đốc</b></td><td class=small>&nbsp;</td>
@@ -150,11 +150,25 @@
                                         </tr>
                                     </table>
                                     </form>
+                                                        
                                 </td>
                             </tr>
                         </table>
 
-
+                         <script type="text/javascript">
+                                $(document).ready(function(){
+                                    var startDate = '<s:property value="%{#parameters.startDate}"/>';
+                                    var endDate = '<s:property value="%{#parameters.startDate}"/>';
+                                    
+                                    var todayDate = new Date();
+                                    var today = todayDate.toString('dd-MM-yyyy');
+                                    if(startDate == '')
+                                        $('form[name=filterForm] input[name=startDate]').val(today);
+                                    if(startDate == '')
+                                        $('form[name=filterForm] input[name=endDate]').val(today);
+                                   
+                                });
+                            </script>                                 
                         <div style="display: block;" id="Generate" align="center">
 
 
