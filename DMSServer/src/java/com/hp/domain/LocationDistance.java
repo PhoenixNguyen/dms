@@ -6,6 +6,8 @@
 
 package com.hp.domain;
 
+import java.util.Date;
+
 /**
  *
  * @author HP
@@ -15,6 +17,16 @@ public class LocationDistance {
     private Staff staff;
     private float distance;
     private float interval;
+    
+    private Date currentDate;
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
     
     public Staff getStaff() {
         return staff;

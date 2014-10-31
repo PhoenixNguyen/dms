@@ -20,7 +20,7 @@
         <!--[if lte IE 6]>
         <style type="text/css">div.fixedLay { poview/calendar/footer.jspsition:absolute; }</style>
         <![endif]-->
-        
+
         <!-- End -->
     </head>
     <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" class="small">
@@ -40,26 +40,26 @@
                         <table class="small reportGenHdr mailClient mailClientBg" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 
 
-                                <tbody>
-                                    <tr>
-                                        <td style="padding: 10px; text-align: left;" width="70%">
-                                            <span class="moduleName">
-                                                Kế hoạch công tác tuần
-                                            </span>&nbsp;&nbsp;
-                                            <!--                                            <input type="button" name="custReport" value="Sửa Báo cáo" class="crmButton small edit" onClick="editReport('20');">-->
-                                            <br>
-<!--                                            <a href="report" class="reportMnu" style="border-bottom: 0px solid rgb(0, 0, 0);">&lt; Quay lại Nhân viên</a>-->
-                                        </td>
-                                        <!--                                        <td style="border-left: 2px dotted rgb(109, 109, 109); padding: 10px;" width="30%">
-                                                                                    <b>Chọn báo cáo khác : </b><br>
-                                                                                    <select name="another_report" class="detailedViewTextBox" onChange="selectReport()">
-                                        
-                                        
-                                                                                        <option value=20 selected>Báo cáo chi tiết Nhập hàng</option>
-                                                                                    </select>&nbsp;&nbsp;
-                                                                                </td>-->
-                                    </tr>
-                                </tbody>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; text-align: left;" width="70%">
+                                        <span class="moduleName">
+                                            Kế hoạch công tác tuần
+                                        </span>&nbsp;&nbsp;
+                                        <!--                                            <input type="button" name="custReport" value="Sửa Báo cáo" class="crmButton small edit" onClick="editReport('20');">-->
+                                        <br>
+                                        <!--                                            <a href="report" class="reportMnu" style="border-bottom: 0px solid rgb(0, 0, 0);">&lt; Quay lại Nhân viên</a>-->
+                                    </td>
+                                    <!--                                        <td style="border-left: 2px dotted rgb(109, 109, 109); padding: 10px;" width="30%">
+                                                                                <b>Chọn báo cáo khác : </b><br>
+                                                                                <select name="another_report" class="detailedViewTextBox" onChange="selectReport()">
+                                    
+                                    
+                                                                                    <option value=20 selected>Báo cáo chi tiết Nhập hàng</option>
+                                                                                </select>&nbsp;&nbsp;
+                                                                            </td>-->
+                                </tr>
+                            </tbody>
                         </table>
 
                         <!-- Generate Report UI Filter -->
@@ -67,115 +67,115 @@
                             <tr>
                                 <td align=center class=small>
                                     <form id="sub_form" name="filterForm" method="get" action="calendar-filter-result">
-                                    <table border=0 cellspacing=0 cellpadding=0 width=80%>
-                                        <tr>
-                                            <td align=left class=small><b>Chọn Giám đốc</b></td><td class=small>&nbsp;</td>
-                                            <td align=left class=small><b>Chọn Nhân viên </b></td><td class=small>&nbsp;</td>
-                                            <td align=left class=small><b>Ngày bắt đầu </b></td><td class=small>&nbsp;</td>
-                                            <td align=left class=small><b>Ngày kết thúc </b>
-                                        </tr>
-                                        <tr>
-                                            <s:push value="pushInfo">
-                                            <td align="left" width="20%">
-                                                <select name="pushInfo.managerID"  class="small" style="width:98%" onchange="onClickManager(options[selectedIndex].text , 'take');">
-                                                    <option value="">--select--</option>
-                                                    <s:iterator value="userListGiamDoc" status="index" >
-                                                        <s:if test="pushInfo.managerID == userListGiamDoc.get(#index.index)">
-                                                            <option value="<s:property />" selected="selected"><s:property /></option>
-                                                        </s:if>
-                                                        <s:else>
-                                                            <option value="<s:property />"><s:property /></option>
-                                                        </s:else>
-                                                    </s:iterator>
-                                                </select>
-                                            </td>
-                                            <td class=small>&nbsp;</td>
-                                            
-                                            <td align="left" width="20%">
-                                                <select name="pushInfo.staffID" class="small" style="width:98%" onchange="onClickStaff(options[selectedIndex].text , 'take');" id="staff">
-                                                    <option value="">--select--</option>
-                                                    <s:iterator value="userListStaff" status="index" >
-                                                        
-                                                        <s:if test="pushInfo.staffID == userListStaff.get(#index.index)">
-                                                            <option value="<s:property />" selected="selected"><s:property /></option>
-                                                        </s:if>
-                                                        <s:else>
-                                                            <option value="<s:property />"><s:property /></option>
-                                                        </s:else>
+                                        <table border=0 cellspacing=0 cellpadding=0 width=80%>
+                                            <tr>
+                                                <td align=left class=small><b>Chọn Giám đốc</b></td><td class=small>&nbsp;</td>
+                                                <td align=left class=small><b>Chọn Nhân viên </b></td><td class=small>&nbsp;</td>
+                                                <td align=left class=small><b>Ngày bắt đầu </b></td><td class=small>&nbsp;</td>
+                                                <td align=left class=small><b>Ngày kết thúc </b>
+                                            </tr>
+                                            <tr>
+                                                <s:push value="pushInfo">
+                                                    <td align="left" width="20%">
+                                                        <select name="pushInfo.managerID"  class="small" style="width:98%" onchange="onClickManager(options[selectedIndex].text, 'take');">
+                                                            <option value="">--select--</option>
+                                                            <s:iterator value="userListGiamDoc" status="index" >
+                                                                <s:if test="pushInfo.managerID == userListGiamDoc.get(#index.index)">
+                                                                    <option value="<s:property />" selected="selected"><s:property /></option>
+                                                                </s:if>
+                                                                <s:else>
+                                                                    <option value="<s:property />"><s:property /></option>
+                                                                </s:else>
+                                                            </s:iterator>
+                                                        </select>
+                                                    </td>
+                                                    <td class=small>&nbsp;</td>
 
-                                                        
-                                                    </s:iterator>
-                                                </select>
-                                            </td>
-                                            <td class=small>&nbsp;</td>
-                                            
-                                            </s:push>
-                                            <td align=left width="20%">
-                                                <table border=0 cellspacing=0 cellpadding=2>
-                                                    <tr>
-                                                        <s:date format="dd-MM-yyyy" id="dateconverted" name="startDate"/>
-                                                        <td align=left><input name="startDate" id="jscal_field_date_start" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="startDate"/>"></td>
-                                                        <td valign=absmiddle align=left>
-                                                            <img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_start">
-                                                            <font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
-                                                            <script type="text/javascript">
-                                                                Calendar.setup({
-                                                                    inputField: "jscal_field_date_start", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_start", singleClick: true, step: 1
-                                                                });
-                                                                
-                                                            </script>
+                                                    <td align="left" width="20%">
+                                                        <select name="pushInfo.staffID" class="small" style="width:98%" onchange="onClickStaff(options[selectedIndex].text, 'take');" id="staff">
+                                                            <option value="">--select--</option>
+                                                            <s:iterator value="userListStaff" status="index" >
 
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                            <td align=left class=small>&nbsp;</td>
-                                            <td align=left width=20%>
-                                                <table border=0 cellspacing=0 cellpadding=2>
-                                                    <tr>
-                                                        <td align=left><input name="endDate" id="jscal_field_date_end" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="endDate"/>"></td>
-                                                        <td valign=absmiddle align=left><img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_end"><font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
-                                                            <script type="text/javascript">
-                                                                Calendar.setup({
-                                                                    inputField: "jscal_field_date_end", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_end", singleClick: true, step: 1
-                                                                });
-                                                            </script>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" colspan="8" style="padding:5px"><input name="generatenw" value=" Xem báo cáo " class="crmbutton small create" type="submit" ></td>
-                                        </tr>
-                                    </table>
+                                                                <s:if test="pushInfo.staffID == userListStaff.get(#index.index)">
+                                                                    <option value="<s:property />" selected="selected"><s:property /></option>
+                                                                </s:if>
+                                                                <s:else>
+                                                                    <option value="<s:property />"><s:property /></option>
+                                                                </s:else>
+
+
+                                                            </s:iterator>
+                                                        </select>
+                                                    </td>
+                                                    <td class=small>&nbsp;</td>
+
+                                                </s:push>
+                                                <td align=left width="20%">
+                                                    <table border=0 cellspacing=0 cellpadding=2>
+                                                        <tr>
+                                                            <s:date format="dd-MM-yyyy" id="dateconverted" name="startDate"/>
+                                                            <td align=left><input name="startDate" id="jscal_field_date_start" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="startDate"/>"></td>
+                                                            <td valign=absmiddle align=left>
+                                                                <img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_start">
+                                                                <font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
+                                                                <script type="text/javascript">
+                                                                    Calendar.setup({
+                                                                        inputField: "jscal_field_date_start", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_start", singleClick: true, step: 1
+                                                                    });
+
+                                                                </script>
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td align=left class=small>&nbsp;</td>
+                                                <td align=left width=20%>
+                                                    <table border=0 cellspacing=0 cellpadding=2>
+                                                        <tr>
+                                                            <td align=left><input name="endDate" id="jscal_field_date_end" type="text" size="10" class="importBox" style="width:70px;" value="<s:property value="endDate"/>"></td>
+                                                            <td valign=absmiddle align=left><img src="themes/softed/images/btnL3Calendar.gif" id="jscal_trigger_date_end"><font size="1"><em old="(yyyy-mm-dd)">(dd-mm-yyyy)</em></font>
+                                                                <script type="text/javascript">
+                                                                    Calendar.setup({
+                                                                        inputField: "jscal_field_date_end", ifFormat: "%d-%m-%Y", showsTime: false, button: "jscal_trigger_date_end", singleClick: true, step: 1
+                                                                    });
+                                                                </script>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="8" style="padding:5px"><input name="generatenw" value=" Xem báo cáo " class="crmbutton small create" type="submit" ></td>
+                                            </tr>
+                                        </table>
                                     </form>
-                                                        
+
                                 </td>
                             </tr>
                         </table>
 
-                         <script type="text/javascript">
-                                $(document).ready(function(){
-                                    var startDate = '<s:property value="%{#parameters.startDate}"/>';
-                                    var endDate = '<s:property value="%{#parameters.startDate}"/>';
-                                    
-                                    var todayDate = new Date();
-                                    var today = todayDate.toString('dd-MM-yyyy');
-                                    if(startDate == '')
-                                        $('form[name=filterForm] input[name=startDate]').val(today);
-                                    if(startDate == '')
-                                        $('form[name=filterForm] input[name=endDate]').val(today);
-                                   
-                                });
-                            </script>                                 
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                var startDate = '<s:property value="%{#parameters.startDate}"/>';
+                                var endDate = '<s:property value="%{#parameters.startDate}"/>';
+
+                                var todayDate = new Date();
+                                var today = todayDate.toString('dd-MM-yyyy');
+                                if (startDate == '')
+                                    $('form[name=filterForm] input[name=startDate]').val(today);
+                                if (startDate == '')
+                                    $('form[name=filterForm] input[name=endDate]').val(today);
+
+                            });
+                        </script>                                 
                         <div style="display: block;" id="Generate" align="center">
 
 
                             <br>
                             <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader" >
                                 <tbody><tr>
-<!--                                        <td align="left" nowrap ><input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="window.location.href='export-takeorder-xls'" title="Xuất dữ liệu Excel" ></td>-->
+                                        <!--                                        <td align="left" nowrap ><input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="window.location.href='export-takeorder-xls'" title="Xuất dữ liệu Excel" ></td>-->
                                     </tr>
                                 </tbody>
                             </table>
@@ -201,7 +201,7 @@
                                                     <tr><td colspan="2">&nbsp;</td></tr>
                                                     <tr>
                                                         <td colspan="2">
-                                                            
+
                                                             <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="80%">
                                                                 <tr>
                                                                     <td class='rptCellLabel'>Stt</td>
@@ -212,142 +212,140 @@
                                                                     <td class='rptCellLabel'>Nội dung</td>
                                                                     <td class='rptCellLabel'>Báo cáo</td>
                                                                     <td class='rptCellLabel'>Cộng tác viên</td>
-                                                                    
+
                                                                     <td class='rptCellLabel'>Trạng thái</td>
                                                                     <td class='rptCellLabel'>Hành động</td>
                                                                 </tr>
-                                                                
-                                                                
+
+
                                                                 <s:iterator value="calendarList" status="index">
-                                                                <s:date id="dateconverted" name="calendarDate" format="dd-MM-yyyy"/>
-                                                                <s:date id="createdTimeConverted" name="createdTime" format="dd-MM-yyyy HH:mm:ss"/>
-                                                                <tr>
-                                                                    <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
-                                                                    <td class='rptData'>${staff.id}</td>
-                                                                    <td class='rptData'><s:property value="staff.name"/></td>
-                                                                    <td class='rptData'><s:property value="%{dateconverted}"/></td>
-                                                                    <td class='rptData'><s:property value="province"/></td>
-                                                                    <td class='rptData'><s:property value="content"/></td>
-                                                                    <td class='rptData'><s:property value="report"/></td>
-                                                                    <td class='rptData'><s:property value="contributor"/></td>
-                                                                    
-                                                                    
-                                                                    <td class='rptData' style="text-align: center">
-                                                                        <s:if test="status == 0">
-                                                                            <img src="${pageContext.request.contextPath}/themes/images/exclamation.png" title="Khởi tạo" >
-                                                                        </s:if>
-                                                                        <s:if test="status == 1">
-                                                                            <img src="${pageContext.request.contextPath}/themes/images/request.png" title="Đã đề nghị" >
-                                                                        </s:if>
-                                                                        <s:if test="status == 2">
-                                                                            <img src="${pageContext.request.contextPath}/themes/images/completed.png" title="Hoàn thành" >
-                                                                        </s:if>
-                                                                    </td>
-                                                                    
-                                                                    <td class='rptData'>
-                                                                        <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa"
-                                                                           id="${stt}" staffID="${staff.id}" staffName="${staff.name}" date="${dateconverted}" province="${province}" content="${content}"
-                                                                           contributor="${contributor}" support="${support}" mission="${mission}" report="${report}" createdTime="${createdTimeConverted}"
-                                                                           status="${status}" cities ="${note}"
-                                                                           >
-                                                                            <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
-                                                                        </a>
-                                                                        <a href="javascript:void(0)" class="delete_popup" id="${stt}" status="${status}" title="Xóa">
-                                                                            <img src="${pageContext.request.contextPath}/themes/images/delete.png" title="" >
-                                                                        </a>
-                                                                        
-                                                                    </td>
-                                                                </tr>
-                                                                
+                                                                    <s:date id="dateconverted" name="calendarDate" format="dd-MM-yyyy"/>
+                                                                    <s:date id="createdTimeConverted" name="createdTime" format="dd-MM-yyyy HH:mm:ss"/>
+                                                                    <tr>
+                                                                        <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
+                                                                        <td class='rptData'>${staff.id}</td>
+                                                                        <td class='rptData'><s:property value="staff.name"/></td>
+                                                                        <td class='rptData'><s:property value="%{dateconverted}"/></td>
+                                                                        <td class='rptData'><s:property value="province"/></td>
+                                                                        <td class='rptData'><s:property value="content"/></td>
+                                                                        <td class='rptData'><s:property value="report"/></td>
+                                                                        <td class='rptData'><s:property value="contributor"/></td>
+
+
+                                                                        <td class='rptData' style="text-align: center">
+                                                                            <s:if test="status == 0">
+                                                                                <img src="${pageContext.request.contextPath}/themes/images/exclamation.png" title="Khởi tạo" >
+                                                                            </s:if>
+                                                                            <s:if test="status == 1">
+                                                                                <img src="${pageContext.request.contextPath}/themes/images/request.png" title="Đã đề nghị" >
+                                                                            </s:if>
+                                                                            <s:if test="status == 2">
+                                                                                <img src="${pageContext.request.contextPath}/themes/images/completed.png" title="Hoàn thành" >
+                                                                            </s:if>
+                                                                        </td>
+
+                                                                        <td class='rptData'>
+                                                                            <a href="#edit_calendar_popup" class="edit_calendar_popup" rel="leanModal" title="Sửa"
+                                                                               id="${stt}" staffID="${staff.id}" staffName="${staff.name}" date="${dateconverted}" province="${province}" content="${content}"
+                                                                               contributor="${contributor}" support="${support}" mission="${mission}" report="${report}" createdTime="${createdTimeConverted}"
+                                                                               status="${status}" cities ="${note}"
+                                                                               >
+                                                                                <img src="${pageContext.request.contextPath}/themes/images/edit.png" title="" >
+                                                                            </a>
+                                                                            <a href="javascript:void(0)" class="delete_popup" id="${stt}" status="${status}" title="Xóa">
+                                                                                <img src="${pageContext.request.contextPath}/themes/images/delete.png" title="" >
+                                                                            </a>
+
+                                                                        </td>
+                                                                    </tr>
+
                                                                 </s:iterator>
-                                                                
-                                                                
+
+
                                                             </table>
                                                             <script type="text/javascript">
-                                                                $(document).ready(function(){
+                                                                $(document).ready(function() {
                                                                     //$(".edit_calendar_popup").leanModal();
-                                                                    $('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".modal_close" });	
-                                                                    
-                                                                    $('.edit_calendar_popup').live('click', function(){
-                                                                       //alert($(this).attr('createdTime')) ;
-                                                                       //$('form[name=edit_calendar]').trigger('reset');
-                                                                       
-                                                                       $('form[name=edit_calendar] .createdTime').html($(this).attr('createdTime'));
-                                                                       $('form[name=edit_calendar] .staffId').html($(this).attr('staffId'));
-                                                                       $('form[name=edit_calendar] .staffName').html($(this).attr('staffName'));
-                                                                       $('form[name=edit_calendar] .calendarDate').html($(this).attr('date'));
-                                                                       $('form[name=edit_calendar] .province').html($(this).attr('province'));
-                                                                       $('form[name=edit_calendar] .content').html($(this).attr('content'));
-                                                                       $('form[name=edit_calendar] .cities').html($(this).attr('cities'));
-                                                                       
-                                                                       $('form[name=edit_calendar] input[name=id]').val($(this).attr('id'));
-                                                                       
-                                                                       $('form[name=edit_calendar] input[name=contributor]').val($(this).attr('contributor'));//
-                                                                       $('form[name=edit_calendar] input[name=support]').val($(this).attr('support'));
-                                                                       $('form[name=edit_calendar] input[name=mission]').val($(this).attr('mission'));
-                                                                       $('form[name=edit_calendar] textarea[name=report]').val($(this).attr('report'));
-                                                                       $('form[name=edit_calendar] select[name=status]').val($(this).attr('status'));
-                                                                       
-                                                                       $('form[name=edit_calendar] .action').html('Cập nhật &raquo;');
-                                                                       $('form[name=edit_calendar] button').prop('type', 'submit');
-                                                                       $('form[name=edit_calendar] .action').attr('onclick', null);
-                                                                       
-                                                                       if($(this).attr('status') == 2){
+                                                                    $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal_close"});
+
+                                                                    $('.edit_calendar_popup').live('click', function() {
+                                                                        //alert($(this).attr('createdTime')) ;
+                                                                        //$('form[name=edit_calendar]').trigger('reset');
+
+                                                                        $('form[name=edit_calendar] .createdTime').html($(this).attr('createdTime'));
+                                                                        $('form[name=edit_calendar] .staffId').html($(this).attr('staffId'));
+                                                                        $('form[name=edit_calendar] .staffName').html($(this).attr('staffName'));
+                                                                        $('form[name=edit_calendar] .calendarDate').html($(this).attr('date'));
+                                                                        $('form[name=edit_calendar] .province').html($(this).attr('province'));
+                                                                        $('form[name=edit_calendar] .content').html($(this).attr('content'));
+                                                                        $('form[name=edit_calendar] .cities').html($(this).attr('cities'));
+
+                                                                        $('form[name=edit_calendar] input[name=id]').val($(this).attr('id'));
+
+                                                                        $('form[name=edit_calendar] input[name=contributor]').val($(this).attr('contributor'));//
+                                                                        $('form[name=edit_calendar] input[name=support]').val($(this).attr('support'));
+                                                                        $('form[name=edit_calendar] input[name=mission]').val($(this).attr('mission'));
+                                                                        $('form[name=edit_calendar] textarea[name=report]').val($(this).attr('report'));
+                                                                        $('form[name=edit_calendar] select[name=status]').val($(this).attr('status'));
+
+                                                                        $('form[name=edit_calendar] .action').html('Cập nhật &raquo;');
+                                                                        $('form[name=edit_calendar] button').prop('type', 'submit');
+                                                                        $('form[name=edit_calendar] .action').attr('onclick', null);
+
+                                                                        if ($(this).attr('status') == 2) {
                                                                             $('form[name=edit_calendar] .action').html('Đóng &raquo;');
                                                                             $('form[name=edit_calendar] button').prop('type', 'button');
                                                                             $('form[name=edit_calendar] .action').attr('onclick', '$("#edit_calendar_popup .modal_close").click();');
                                                                         }
                                                                     });
-                                                                    
-                                                                    $('form[name=edit_calendar]').submit(function(){
-                                                                        if(!confirm('Bạn chắc chắn muốn cập nhật'))
+
+                                                                    $('form[name=edit_calendar]').submit(function() {
+                                                                        if (!confirm('Bạn chắc chắn muốn cập nhật'))
                                                                             return;
                                                                         $.ajax({
-                                                                           url: $(this).attr('action'),
-                                                                           type: 'POST',
-                                                                           data : $(this).serializeArray(),
-                                                                           
-                                                                           success: function (data) {
-                                                                               alert(data);
-                                                                               if(data.indexOf('thành công') !== -1){
-                                                                                   location.reload();
-                                                                               }
-                                                                           }
-                                                                           
+                                                                            url: $(this).attr('action'),
+                                                                            type: 'POST',
+                                                                            data: $(this).serializeArray(),
+                                                                            success: function(data) {
+                                                                                alert(data);
+                                                                                if (data.indexOf('thành công') !== -1) {
+                                                                                    location.reload();
+                                                                                }
+                                                                            }
+
                                                                         });
                                                                         return false;
                                                                     });
-                                                                    
-                                                                    $('.delete_popup').live('click', function(){
+
+                                                                    $('.delete_popup').live('click', function() {
                                                                         var id = $(this).attr('id');
-                                                                        
-                                                                        if($(this).attr('status') == 2){
+
+                                                                        if ($(this).attr('status') == 2) {
                                                                             alert('Không thể xóa lịch làm việc, lịch này đã hoàn thành.');
                                                                             return;
                                                                         }
-                                                                        
-                                                                        if(!confirm('Bạn chắc chắn muốn xóa!'))
+
+                                                                        if (!confirm('Bạn chắc chắn muốn xóa!'))
                                                                             return;
-                                                                        
+
                                                                         $.ajax({
-                                                                           url: 'delete-calendar-ajax',
-                                                                           type: 'POST',
-                                                                           data : 'id=' + id,
-                                                                           
-                                                                           success: function (data) {
-                                                                               alert(data);
-                                                                               if(data.indexOf('thành công') !== -1){
-                                                                                   location.reload();
-                                                                               }
-                                                                           }
-                                                                           
+                                                                            url: 'delete-calendar-ajax',
+                                                                            type: 'POST',
+                                                                            data: 'id=' + id,
+                                                                            success: function(data) {
+                                                                                alert(data);
+                                                                                if (data.indexOf('thành công') !== -1) {
+                                                                                    location.reload();
+                                                                                }
+                                                                            }
+
                                                                         });
                                                                         return false;
                                                                     });
                                                                 });
                                                             </script>    
                                                             <style>
-                                                                
+
                                                                 #edit_calendar_popup{
                                                                     width: 804px;
                                                                     padding-bottom: 2px;
@@ -361,7 +359,7 @@
 
                                                                 }
                                                             </style>
-                                                            
+
                                                             <div id="edit_calendar_popup">
                                                                 <div id="popup-header">
                                                                     <h2>Cập nhật lịch công tác</h2>
@@ -394,24 +392,23 @@
                                                                                     <label for="">Tỉnh thành</label>
                                                                                     <label class="province" for="">Hà Nội</label>
                                                                                 </div>
-
+                                                                                <div id="popup-body" title="Danh sách thành phố đã đi">
+                                                                                    <label for="" title="Danh sách thành phố đã đi">Thành phố</label>
+                                                                                    <label class="cities" for="" style="min-height: 20px;">Hà Nội</label>
+                                                                                </div>
+                                                                                
                                                                                 <div id="popup-body">
                                                                                     <label for="">Nội dung</label>
-    <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
+                                                                                    <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
                                                                                     <span class="content" style="text-align: left; color: #222; font-size: 1.3em; padding-top: 8px; display: block; background-color: #F7F7F7; float: left;">
-                                                                                       Đưa đón khách hàng đi du lịch tại hạ long Đưa đón khách hàng đi du lịch tại hạ long
+                                                                                        Đưa đón khách hàng đi du lịch tại hạ long Đưa đón khách hàng đi du lịch tại hạ long
                                                                                     </span>
                                                                                 </div>
                                                                                 <br/>
-                                                                                <div id="popup-body">
-                                                                                    <label for="">Thành phố</label>
-    <!--                                                                                <label for="">Đưa đón khách hàng đi du lịch tại hạ long</label>-->
-                                                                                    <span class="cities" style="text-align: left; color: #222; font-size: 1.3em; padding-top: 8px; display: block; background-color: #F7F7F7; float: left;">
-                                                                                       HÀ Nội
-                                                                                    </span>
-                                                                                </div>
+                                                                                
                                                                             </td>
                                                                             <td style="vertical-align: top">
+                                                                                
                                                                                 <div id="popup-body">
                                                                                     <label for="">Cộng tác viên</label>
                                                                                     <input name="contributor" type="text" />
@@ -492,7 +489,7 @@
 <br><br><br>
 
 <!--    Footer-->
-<s:include value="../../footer.jsp"></s:include>
+        <s:include value="../../footer.jsp"></s:include>
 
 
 </body>

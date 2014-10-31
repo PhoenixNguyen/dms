@@ -38,7 +38,7 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
         try{
             String datefinal="";
             
-            System.out.println(" DATE: " + pDate); 
+            //System.out.println(" DATE: " + pDate); 
             if(pDate != null && pDate.compareTo("")!= 0 ){
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,7 +47,7 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                 datefinal = sdf2.format(date);
                 
                 
-                System.out.println(" DATECONVERT: " + datefinal );
+                //System.out.println(" DATECONVERT: " + datefinal );
             }
             
 //            if(pMaKhachHang != null){
@@ -144,7 +144,7 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                 Date to_date = sdf.parse(toDate);
                 toDatefinal = sdf2.format(to_date);
                 
-                System.out.println(" DATECONVERT: " + datefinal );
+                //System.out.println(" DATECONVERT: " + datefinal );
             }
             
             if(pNhanVien != null){

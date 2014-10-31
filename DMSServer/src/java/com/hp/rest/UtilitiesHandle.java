@@ -157,7 +157,10 @@ public class UtilitiesHandle {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
         
-        List<List<RoadManagement>> roads = roadManagementDAO.getRoad(null, calendar.getStaff().getId(), null, sdf.format(today));
+        System.out.println(calendar.getStaff().getId() + " " + sdf.format(today));
+        List<List<RoadManagement>> roads = roadManagementDAO.getRoad(null, calendar.getStaff().getId(), null, sdf.format(today), sdf.format(today));
+        
+        
         String cities = "";
         if(roads != null && roads.size() > 0){
             List<RoadManagement> roads1 = roads.get(0);

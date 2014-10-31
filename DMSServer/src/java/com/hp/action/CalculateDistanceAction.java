@@ -19,10 +19,14 @@ import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
@@ -89,7 +93,7 @@ public class CalculateDistanceAction extends ActionSupport{
         List<List<RoadManagement>> lists = new ArrayList<List<RoadManagement>>();
         lists = roadManagementDAO.getRoad(pushInfo.getManagerID(), pushInfo.getStaffID(), "", startDate, endDate);
         
-        System.out.println("lists: " + lists.size());
+        //System.out.println("lists: " + lists.size());
         
         if(lists!=null && lists.size() > 0){
             for(int i = 0; i < lists.size(); i++){
@@ -130,9 +134,112 @@ public class CalculateDistanceAction extends ActionSupport{
                 locationDistance.setDistance(distance);
                 locationDistance.setInterval(interval/(1000*60 *60*1f));
                 
-                locationDistanceList.add(locationDistance);
+                if(distance >= 20)
+                    locationDistanceList.add(locationDistance);
             }
         }
+        
+        return SUCCESS;
+    }
+    
+    public String filterDetail(){
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        HttpSession session = request.getSession();
+        
+        user = (User)session.getAttribute("USER");
+        
+        //Authorize
+        if(!userDAO.authorize((String)session.getAttribute("user_name"), (String)session.getAttribute("user_password"))){
+            return LOGIN;
+        }
+        
+        pushInfo.setManagerID((String)session.getAttribute("giamdocId"));
+        pushInfo.setStaffID((String)session.getAttribute("staffId"));
+        pushInfo.setCustomerID((String)session.getAttribute("khachhangId"));
+        
+        userListGiamDoc = userDAO.getListUser(2);
+        userListStaff = staffDAO.getListUser(pushInfo.getManagerID());
+        Date fromDate = null;
+        Date toDate = null;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        
+        try {
+            System.out.println("1: " +startDate);
+            
+            fromDate = sdf.parse(startDate);
+            toDate = sdf.parse(endDate);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(CalculateDistanceAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(fromDate != null && toDate != null)
+        while(fromDate.before(toDate)){
+            System.out.println("1: " +fromDate);
+            
+            String date = sdf.format(fromDate);
+            
+            //Get list value
+            List<List<RoadManagement>> lists = new ArrayList<List<RoadManagement>>();
+            lists = roadManagementDAO.getRoad(pushInfo.getManagerID(), pushInfo.getStaffID(), "", date, date);
+
+            System.out.println("fromDate: " + fromDate + " " + date);
+
+            if(lists!=null && lists.size() > 0){
+                for(int i = 0; i < lists.size(); i++){
+                    LocationDistance locationDistance = new LocationDistance();
+                    locationDistance.setStaff(staffDAO.loadStaff(lists.get(i).get(0).getMaNhanVien()));
+                    locationDistance.setCurrentDate(fromDate);
+                            
+                    float distance = 0;
+                    float interval = 0;
+                    List<RoadManagement> list = lists.get(i);
+                    for(int j = 0; j < (list.size() - 1); j ++){
+                        RoadManagement location1 = list.get(j);
+                        RoadManagement location2 = list.get(j+1);
+                        if(exceptionFrom != null && !exceptionFrom.equals("") && exceptionTo != null && !exceptionTo.equals("")){
+                            System.out.println("exceptionFrom: " + exceptionFrom + "exceptionTo: " + exceptionTo);
+                            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                            Date from = null;
+                            Date to = null;
+                            try{
+                                from = df.parse(exceptionFrom);
+                                to = df.parse(exceptionTo);
+
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+
+                            if(from!=null && to != null){
+                                if(location1.getThoiGian().after(from) && location1.getThoiGian().before(to))
+                                    continue;
+                            }
+                        }
+
+                        distance += calculateDistance(location1.getViDo(), location1.getKinhDo(), location2.getViDo(), location2.getKinhDo());
+                        interval += (location2.getThoiGian().getTime() - location1.getThoiGian().getTime());
+
+                        //System.out.println("Y= " + list.get(j).getThoiGian() + " Time(" + j +"): " + interval);
+                    }
+
+                    locationDistance.setDistance(distance);
+                    locationDistance.setInterval(interval/(1000*60 *60*1f));
+
+                    if(distance >= 20)
+                        locationDistanceList.add(locationDistance);
+                }
+            }
+            //End Get list value
+            //next day
+            Calendar c = Calendar.getInstance();
+            c.setTime(fromDate);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            
+            fromDate = c.getTime();
+        }
+        
+        
         
         return SUCCESS;
     }
@@ -150,7 +257,8 @@ public class CalculateDistanceAction extends ActionSupport{
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return (float)(AVERAGE_RADIUS_OF_EARTH * c);
+        float result = (float)(AVERAGE_RADIUS_OF_EARTH * c);
+        return result > 0.2 ? result : 0;
     }
 
     public PushInfo getPushInfo() {

@@ -1512,6 +1512,12 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="filter-distance-detail" method="filterDetail" class="com.hp.action.CalculateDistanceAction">
+            <result name="success">view/staff/calculate-distance-detail.jsp</result>
+            <result name="input" >home.jsp</result>
+            <result name="login" >index.jsp</result>
+        </action>
+        
         <action name="view-set-lunch" method="displaySetLunch" class="com.hp.action.SetLunchAction">
             <result name="success">view/staff/set-lunch.jsp</result>
             <result name="input" >home.jsp</result>

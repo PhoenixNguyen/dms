@@ -47,18 +47,8 @@
                                         <span class="moduleName">
                                             Tính quãng đường
                                         </span>&nbsp;&nbsp;
-                                        <!--                                            <input type="button" name="custReport" value="Sửa Báo cáo" class="crmButton small edit" onClick="editReport('20');">-->
                                         <br>
-                                        <!--                                            <a href="report" class="reportMnu" style="border-bottom: 0px solid rgb(0, 0, 0);">&lt; Quay lại Nhân viên</a>-->
                                     </td>
-                                    <!--                                        <td style="border-left: 2px dotted rgb(109, 109, 109); padding: 10px;" width="30%">
-                                                                                <b>Chọn báo cáo khác : </b><br>
-                                                                                <select name="another_report" class="detailedViewTextBox" onChange="selectReport()">
-                                    
-                                    
-                                                                                    <option value=20 selected>Báo cáo chi tiết Nhập hàng</option>
-                                                                                </select>&nbsp;&nbsp;
-                                                                            </td>-->
                                 </tr>
                             </tbody>
                         </table>
@@ -226,7 +216,8 @@
                                                             </span><br>
                                                         </td>
                                                         <td align="right" width="25%">
-                                                            <span class="genHeaderGray">Tổng số : <span id='_reportrun_total'><s:property value="locationDistanceList.size()"/></span>  Bản ghi</span>
+                                                            <span class="genHeaderGray" style="display: block">Tổng số : <span id='_reportrun_total'><s:property value="locationDistanceList.size()"/></span>  Bản ghi</span>
+                                                            <span class="genHeaderGray" style="display: block; cursor: pointer;"><a onclick="window.location='filter-distance-detail'+window.location.search;">Xem chi tiết</a></span>
                                                         </td>
                                                     </tr>
                                                     <tr><td id="report_info" align="left" colspan="2">&nbsp;</td></tr>

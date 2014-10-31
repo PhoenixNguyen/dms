@@ -235,7 +235,7 @@ public class UserAPI {
 		  String provider = locationManager.getBestProvider(criteria, false);
 	    
 		  // the last known location of this provider
-		  Location location = null;//locationManager.getLastKnownLocation(provider);
+		  Location location = locationManager.getLastKnownLocation(provider);
 
 		  MyLocationListener mylistener = new MyLocationListener();
 	
@@ -247,7 +247,7 @@ public class UserAPI {
 			  activity.startActivity(intent);
 		  }
 		  // location updates: at least 1 meter and 200millsecs change
-		  locationManager.requestLocationUpdates(provider, 10000, 50, mylistener);
+		  locationManager.requestLocationUpdates(provider, 1000, 0, mylistener);
 		
 	}
 	
