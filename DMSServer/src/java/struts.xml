@@ -1450,6 +1450,9 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-calendar" method="exportCalendar" class="com.hp.action.CalendarAction">
+        </action>
+        
         <action name="edit-calendar-ajax" method="edit" class="com.hp.action.CalendarAction"  >
               
           <result  type="json" >

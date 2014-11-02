@@ -251,9 +251,9 @@ public class CustomerMapActivity extends FragmentActivity
             takePicture();
             return true;
             
-        case R.id.sale:
+        /*case R.id.sale:
             saleOrder();
-            return true;
+            return true;*/
             
         case R.id.inventory_manager:
             inventoryManager();

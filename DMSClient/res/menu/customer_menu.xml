@@ -16,10 +16,10 @@
             android:showAsAction="always|withText"
             android:title="Chụp ảnh tại cửa hàng"/>
         
-        <item
+        <!-- <item
             android:id="@+id/sale"
             android:showAsAction="always|withText"
-            android:title="Bán hàng"/>
+            android:title="Bán hàng"/> -->
         
         <item
             android:id="@+id/inventory_manager"

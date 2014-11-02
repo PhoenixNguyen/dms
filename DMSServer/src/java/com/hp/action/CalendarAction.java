@@ -21,16 +21,25 @@ import static com.opensymphony.xwork2.Action.LOGIN;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.media.sound.InvalidFormatException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -71,8 +80,10 @@ public class CalendarAction extends ActionSupport{
         return SUCCESS;
     }
     
-    public String filterResult(){
+    public String filterResult() throws ParsePropertyException, IOException{
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
+        
         HttpSession session = request.getSession();
         
         user = (User)session.getAttribute("USER");
@@ -116,9 +127,48 @@ public class CalendarAction extends ActionSupport{
         calendarList = calendarDAO.getCalendarList(pushInfo.getManagerID(), pushInfo.getStaffID(), 
                 start, end);
         
+        String action = StringUtils.trimToEmpty(request.getParameter("action"));
+        if(action.equalsIgnoreCase("export")){
+            String fileInput = ServletActionContext.getServletContext().getRealPath("/db_templates/") ;
+            String templateFile = fileInput +"\\" + "report_calendar.xls";
+            System.out.println("templateFile: " + templateFile);
+            
+            export(calendarList, "model", templateFile, "", request, response);
+            return null;
+        }
         return SUCCESS;
     }
     
+    private void export(List<?> dataList, String dataKey, String tempFilePath, String desFilePath, HttpServletRequest request, HttpServletResponse response) throws ParsePropertyException, IOException {
+        
+        Map<String, Object> beans = new HashMap<String, Object>();
+        beans.put(dataKey, dataList);
+
+        XLSTransformer transformer = new XLSTransformer();
+        File tempFile = new File(tempFilePath);
+        if(!tempFile.exists()) {
+                System.out.println("Template file not found!");
+                return;
+        }
+
+        Workbook workbook = transformer.transformXLS(new FileInputStream(tempFile), beans);
+        //
+        String fileName = "Bao Cao "+startDate+" " + endDate + ".xls";
+        //Download file
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+        OutputStream outputStream = response.getOutputStream();
+        //Write to hardware
+        /*OutputStream outputStream = new FileOutputStream(desFilePath);*/
+
+        workbook.setSheetName(0, fileName.substring(0, fileName.lastIndexOf(".")));
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
+
+        System.out.println("Export is OK!");
+    }
+
     public String edit() throws IOException{
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
@@ -211,6 +261,7 @@ public class CalendarAction extends ActionSupport{
         response.getOutputStream().write("Xóa lịch công tác thất bại, hãy thử lại sau!".getBytes("UTF-8"));
         return null;
     }
+    
     
     public List<Calendar> getCalendarList() {
         return calendarList;

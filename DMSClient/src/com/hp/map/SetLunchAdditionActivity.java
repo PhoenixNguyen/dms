@@ -54,6 +54,7 @@ public class SetLunchAdditionActivity extends MainMenuActivity implements OnItem
 		
 		calendar_content = (EditText) findViewById(R.id.calendar_content);
 		calendar_content.setHint("Nhập nội dung");
+		calendar_content.setText("Đặt cơm văn phòng.");
 		
 		cities_spinner = (Spinner) findViewById(R.id.cities_spinner);
 		cities_spinner.setVisibility(View.GONE);

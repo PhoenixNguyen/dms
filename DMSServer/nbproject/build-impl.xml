@@ -1056,6 +1056,8 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.httpcore-4.0.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.httpclient-4.3.5.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.httpcore-4.3.2.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jxls-core-0.9.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.commons-jexl-1.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.Hibernate3.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
@@ -1120,6 +1122,8 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.httpcore-4.0.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.httpclient-4.3.5.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.httpcore-4.3.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jxls-core-0.9.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.commons-jexl-1.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.Hibernate3.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>-->
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
@@ -1542,7 +1546,7 @@ exists or setup the property manually. For example like this:
         <delete includeEmptyDirs="true" quiet="true">
             <fileset dir="${build.dir.to.clean}/WEB-INF/lib"/>
         </delete>
-<!--        <delete dir="${build.dir}"/>-->
+        <delete dir="${build.dir}"/>
         <available file="${build.dir.to.clean}/WEB-INF/lib" property="status.clean-failed" type="dir"/>
         <delete dir="${dist.dir}"/>
     </target>

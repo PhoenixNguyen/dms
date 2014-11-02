@@ -158,7 +158,16 @@ public class UtilitiesHandle {
         RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
         
         System.out.println(calendar.getStaff().getId() + " " + sdf.format(today));
-        List<List<RoadManagement>> roads = roadManagementDAO.getRoad(null, calendar.getStaff().getId(), null, sdf.format(today), sdf.format(today));
+        
+        String fromDate = sdf.format(today);
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.setTime(today);
+        c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+        
+        String endDate = sdf.format(c.getTime());
+        
+        List<List<RoadManagement>> roads = new ArrayList<List<RoadManagement>>();
+        roads = roadManagementDAO.getRoad("", calendar.getStaff().getId(), "", fromDate, endDate);
         
         
         String cities = "";

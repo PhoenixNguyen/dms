@@ -67,6 +67,7 @@
                             <tr>
                                 <td align=center class=small>
                                     <form id="sub_form" name="filterForm" method="get" action="calendar-filter-result">
+                                        <input type="hidden" name="action" value=""/>
                                         <table border=0 cellspacing=0 cellpadding=0 width=80%>
                                             <tr>
                                                 <td align=left class=small><b>Chọn Giám đốc</b></td><td class=small>&nbsp;</td>
@@ -171,11 +172,20 @@
                         </script>                                 
                         <div style="display: block;" id="Generate" align="center">
 
-
-                            <br>
+                            <script>
+                                //$(document).ready(function(){
+                                   function exportExcel() {
+                                       //alert('a');
+                                       $('form[name=filterForm] input[name=action]').val('export');
+                                       $('form[name=filterForm]').submit();
+                                   }
+                                //});
+                            </script>
                             <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader" >
                                 <tbody><tr>
-                                        <!--                                        <td align="left" nowrap ><input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="window.location.href='export-takeorder-xls'" title="Xuất dữ liệu Excel" ></td>-->
+                                        <td align="left" nowrap >
+<!--                                            <input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="exportExcel()" title="Xuất dữ liệu Excel" >-->
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
