@@ -8,10 +8,13 @@ package com.hp.action;
 
 import com.hp.common.City;
 import com.hp.common.HttpHelper;
+import com.hp.dao.CustomerDAO;
+import com.hp.dao.CustomerDAOImpl;
 import com.hp.dao.RoadManagementDAO;
 import com.hp.dao.RoadManagementDAOImpl;
 import com.hp.dao.UserDAO;
 import com.hp.dao.UserDAOImpl;
+import com.hp.domain.Customer;
 import com.hp.domain.LastLocation;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.User;
@@ -43,6 +46,9 @@ public class ViewStaffCurrentLocation extends ActionSupport{
     
     private UserDAO userDAO = new UserDAOImpl();
     private RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    
+    private List<Customer> listCustomer = new ArrayList();
     
     List<RoadManagement> currLocations = new ArrayList<RoadManagement>();
     List<String> cities = new ArrayList<String>();
@@ -119,6 +125,8 @@ public class ViewStaffCurrentLocation extends ActionSupport{
                 }
             }
         }
+        
+        listCustomer = customerDAO.loadCustomersWithLocations();
         return SUCCESS;
      }
     
@@ -182,6 +190,14 @@ public class ViewStaffCurrentLocation extends ActionSupport{
 
     public void setCurrLocations(List<RoadManagement> currLocations) {
         this.currLocations = currLocations;
+    }
+    
+    public List<Customer> getListCustomer() {
+        return listCustomer;
+    }
+
+    public void setListCustomer(List<Customer> listCustomer) {
+        this.listCustomer = listCustomer;
     }
     
 }

@@ -39,6 +39,7 @@
             
             var arr = new Array();
             var map;
+            var icon;
             function initialize() {
                 var i;
                 var Customers = [
@@ -78,46 +79,93 @@
                 
                 //alert(<s:property value="lastLocations.size()"/>);
                 
-            <s:iterator value="currLocations" status="status" var="curr">
-                <s:iterator value="lastLocations" status="status2" var="last">
-                    
-                    <s:if test="#curr.maNhanVien == #last.maNhanVien">
-                        
-                        <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
-                        <s:date name="#last.timeLast" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
-                            
-                        contentString.push(
-                            '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
-                            '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
-                            '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
-                            '<b>Ghi chú:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
-                            '<b>Vị trí:</b> <s:property value="#last.address"/> <br/> \n'+
-                            '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
-                            <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.lastAddress"/> <br/> \n\
-                            </div>'
-                        );
-                    </s:if>
-                    
+                <s:iterator value="currLocations" status="status" var="curr">
+                    <s:iterator value="lastLocations" status="status2" var="last">
+
+                        <s:if test="#curr.maNhanVien == #last.maNhanVien">
+
+                            <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
+                            <s:date name="#last.timeLast" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
+
+                            contentString.push(
+                                '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
+                                '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
+                                '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
+                                '<b>Ghi chú:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
+                                '<b>Vị trí:</b> <s:property value="#last.address"/> <br/> \n'+
+                                '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
+                                <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.lastAddress"/> <br/> \n\
+                                </div>'
+                            );
+                        </s:if>
+
+                    </s:iterator>
                 </s:iterator>
-            </s:iterator>
                 
 
-                for (i = 0; i < Customers.length; i++) {
-                    size = 15;
-                    var img = new google.maps.MarkerImage('../images/marker.jpg',
+                //
+                var size = 15;
+                var img = new google.maps.MarkerImage('D:/marker.jpg',
                             new google.maps.Size(size, 2 * size),
                             new google.maps.Point(0, 0),
                             new google.maps.Point(size / 2, size / 2)
                             );
-
+                pinColor = "FFFF00";
+                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(10, 34));
+                    
+                for (i = 0; i < Customers.length; i++) {
+                    
                     var marker = new google.maps.Marker({
                         map: map,
                         title: Customers[i].title,
-                        position: new google.maps.LatLng(Customers[i].mXCoordinates, Customers[i].mYCoordinates)
-                        //icon: img
+                        position: new google.maps.LatLng(Customers[i].mXCoordinates, Customers[i].mYCoordinates),
+                        icon: pinImage
                     });
 
                     bindInfoWindow(marker, map, infowindow, contentString[i], Customers[i].mMaDoiTuong);
+
+                }
+                
+                //For Customer ---------------------------------------------------------------------------------------------------------
+                var Customers2 = [
+                    <s:iterator value="listCustomer" status="status">
+                            {
+                                mXCoordinates: <s:property value="coordinateX"/>,
+                                        mYCoordinates: <s:property value="coordinateY"/>,
+                                mMaDoiTuong: '<s:property value="maDoiTuong:"/>'
+
+                            },
+                    </s:iterator>
+                ];
+               // alert(Customers2);
+               var customerContent2 = [
+                    <s:iterator value="listCustomer" status="status">
+                            '<div id="boxShow"> <a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">\n\
+                                                <img class= "ImageWrap" border="0" src="../customer/<s:property value="maDoiTuong"/>/1.jpg"  ></a>' +
+                                    '<p class= "TextWrap">\n\
+                                        <b><a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">Khách hàng: <s:property value="doiTuong"/></a></b>' + '<br/><br/>' +
+                                    'Mã khách hàng: <s:property value="maDoiTuong"/>' + '<br/>' +
+                                    'Tỉnh thành: <s:property value="tinhThanh"/>' + '<br/>' +
+                                    'Địa chỉ: <s:property value="diaChi"/>' + '<br/>' +
+                                    'Điện thoại: <s:property value="dienThoai"/>' + '<br/>' +
+                                    'Fax: <s:property value="fax"/>' + '<br/>\n\
+                                     \n\
+                                      <br/>   </p></div>',
+                    </s:iterator>
+                ];
+                
+                for (i = 0; i < Customers2.length; i++) {
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        title: Customers2[i].title,
+                        position: new google.maps.LatLng(Customers2[i].mXCoordinates, Customers2[i].mYCoordinates)
+                    });
+
+                    bindInfoWindow(marker, map, infowindow, customerContent2[i], Customers2[i].mMaDoiTuong);
 
                 }
 
