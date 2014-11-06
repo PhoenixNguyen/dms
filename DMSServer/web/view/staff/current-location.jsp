@@ -110,8 +110,8 @@
                             new google.maps.Point(0, 0),
                             new google.maps.Point(size / 2, size / 2)
                             );
-                pinColor = "FFFF00";
-                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                
+                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + "FFFF00",
                     new google.maps.Size(100, 100),
                     new google.maps.Point(0,0),
                     new google.maps.Point(10, 34));
@@ -157,12 +157,17 @@
                     </s:iterator>
                 ];
                 
+                var pinImage2 = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + "00BFFF",
+                    new google.maps.Size(100, 100),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(10, 34));
                 for (i = 0; i < Customers2.length; i++) {
 
                     var marker = new google.maps.Marker({
                         map: map,
                         title: Customers2[i].title,
-                        position: new google.maps.LatLng(Customers2[i].mXCoordinates, Customers2[i].mYCoordinates)
+                        position: new google.maps.LatLng(Customers2[i].mXCoordinates, Customers2[i].mYCoordinates),
+                        icon : pinImage2
                     });
 
                     bindInfoWindow(marker, map, infowindow, customerContent2[i], Customers2[i].mMaDoiTuong);
