@@ -247,7 +247,7 @@ public class UserAPI {
 			  activity.startActivity(intent);
 		  }
 		  // location updates: at least 1 meter and 200millsecs change
-		  locationManager.requestLocationUpdates(provider, 1000, 0, mylistener);
+		  locationManager.requestLocationUpdates(provider, 20000, 50, mylistener);
 		
 	}
 	

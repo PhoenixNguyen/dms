@@ -46,37 +46,39 @@
 		    
 		    <EditText 
 		        android:id="@+id/start"
-		        android:layout_weight="0.35"
+		        android:layout_weight="0.4"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
-		        android:text="Từ"
+		        android:hint="Từ"
 		        android:editable="false"
+		        android:onClick="button_click_1"
 		        />
-		    <Button 
+		    <!-- <Button 
 		        android:id="@+id/date1"
 		        android:layout_weight="0.05"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
 		        android:text=""
 		        android:onClick="button_click_1"
-		        />
+		        /> -->
 		    <EditText 
 		        android:id="@+id/end"
-		        android:layout_weight="0.35"
+		        android:layout_weight="0.4"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
-		        android:text="Đến"
 		        android:editable="false"
+		        android:onClick="button_click_2"
+		        android:hint="Đến"
 		       
 		        />
-		    <Button
+		    <!-- <Button
 		        android:id="@+id/date2" 
 		        android:layout_weight="0.05"
 		        android:layout_width= "0dip"
 		        android:layout_height="wrap_content"
 		        android:text=""
 		         android:onClick="button_click_2"
-		        />
+		        /> -->
 		    <Button 
 		        android:layout_weight="0.2"
 		        android:layout_width= "0dip"

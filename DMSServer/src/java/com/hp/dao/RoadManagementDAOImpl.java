@@ -6,17 +6,13 @@
 
 package com.hp.dao;
 
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
 import static com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory.getSessionFactory;
-import com.hp.domain.Customer;
 import com.hp.domain.RoadManagement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -27,13 +23,12 @@ import org.hibernate.Transaction;
  */
 public class RoadManagementDAOImpl implements RoadManagementDAO{
     
-    @SessionTarget
-    Session session;
-    @TransactionTarget
-    Transaction transaction;
-    
     @Override
     public List<List<RoadManagement>> getRoad(String pGiamDoc, String pNhanVien, String pMaKhachHang, String pDate){
+        Session session = getSessionFactory().openSession();
+        Transaction transaction;
+        transaction = session.beginTransaction();
+        
         List<List<RoadManagement>> result = new ArrayList<List<RoadManagement>>();
         try{
             String datefinal="";
@@ -124,11 +119,18 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
         }catch(Exception e){
             e.printStackTrace();
         }
+        finally {
+            session.close();
+        }
         
         return result;
     }
     
     public List<List<RoadManagement>> getRoad(String pGiamDoc, String pNhanVien, String pMaKhachHang, String pDate, String toDate){
+        Session session = getSessionFactory().openSession();
+        Transaction transaction;
+        transaction = session.beginTransaction();
+        
         List<List<RoadManagement>> result = new ArrayList<List<RoadManagement>>();
         try{
             String datefinal="";
@@ -157,7 +159,7 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                     tmp = session.createQuery("from RoadManagement where maNhanVien='"+pNhanVien+"'"
                             + "  and cast (thoiGian as date) BETWEEN '"+datefinal+"' and '" + toDatefinal + "' order by thoiGian").list();
 
-                if(tmp.size() > 0)
+                if(tmp != null && tmp.size() > 0)
                     result.add(tmp);
                 
                 return result;
@@ -214,6 +216,9 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
             }
         }catch(Exception e){
             e.printStackTrace();
+        }
+        finally {
+            session.close();
         }
         
         return result;

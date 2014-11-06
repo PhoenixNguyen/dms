@@ -167,7 +167,7 @@ public class UtilitiesHandle {
         String endDate = sdf.format(c.getTime());
         
         List<List<RoadManagement>> roads = new ArrayList<List<RoadManagement>>();
-        roads = roadManagementDAO.getRoad("", calendar.getStaff().getId(), "", fromDate, endDate);
+        roads = roadManagementDAO.getRoad(null, calendar.getStaff().getId(), "", fromDate, fromDate);
         
         
         String cities = "";
@@ -176,7 +176,10 @@ public class UtilitiesHandle {
             if(roads1 != null && roads1.size() > 0)
             for(RoadManagement rm : roads1){
                 String city = getAddress(rm);
-                if(cities.indexOf(city) != -1)
+                if(cities.equals(""))
+                    cities = city;
+                else
+                if(cities.indexOf(city) == -1)
                     cities += ", " + city;
             }
         }

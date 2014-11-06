@@ -26,8 +26,8 @@ public class Rest {
 
 		ClientConfig config = new DefaultClientConfig();
 	    Client client = Client.create(config);
-	    client.setConnectTimeout(10000);
-	    client.setReadTimeout(10000);
+	    //client.setConnectTimeout(10000);
+	    //client.setReadTimeout(10000);
 	    
 	    mService = client.resource(getBaseURI());
 	    // Fluent interfaces
@@ -47,7 +47,7 @@ public class Rest {
 	    //return UriBuilder.fromUri("http://192.168.169.3:8080/DMSProject").build();
 	    //return UriBuilder.fromUri("http://masterpro02.hosco.com.vn:8001/DMS").build();
 	    //return UriBuilder.fromUri("http://masterpro02.hosco.com.vn:2222/DMS").build();
-		return UriBuilder.fromUri("http://192.168.0.114:8080/DMS").build();
+		return UriBuilder.fromUri("http://192.168.169.2:8080/DMS").build();
 	  }
 	
 	
