@@ -212,13 +212,14 @@
                                                     <tr>
                                                         <td colspan="2">
 
-                                                            <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="80%">
+                                                            <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="100%">
                                                                 <tr>
                                                                     <td class='rptCellLabel'>Stt</td>
                                                                     <td class='rptCellLabel'>Mã nhân viên</td>
                                                                     <td class='rptCellLabel'>Tên nhân viên</td>
                                                                     <td class='rptCellLabel'>Ngày</td>
                                                                     <td class='rptCellLabel'>Tỉnh thành</td>
+                                                                    <td class='rptCellLabel' title="Danh sách tỉnh thành đã đi qua">DS tỉnh thành đi qua</td>
                                                                     <td class='rptCellLabel'>Nội dung</td>
                                                                     <td class='rptCellLabel'>Báo cáo</td>
                                                                     <td class='rptCellLabel'>Cộng tác viên</td>
@@ -236,7 +237,8 @@
                                                                         <td class='rptData'>${staff.id}</td>
                                                                         <td class='rptData'><s:property value="staff.name"/></td>
                                                                         <td class='rptData'><s:property value="%{dateconverted}"/></td>
-                                                                        <td class='rptData'><s:property value="province"/></td>
+                                                                        <td class='rptData' style="text-align: center"><s:property value="province"/></td>
+                                                                        <td class='rptData'><s:property value="note"/></td>
                                                                         <td class='rptData'><s:property value="content"/></td>
                                                                         <td class='rptData'><s:property value="report"/></td>
                                                                         <td class='rptData'><s:property value="contributor"/></td>
