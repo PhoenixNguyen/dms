@@ -36,13 +36,13 @@ public class DateTimePicker extends RelativeLayout {
 		private EditText year_display;
 		private Button year_minus;
 
-		private Button hour_plus;
+		/*private Button hour_plus;
 		private EditText hour_display;
 		private Button hour_minus;
 
 		private Button min_plus;
 		private EditText min_display;
-		private Button min_minus;
+		private Button min_minus;*/
 		
 		private Calendar cal;
 		// Constructor start
@@ -102,7 +102,7 @@ public class DateTimePicker extends RelativeLayout {
 			year_minus.setOnClickListener(year_minus_listener);
 
 			
-			hour_plus = (Button) myPickerView.findViewById(R.id.hour_plus);
+			/*hour_plus = (Button) myPickerView.findViewById(R.id.hour_plus);
 			hour_plus.setOnClickListener(hour_plus_listener);
 			hour_display = (EditText) myPickerView.findViewById(R.id.hour_display);
 			hour_display.addTextChangedListener(hour_watcher);
@@ -114,7 +114,7 @@ public class DateTimePicker extends RelativeLayout {
 			min_display = (EditText) myPickerView.findViewById(R.id.min_display);
 			min_display.addTextChangedListener(min_watcher);
 			min_minus = (Button) myPickerView.findViewById(R.id.min_minus);
-			min_minus.setOnClickListener(min_minus_listener);
+			min_minus.setOnClickListener(min_minus_listener);*/
 			
 			initData();
 			initFilterNumericDigit();
@@ -125,9 +125,9 @@ public class DateTimePicker extends RelativeLayout {
 			month_display.setText(months[cal.get(Calendar.MONTH)]);
 			date_display.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 			year_display.setText(String.valueOf(cal.get(Calendar.YEAR))); 
-			hour_display.setText("0"); //String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) 
+			/*hour_display.setText("0"); //String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) 
 			min_display.setText("0");//String.valueOf(cal.get(Calendar.MINUTE))
-		}
+*/		}
 
 		private void initFilterNumericDigit() {
 
@@ -138,9 +138,9 @@ public class DateTimePicker extends RelativeLayout {
 				InputFilter[] filterArray_year = new InputFilter[1];
 				filterArray_year[0] = new InputFilter.LengthFilter(4);
 				year_display.setFilters(filterArray_year);
-				hour_display.setFilters(new InputFilter[] { new InputFilterMinMax(
+				/*hour_display.setFilters(new InputFilter[] { new InputFilterMinMax(
 						0, 23) }); 
-				min_display.setFilters(new InputFilter[] { new InputFilterMinMax(0, 59) });
+				min_display.setFilters(new InputFilter[] { new InputFilterMinMax(0, 59) });*/
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -169,7 +169,7 @@ public class DateTimePicker extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				hour_display.requestFocus();
+				//hour_display.requestFocus();
 
 				try { 
 						cal.add(Calendar.HOUR_OF_DAY, 1); 
@@ -184,7 +184,7 @@ public class DateTimePicker extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				hour_display.requestFocus();
+				//hour_display.requestFocus();
 
 				try {  
 						cal.add(Calendar.HOUR_OF_DAY, -1); 
@@ -199,7 +199,7 @@ public class DateTimePicker extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				min_display.requestFocus();
+				//min_display.requestFocus();
 
 				try {
 					cal.add(Calendar.MINUTE, 1);
@@ -213,7 +213,7 @@ public class DateTimePicker extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				min_display.requestFocus();
+				//min_display.requestFocus();
 
 				try {
 					cal.add(Calendar.MINUTE, -1);
@@ -224,8 +224,8 @@ public class DateTimePicker extends RelativeLayout {
 			}
 		};
 
-		String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-				"Sep", "Oct", "Nov", "Dec" };
+		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08",
+				"09", "10", "11", "12" };
 
 		View.OnClickListener month_plus_listener = new View.OnClickListener() {
 
@@ -419,8 +419,8 @@ public class DateTimePicker extends RelativeLayout {
 			month_display.setText("0");
 			date_display.setText("0");
 			year_display.setText("0"); 
-			hour_display.setText("0"); //String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) 
-			min_display.setText("0");//String.valueOf(cal.get(Calendar.MINUTE))
+			//hour_display.setText("0"); //String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) 
+			//min_display.setText("0");//String.valueOf(cal.get(Calendar.MINUTE))
 		}
 		
 		synchronized private void sendToListener() {
@@ -436,8 +436,8 @@ public class DateTimePicker extends RelativeLayout {
 
 		private void sendToDisplay() {
 
-			hour_display.setText(String.valueOf(cal.get(Calendar.HOUR_OF_DAY))); 
-			min_display.setText(String.valueOf(cal.get(Calendar.MINUTE)));
+			//hour_display.setText(String.valueOf(cal.get(Calendar.HOUR_OF_DAY))); 
+			//min_display.setText(String.valueOf(cal.get(Calendar.MINUTE)));
 		}
 
 		TimeWatcher mTimeWatcher = null;
@@ -514,13 +514,13 @@ public class DateTimePicker extends RelativeLayout {
 			return month_display.getText().toString();
 		}
 		
-		public int getHour() {
+		/*public int getHour() {
 			return Integer.parseInt(hour_display.getText().toString());
 		}
 		
 		public int getMinute() {
 			return Integer.parseInt(min_display.getText().toString());
-		}
+		}*/
 		
 		public void setDateChangedListener(DateWatcher listener) {
 			this.mDateWatcher = listener;

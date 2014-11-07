@@ -331,7 +331,7 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 	               result_string_start = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getYear());
 	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
 	               
-	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
 	               try {
 	            	   start.setText(df.format(df2.parse(result_string_start)));
 					} catch (ParseException e) {
@@ -394,7 +394,7 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 	               result_string_end = String.valueOf(mDateTimePicker.getDay()) + "/" + mDateTimePicker.getMonth() + "/" +  String.valueOf(mDateTimePicker.getYear());
 	                                                //+ "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
 	               
-	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MMM/yyyy");
+	               SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
 	               try {
 	            	   end.setText(df.format(df2.parse(result_string_end)));
 					} catch (ParseException e) {
@@ -441,7 +441,7 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 		filter = true;
 		forLeaveListFilter.clear();
 		
-		DateFormat dateFormat2 = new SimpleDateFormat("dd/MMM/yyyy");
+		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
 		
 		Date startDate = null;
 		Date endDate = null;

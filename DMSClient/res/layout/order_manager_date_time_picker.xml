@@ -6,24 +6,30 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:baselineAligned="true"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    >
    
         <LinearLayout
         android:id="@+id/month_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        >
         <Button
-            android:id="@+id/month_plus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"    
-            android:background="@drawable/image_button_up"/> 
+            android:id="@+id/date_plus"
+            android:layout_width="60dp"
+            android:layout_height="32dp"    
+            android:background="@drawable/image_button_up"
+        /> 
         <EditText
-            android:id="@+id/month_display"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:id="@+id/date_display"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
             android:background="@drawable/picker_middle"
             android:focusable="false"
             android:gravity="center"
@@ -31,9 +37,9 @@
             android:textColor="#C0C0C0" >
         </EditText>
         <Button
-            android:id="@+id/month_minus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"       
+            android:id="@+id/date_minus"
+            android:layout_width="60dp"
+            android:layout_height="32dp"       
             android:background="@drawable/image_button_down" />
     </LinearLayout>
     <LinearLayout
@@ -44,23 +50,23 @@
         android:gravity="center"
         android:orientation="vertical" >
         <Button
-            android:id="@+id/date_plus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"       
+            android:id="@+id/month_plus"
+            android:layout_width="60dp"
+            android:layout_height="32dp"       
             android:background="@drawable/image_button_up" />
         <EditText
-            android:id="@+id/date_display"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:id="@+id/month_display"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
             android:background="@drawable/picker_middle"
             android:gravity="center"
             android:inputType="number"
             android:textColor="#C0C0C0"
             android:singleLine="true" />
         <Button
-            android:id="@+id/date_minus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"       
+            android:id="@+id/month_minus"
+            android:layout_width="60dp"
+            android:layout_height="32dp"       
             android:background="@drawable/image_button_down"/>
     </LinearLayout>
     <LinearLayout
@@ -72,13 +78,13 @@
         android:orientation="vertical" >
         <Button
             android:id="@+id/year_plus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"       
+            android:layout_width="60dp"
+            android:layout_height="32dp"       
                 android:background="@drawable/image_button_up" />
         <EditText
             android:id="@+id/year_display"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
             android:background="@drawable/picker_middle"
             android:gravity="center"
             android:inputType="number"
@@ -86,11 +92,11 @@
             android:singleLine="true" />
         <Button
             android:id="@+id/year_minus"
-            android:layout_width="40dp"
-            android:layout_height="28dp"       
+            android:layout_width="60dp"
+            android:layout_height="32dp"       
             android:background="@drawable/image_button_down" />
     </LinearLayout>
-    <LinearLayout
+    <!-- <LinearLayout
             android:id="@+id/hour_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,6 +153,6 @@
                 android:layout_width="40dp"
                 android:layout_height="28dp"       
                 android:background="@drawable/image_button_down"/>
-        </LinearLayout>
+        </LinearLayout> -->
 </LinearLayout>
 </RelativeLayout>

@@ -413,7 +413,7 @@ public class SaleOrdersManagerActivity extends MainMenuActivity implements OnCli
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
                result_string_start = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+                                                + "  00:00:00";
                start.setText(result_string_start);
                mDateTimeDialog.dismiss();
          }
@@ -461,7 +461,7 @@ public class SaleOrdersManagerActivity extends MainMenuActivity implements OnCli
                mDateTimePicker.clearFocus();
                // TODO Auto-generated method stub
                result_string_end = mDateTimePicker.getMonth() + "/" + String.valueOf(mDateTimePicker.getDay()) + "/" + String.valueOf(mDateTimePicker.getYear())
-                                                + "  " + String.valueOf(mDateTimePicker.getHour()) + ":" + String.valueOf(mDateTimePicker.getMinute()+":0");
+                                                + "  00:00:00";
                end.setText(result_string_end);
                mDateTimeDialog.dismiss();
          }
@@ -503,7 +503,7 @@ public class SaleOrdersManagerActivity extends MainMenuActivity implements OnCli
 		takeOrderListFilter.clear();
 		
 		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		DateFormat dateFormat2 = new SimpleDateFormat("MMM/dd/yyyy HH:mm:ss");
+		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
 		Date startDate = null;
 		Date endDate = null;
