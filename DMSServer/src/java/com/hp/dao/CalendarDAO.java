@@ -24,7 +24,7 @@ public interface CalendarDAO {
     
     public List<Calendar> getCalendarList(Staff staff);
     
-    public List<Calendar> getCalendarList(String city, Date date);
+    public List<Calendar> getCalendarList(String staff_id, String city, Date date);
     
     public List<Calendar> getCalendarList(String pManagerID, String pStaff, Date pFromDate, Date pToDate);
 }

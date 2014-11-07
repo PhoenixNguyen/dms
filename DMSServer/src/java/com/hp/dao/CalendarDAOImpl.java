@@ -11,6 +11,7 @@ import com.hp.domain.Calendar;
 import com.hp.domain.Staff;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -145,14 +146,18 @@ public class CalendarDAOImpl implements CalendarDAO{
     }
     
     @Override
-    public List<Calendar> getCalendarList(String city, Date date) {
+    public List<Calendar> getCalendarList(String staff_id, String city, Date date) {
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try{
             Criteria criteria = session.createCriteria(Calendar.class);
+            //inner
+            Criteria criteriaInner = criteria.createCriteria("staff");
+            criteriaInner.add(Restrictions.eq("id", StringUtils.trimToEmpty(staff_id)));
+            
             criteria.add(Restrictions.eq("calendarDate", date));
             criteria.add(Restrictions.eq("province", city));
-            
+             
             return criteria.list();
         }
         catch(Exception e){

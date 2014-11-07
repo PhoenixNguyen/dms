@@ -104,7 +104,7 @@ public class UtilitiesHandle {
         if(calendar == null)
             return Response.status(200).entity("false").build();
         
-        List<Calendar> calendarList = calendarDAO.getCalendarList(calendar.getProvince(), calendar.getCalendarDate());
+        List<Calendar> calendarList = calendarDAO.getCalendarList(calendar.getStaff().getId(), calendar.getProvince(), calendar.getCalendarDate());
         
         if(calendarList != null && calendarList.size() > 0){
             return Response.status(200).entity("existcalendar").build();

@@ -160,7 +160,7 @@ public class CalendarAPI {
 				} 
 				else if (result.equals("existcalendar")) {
 					Toast.makeText(context,
-							"Ngày làm việc ngày này và địa điểm hiện tại đã tồn tại lịch công tác. Hãy chọn ngày khác!",
+							"Ngày làm việc và địa điểm đã tồn tại lịch công tác. Hãy chọn ngày khác!",
 							Toast.LENGTH_LONG).show();
 				}
 				
