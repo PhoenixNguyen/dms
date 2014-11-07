@@ -32,6 +32,7 @@
         android:theme="@style/DMSTheme" >
         <activity
             android:name="com.hp.map.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="false"
             android:label="@string/app_name" >
             <intent-filter>
@@ -50,36 +51,45 @@
        
         <activity
             android:name=".CustomerMapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/marker_label" />
         
         <activity
             android:name=".CustomerListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/customer_list_label" />
         
         <activity
             android:name=".PlanningActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/planning_label" />
         <activity
             android:name=".TakeOrder_AmountActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/amount" />
         
         <activity
             android:name=".TakeOrder_ReViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Xem lại" />
         
         <activity
             android:name=".TakeOrder_ProductActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/product" />
          <activity
             android:name=".TakeOrder_TabActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/product" />
          
         <activity
             android:name="com.hp.map.Schedule_CalendarActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/schedule" />
         
         <activity
             android:name="com.hp.map.TakeOrdersManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/orders_manager" 
             
         	/>
@@ -87,147 +97,181 @@
         
 		<activity
             android:name="com.hp.map.TakeOrdersDetailManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/orders_detail_manager" />          
             
 		<activity
             android:name="com.hp.map.TakeImagesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/take_images" />  
 		
 		<activity
             android:name="com.hp.map.SaleOrderDetail_Main_Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/sale_detail_label" />  
 		
 		<activity
             android:name="com.hp.map.SaleOrdersManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/sale_label" /> 
 		
 		<activity
             android:name="com.hp.map.InventoryManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/stock_manager" /> 
         <activity
 	        android:name="com.hp.map.InventoryManagerDetailActivity"
+	        android:configChanges="orientation|keyboardHidden|screenSize"
 	        android:label="@string/stock_manager" /> 
 		
 		<activity
             android:name="com.hp.map.GPSTracker"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hàng tồn" /> 
 		
 		<activity
             android:name="com.hp.map.InventoryManager_TabActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hàng tồn" /> 
             
 		<activity
             android:name="com.hp.map.InventoryManager_AmountActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hàng tồn" /> 
 		
 		<activity
             android:name="com.hp.map.InventoryManager_ProductActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hàng tồn" />
 		<activity
             android:name="com.hp.map.InventoryManager_ReviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hàng tồn" />
 		
 		<activity
             android:name="com.hp.map.CustomerAdditionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Thêm mới khách hàng" />
 		
 		<activity
             android:name="com.hp.map.CustomerEditerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Sửa thông tin khách hàng" />
 		
 		<activity
             android:name="com.hp.map.ProductManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Quản lý mặt hàng" />
 		
 		<activity
             android:name="com.hp.map.ProductAdditionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Thêm mặt hàng" />
 		
 		<activity
             android:name="com.hp.map.ProductEditerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Sửa mặt hàng" />
 		
 		<activity
             android:name="com.hp.map.ProfileActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Thông tin nhân viên" />
 		
 		<activity
             android:name="com.hp.map.SaleManagerDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Bán hàng chi tiết" />
 		
 		<activity
             android:name="com.hp.map.SaleManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Bán hàng" />
 		
 		<activity
             android:name="com.hp.map.SaleManager_TabActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Chọn sản phẩm" />
 		
 		<activity
             android:name="com.hp.map.SaleManager_ProductActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Chọn sản phẩm" />
 		<activity
             android:name="com.hp.map.SaleManager_ReviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Xem lại sản phẩm" />
 		
 		<activity
             android:name="com.hp.map.SaleManager_AmountActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Tổng cộng" />
 		
 		<activity
             android:name="com.hp.map.SaleManagerDetail_Main_Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Bán hàng" />
             
          <activity
             android:name="com.hp.map.ProfileEditActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Sửa thông tin cá nhân" />
             
          <activity
             android:name="com.hp.map.ProfileChangePWActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Thay đổi mật khẩu" />
          
          <activity
             android:name="com.hp.map.CalendarManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/calendar_manager" 
             
         	/>
          
          <activity
             android:name="com.hp.map.CalendarAdditionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/calendar_addition" 
             
         	/>
          
          <activity
             android:name="com.hp.map.TimeKeeperActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/time_picker" 
             
         	/>
          
          <activity
             android:name="com.hp.map.SoftwareInformation"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Thông tin phần mềm" 
             
         	/>
         	
        	<activity
             android:name="com.hp.map.SetLunchManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Đặt cơm văn phòng" 
             
         	/>
         	
        	<activity
             android:name="com.hp.map.SetLunchAdditionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Đặt cơm văn phòng" 
             
         	/>
        	<activity
             android:name="com.hp.map.ForLeaveManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Nghỉ phép" 
             
         	/>
        	<activity
             android:name="com.hp.map.ForLeaveAdditionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Nghỉ phép" 
             
         	/>
