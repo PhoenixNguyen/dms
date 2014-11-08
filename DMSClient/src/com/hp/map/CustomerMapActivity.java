@@ -166,10 +166,6 @@ public class CustomerMapActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_map);
 
-        Button sendLocation = (Button)findViewById(R.id.send_location);
-        if(Rest.mStaff.getPermission() == 1 || Rest.mStaff.getPermission() == 3)
-        	sendLocation.setVisibility(View.VISIBLE);
-        
         //Action bar
         getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setLogo(R.drawable.ic_launcher);
@@ -187,6 +183,11 @@ public class CustomerMapActivity extends FragmentActivity
         		mSelectedCustomer = CustomerAPI.customerList.get(j);
         	}
         }
+        
+        Button sendLocation = (Button)findViewById(R.id.send_location);
+        //if(Rest.mStaff.getPermission() == 1 || Rest.mStaff.getPermission() == 3)
+        if(Rest.mStaff.getId().equalsIgnoreCase(CustomerAPI.customerList.get(positionClick).getMaNhanVien()))
+        	sendLocation.setVisibility(View.VISIBLE);
         
         customer_name = (TextView) findViewById(R.id.customer_name);
         customer_id = (TextView) findViewById(R.id.customer_id);
