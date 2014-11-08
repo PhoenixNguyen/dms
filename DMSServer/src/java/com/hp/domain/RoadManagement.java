@@ -41,6 +41,11 @@ public class RoadManagement {
     @Column(name="quanlyduongdi_ghi_chu")
     private String ghiChu;
 
+    public RoadManagement(String maNhanVien, String tenNhanVien, Timestamp thoiGian) {
+        this.maNhanVien = maNhanVien;
+        this.tenNhanVien = tenNhanVien;
+        this.thoiGian = thoiGian;
+    }
     
     public int getStt() {
         return stt;

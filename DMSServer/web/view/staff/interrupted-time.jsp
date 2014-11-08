@@ -194,13 +194,13 @@
 
                                                             <table cellpadding="5" cellspacing="0" align="center" class="rptTable" width="90%">
                                                                 <col width="5%"/>
-                                                                <col width="10%"/>
                                                                 <col width="15%"/>
-                                                                <col width="30%"/>
+                                                                <col width="25%"/>
+                                                                <col width="20%"/>
 
-                                                                <col width="30%"/>
+                                                                <col width="20%"/>
 
-                                                                <col width="10%"/>
+                                                                <col width="15%"/>
                                                                 <tr>
                                                                     <td class='rptCellLabel'>Stt</td>
                                                                     <td class='rptCellLabel'>Mã nhân viên</td>
@@ -219,17 +219,17 @@
                                                                 <s:iterator value="interruptedTimeList" status="index">
                                                                     <s:date id="lastTime" name="lastLocation.thoiGian" format="dd-MM-yyyy HH:mm:ss"/>
                                                                     <s:date id="updatedTime" name="updatedLocation.thoiGian" format="dd-MM-yyyy HH:mm:ss"/>
-
+                                                                    
 
                                                                     <tr>
                                                                         <td class='rptData'><s:property value="%{#index.index + 1}"/></td>
                                                                         <td class='rptData'><s:property value="lastLocation.maNhanVien"/></td>
                                                                         <td class='rptData'><s:property value="lastLocation.tenNhanVien"/></td>
 
-                                                                        <td class='rptData'><s:property value="lastTime"/></td>
+                                                                        <td class='rptData' style="text-align: center;"><s:property value="lastTime"/></td>
 
-                                                                        <td class='rptData'><s:property value="updatedTime"/></td>
-                                                                        <td class='rptData'><s:property value="range"/> Giờ</td>
+                                                                        <td class='rptData' style="text-align: center;"><s:property value="updatedTime"/></td>
+                                                                        <td class='rptData'><s:property value="getText('{0,number,#,##0}',{range/60})"/> giờ và <s:property value="getText('{0,number,#,##0}',{range%60})"/> phút</td>
                                                                     </tr>
 
                                                                 </s:iterator>

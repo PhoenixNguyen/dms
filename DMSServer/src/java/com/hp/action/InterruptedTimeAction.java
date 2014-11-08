@@ -20,8 +20,16 @@ import com.hp.domain.User;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
@@ -34,7 +42,7 @@ import org.json.JSONObject;
  * @author HP
  */
 public class InterruptedTimeAction extends ActionSupport{
-    public static long INTERRUPTED_TIME = 60*60*1000; //1h
+    public static long INTERRUPTED_TIME = 15*60*1000; //15'
     
     private UserDAO userDAO = new UserDAOImpl();
     private RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
@@ -67,7 +75,7 @@ public class InterruptedTimeAction extends ActionSupport{
         return SUCCESS;
     }
     
-    public String discoverInterruption(){
+    public String discoverInterruption() throws ParseException{
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         HttpSession session = request.getSession();
         
@@ -98,11 +106,58 @@ public class InterruptedTimeAction extends ActionSupport{
                         RoadManagement last = list.get(j);
                         RoadManagement updated = list.get(j+1);
                         
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        DateFormat dfTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        if(j == 0){
+                            
+                            try {
+                                Date startDate = df.parse(df.format(last.getThoiGian()));
+                                long rangeStart = last.getThoiGian().getTime() - startDate.getTime();
+                                if(rangeStart > INTERRUPTED_TIME){
+                                    //getAddress(last);
+                                    interruptedTimeList.add(
+                                            new InterruptedTime( 
+                                                    new RoadManagement(last.getMaNhanVien(), 
+                                                            last.getTenNhanVien(), Timestamp.valueOf(dfTimestamp.format(startDate))),
+                                                    last,
+                                                    rangeStart/(1000*60), "", ""));
+                                }
+                            } catch (ParseException ex) {
+                                Logger.getLogger(InterruptedTimeAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
                         long range = updated.getThoiGian().getTime() - last.getThoiGian().getTime();
                         //System.out.println("range " + range);
                         if(range > INTERRUPTED_TIME){
                             //getAddress(last);
-                            interruptedTimeList.add(new InterruptedTime(last, updated, range/(1000*60 *60), "", ""));
+                            interruptedTimeList.add(new InterruptedTime(last, updated, range/(1000*60), "", ""));
+                        }
+                        
+                        if(j == (list.size() -2)){
+                            try {
+                                Date endDate = df.parse(df.format(updated.getThoiGian()));
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(endDate);
+                                
+                                c.add(Calendar.DAY_OF_MONTH, 1);
+                                c.add(Calendar.SECOND, -1);
+                                
+                                endDate = c.getTime();
+                                
+                                long rangeEnd = endDate.getTime() - updated.getThoiGian().getTime();
+                                //System.out.println("range " + range);
+                                if(rangeEnd > INTERRUPTED_TIME){
+                                    //getAddress(last);
+                                    interruptedTimeList.add(new InterruptedTime(updated, 
+                                                    new RoadManagement(updated.getMaNhanVien(), 
+                                                            updated.getTenNhanVien(), Timestamp.valueOf(dfTimestamp.format(endDate))), 
+                                            rangeEnd/(1000*60), "", ""));
+                                } 
+                            }
+                                catch (ParseException ex) {
+                                Logger.getLogger(InterruptedTimeAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 }
