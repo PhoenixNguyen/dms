@@ -127,7 +127,8 @@ public class SetLunchDAOImpl implements SetLunchDAO{
         try{
             Criteria criteria = session.createCriteria(SetLunch.class);
             criteria.add(Restrictions.eq("staff", staff));
-            
+            criteria.addOrder(Order.desc("timeAt"));
+             
             return criteria.list();
         }
         catch(Exception e){

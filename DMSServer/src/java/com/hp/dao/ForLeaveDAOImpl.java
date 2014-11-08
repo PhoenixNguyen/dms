@@ -127,7 +127,8 @@ public class ForLeaveDAOImpl implements ForLeaveDAO{
         try{
             Criteria criteria = session.createCriteria(ForLeave.class);
             criteria.add(Restrictions.eq("staff", staff));
-            
+            criteria.addOrder(Order.desc("timeAt"));
+             
             return criteria.list();
         }
         catch(Exception e){
