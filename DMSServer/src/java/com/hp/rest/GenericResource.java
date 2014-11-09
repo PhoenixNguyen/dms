@@ -434,9 +434,10 @@ public class GenericResource {
         List<Customer> customerList = new ArrayList<Customer>();
 
         //Check is Admin (manager)
-        StaffDAO staffDAO = new StaffDAOImpl();
-        
-        customerList = customerDAO.getListCustomers(pStaff, staffDAO.adminAuthenticate(pStaff));
+        //StaffDAO staffDAO = new StaffDAOImpl();
+        //staffDAO.adminAuthenticate(pStaff)
+                
+        customerList = customerDAO.getListCustomers(pStaff, 1); 
         return customerList;
     }
     

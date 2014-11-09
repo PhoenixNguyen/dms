@@ -185,8 +185,8 @@ public class CustomerMapActivity extends FragmentActivity
         }
         
         Button sendLocation = (Button)findViewById(R.id.send_location);
-        //if(Rest.mStaff.getPermission() == 1 || Rest.mStaff.getPermission() == 3)
-        if(Rest.mStaff.getId().equalsIgnoreCase(CustomerAPI.customerList.get(positionClick).getMaNhanVien()))
+        //if(Rest.mStaff.getId().equalsIgnoreCase(CustomerAPI.customerList.get(positionClick).getMaNhanVien()))
+        if(Rest.mStaff.getPermission() == 1 || Rest.mStaff.getPermission() == 3)
         	sendLocation.setVisibility(View.VISIBLE);
         
         customer_name = (TextView) findViewById(R.id.customer_name);
