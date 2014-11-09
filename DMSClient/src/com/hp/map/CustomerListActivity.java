@@ -88,7 +88,7 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 		});
 		
 		System.out.println("____Preparing UPDAte list");
-		addListView();
+		addListViewStart();
 	}
 
 //	public void onResume(){
@@ -174,6 +174,30 @@ public class CustomerListActivity extends MainMenuActivity implements OnItemSele
 				this, true);
     	getData.execute();
     	
+	}
+	
+	public void addListViewStart(){
+		//List view
+		listView = (ListView)findViewById(R.id.list);
+		customerAdapter = new CustomerArrayAdapter(context, CustomerAPI.customerList);
+		listView.setAdapter(customerAdapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+		     @Override
+		     public void onItemClick(AdapterView<?> a, View v,int position, long id) 
+		     {
+		    	customer = (Customer) listView.getAdapter().getItem(position);
+		    	
+		    	//open dialog
+		    	//customerActivity.choiceDialog(customer);
+		    	Intent t = new Intent(context, CustomerMapActivity.class);
+		        t.putExtra("POSITION_CLICK", customer.getMaDoiTuong());
+		        
+		        startActivity(t);
+		      }
+		});
+		
 	}
 	
 //	public void choiceDialog(final Customer customer){
