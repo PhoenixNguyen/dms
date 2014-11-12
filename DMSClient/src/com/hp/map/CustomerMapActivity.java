@@ -62,6 +62,7 @@ import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;import android.location.Location;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -709,6 +710,11 @@ public class CustomerMapActivity extends FragmentActivity
 		
 		
 	}
-										       
+					
+	public void callNumber(View view){
+		Intent callIntent = new Intent(Intent.ACTION_CALL);
+		callIntent.setData(Uri.parse("tel:"+customer_phone.getText().toString().trim()));
+		startActivity(callIntent );
+	}
 
 }
