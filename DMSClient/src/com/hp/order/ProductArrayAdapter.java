@@ -9,6 +9,7 @@ import com.hp.map.R;
 import com.hp.map.R.layout;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,12 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
             featureView = new FeatureView(getContext());
         }
 
-        
+        if(position%2 == 0){
+	        //getResources().getColor(R.color.mycolor)
+	        featureView.setBackgroundColor(Color.parseColor("#FFFF99"));
+        }
+        else
+        	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
 
         featureView.setTitleId(values.get(position).getProductID());
         featureView.setDescriptionId(values.get(position).getProductName());

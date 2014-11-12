@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,6 +40,13 @@ public class CustomerArrayAdapter extends ArrayAdapter<Customer>{
             featureView = new FeatureView(getContext());
         }
 
+        if(position%2 == 0){
+	        //getResources().getColor(R.color.mycolor)
+	        featureView.setBackgroundColor(Color.parseColor("#FFFF99"));
+        }
+        else
+        	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
+        
         Customer customer = getItem(position);
 
         featureView.setCustomerID(customer.getMaDoiTuong());
