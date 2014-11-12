@@ -200,11 +200,12 @@
                                                                 <td class="lvtCol"><a href="javascript:;" onclick="getListViewEntries_js( & quot; SalesOrder & quot; , & quot; parenttab = Inventory & amp; foldername = Default & amp; order_by = salesorder_no & amp; start = 1 & amp; sorder = ASC & amp; viewname = 26 & quot; );" class="listFormHeaderLinks">Mã Đặt hàng</a></td>
                                                                 <td class="lvtCol"><a href="javascript:;" onclick="getListViewEntries_js( & quot; SalesOrder & quot; , & quot; parenttab = Inventory & amp; foldername = Default & amp; order_by = subject & amp; start = 1 & amp; sorder = ASC & amp; viewname = 26 & quot; );" class="listFormHeaderLinks">Ngày đặt hàng</a></td>
                                                                 <td class="lvtCol"><a href="javascript:;" onclick="getListViewEntries_js( & quot; SalesOrder & quot; , & quot; parenttab = Inventory & amp; foldername = Default & amp; order_by = subject & amp; start = 1 & amp; sorder = ASC & amp; viewname = 26 & quot; );" class="listFormHeaderLinks">Ngày giao hàng</a></td>
-                                                                <td class="lvtCol">Tên Khách hàng</td>
+                                                                <td class="lvtCol" style="width: 120px;">Tên Khách hàng</td>
                                                                 <td class="lvtCol">Mã Khách hàng</td>
                                                                 <td class="lvtCol">Địa chỉ giao hàng</td>
                                                                 <td class="lvtCol"><a href="javascript:;" onclick="getListViewEntries_js( & quot; SalesOrder & quot; , & quot; parenttab = Inventory & amp; foldername = Default & amp; order_by = total & amp; start = 1 & amp; sorder = ASC & amp; viewname = 26 & quot; );" class="listFormHeaderLinks">Tổng cộng</a></td>
                                                                 <td class="lvtCol"><a href="javascript:;" onclick="getListViewEntries_js( & quot; SalesOrder & quot; , & quot; parenttab = Inventory & amp; foldername = Default & amp; order_by = smownerid & amp; start = 1 & amp; sorder = ASC & amp; viewname = 26 & quot; );" class="listFormHeaderLinks">Gán cho</a></td>
+                                                                <td class="lvtCol">Trạng thái</td>
                                                                 <td class="lvtCol">Hoạt động</td>
                                                             </tr>
                                                             <!-- Table Contents -->
@@ -227,7 +228,23 @@
                                                                     <td onmouseover="">₫<s:property value="getText('{0,number,#,##0.00}',{afterPrivate})"/> <span type="vtlib_metainfo" vtrecordid="201" vtfieldname="hdnGrandTotal" vtmodule="SalesOrder" style="display:none;"></span></td>
 
                                                                     <td onmouseover=""><a href="" title="Accounts"><s:property value="creater"/> </a><span type="vtlib_metainfo" vtrecordid="201" vtfieldname="assigned_user_id" vtmodule="SalesOrder" style="display:none;"></span></td>
-
+                                                                    
+                                                                    <td onmouseover="" >
+                                                                        <s:if test="orderStatus == 0">
+                                                                            <span style="color: deeppink; font-weight: bold; font-size: 15px;">Đang đặt hàng ...</span>
+                                                                        </s:if>
+                                                                        <s:if test="orderStatus == 1">
+                                                                            <span style="color: gold; font-weight: bold; font-size: 15px;"> Đã duyệt </span>
+                                                                        </s:if>
+                                                                        <s:if test="orderStatus == 2">
+                                                                            <span style="color: green; font-weight: bold; font-size: 15px;">Hoàn thành</span>
+                                                                        </s:if>
+                                                                        <s:if test="orderStatus == 3">
+                                                                            <span style="color: red; font-weight: bold; font-size: 15px;">Đã hủy</span>
+                                                                        </s:if>
+                                                                        <span type="vtlib_metainfo" vtrecordid="201" vtfieldname="assigned_user_id" vtmodule="SalesOrder" style="display:none;"></span>
+                                                                    </td>
+                                                                    
                                                                     <td onmouseover=""><a href="take-order-edit?id_tod=<s:property value="id"/>">Sửa</a>  | <a href='javascript:confirmdelete("delete-takeorder?id_tod=<s:property value="id"/>")'>Xóa</a></td>
                                                                 </tr>
                                                             </s:iterator>
