@@ -19,8 +19,17 @@
                 android:layout_height="wrap_content"
                 android:background="@color/LightYellow"
                 android:text="Không có dữ liệu"
-                android:textSize="22sp" />
+                android:textSize="22sp" 
+                android:textStyle="bold"
+                />
 
+            <TextView
+                android:id="@+id/my_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/LightYellow"
+                android:text="Không lấy được vị trí"
+                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

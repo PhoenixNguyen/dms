@@ -1,11 +1,23 @@
 package com.hp.map;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.hp.common.HttpHelper;
+import com.hp.gps.MyLocationListener;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
+import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,10 +25,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+@SuppressLint("SimpleDateFormat")
 public class ProfileActivity extends MainMenuActivity{
 	private TextView my_info;
-	
+	private TextView my_location;
 	private EditText name;
 	private EditText address;
 	private EditText job;
@@ -27,12 +41,15 @@ public class ProfileActivity extends MainMenuActivity{
 	
 	private Button password;
 	
-	
+	private SimpleDateFormat df;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.staff_profile);
 		
+		df = new SimpleDateFormat("dd/MM/yyyy");
+		
 		my_info = (TextView)findViewById(R.id.my_info);
+		my_location = (TextView)findViewById(R.id.my_location);
 		
 		name = (EditText)findViewById(R.id.name);
 		address = (EditText)findViewById(R.id.address);
@@ -50,7 +67,7 @@ public class ProfileActivity extends MainMenuActivity{
 		phone.setFocusable(false);
 		
 		
-		my_info.setText("Xin chào " + Rest.mStaff.getId() + " - " + Rest.mStaff.getName());
+		my_info.setText("Xin chào! " + Rest.mStaff.getId() + " - " + Rest.mStaff.getName());
 		
 		name.setText(Rest.mStaff.getName());
 		address.setText(Rest.mStaff.getAdress());
@@ -74,6 +91,9 @@ public class ProfileActivity extends MainMenuActivity{
             	getData.execute();
 			}
 		}
+		
+		getAddress();
+		
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu){
@@ -113,5 +133,74 @@ public class ProfileActivity extends MainMenuActivity{
 	@Override
 	public void onBackPressed() {
 		moveTaskToBack(true);
+	}
+	
+	@SuppressLint("SimpleDateFormat")
+	public String getAddress(){
+		//check internet
+		if(CheckingInternet.isOnline()){
+			System.out.println("Internet access!!____________________");
+		}
+		else{
+											
+			System.out.println("NO Internet access!!____________________");
+			Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+			return null;
+			
+		}
+		
+		if(MyLocationListener.location == null)
+			return "";
+		
+		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
+			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
+			return "";
+		}
+		//Toast.makeText(this, String.valueOf(MyLocationListener.location.getLatitude()) + " " +String.valueOf(MyLocationListener.location.getLongitude()), Toast.LENGTH_SHORT).show();
+		
+		//Get City
+		String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+		        + MyLocationListener.location.getLatitude() + "," + MyLocationListener.location.getLongitude() + "&sensor=false";
+		JSONObject jsonObj;
+		String City = "";
+		String address = "";
+	     try {
+	      
+	      jsonObj = new JSONObject(HttpHelper.makeRequest(url));
+
+	      String Status = jsonObj.getString("status");
+	      if (Status.equalsIgnoreCase("OK")) {
+		       JSONArray Results = jsonObj.getJSONArray("results");
+		       JSONObject zero = Results.getJSONObject(0);
+		       
+		       address = zero.getString("formatted_address").toString();
+		       System.out.println("Full address _______________________________ --->" + address + "");
+		       
+		       String[] long_name = address.split(",");
+		       
+		       int number = long_name.length - 2;
+		       City = long_name[number];
+		       Log.d(" CityName _______________________________ ---> ", City + "");
+		       System.out.println("CityName _______________________________ --->" + City + "");
+		       
+		       //Toast.makeText(this, "CityName: " + City, Toast.LENGTH_SHORT).show();
+		       
+		       if (!City.equals("")) {
+		        //finish_service();
+		       }
+	      }
+
+	     } catch (JSONException e) {
+	    	 e.printStackTrace();
+	     }
+		//End Get City
+		
+	     if(!address.equals("")){
+	    	 my_location.setText("" + df.format(new Date()) + "\n" + 
+	    			 "" +
+	    			 "Vị trí hiện tại: " + " \n" + address);
+	     }
+	     
+	     return City;
 	}
 }
