@@ -3,64 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-	<TextView 
-	    android:id="@+id/my_info"
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text="Không có dữ liệu"
-    	android:textSize="22sp"
-    	android:background="@color/LightYellow"
-	    />
-	
-	
-	<TextView 
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text="Mật khẩu cũ"
-    	android:layout_marginTop="5dp"
-    	
-	    />
-	
-	<EditText 
-	    android:id="@+id/pw"
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text=""
-    	android:password="true"
-	    />
-	
-	<TextView 
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text="Mật khẩu mới"
-    	
-	    />
-	
-	<EditText 
-	    android:id="@+id/pw1"
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text=""
-    	android:password="true"
-	    />
-	
-	<TextView 
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text="Xác nhận mật khẩu"
-	    />
-	
-	<EditText 
-	    android:id="@+id/pw2"
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text=""
-    	android:password="true"
-	    />
-	<!-- ImageView 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/my_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/LightYellow"
+                android:text="Không có dữ liệu"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Mật khẩu cũ" />
+
+            <EditText
+                android:id="@+id/pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mật khẩu mới" />
+
+            <EditText
+                android:id="@+id/pw1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xác nhận mật khẩu" />
+
+            <EditText
+                android:id="@+id/pw2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:text="" />
+        </LinearLayout>
+    </ScrollView>
+    <!--
+         ImageView 
 	    android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:src="@drawable/alopa"
-	    /-->
+	    /
+    -->
+
 </LinearLayout>
