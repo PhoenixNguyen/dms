@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/LightYellow"
-                android:text="Không lấy được vị trí"
+                android:text="Đang cập nhật vị trí ..."
                  />
             <TextView
                 android:layout_width="match_parent"

@@ -23,8 +23,10 @@ import com.hp.customer.CustomerArrayAdapter;
 import com.hp.datahandle.DataConvert;
 import com.hp.domain.Customer;
 import com.hp.domain.DataInfo;
+import com.hp.gps.BackgroundLocationService;
 import com.hp.map.CustomerListActivity;
 import com.hp.map.CustomerMapActivity;
+import com.hp.map.ProfileActivity;
 import com.hp.map.R;
 import com.hp.map.TakeImagesActivity;
 import com.sun.jersey.api.client.ClientResponse;
@@ -40,7 +42,8 @@ public class CustomerAPI {
 		Context context;
 		String method;
 		String staff;
-
+		ProfileActivity profileActivity;
+		
 		// Delete
 		boolean delete;
 		CustomerArrayAdapter customerAdapter;
@@ -59,10 +62,11 @@ public class CustomerAPI {
 		boolean get;
 
 		//CustomerListActivity customerActivity;
-		public GetCustomerListTask(Context context, String method, String staff) {
+		public GetCustomerListTask(ProfileActivity profileActivity, Context context, String method, String staff) {
 			this.context = context;
 			this.method = method;
 			this.staff = staff;
+			this.profileActivity = profileActivity;
 		}
 
 		public GetCustomerListTask(Context context, String method,
@@ -206,6 +210,7 @@ public class CustomerAPI {
 					        customerActivity.startActivity(t);
 					      }
 					});
+					
 				}
 				
 				

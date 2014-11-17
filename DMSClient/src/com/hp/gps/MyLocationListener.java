@@ -25,7 +25,7 @@ public class MyLocationListener implements LocationListener {
 	  public static Location location;
 	  @Override
 	  public void onLocationChanged(Location location) {
-		  MyLocationListener.location = location;
+		  MyLocationListener.setLocation(location);
 		  
 		// Initialize the location fields
 		  Log.v("Location changed:: ", "Changed");
@@ -37,7 +37,15 @@ public class MyLocationListener implements LocationListener {
 		  //provText.setText(provider + " provider has been selected.");
 	  }
 
-	  @Override
+	  public static Location getLocation() {
+		return location;
+	}
+
+	public static void setLocation(Location location) {
+		MyLocationListener.location = location;
+	}
+
+	@Override
 	  public void onStatusChanged(String provider, int status, Bundle extras) {
 		  Log.v("Status changed: ", provider + "'s status changed to "+status +"!");
 		  

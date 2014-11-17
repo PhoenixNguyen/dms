@@ -3,7 +3,7 @@
 <hibernate-configuration>
   <session-factory >
         <!--FOR online Server -->
-        <!--property name="hibernate.connection.datasource">jdbc/DMSProject</property-->
+<!--        <property name="hibernate.connection.datasource">jdbc/DMSProject</property>-->
         
         <!-- FOR TEST WITH SERVER-->
         <!--property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>

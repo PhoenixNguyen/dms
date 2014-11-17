@@ -26,6 +26,8 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -151,7 +153,7 @@ public class UserAPI {
 				//To enable st auto
 				//enableConditions(context);
 				//update location
-				updateCurrentLocation(activity);
+				//updateCurrentLocation2(activity);
 				
 	        	
             }
@@ -249,6 +251,30 @@ public class UserAPI {
 		  // location updates: at least 1 meter and 200millsecs change
 		  locationManager.requestLocationUpdates(provider, 20000, 50, mylistener);
 		
+	}
+	
+	static long MY_TIMEOUT_IN_MS = 100;
+	private static void updateCurrentLocation2(Activity activity) {
+		final LocationManager locationManager
+        = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+	    // ...
+		
+		Criteria criteria = new Criteria();
+		  criteria.setAccuracy(Criteria.ACCURACY_COARSE);	//default
+		  
+		  criteria.setCostAllowed(false); 
+	
+		final MyLocationListener myListener = new MyLocationListener();
+		
+	    Looper myLooper = Looper.myLooper();
+	    locationManager.requestSingleUpdate(criteria, myListener, null);
+	    final Handler myHandler = new Handler(myLooper);
+	    myHandler.postDelayed(new Runnable() {
+	         public void run() {
+	             locationManager.removeUpdates(myListener);
+	         }
+	    }, MY_TIMEOUT_IN_MS);
 	}
 	
 	//EDIT STAFF

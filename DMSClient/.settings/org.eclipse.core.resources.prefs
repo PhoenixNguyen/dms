@@ -5,6 +5,7 @@ encoding//src/com/hp/common/UpdateApp.java=UTF-8
 encoding//src/com/hp/common/Utility.java=UTF-8
 encoding//src/com/hp/customer/CustomerArrayAdapter.java=UTF-8
 encoding//src/com/hp/forleave/ForLeaveArrayAdapter.java=UTF-8
+encoding//src/com/hp/gps/BackgroundLocationService.java=UTF-8
 encoding//src/com/hp/gps/MapLocation.java=UTF-8
 encoding//src/com/hp/gps/MyLocationListener.java=UTF-8
 encoding//src/com/hp/map/CalendarAdditionActivity.java=UTF-8

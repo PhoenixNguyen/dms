@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.hp.common.HttpHelper;
 import com.hp.common.Unicode2NoSign;
 import com.hp.domain.TimeKeeper;
+import com.hp.gps.BackgroundLocationService;
 import com.hp.gps.MapLocation;
 import com.hp.gps.MyLocationListener;
 import com.hp.rest.CheckingInternet;
@@ -21,6 +22,7 @@ import com.hp.rest.TimeKeeperAPI.GetTimeKeeperTask;
 import com.hp.rest.TimeKeeperAPI.ModifyTimeKeeperTask;
 
 import android.annotation.SuppressLint;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -136,10 +138,11 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			
 		}
 		
-		if(MyLocationListener.location == null)
+		Location myLocation = BackgroundLocationService.CURRENT_LOCATION;
+		if(myLocation == null)
 			return "";
 		
-		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
+		if(myLocation.getLatitude() == 0 && myLocation.getLongitude() == 0){
 			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
 			return "";
 		}
@@ -147,7 +150,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		
 		//Get City
 		String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-		        + MyLocationListener.location.getLatitude() + "," + MyLocationListener.location.getLongitude() + "&sensor=false";
+		        + myLocation.getLatitude() + "," + myLocation.getLongitude() + "&sensor=false";
 		JSONObject jsonObj;
 		String City = "";
 		String address = "";
@@ -188,7 +191,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	    			 "Vị trí hiện tại của bạn: " + " \n" + address);
 	     }
 	     
-	     return City;
+	     return address;
 	}
 	@SuppressLint("SimpleDateFormat")
 	public void timeKeeping(View v){
@@ -199,12 +202,12 @@ public class TimeKeeperActivity extends MainMenuActivity{
 			return;
 		
 		if(city.equals("")){
-			Toast.makeText(this, "Đang xác định thành phố ...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Đang xác định vị trí ...", Toast.LENGTH_SHORT).show();
 			return ;
 			
 		}
 		
-		String cityPut = "";
+		/*String cityPut = "";
 		//End Get City
 		for(String cityCore : MapLocation.getAllCityOfVietNam()){
 			if(city.toLowerCase().indexOf(Unicode2NoSign.convert(cityCore).toLowerCase()) != -1 ||
@@ -215,17 +218,17 @@ public class TimeKeeperActivity extends MainMenuActivity{
 				Log.v("CITY PUT: ", cityPut);
 				break;
 			}
-		}
+		}*/
 		
-		Log.v("CITY PUT: ", cityPut);
+		Log.v("CITY PUT: ", city);
 		
-		if(cityPut.equals("")){
+		if(city.equals("")){
 			Toast.makeText(this, "Không xác định được thành phố, hãy liên lạc với nhà sản xuất. Xin cảm ơn!", Toast.LENGTH_SHORT).show();
 			return ;
 		}
 		
 		TimeKeeper timeKeeper = new TimeKeeper(Rest.mStaff, Timestamp.valueOf(df.format(new Date())), 
-				cityPut, 0, "");
+				city, 0, "");
 		
 		ModifyTimeKeeperTask addTimeKeeper = new ModifyTimeKeeperTask(this, ModifyTimeKeeperTask.ACTION_ADD, "putTimeKeeper", timeKeeper, this);
 		addTimeKeeper.execute();

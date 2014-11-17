@@ -342,6 +342,8 @@ public class UtilitiesHandle {
             DecimalFormat dc = new DecimalFormat("####0.0");
             System.out.println(Float.parseFloat(dc.format(diffInMinutes/60f)));
             timeKeeper.setTimeBetween( Float.parseFloat(dc.format(diffInMinutes/60f)));
+            
+            timeKeeper.setTimeAt(Timestamp.valueOf(dateFormat.format(new Date())));
         }
         return Response.status(200).entity(timeKeeperDAO.saveOrUpdate(timeKeeper) + "").build();
     }

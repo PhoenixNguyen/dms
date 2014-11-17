@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -38,6 +39,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +53,7 @@ import com.hp.common.LoadingView;
 import com.hp.domain.Customer;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
+import com.hp.gps.MyLocationListener;
 import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 import com.hp.rest.CustomerAPI;
@@ -144,7 +147,5 @@ public class LoginActivity extends Activity {
     	moveTaskToBack(true);
     	  
 	}
-    
         
-      
 }

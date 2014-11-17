@@ -8,14 +8,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.hp.common.HttpHelper;
-import com.hp.gps.MyLocationListener;
+import com.hp.gps.BackgroundLocationService;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
 import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -28,9 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
-public class ProfileActivity extends MainMenuActivity{
+public class ProfileActivity extends MainMenuActivity  
+{
 	private TextView my_info;
-	private TextView my_location;
+	private static TextView my_location;
 	private EditText name;
 	private EditText address;
 	private EditText job;
@@ -41,7 +42,7 @@ public class ProfileActivity extends MainMenuActivity{
 	
 	private Button password;
 	
-	private SimpleDateFormat df;
+	private static SimpleDateFormat df;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.staff_profile);
@@ -87,13 +88,15 @@ public class ProfileActivity extends MainMenuActivity{
 		if(i != null){
 			int val = i.getIntExtra("login", 0);
 			if(val == 1){
-				GetCustomerListTask getData = new GetCustomerListTask(context, CustomerListActivity.LOAD_CUSTOMER, Rest.mStaff.getId()); //getCustomersListStart
+				GetCustomerListTask getData = new GetCustomerListTask(ProfileActivity.this, context, CustomerListActivity.LOAD_CUSTOMER, Rest.mStaff.getId()); //getCustomersListStart
             	getData.execute();
 			}
 		}
 		
-		getAddress();
-		
+		// Init service 
+		startService(new Intent(context, BackgroundLocationService.class));
+		if(BackgroundLocationService.CURRENT_LOCATION != null)
+			getAddress(BackgroundLocationService.CURRENT_LOCATION);
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu){
@@ -136,7 +139,7 @@ public class ProfileActivity extends MainMenuActivity{
 	}
 	
 	@SuppressLint("SimpleDateFormat")
-	public String getAddress(){
+	public static String getAddress(Location location){
 		//check internet
 		if(CheckingInternet.isOnline()){
 			System.out.println("Internet access!!____________________");
@@ -144,23 +147,23 @@ public class ProfileActivity extends MainMenuActivity{
 		else{
 											
 			System.out.println("NO Internet access!!____________________");
-			Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+			//Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
 			return null;
 			
 		}
 		
-		if(MyLocationListener.location == null)
+		if(location == null)
 			return "";
 		
-		if(MyLocationListener.location.getLatitude() == 0 && MyLocationListener.location.getLongitude() == 0){
-			Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
+		if(location.getLatitude() == 0 && location.getLongitude() == 0){
+			//Toast.makeText(this, "Đang cập nhật vị trí ...", Toast.LENGTH_SHORT).show();
 			return "";
 		}
 		//Toast.makeText(this, String.valueOf(MyLocationListener.location.getLatitude()) + " " +String.valueOf(MyLocationListener.location.getLongitude()), Toast.LENGTH_SHORT).show();
 		
 		//Get City
 		String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-		        + MyLocationListener.location.getLatitude() + "," + MyLocationListener.location.getLongitude() + "&sensor=false";
+		        + location.getLatitude() + "," + location.getLongitude() + "&sensor=false";
 		JSONObject jsonObj;
 		String City = "";
 		String address = "";
@@ -203,4 +206,5 @@ public class ProfileActivity extends MainMenuActivity{
 	     
 	     return City;
 	}
+	
 }
