@@ -1492,6 +1492,22 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-timekeeper" method="exportExcel" class="com.hp.action.TimeKeeperAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >view/staff/time-keeper.jsp</result>
+        </action>
+        
         <action name="interrupted-time" method="loadPage" class="com.hp.action.InterruptedTimeAction">
             <result name="success">view/staff/interrupted-time.jsp</result>
             <result name="input" >home.jsp</result>

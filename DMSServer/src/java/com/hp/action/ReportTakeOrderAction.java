@@ -326,6 +326,9 @@ public class ReportTakeOrderAction extends ActionSupport implements ModelDriven{
         takeOrdersList = (List<TakeOrder>)session.getAttribute("takeOrdersList");
         takeOrderDetailList = (List<List<TakeOrderDetail>>)session.getAttribute("takeOrderDetailList");
         
+        if(takeOrdersList == null)
+            return INPUT;
+        
         String fileInput = ServletActionContext.getServletContext().getRealPath("/db_exports/");
         String start = (String)session.getAttribute("startDate");
         String end = (String)session.getAttribute("endDate");

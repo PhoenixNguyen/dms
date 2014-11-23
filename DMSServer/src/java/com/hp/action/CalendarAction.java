@@ -166,6 +166,9 @@ public class CalendarAction extends ActionSupport{
         //GET DATA
         calendarList = (List<Calendar>)session.getAttribute("calendarList");
         
+        if(calendarList == null)
+            return INPUT;
+        
         String fileInput = ServletActionContext.getServletContext().getRealPath("/db_exports/");
         String start = (String)session.getAttribute("startDate");
         String end = (String)session.getAttribute("endDate");
@@ -358,15 +361,10 @@ public class CalendarAction extends ActionSupport{
             calendar.getContent(),
             calendar.getMission(),
             calendar.getReport(),
-            //str1, str2, str3, str4,
             calendar.getContributor(),
             calendar.getSupport(),
             status,
-            
             calendar.getCreatedTime() == null?"":df2.format(calendar.getCreatedTime())
-            //takeOrder.getAfterPrivate(),
-            
-            
         };
     }
     

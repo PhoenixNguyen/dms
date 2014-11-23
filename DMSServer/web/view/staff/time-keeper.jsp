@@ -172,9 +172,11 @@
 
 
                             <br>
-                            <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader">
+                            <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader" >
                                 <tbody><tr>
-                                        <!--                                        <td align="left" nowrap ><input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="window.location.href='export-takeorder-xls'" title="Xuất dữ liệu Excel" ></td>-->
+                                        <td align="left" nowrap >
+                                            <input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="location.href='export-timekeeper'" title="Xuất dữ liệu Excel" >
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -249,10 +251,11 @@
                                 </tbody>
                             </table>
 
-                            <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader">
-                                <tbody>
-                                    <tr>
-                                        <!--                    <td align="left" nowrap ><input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="window.location.href='export-takeorder-xls'" title="Xuất dữ liệu Excel" ></td>-->
+                            <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%" class="mailSubHeader" >
+                                <tbody><tr>
+                                        <td align="left" nowrap >
+                                            <input class="crmbutton small create" id="btnExport" name="btnExport" value="Xuất dữ liệu Excel" type="button" onClick="location.href='export-timekeeper'" title="Xuất dữ liệu Excel" >
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
