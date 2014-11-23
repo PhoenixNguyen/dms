@@ -1576,10 +1576,42 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-calculate-distance" method="exportExcel" class="com.hp.action.CalculateDistanceAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >view/staff/calculate-distance.jsp</result>
+        </action>
+        
         <action name="filter-distance-detail" method="filterDetail" class="com.hp.action.CalculateDistanceAction">
             <result name="success">view/staff/calculate-distance-detail.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="export-calculate-distance-detail" method="exportExcelDetail" class="com.hp.action.CalculateDistanceAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >view/staff/calculate-distance-detail.jsp</result>
         </action>
         
         <action name="view-set-lunch" method="displaySetLunch" class="com.hp.action.SetLunchAction">
