@@ -73,7 +73,10 @@
 
                         var option = $("#info");
                         option.find('span').remove();
-                        var alert = "Có " + total + " khách hàng được thêm!";
+                        var alert = "Có " + total + " khách hàng được thêm! <br/>";
+                        alert += "Có " +data.importFail + " khách hàng thêm thất bại. <br/>";
+                        alert += "Nguyên nhân: " + data.reasonFail;
+                        
                         option.append($("<span/>").append(alert));
 
                     },

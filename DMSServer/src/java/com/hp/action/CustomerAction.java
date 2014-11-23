@@ -81,6 +81,24 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
 
     private int customersTotal;
 
+    public int getImportFail() {
+        return importFail;
+    }
+
+    public void setImportFail(int importFail) {
+        this.importFail = importFail;
+    }
+
+    public String getReasonFail() {
+        return reasonFail;
+    }
+
+    public void setReasonFail(String reasonFail) {
+        this.reasonFail = reasonFail;
+    }
+    private int importFail;
+    private String reasonFail = "";
+
     private List<String> staffsList = new ArrayList<String>();
 
     private boolean deleteStatus;
@@ -194,6 +212,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
             return SUCCESS;
         
         int total = 0;
+        int totalFail = 0;
+        String reason = "";
         //Import data
         try {
             String fileInput = ServletActionContext.getServletContext().getRealPath("/db_inputs/"+saveName+"/");
@@ -239,6 +259,25 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
                     Customer customer = new Customer();
 //                    customer.setmStt((int)row.getCell(tmp++).getNumericCellValue());
                     
+                    //System.out.println(row.getCell(1).getStringCellValue());
+                    
+                    if(row.getCell(1) != null && !row.getCell(1).getStringCellValue().equals("")){
+                        Customer customer2 = customerDAO.loadCustomer(row.getCell(1).getStringCellValue());
+                        if(customer2 != null){
+                            reason += "Khách hàng <b>" + row.getCell(1).getStringCellValue() + "</b> đã tồn tại. ";
+                        }
+                    }
+                    else
+                        reason += "Mã Khách hàng hàng " + (i+1) + " không được trống. ";
+                    
+                    if(row.getCell(9) != null && !row.getCell(9).getStringCellValue().equals("")){
+                        Staff staff = staffDAO.loadStaff(row.getCell(9).getStringCellValue());
+                        if(staff == null)
+                            reason += "Mã Nhân viên <b>" + row.getCell(9).getStringCellValue() + "</b> không tồn tại. ";
+                    }
+                    else
+                        reason += "Mã Nhân viên hàng " + (i+1) + " không được trống.";
+                    
                     try{
                         if(row.getCell(1) != null)
                             customer.setMaDoiTuong(row.getCell(1).getStringCellValue());
@@ -255,6 +294,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
 
                         if(row.getCell(7) != null)
                             customer.setDienThoai(row.getCell(7).getStringCellValue());
+                        //System.out.println(row.getCell(7).getStringCellValue());
+                        
                         if(row.getCell(8) != null)
                             customer.setFax(row.getCell(8).getStringCellValue());
                         if(row.getCell(9) != null)
@@ -285,11 +326,14 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
                             total++;
                             customersTotal = total;
                         }
-                        else
+                        else{
+                            totalFail ++;
                             continue;
+                        }
                     }
                     catch(Exception e){
                         e.printStackTrace();
+                        totalFail ++;
                         continue;
                     }
                     
@@ -301,7 +345,11 @@ public class CustomerAction extends ActionSupport implements ModelDriven{
             ioe.printStackTrace();
             return SUCCESS;
         }
+        
+        reasonFail = reason;
         customersTotal = total;
+        importFail = totalFail;
+        
         return SUCCESS;
     }
     

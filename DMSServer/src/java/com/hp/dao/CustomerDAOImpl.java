@@ -9,16 +9,20 @@ package com.hp.dao;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 import static com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory.getSessionFactory;
+import com.hp.domain.Calendar;
 import com.hp.domain.Customer;
 import com.hp.domain.Staff;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -359,10 +363,14 @@ public class CustomerDAOImpl implements CustomerDAO {
         
         Customer courses = null;
         try{
-            //Query query = session.createQuery("from Customer where mMaDoiTuong='"+pCustomer+"'");
-            //courses = (Customer)query;
-                    
-            courses = (Customer)session.get(Customer.class, 1);
+            Criteria criteria = session.createCriteria(Customer.class);
+            criteria.add(Restrictions.eq("maDoiTuong", pCustomer));
+            List<Customer> list = new ArrayList<Customer>();
+            list = criteria.list();
+            
+            if(list != null && list.size() > 0)
+                return (Customer)list.get(0);
+            
         }catch(Exception e){
             e.printStackTrace();
         }
