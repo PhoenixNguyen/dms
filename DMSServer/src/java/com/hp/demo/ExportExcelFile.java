@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.ServletActionContext;
 
@@ -28,7 +29,7 @@ import org.apache.struts2.ServletActionContext;
  * @author admin
  */
 public class ExportExcelFile {
-    public static void main(String[] args ) throws ParsePropertyException, IOException{
+    public static void main(String[] args ) throws ParsePropertyException, IOException, InvalidFormatException{
         String log4jConfPath = "C:\\Users\\anhhn\\Desktop\\log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
 
@@ -50,7 +51,7 @@ public class ExportExcelFile {
 
     }
     
-    private static void export(List<?> dataList, String dataKey, String tempFilePath, String desFilePath, HttpServletRequest request, HttpServletResponse response) throws ParsePropertyException, IOException {
+    private static void export(List<?> dataList, String dataKey, String tempFilePath, String desFilePath, HttpServletRequest request, HttpServletResponse response) throws ParsePropertyException, IOException, InvalidFormatException {
         
         Map<String, Object> beans = new HashMap<String, Object>();
         beans.put(dataKey, dataList);

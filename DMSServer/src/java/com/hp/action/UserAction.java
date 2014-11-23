@@ -17,15 +17,32 @@ import com.hp.domain.History;
 import com.hp.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -169,14 +186,86 @@ public class UserAction extends ActionSupport{
     }
     
     public String home(){
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        HttpSession session = request.getSession();
-        
-        if(!userDAO.authorize((String)session.getAttribute("user_name"), (String)session.getAttribute("user_password"))){
-            return LOGIN;
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            HttpSession session = request.getSession();
+            
+            if(!userDAO.authorize((String)session.getAttribute("user_name"), (String)session.getAttribute("user_password"))){
+                return LOGIN;
+            }
+            
+            ex(null);
+            
+            announcementList = announcementDAO.loadAnnouncementList();
+            return SUCCESS;
+        } catch (ParsePropertyException ex) {
+            Logger.getLogger(UserAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UserAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(UserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        announcementList = announcementDAO.loadAnnouncementList();
+        
         return SUCCESS;
         
     }
+    
+    private void ex(HttpServletResponse response) throws ParsePropertyException, IOException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
+        	List<Student> students = new ArrayList<Student>();
+		Random r = new Random();
+		for(int i = 0; i < 10; i++) {
+			Student student = new Student();
+			student.setName("Student "  + (i+1));
+			student.setAge(r.nextInt(30));
+			
+			students.add(student);
+		}
+		
+		export(response, students, "student", "C:\\Users\\anhhn\\Desktop/student.xls", "C:\\Users\\anhhn\\Desktop/student_list.xls");
+
+    }
+    private void export(HttpServletResponse response, List<?> dataList, String dataKey, String tempFilePath, String desFilePath) throws ParsePropertyException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, FileNotFoundException, IOException {
+		Map<String, Object> beans = new HashMap<String, Object>();
+        beans.put(dataKey, dataList);
+		XLSTransformer transformer = new XLSTransformer();
+        File tempFile = new File(tempFilePath);
+        if(!tempFile.exists()) {
+        	System.out.println("Template file not found!");
+        	return;
+        }
+        
+		Workbook workbook = transformer.transformXLS(new FileInputStream(tempFile), beans);
+        //
+        String fileName = desFilePath.substring(desFilePath.lastIndexOf("/") + 1);
+//        Náº¿u download file excel
+//        response.setContentType("application/vnd.ms-excel");
+//        response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+//        OutputStream outputStream = response.getOutputStream();
+        OutputStream outputStream = new FileOutputStream(desFilePath);
+        
+        workbook.setSheetName(0, fileName.substring(0, fileName.lastIndexOf(".")));
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
+        
+        System.out.println("Export is OK!");
+	}
+    
+    public class Student implements Serializable {
+		private String name;
+		private int age;
+		
+		public String getName() {
+			return name;
+		} 
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+	}
 }

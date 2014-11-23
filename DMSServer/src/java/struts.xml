@@ -1450,7 +1450,20 @@
             <result name="login" >index.jsp</result>
         </action>
         
-        <action name="export-calendar" method="exportCalendar" class="com.hp.action.CalendarAction">
+        <action name="export-calendar" method="exportCalendarList" class="com.hp.action.CalendarAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >view/staff/calendars.jsp</result>
         </action>
         
         <action name="edit-calendar-ajax" method="edit" class="com.hp.action.CalendarAction"  >
