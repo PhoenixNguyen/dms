@@ -1594,6 +1594,22 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-setlunch" method="exportExcel" class="com.hp.action.SetLunchAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >view/staff/set-lunch.jsp</result>
+        </action>
+        
         <action name="view-for-leave" method="displayForLeave" class="com.hp.action.ForLeaveAction">
             <result name="success">view/staff/for-leave.jsp</result>
             <result name="input" >home.jsp</result>
