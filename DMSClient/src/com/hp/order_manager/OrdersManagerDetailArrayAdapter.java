@@ -49,9 +49,7 @@ public class OrdersManagerDetailArrayAdapter extends ArrayAdapter<TakeOrderDetai
         if(values != null){
 	        featureView.setName(values.get(position).getProductName());
 	        featureView.setId(values.get(position).getProductID());
-	        featureView.setNumber(values.get(position).getNumber() + " x " + 
-	        		(values.get(position).getAfterOrderPrice() - values.get(position).getAfterOrderPrice() * 
-	        		values.get(position).getDiscount() / 100));
+	        featureView.setNumber(values.get(position).getNumber() + " " + values.get(position).getUnit());
 	        featureView.setValue((new BigDecimal(values.get(position).getPriceTotal())).toString()); 
 	        
 	        featureView.setOriginalPrice(values.get(position).getAfterOrderPrice()+"");

@@ -123,7 +123,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         List<Customer> courses = null;
         try{
             String q = "from Customer ";
-            Query query = session.createQuery("from Customer where coordinateX > 0");
+            Query query = session.createQuery("from Customer where coordinateX > 0 order by maDoiTuong");
                         
             courses = query.list();
             //courses = session.createQuery("from Customer where mXCoordinates = 0").list(); //where mXCoordinates is NOT NULL and  mYCoordinates is NOT NULL

@@ -272,6 +272,9 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 		final EditText note = (EditText) dialog.findViewById(R.id.note);
 		note.setText(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).getNote());
 		
+		final TextView unit = (TextView) dialog.findViewById(R.id.unit);
+		unit.setText(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).getQuantification());
+		
 		//discount product
 		final TextView product_discount = (TextView) dialog.findViewById(R.id.product_discount);
 		final EditText product_discount_count = (EditText) dialog.findViewById(R.id.product_discount_count);

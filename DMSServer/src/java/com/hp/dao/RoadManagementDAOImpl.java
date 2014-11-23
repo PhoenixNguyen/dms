@@ -267,7 +267,7 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                     + " from RoadManagement"
                     + " where thoiGian <= '" + timeToCompare +"' "
                     + " group by maNhanVien"
-                    + ")";
+                    + ") order by rm.maNhanVien";
              
             results = session.createQuery(query).list();
         }catch(Exception e){

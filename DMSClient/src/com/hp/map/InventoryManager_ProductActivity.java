@@ -53,6 +53,9 @@ public class InventoryManager_ProductActivity extends TakeOrder_ProductActivity{
 		
 		final EditText count = (EditText)dialog.findViewById(R.id.count);
 		
+		final TextView unit = (TextView) dialog.findViewById(R.id.unit);
+		unit.setText(selectedValue.getQuantification());
+		
 		final EditText note = (EditText) dialog.findViewById(R.id.note);
 		
 		//discount product

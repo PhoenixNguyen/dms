@@ -2,6 +2,7 @@ package com.hp.map;
 
 import java.math.BigDecimal;
 import com.hp.domain.TakeOrderDetail;
+import com.hp.order.CustomOnItemSelectedListener;
 import com.hp.order_manager.OrdersManagerDetailArrayAdapter;
 import com.hp.rest.TakeOrderDetailAPI;
 import com.hp.rest.TakeOrderDetailAPI.GetTakeOrderDetailTask;
@@ -180,6 +181,9 @@ public class TakeOrdersDetailManagerActivity extends MainMenuActivity{
 		final EditText count = (EditText)dialog.findViewById(R.id.count);
 		count.setText(selectedValue.getNumber()+"");
 		
+		final TextView unit = (TextView) dialog.findViewById(R.id.unit);
+		unit.setText(selectedValue.getUnit()+"");
+				
 		final EditText note = (EditText) dialog.findViewById(R.id.note);
 		note.setText(selectedValue.getNote()+"");
 		

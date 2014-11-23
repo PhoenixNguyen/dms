@@ -36,6 +36,9 @@ public class InventoryManager_ReviewActivity extends TakeOrder_ReViewActivity{
 		final EditText count = (EditText)dialog.findViewById(R.id.count);
 		count.setText(takeOrderDetailList.get(position).getNumber()+"");
 		
+		final TextView unit = (TextView) dialog.findViewById(R.id.unit);
+		unit.setText(takeOrderDetailList.get(position).getUnit());
+		
 		final EditText note = (EditText) dialog.findViewById(R.id.note);
 		note.setText(takeOrderDetailList.get(position).getNote()+"");
 		

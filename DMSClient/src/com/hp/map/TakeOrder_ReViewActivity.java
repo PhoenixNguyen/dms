@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.hp.domain.TakeOrderDetail;
+import com.hp.order.CustomOnItemSelectedListener;
 import com.hp.order_manager.OrdersManagerDetailArrayAdapter;
 import com.hp.rest.Rest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -79,7 +80,7 @@ public class TakeOrder_ReViewActivity extends TakeOrdersDetailManagerActivity{
 											TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getDiscount() / 100)
 										* TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getTotal())
 									, "", TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getTotal()
-									, "", 0
+									, TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getQuantification(), 0
 									, TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getNote()
 									, TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getPromotionalProductAmounts()
 									);
@@ -133,6 +134,9 @@ public class TakeOrder_ReViewActivity extends TakeOrdersDetailManagerActivity{
 		
 		final EditText count = (EditText)dialog.findViewById(R.id.count);
 		count.setText(takeOrderDetailList.get(position).getNumber()+"");
+		
+		final TextView unit = (TextView) dialog.findViewById(R.id.unit);
+		unit.setText(takeOrderDetailList.get(position).getUnit());
 		
 		final EditText note = (EditText) dialog.findViewById(R.id.note);
 		note.setText(takeOrderDetailList.get(position).getNote()+"");
