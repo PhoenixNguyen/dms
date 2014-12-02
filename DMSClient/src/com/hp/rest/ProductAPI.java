@@ -1,6 +1,7 @@
 package com.hp.rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -71,6 +72,7 @@ public class ProductAPI {
 			else
 				return "success";
 			
+			System.out.println("NO");
 			for(int k = 0; k< ProviderAPI.providersList.size(); k++){
 				if (CheckingInternet.isOnline()) {
 					System.out.println("Internet access!!____________________");
@@ -92,7 +94,11 @@ public class ProductAPI {
 							.post(ClientResponse.class, ProviderAPI.providersList.get(k).getId());
 				}catch(Exception e){
 					e.printStackTrace();
-					return "nohost";
+					
+					TakeOrder_ProductActivity.mProductsMap.put(k + "", new ArrayList<Product>());
+					System.out.println("________________ + response.toString()" );
+					continue;
+					
 				}
 				
 				System.out.println("________________ " + response.toString());
@@ -109,7 +115,6 @@ public class ProductAPI {
 					if (ConvertStringToObjectList(re)){
 						TakeOrder_ProductActivity.mProductsMap.put(k + "", productList);
 
-						//
 						// if add more products for take order
 						if (TakeOrder_ProductActivity.add_take_order_detail) {
 
@@ -173,6 +178,7 @@ public class ProductAPI {
 				
 			}
 			
+			System.out.println("Size: "+ TakeOrder_ProductActivity.mProductsMap.size());
 			return "success";
 			// =====================================================================================
 
