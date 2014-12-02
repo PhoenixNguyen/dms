@@ -467,6 +467,9 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 
 	public void button_filter(View view){
 		
+		if(TakeOrderAPI.takeOrderList == null || TakeOrderAPI.takeOrderList.size() <= 0)
+			return;
+		
 		filter = true;
 		takeOrderListFilter.clear();
 		

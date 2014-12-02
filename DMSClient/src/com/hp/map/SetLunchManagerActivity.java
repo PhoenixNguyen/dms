@@ -35,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.hp.domain.DateTimePicker;
 import com.hp.domain.DateTimePicker.DateWatcher;
 import com.hp.domain.SetLunch;
+import com.hp.rest.CalendarAPI;
 import com.hp.rest.Rest;
 import com.hp.rest.SetLunchAPI;
 import com.hp.rest.SetLunchAPI.GetSetLunchTask;
@@ -448,6 +449,8 @@ public class SetLunchManagerActivity extends MainMenuActivity implements OnClick
 	public void button_filter(View view){
 		//Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
 		
+		if(SetLunchAPI.setLunchList == null || SetLunchAPI.setLunchList.size() <= 0)
+			return;
 		
 		filter = true;
 		setLunchListFilter.clear();

@@ -35,7 +35,8 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
 		this.mManager = pManager;
 		
 		this.originalList = new ArrayList<Product>();
-	    this.originalList.addAll(pValues);
+		if(pValues != null && pValues.size() > 0)
+			this.originalList.addAll(pValues);
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent){
@@ -53,14 +54,15 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
 
-        featureView.setTitleId(values.get(position).getProductID());
-        featureView.setDescriptionId(values.get(position).getProductName());
-        featureView.setPrice("Giá: "+values.get(position).getExportPrices() + "");
-        
-        if(!mManager){
-        	featureView.setTotal(values.get(position).getTotal() + "");
+        if(values != null && values.size() > 0){
+	        featureView.setTitleId(values.get(position).getProductID());
+	        featureView.setDescriptionId(values.get(position).getProductName());
+	        featureView.setPrice("Giá: "+values.get(position).getExportPrices() + "");
+	        
+	        if(!mManager){
+	        	featureView.setTotal(values.get(position).getTotal() + "");
+	        }
         }
-        
 
         return featureView;
 	}
@@ -83,7 +85,8 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
 	     if(constraint != null && constraint.toString().length() > 0)
 	     {
 	     ArrayList<Product> filteredItems = new ArrayList<Product>();
-
+	     
+	     if(originalList != null && originalList.size() > 0)
 	     for(int i = 0, l = originalList.size(); i < l; i++)
 	     {
 	    	 Product nameList = originalList.get(i);
@@ -98,7 +101,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
 	      synchronized(this)
 	      {
 	       result.values = originalList;
-	       result.count = originalList.size();
+	       result.count = originalList!=null?originalList.size():0;
 	      }
 	     }
 	     return result;
@@ -112,6 +115,8 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
 	     values = (ArrayList<Product>)results.values;
 	     notifyDataSetChanged();
 	     clear();
+	     
+	     if(values != null && values.size() > 0)
 	     for(int i = 0, l = values.size(); i < l; i++)
 	      add(values.get(i));
 	     notifyDataSetInvalidated();

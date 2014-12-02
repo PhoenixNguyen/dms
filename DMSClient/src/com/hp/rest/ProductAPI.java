@@ -182,13 +182,22 @@ public class ProductAPI {
 			if (result.equals("success")) {
 				
 			    // Something after add all product =====================================================================
-				adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
-						, TakeOrder_ProductActivity.mProductsMap.get(mProviderIndex + ""), mManager);
-				listView.setAdapter(adapter);
-				//Set total
-				if(mManager)
-					TakeOrder_ProductActivity.total_value.setText(TakeOrder_ProductActivity.mProductsMap.get(mProviderIndex + "").size()+"");
-				//
+				
+				try{
+					if(TakeOrder_ProductActivity.mProductsMap != null && mProviderIndex < TakeOrder_ProductActivity.mProductsMap.size()){
+						adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
+								, TakeOrder_ProductActivity.mProductsMap.get(mProviderIndex + ""), mManager);
+						
+						listView.setAdapter(adapter);
+						
+						//Set total
+						if(mManager)
+							TakeOrder_ProductActivity.total_value.setText(TakeOrder_ProductActivity.mProductsMap.get(mProviderIndex + "").size()+"");
+						//
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 				
 				//Add search listenner
 				search.addTextChangedListener(new TextWatcher() {

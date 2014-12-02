@@ -36,6 +36,7 @@ import com.hp.domain.DateTimePicker.DateWatcher;
 import com.hp.domain.ForLeave;
 import com.hp.forleave.ForLeaveArrayAdapter;
 import com.hp.rest.ForLeaveAPI;
+import com.hp.rest.SetLunchAPI;
 import com.hp.rest.ForLeaveAPI.GetForLeaveTask;
 import com.hp.rest.Rest;
 
@@ -437,6 +438,8 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 	public void button_filter(View view){
 		//Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
 		
+		if(ForLeaveAPI.forLeaveList == null || ForLeaveAPI.forLeaveList.size() <= 0)
+			return;
 		
 		filter = true;
 		forLeaveListFilter.clear();

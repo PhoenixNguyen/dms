@@ -458,6 +458,8 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 	public void button_filter(View view){
 		//Toast.makeText(this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
 		
+		if(CalendarAPI.calendarList == null || CalendarAPI.calendarList.size() <= 0)
+			return;
 		
 		filter = true;
 		calendarListFilter.clear();
