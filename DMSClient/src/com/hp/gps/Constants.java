@@ -2,7 +2,7 @@ package com.hp.gps;
 
 public final class Constants {
 	// Min distance
-	public static final float MIN_DISTANCE = 5;
+	public static final float MIN_DISTANCE = 1;
     // Milliseconds per second
     private static final int MILLISECONDS_PER_SECOND = 1000;
     // Update frequency in seconds

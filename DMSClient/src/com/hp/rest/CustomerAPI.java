@@ -23,7 +23,7 @@ import com.hp.customer.CustomerArrayAdapter;
 import com.hp.datahandle.DataConvert;
 import com.hp.domain.Customer;
 import com.hp.domain.DataInfo;
-import com.hp.gps.BackgroundLocationService;
+//import com.hp.gps.BackgroundLocationService;
 import com.hp.map.CustomerListActivity;
 import com.hp.map.CustomerMapActivity;
 import com.hp.map.ProfileActivity;

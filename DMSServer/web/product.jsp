@@ -69,6 +69,7 @@
                                                                 <tr>
                                                                     <td style="padding-right:0px;padding-left:10px;"><a href="new-product"><img src="themes/softed/images/btnL3Add.gif" alt="Tạo mới..." title="Tạo mới..." border="0"></a></td>
                                                                     <td style="padding-right:0px;padding-left:10px;"><a href="import-product"><img src="themes/softed/images/tbarImport.gif" alt="Nhập dữ liệu Sản phẩm" title="Nhập dữ liệu Sản phẩm" border="0"></a></td>  
+                                                                    <td style="padding-right:0px;padding-left:10px;"><a href="export-products"><img src="themes/softed/images/tbarImport.gif" alt="Xuất dữ liệu Sản phẩm" title="Xuất dữ liệu Sản phẩm" border="0"></a></td>  
 <!--                                                                    <td style="padding-right:10px"><a href="javascript:;" onclick="moveMe('searchAcc');
                                                                             searchshowhide('searchAcc', 'advSearch');
                                                                             mergehide('mergeDup')"><img src="themes/softed/images/btnL3Search.gif" alt="Tìm kiếm trong Khách hàng..." title="Tìm kiếm trong Khách hàng..." border="0"></a></td>-->
@@ -211,16 +212,29 @@
                                         <div  >
                                             <table border=0 cellspacing=1 cellpadding=3 width=100% class="lvt small">
                                                 <!-- Table Headers -->
+                                                <col width="3%">
+                                                <col width="10%">
+                                                <col width="23%">
+                                                <col width="10%">
+                                                <col width="5%">
+                                                <col width="7%">
+                                                <col width="10%">
+                                                <col width="7%">
+                                                <col width="16%">
+                                                <col width="10%">
+                                                
+                                                
                                                 <tr>
                                                     <!--td class="lvtCol"><input type="checkbox"  name="selectall" onClick=toggleSelect_ListView(this.checked, "selected_id")></td-->
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=productname&start=&sorder=ASC");' class='listFormHeaderLinks'>Stt</a></td>
-                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=productname&start=&sorder=ASC");' class='listFormHeaderLinks'>Tên sản phẩm</a></td>
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=serialno&start=&sorder=ASC");' class='listFormHeaderLinks'>Mã sản phẩm</a></td>
+                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=productname&start=&sorder=ASC");' class='listFormHeaderLinks'>Tên sản phẩm</a></td>
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=createdtime&start=&sorder=ASC");' class='listFormHeaderLinks'>Mã vạch</a></td>
-                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=qtyinstock&start=&sorder=ASC");' class='listFormHeaderLinks'>Thương hiệu</a></td>
+                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=cf_628&start=&sorder=ASC");' class='listFormHeaderLinks'>Đơn vị</a></td>
+                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=qtyinstock&start=&sorder=ASC");' class='listFormHeaderLinks'>Nhóm sản phẩm</a></td>
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=qtyinstock&start=&sorder=ASC");' class='listFormHeaderLinks'>Nhà cung cấp</a></td>
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=cf_628&start=&sorder=ASC");' class='listFormHeaderLinks'>Giá</a></td>
-                                                    <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=cf_628&start=&sorder=ASC");' class='listFormHeaderLinks'>Đơn vị</a></td>
+                                                    
                                                     <td class="lvtCol"><a href='javascript:;' onClick='getListViewEntries_js("Products", "parenttab=Inventory&foldername=Default&order_by=reorderlevel&start=&sorder=ASC");' class='listFormHeaderLinks'>Mô tả</a></td>
                                                     <td class="lvtCol">Hoạt động</td>
                                                 </tr>
@@ -231,19 +245,19 @@
 
                                                         <td onmouseover=""><s:property value="%{#index.index + 1}"/> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='productname' vtmodule='Products' style='display:none;'></span></td>
 
+                                                        <td onmouseover=""><s:property value="productID"/> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='serial_no' vtmodule='Products' style='display:none;'></span></td>
+                                                        
                                                         <td onmouseover=""><a href='product-detail?id_pdct=<s:property value="serial"/>' title='Products'><s:property value="productName"/></a> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='productname' vtmodule='Products' style='display:none;'></span></td>
 
-                                                        <td onmouseover=""><s:property value="productID"/> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='serial_no' vtmodule='Products' style='display:none;'></span></td>
-
                                                         <td onmouseover=""><s:property value="barcode"/> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='createdtime' vtmodule='Products' style='display:none;'></span></td>
+                                                        
+                                                        <td onmouseover=""><s:property value="quantification"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='reorderlevel' vtmodule='Products' style='display:none;'></span></td>
 
                                                         <td onmouseover=""><s:property value="brand"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='qtyinstock' vtmodule='Products' style='display:none;'></span></td>
 
                                                         <td onmouseover=""><s:property value="provider"/> <span type='vtlib_metainfo' vtrecordid='142' vtfieldname='cf_628' vtmodule='Products' style='display:none;'></span></td>
 
-                                                        <td onmouseover=""><s:property value="exportPrices"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='reorderlevel' vtmodule='Products' style='display:none;'></span></td>
-
-                                                        <td onmouseover=""><s:property value="quantification"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='reorderlevel' vtmodule='Products' style='display:none;'></span></td>
+                                                        <td onmouseover="" style="text-align: right;"><s:property value="exportPrices"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='reorderlevel' vtmodule='Products' style='display:none;'></span></td>
 
                                                         <td onmouseover=""><s:property value="description"/><span type='vtlib_metainfo' vtrecordid='142' vtfieldname='reorderlevel' vtmodule='Products' style='display:none;'></span></td>
 

@@ -614,6 +614,22 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-customers" method="exportExcel" class="com.hp.action.CustomerAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >customer.jsp</result>
+        </action>
+        
         <action name="customer-detail" method="showDetail" class="com.hp.action.CustomerAction">
             <result name="success">customer-detail.jsp?id_cus=${customer.stt}</result>
             <result name="input" type="redirect">customer-list</result>
@@ -701,6 +717,22 @@
             <result name="success">product.jsp</result>
             <result name="input" >home.jsp</result>
             <result name="login" >index.jsp</result>
+        </action>
+        
+        <action name="export-products" method="exportExcel" class="com.hp.action.ProductsAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >product.jsp</result>
         </action>
         
         <action name="product-detail" method="displayProduct" class="com.hp.action.ProductsAction">
@@ -951,6 +983,21 @@
             <result name="login" >index.jsp</result>
         </action>
         
+        <action name="export-staffs" method="exportExcel" class="com.hp.action.StaffsAction">
+            <result name="success" type="stream">
+                <param name="contentType">
+                    image/png,image/gif,image/jpeg,image/pjpeg,application/rar,application/zip
+                    ,application/octet-stream,text/plain
+                    ,application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                    , application/vnd.ms-powerpoint
+                    , application/pdf
+                </param>
+                <param name="inputName">orderFile</param>
+                <param name="contentDisposition">attachment;filename=${outputFile}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="input" >staff.jsp</result>
+        </action>
         <!-- PROVIDER -->
         
         <action name="search-provider" method="searchProvider" class="com.hp.action.ProviderAction">

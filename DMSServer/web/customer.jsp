@@ -71,7 +71,7 @@
                                                                 <tr>
                                                                     <td style="padding-right:0px;padding-left:10px;"><a href="new-customer"><img src="themes/softed/images/btnL3Add.gif" alt="Tạo Khách hàng..." title="Tạo Khách hàng..." border="0"></a></td>
                                                                     <td style="padding-right:0px;padding-left:10px;"><a href="import-customer"><img src="themes/softed/images/tbarImport.gif" alt="Nhập dữ liệu Khách hàng" title="Nhập dữ liệu Khách hàng" border="0"></a></td>  
-                                                                    
+                                                                    <td style="padding-right:0px;padding-left:10px;"><a href="export-customers"><img src="themes/softed/images/tbarExport.gif" alt="Xuất dữ liệu Khách hàng" title="Xuất dữ liệu Khách hàng" border="0"></a></td>  
 <!--                                                                    <td style="padding-right:10px"><a href="javascript:;" onclick="moveMe('searchAcc'); searchshowhide('searchAcc', 'advSearch'); mergehide('mergeDup')"><img src="themes/softed/images/btnL3Search.gif" alt="Tìm kiếm trong Khách hàng..." title="Tìm kiếm trong Khách hàng..." border="0"></a></td>-->
 
                                                                 </tr>
@@ -211,8 +211,9 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td width="5%" class="lvtCol"><a href="javascript:;" class="listFormHeaderLinks">Stt</a></td>
-                                                                    <td width="20%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tên Khách hàng</a></td>
                                                                     <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Mã Khách hàng</a></td>
+                                                                    <td width="20%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tên Khách hàng</a></td>
+                                                                    
                                                                     <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Được gán cho</a></td>
                                                                     <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tỉnh thành</a></td>
                                                                     <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Địa chỉ</a></td>
@@ -224,8 +225,9 @@
                                                                 <s:iterator value="customersList" status="index">
                                                                 <tr bgcolor="white" onmouseover="this.className = 'lvtColDataHover'" onmouseout="this.className = 'lvtColData'" id="row_137" class="lvtColData">
                                                                     <td onmouseover=""><a href="" title="Accounts"><s:property value="%{#index.index + 1}"/></a> <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="accountname" vtmodule="Accounts" style="display:none;"></span></td>
-                                                                    <td onmouseover=""><a href="customer-detail?id_cus=<s:property value="stt"/>" title="Accounts"><s:property value="doiTuong"/></a> <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="accountname" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><a href="customer-detail?id_cus=<s:property value="stt"/>" title="Accounts"><s:property value="maDoiTuong"/></a> <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="accountname" vtmodule="Accounts" style="display:none;"></span></td>
+                                                                    <td onmouseover=""><a href="customer-detail?id_cus=<s:property value="stt"/>" title="Accounts"><s:property value="doiTuong"/></a> <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="accountname" vtmodule="Accounts" style="display:none;"></span></td>
+                                                                    
                                                                     <td onmouseover=""><s:property value="maNhanVien"/><span type="vtlib_metainfo" vtrecordid="137" vtfieldname="assigned_user_id" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><s:property value="tinhThanh"/><span type="vtlib_metainfo" vtrecordid="137" vtfieldname="createdtime" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><s:property value="diaChi"/><span type="vtlib_metainfo" vtrecordid="137" vtfieldname="cf_607" vtmodule="Accounts" style="display:none;"></span></td>
