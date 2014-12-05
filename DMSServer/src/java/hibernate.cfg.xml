@@ -17,7 +17,7 @@
         
         <!-- FOR LOCALHOST -->
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=dms_eufood</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=dms_adi</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">root</property>
         <property name="show_sql">true</property>

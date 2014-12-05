@@ -246,7 +246,7 @@
                                                                                                                     <select name="user.permission" tabindex="" class="small">
                                                                                                                             <option value="0" selected>Quản trị hệ thống</option>
                                                                                                                             <option value="1" >Người dùng</option>
-                                                                                                                            <option value="3" >Nhóm kinh doanh</option>
+                                                                                                                            <option value="2" >Nhóm kinh doanh</option>
                                                                                                                         
                                                                                                                         <!-- code added to pass Currency field value, if Disabled for nonadmin -->
                                                                                                                         <!--code ends -->
