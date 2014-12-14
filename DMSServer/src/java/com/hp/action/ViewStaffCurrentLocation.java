@@ -117,6 +117,7 @@ public class ViewStaffCurrentLocation extends ActionSupport{
         if(currLocations != null && currLocations.size() > 0){
              //System.out.println("currLocations: " + currLocations.size());
             for(RoadManagement rm : currLocations){
+                System.out.println("currLocations: " + rm.getMaNhanVien() + " " + rm.getThoiGian());
                 for(RoadManagement last : lastRoads){
                     if(last.getMaNhanVien().equalsIgnoreCase(rm.getMaNhanVien())){
                         lastLocations.add(new LastLocation(rm.getMaNhanVien(), getAddress(rm), getAddress(last), last.getThoiGian()));

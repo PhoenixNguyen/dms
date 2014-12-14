@@ -87,16 +87,19 @@
                             <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
                             <s:date name="#last.timeLast" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
 
-                            contentString.push(
+                            contentString.push({ content :
                                 '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
                                 '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
                                 '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
                                 '<b>Ghi chú:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
                                 '<b>Vị trí:</b> <s:property value="#last.address"/> <br/> \n'+
+                                '<b>Lat:</b> <s:property value="#curr.viDo"/>, <s:property value="#curr.kinhDo"/> <br/> \n'+
+                                
                                 '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
                                 <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.lastAddress"/> <br/> \n\
-                                </div>'
-                            );
+                                </div>',
+                                id : '<s:property value="#curr.maNhanVien"/>'
+                    });
                         </s:if>
 
                     </s:iterator>
@@ -124,8 +127,9 @@
                         position: new google.maps.LatLng(Customers[i].mXCoordinates, Customers[i].mYCoordinates),
                         icon: pinImage
                     });
-
-                    bindInfoWindow(marker, map, infowindow, contentString[i], Customers[i].mMaDoiTuong);
+                    for( j = 0; j < contentString.length; j++)
+                        if(Customers[i].mMaDoiTuong === contentString[j].id)
+                            bindInfoWindow(marker, map, infowindow, contentString[j].content, Customers[i].mMaDoiTuong);
 
                 }
                 
@@ -294,7 +298,7 @@
                     </script>
                 <tr>
                     <td  ><input name="generatenw" value=" Lọc kết quả " class="crmbutton small create" type="submit" ></td>
-                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/customer-list'"></td>
+                    <td  ><input name="generatenw" value=" Trang chủ " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/'"></td>
                 </tr>
                 </table>
             </form>

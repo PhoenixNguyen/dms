@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -262,14 +263,29 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                 timeToCompare = df.format(new Date());
             }
             
-            String query = "select rm from RoadManagement as rm where rm.thoiGian in ("
-                    + " select max(thoiGian) "
-                    + " from RoadManagement"
-                    + " where thoiGian <= '" + timeToCompare +"' "
-                    + " group by maNhanVien"
-                    + ") order by rm.maNhanVien";
+            String sql = "SELECT a.* \n" +
+                "From tb_quanlyduongdi \n" +
+                "\n" +
+                "as a \n" +
+                "RIGHT JOIN (\n" +
+                "	select rm.quanlyduongdi_ma_nhan_vien as nhan_vien, max(quanlyduongdi_thoi_gian) AS TIMET \n" +
+                "	from dbo.tb_quanlyduongdi rm \n" +
+                "	group by quanlyduongdi_ma_nhan_vien \n" +
+                "	having max(quanlyduongdi_thoi_gian) < '"+timeToCompare+"' \n" +
+                ") b ON a.quanlyduongdi_ma_nhan_vien = b.nhan_vien \n" +
+                "AND a.quanlyduongdi_thoi_gian=b.TIMET "
+                + "order by a.quanlyduongdi_ma_nhan_vien ";
+            
+//            String query = "select rm from RoadManagement where rm.thoiGian in ("
+//                    + " select top 1 thoiGian "
+//                    + " from RoadManagement"
+//                    + " where cast (thoiGian as time) < '" + timeToCompare +"'  "
+//                    + " group by maNhanVien order by thoiGian desc "
+//                    + ")"; //order by rm.maNhanVien
              
-            results = session.createQuery(query).list();
+            Query query = session.createSQLQuery(sql)
+                .addEntity(RoadManagement.class);
+            results = query.list();
         }catch(Exception e){
             e.printStackTrace();
             return null;

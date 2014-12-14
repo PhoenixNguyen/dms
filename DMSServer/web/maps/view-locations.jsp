@@ -301,7 +301,7 @@
                 
                 <tr>
                     <td  ><input name="generatenw" value=" Lọc kết quả " class="crmbutton small create" type="submit" ></td>
-                    <td  ><input name="generatenw" value=" Quay lại " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/customer-list'"></td>
+                    <td  ><input name="generatenw" value=" Trang chủ " class="crmbutton small create" type="button" onclick="window.location.href='${pageContext.request.contextPath}/'"></td>
                 </tr>
                 </table>
             </form>
