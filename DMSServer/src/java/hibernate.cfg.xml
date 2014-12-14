@@ -6,11 +6,11 @@
 <!--        <property name="hibernate.connection.datasource">jdbc/DMSProject</property>-->
         
         <!-- FOR TEST WITH SERVER-->
-        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+<!--        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
         <property name="hibernate.connection.url">jdbc:sqlserver://dms.adiagri.com.vn:3439;databaseName=hoscodb_dms_adi_2311</property>
         <property name="hibernate.connection.username">hoscodb_dms_adi_2311</property>
         <property name="hibernate.connection.password">123456Aa@</property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">true</property>-->
             
         <!--property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
         <property name="hibernate.connection.url">jdbc:sqlserver://dms.adiagri.com.vn:1488;databaseName=DMS_8083_test</property>
@@ -22,11 +22,11 @@
         <!--com.hp.filter.CustomMysqlDialect - org.hibernate.dialect.SQLServerDialect -->
         
         <!-- FOR LOCALHOST -->
-<!--        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
         <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=dms_adi</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">root</property>
-        <property name="show_sql">true</property>-->
+        <property name="show_sql">true</property>
         
     
         <property name="hbm2ddl.auto">create</property>

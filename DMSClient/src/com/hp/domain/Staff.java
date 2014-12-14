@@ -16,6 +16,15 @@ public class Staff {
     private boolean status;
     private Integer permission;
 
+    private String imei;
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
     public Integer getPermission() {
         return permission;
     }

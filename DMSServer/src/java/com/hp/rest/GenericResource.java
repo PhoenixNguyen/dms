@@ -410,15 +410,23 @@ public class GenericResource {
     @Path("/getStaff")
     @Consumes(MediaType.APPLICATION_JSON)
     public Staff getStaff( String pStaff ) {
-
+        
         String[] total = pStaff.split("::");
         
-        String name = total[0];
-        String pw = total[1];
-        
+        String name = "";
+        String pw = "";
+        String imei = "";
+        try{
+           name = total[0];
+           pw = total[1];
+           imei = total[2];
+           
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         StaffDAO staffDAO = new StaffDAOImpl();
         Staff staff = new Staff();
-        staff = staffDAO.authenticate(name, pw);
+        staff = staffDAO.authenticate(name, pw, imei);
         
         
         return staff;

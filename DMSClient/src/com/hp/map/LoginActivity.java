@@ -40,6 +40,7 @@ import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -87,7 +88,9 @@ public class LoginActivity extends Activity {
         
         mUsername = (EditText)findViewById(R.id.username);
         mPassword = (EditText)findViewById(R.id.password);
-        
+        TelephonyManager mngr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+		final String imei =   mngr.getDeviceId();
+		  
         remember_me = (CheckBox)findViewById(R.id.remember_me);
         
         SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
@@ -112,7 +115,7 @@ public class LoginActivity extends Activity {
 				//LOADING DATA
 
 				//Authenticate
-				AuthenticateUserTask authenticate = new AuthenticateUserTask(context, mUsername.getText().toString(), mPassword.getText().toString(), 
+				AuthenticateUserTask authenticate = new AuthenticateUserTask(context, mUsername.getText().toString(), mPassword.getText().toString(), imei, 
 						LoginActivity.this);
 				authenticate.execute();
 

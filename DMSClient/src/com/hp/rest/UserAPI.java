@@ -46,16 +46,19 @@ public class UserAPI {
 		Context context;
 		String username;
 		String password;
+		String imei;
 		LoginActivity activity;
 		
     	ProgressDialog dialog;
-    	public AuthenticateUserTask(Context context, String username, String password,
+    	public AuthenticateUserTask(Context context, String username, String password, String imei,
     			LoginActivity activity){
     		
     		this.context = context;
     		this.username = username;
     		
     		this.password = password;
+    		this.imei = imei;
+    		
     		this.activity = activity;
     	}
     	
@@ -83,7 +86,7 @@ public class UserAPI {
 	        
 			System.out.println("USERNAME___" + username);
 			//Init Http request
-			System.out.println("__ " + password);
+			System.out.println("__ " + password + " Imei: " + imei);
 			
 			
 			// Getting
@@ -92,7 +95,7 @@ public class UserAPI {
 			try{
 				response = Rest.mService.path("webresources")
 					.path("getStaff").accept("application/json")
-					.type("application/json").post(ClientResponse.class, username +"::" + password);
+					.type("application/json").post(ClientResponse.class, username +"::" + password + "::" +imei);
 			}catch(Exception e){
 				e.printStackTrace();
 				return "nohost";

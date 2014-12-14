@@ -68,6 +68,16 @@ public class Staff implements Serializable {
     
     @Column(name="nhanvien_permission")
     private Integer permission;
+    @Column(name="nhanvien_imei")
+    private String imei;
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
     
     public Integer getPermission() {
         return permission;

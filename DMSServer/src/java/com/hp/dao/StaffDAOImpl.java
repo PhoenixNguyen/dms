@@ -67,6 +67,32 @@ public class StaffDAOImpl implements StaffDAO{
         return staff;
     }
     
+    public Staff authenticate(String pUsername, String pPassword, String imei){
+        Session session = getSessionFactory().openSession();
+        Transaction transaction;
+        transaction = session.beginTransaction();
+        
+        boolean result = false;
+        Staff staff = null;
+        try{
+            
+            String sql = "from Staff where lower(id)= '"+pUsername.toLowerCase()+"' and lower(pw)='"+pPassword.toLowerCase()+ "' and lower(imei)='"+imei.toLowerCase()+"'  and status= true ";
+            Query query = (Query) session.createQuery(sql);
+//            query.setString(0, pUsername.toLowerCase());
+//            query.setString(1, pPassword.toLowerCase());
+
+            staff = (Staff)query.uniqueResult();
+                        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        
+        return staff;
+    }
+    
     public int adminAuthenticate(String pUsername){
         Session session = getSessionFactory().openSession();
         Transaction transaction;
