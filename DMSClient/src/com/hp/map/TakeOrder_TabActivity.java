@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
 @SuppressWarnings("deprecation")
@@ -46,25 +47,25 @@ public class TakeOrder_TabActivity extends TabActivity{
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Resources recource = getResources();
-		TabHost tabHost = getTabHost();
+		final TabHost tabHost = getTabHost();
 		
 		//Product tab
-		Intent intentProduct = new Intent().setClass(this, TakeOrder_ProductActivity.class);
-		TabSpec tabSpecProduct = tabHost
+		Intent intentProduct = new Intent().setClass(this, TakeOrder_ProductActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		final TabSpec tabSpecProduct = tabHost
 				.newTabSpec("Product")
 				.setIndicator("Sản phẩm")
 				.setContent(intentProduct);
 		
 		//Amount tab
-		Intent intentAmount = new Intent().setClass(this, TakeOrder_AmountActivity.class);
-		TabSpec tabSpecAmount = tabHost
+		Intent intentAmount = new Intent().setClass(this, TakeOrder_AmountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);;
+		final TabSpec tabSpecAmount = tabHost
 				.newTabSpec("Amount")
 				.setIndicator("Tổng cộng")
 				.setContent(intentAmount);
 		
 		//Review tab
-		Intent intentReview = new Intent().setClass(this, TakeOrder_ReViewActivity.class);
-		TabSpec tabSpecReview = tabHost
+		Intent intentReview = new Intent().setClass(this, TakeOrder_ReViewActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);;
+		final TabSpec tabSpecReview = tabHost
 				.newTabSpec("Review")
 				.setIndicator("Xem lại")
 				.setContent(intentReview);
@@ -73,7 +74,33 @@ public class TakeOrder_TabActivity extends TabActivity{
 		tabHost.addTab(tabSpecReview);
 		tabHost.addTab(tabSpecAmount);
 		
-		tabHost.setCurrentTab(0);
+		if(TakeOrder_ProductActivity.restart == 10)
+			tabHost.setCurrentTab(1);
+		else
+			tabHost.setCurrentTab(0);
+		
+		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+	         @Override
+	         public void onTabChanged(String tabId) {
+	        	 int currentTabId = tabHost.getCurrentTab();
+	        	 //tabHost.clearAllTabs();
+        	    //setupTabs();
+	        	 System.out.println("tabId: " + tabId + " currentTabId:" + currentTabId);
+        	    //tabHost.setCurrentTab(tabId);
+	        	 
+	        	 if(tabId.equalsIgnoreCase("Review") && TakeOrder_ProductActivity.restart < 1){
+	        		// TakeOrder_ProductActivity.restart++;
+	        		 
+	        		 /*tabHost.clearAllTabs();
+	        		 tabHost.addTab(tabSpecProduct);
+        			 tabHost.addTab(tabSpecReview);
+        			 tabHost.addTab(tabSpecAmount);*/
+        			
+	        		 //tabHost.setCurrentTab(0);
+	        	 }
+	         }	
+		 });
+		 
 	}
 	
 	public boolean onKeyUp(int keyCode, KeyEvent event) {

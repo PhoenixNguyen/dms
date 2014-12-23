@@ -2,6 +2,7 @@ package com.hp.map;
 
 import android.app.Dialog;
 import android.app.ActionBar.LayoutParams;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,6 +15,13 @@ import com.hp.order_manager.OrdersManagerDetailArrayAdapter;
 
 public class InventoryManager_ReviewActivity extends TakeOrder_ReViewActivity{
 	public void init(){
+		if(TakeOrder_ProductActivity.restart < 1){
+			TakeOrder_ProductActivity.restart = 10;
+			System.out.println("refresh ...");
+			Intent intent = new Intent(context, InventoryManager_TabActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);
+		}
 	}
 	
 	

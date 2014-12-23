@@ -122,4 +122,5 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
 	     notifyDataSetInvalidated();
 	    }
 	   }
+	   
 }

@@ -17,6 +17,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import android.app.Dialog;
 import android.app.ActionBar.LayoutParams;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,25 +38,46 @@ public class TakeOrder_ReViewActivity extends TakeOrdersDetailManagerActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		TakeOrder_ProductActivity.id_search.setText("");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.orders_detail_manager);
 		
+		System.out.println("Switched");
 		
 		//order_id = "180NLB-2014-03-14 02:17:02";
 		
 		TextView title = (TextView)findViewById(R.id.title);
 		title.setText("Danh mục đã chọn: ");
 		
-		init();
 		getOrderList();
 		addListView();
+		
+		init();
+	}
+	
+	@Override
+	protected void onRestart() {
+		TakeOrder_ProductActivity.restart ++;
+	    // TODO Auto-generated method stub
+	    super.onRestart();
+	    Intent i = new Intent(TakeOrder_ReViewActivity.this, TakeOrder_ReViewActivity.class);  //your class
+	    startActivity(i);
+	    finish();
+
 	}
 	
 	public void init(){
-		
+		if(TakeOrder_ProductActivity.restart < 1){
+			TakeOrder_ProductActivity.restart = 10;
+			System.out.println("refresh ...");
+			Intent intent = new Intent(context, TakeOrder_TabActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);
+		}
 	}
 	
 	public void onResume(){
+		System.out.println("onResume ...");
 		super.onResume();
 		this.onCreate(null);
 	}

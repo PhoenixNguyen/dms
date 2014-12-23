@@ -41,6 +41,9 @@ public class InventoryManager_TabActivity extends TakeOrder_TabActivity{
 		tabHost.addTab(tabSpecReview);
 		tabHost.addTab(tabSpecAmount);
 		
-		tabHost.setCurrentTab(0);
+		if(TakeOrder_ProductActivity.restart == 10)
+			tabHost.setCurrentTab(1);
+		else
+			tabHost.setCurrentTab(0);
 	}
 }
