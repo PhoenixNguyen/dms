@@ -215,11 +215,12 @@
                                                                     <td width="20%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tên Khách hàng</a></td>
                                                                     
                                                                     <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Được gán cho</a></td>
-                                                                    <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tỉnh thành</a></td>
-                                                                    <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Địa chỉ</a></td>
-                                                                    <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Điện thoại</a></td>
-                                                                    <td width="15%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Ghi chú</a></td>
-                                                                    <td width="10%" class="lvtCol">Hoạt động</td>
+                                                                    <td width="7%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Tỉnh thành</a></td>
+                                                                    <td width="16%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Địa chỉ</a></td>
+                                                                    <td width="7%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Điện thoại</a></td>
+                                                                    <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Ghi chú</a></td>
+                                                                    <td width="10%" class="lvtCol"><a href="javascript:;"  class="listFormHeaderLinks">Vị trí</a></td>
+                                                                    <td width="5%" class="lvtCol">Hoạt động</td>
                                                                 </tr>
                                                                 <!-- Table Contents -->
                                                                 <s:iterator value="customersList" status="index">
@@ -233,6 +234,14 @@
                                                                     <td onmouseover=""><s:property value="diaChi"/><span type="vtlib_metainfo" vtrecordid="137" vtfieldname="cf_607" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><a href="javascript:;" ><s:property value="dienThoai"/></a> <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="phone" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><s:property value="ghiChu"/><span type="vtlib_metainfo" vtrecordid="137" vtfieldname="rating" vtmodule="Accounts" style="display:none;"></span></td>
+                                                                    <td onmouseover="">
+                                                                        <s:if test="coordinateX > 0 && coordinateY > 0">
+                                                                            Đã có vị trí
+                                                                        </s:if>
+                                                                        <s:else>
+                                                                            Chưa có vị trí
+                                                                        </s:else>
+                                                                        <span type="vtlib_metainfo" vtrecordid="137" vtfieldname="rating" vtmodule="Accounts" style="display:none;"></span></td>
                                                                     <td onmouseover=""><a href="edit-customer?id_cus=<s:property value="stt"/>">Sửa</a>  | <a href='javascript:confirmdelete("delete-customer?id_cus=<s:property value="stt"/>")'>Xóa</a></td>
                                                                 </tr>
                                                                 </s:iterator>
