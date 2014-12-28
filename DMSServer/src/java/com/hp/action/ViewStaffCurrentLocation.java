@@ -55,6 +55,16 @@ public class ViewStaffCurrentLocation extends ActionSupport{
 
     List<LastLocation> lastLocations = new ArrayList<LastLocation>();
 
+    List<RoadManagement> lastRoads = new ArrayList<RoadManagement>();
+
+    public List<RoadManagement> getLastRoads() {
+        return lastRoads;
+    }
+
+    public void setLastRoads(List<RoadManagement> lastRoads) {
+        this.lastRoads = lastRoads;
+    }
+    
     public List<LastLocation> getLastLocations() {
         return lastLocations;
     }
@@ -111,21 +121,25 @@ public class ViewStaffCurrentLocation extends ActionSupport{
         }
         
         currLocations = roadManagementDAO.findLocationByTime(date);
-        
-        List<RoadManagement> lastRoads = roadManagementDAO.findLocationByTime(null);
-        
-        if(currLocations != null && currLocations.size() > 0){
-             //System.out.println("currLocations: " + currLocations.size());
-            for(RoadManagement rm : currLocations){
+        for(RoadManagement rm : currLocations){
                 System.out.println("currLocations: " + rm.getMaNhanVien() + " " + rm.getThoiGian());
-                for(RoadManagement last : lastRoads){
-                    if(last.getMaNhanVien().equalsIgnoreCase(rm.getMaNhanVien())){
-                        lastLocations.add(new LastLocation(rm.getMaNhanVien(), getAddress(rm), getAddress(last), last.getThoiGian()));
-                        break;
-                     }
-                }
-            }
         }
+        lastRoads = roadManagementDAO.findLocationByTime(null);
+        for(RoadManagement rm : lastRoads){
+                System.out.println("lastRoads: " + rm.getMaNhanVien() + " " + rm.getThoiGian());
+        }
+//        if(currLocations != null && currLocations.size() > 0){
+//             //System.out.println("currLocations: " + currLocations.size());
+//            for(RoadManagement rm : currLocations){
+//                System.out.println("currLocations: " + rm.getMaNhanVien() + " " + rm.getThoiGian());
+//                for(RoadManagement last : lastRoads){
+//                    if(last.getMaNhanVien().equalsIgnoreCase(rm.getMaNhanVien())){
+//                        lastLocations.add(new LastLocation(rm.getMaNhanVien(), getAddress(rm), getAddress(last), last.getThoiGian()));
+//                        break;
+//                     }
+//                }
+//            }
+//        }
         
         listCustomer = customerDAO.loadCustomersWithLocations();
         return SUCCESS;

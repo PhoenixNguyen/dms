@@ -80,23 +80,22 @@
                 //alert(<s:property value="lastLocations.size()"/>);
                 
                 <s:iterator value="currLocations" status="status" var="curr">
-                    <s:iterator value="lastLocations" status="status2" var="last">
+                    <s:iterator value="lastRoads" status="status2" var="last">
 
                         <s:if test="#curr.maNhanVien == #last.maNhanVien">
 
                             <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
-                            <s:date name="#last.timeLast" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
+                            <s:date name="#last.thoiGian" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
 
                             contentString.push({ content :
                                 '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
                                 '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
                                 '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
-                                '<b>Ghi chú:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
-                                '<b>Vị trí:</b> <s:property value="#last.address"/> <br/> \n'+
+                                '<b>Vị trí:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
                                 '<b>Lat:</b> <s:property value="#curr.viDo"/>, <s:property value="#curr.kinhDo"/> <br/> \n'+
                                 
                                 '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
-                                <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.lastAddress"/> <br/> \n\
+                                <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.ghiChu"/> <br/> \n\
                                 </div>',
                                 id : '<s:property value="#curr.maNhanVien"/>'
                     });

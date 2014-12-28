@@ -204,7 +204,7 @@ public class ProfileActivity extends MainMenuActivity
 	    			 "Vị trí hiện tại: " + " \n" + address);
 	     }
 	     
-	     return City;
+	     return address;
 	}
 	
 }

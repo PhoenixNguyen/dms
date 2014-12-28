@@ -270,8 +270,9 @@ public class RoadManagementDAOImpl implements RoadManagementDAO{
                 "RIGHT JOIN (\n" +
                 "	select rm.quanlyduongdi_ma_nhan_vien as nhan_vien, max(quanlyduongdi_thoi_gian) AS TIMET \n" +
                 "	from dbo.tb_quanlyduongdi rm \n" +
+                "	where quanlyduongdi_thoi_gian <= '"+timeToCompare+"' \n" +    
                 "	group by quanlyduongdi_ma_nhan_vien \n" +
-                "	having max(quanlyduongdi_thoi_gian) < '"+timeToCompare+"' \n" +
+//                "	having max(quanlyduongdi_thoi_gian) < '"+timeToCompare+"' \n" +
                 ") b ON a.quanlyduongdi_ma_nhan_vien = b.nhan_vien \n" +
                 "AND a.quanlyduongdi_thoi_gian=b.TIMET "
                 + "order by a.quanlyduongdi_ma_nhan_vien ";

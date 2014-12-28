@@ -355,6 +355,11 @@ public class OrdersHandle {
                 e.printStackTrace();
         }
         
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        if(roadManagement != null){
+            roadManagement.setThoiGian(Timestamp.valueOf(dateFormat.format(date)));
+        }
         RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
         boolean st = roadManagementDAO.saveOrUpdate(roadManagement);
                
