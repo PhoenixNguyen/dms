@@ -46,6 +46,7 @@ import android.widget.Toast;
 public class TakeOrder_ProductActivity extends Activity implements OnItemClickListener{
 	public ListView listView;
 	public static Map<String, List<Product>> mProductsMap = new HashMap<String, List<Product>>();
+	protected List<String> selectedProducts = new ArrayList<String>();
 	
 	public static int restart = 0;
 	
@@ -105,29 +106,6 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 		
 		//Search ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		id_search = (EditText) findViewById(R.id.product_id);
-		id_search.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence cs, int arg1, int arg2,
-					int arg3) {
-				// When user changed the Text
-				TakeOrder_ProductActivity.this.adapter.getFilter().filter(cs);
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				// TODO Auto-generated method stub
-			}
-
-		});
-		
 		total_value = (TextView)findViewById(R.id.total_value);
 
 		List<Product> productsList = new ArrayList<Product>();
@@ -153,6 +131,7 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 		for(int i = 0; i < TakeOrder_ProductActivity.mProductsMap.get(key).size(); i++)
 			if(TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getTotal() > 0){
 				line++;
+				selectedProducts.add(TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getProductID());
 			}
 		}
 		
@@ -273,8 +252,9 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 	@Override
     public void onItemClick(AdapterView<?> a, View v, final int position, long id) 
     {
+		try{
  		final Product selectedValue = (Product) listView.getAdapter().getItem(position);
- 
+ 		
  		//Toast.makeText(getBaseContext(), "Click", Toast.LENGTH_LONG).show();
  		// custom dialog
 		final Dialog dialog = new Dialog(context);
@@ -364,28 +344,32 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 				TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).setNote(note.getText().toString());
 				TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).setPromotionalProductAmounts(promotionalAmount);
 				
-				Collections.sort(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
-				Collections.reverse(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
-				
-				//finish
-				dialog.dismiss();
-				
-				adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
-						, TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""), mManager);
-				listView.setAdapter(adapter);
+//				Collections.sort(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
+//				Collections.reverse(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
+//				
+//				adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
+//						, TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""), mManager);
+//				listView.setAdapter(adapter);
 				
 				//SET total line
-				Set<String> keyset = TakeOrder_ProductActivity.mProductsMap.keySet();
+				/*Set<String> keyset = TakeOrder_ProductActivity.mProductsMap.keySet();
 				line = 0;
 				for(String key : keyset){
 				for(int i = 0; i < TakeOrder_ProductActivity.mProductsMap.get(key).size(); i++)
 					if(TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getTotal() > 0){
 						line++;
 					}
+				}*/
+				
+				if(selectedProducts != null && !selectedProducts.contains(selectedValue.getProductID())){
+					line++;
+					total_value.setText(line+"");
 				}
+				// Change values
+				//adapter.notifyDataSetChanged();
 				
-				total_value.setText(line+"");
-				
+				//finish
+				dialog.dismiss();
 			}
 		});
 
@@ -402,6 +386,11 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 		});
 		dialog.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		dialog.show();
-     }
+     
+    }catch(Exception e){
+    	e.printStackTrace();
+    }
+    }
+    
 }
 

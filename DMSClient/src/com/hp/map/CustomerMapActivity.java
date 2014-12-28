@@ -633,15 +633,15 @@ public class CustomerMapActivity extends FragmentActivity
     public boolean onMarkerClick(final Marker marker) {
 
             // This causes the marker at Adelaide to change color and alpha.
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(mRandom.nextFloat() * 360));
-            marker.setAlpha(mRandom.nextFloat());
+            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(mRandom.nextFloat() * 360));
+            //marker.setAlpha(mRandom.nextFloat());
         
         return false;
     }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(getBaseContext(), "Click Info Window", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT).show();
     }
 
 	@Override

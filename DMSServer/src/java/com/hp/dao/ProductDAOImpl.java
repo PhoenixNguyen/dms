@@ -29,7 +29,7 @@ public class ProductDAOImpl implements ProductDAO{
         
         List<Product> courses = null;
         try{
-            courses = session.createQuery("from Product where provider='" +pProvider+"'" ).list();
+            courses = session.createQuery("from Product where provider='" +pProvider+"' order by productID" ).list();
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -515,6 +515,14 @@ public class GenericResource {
                 e.printStackTrace();
         }
         
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date today = new Date();
+        if(takeOrder != null){
+            takeOrder.setTakeOrderDate(Timestamp.valueOf(df.format(today)));
+            takeOrder.setDeliveryDate(Timestamp.valueOf(df.format(today)));
+            
+        }
         //Update location
         TakeOrderDAO takeOrderDAO = new TakeOrderDAOImpl();
         boolean st = takeOrderDAO.saveOrUpdate(takeOrder);

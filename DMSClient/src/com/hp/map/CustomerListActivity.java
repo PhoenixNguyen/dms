@@ -36,8 +36,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class CustomerListActivity extends MainMenuActivity implements OnItemSelectedListener{
 	
-	//public static String LOAD_CUSTOMER = "getAllCustomers";
-	public static String LOAD_CUSTOMER = "getCustomersListStart";
+	public static String LOAD_CUSTOMER = "getAllCustomers";
+	//public static String LOAD_CUSTOMER = "getCustomersListStart";
 	
 	private ListView listView;
 	private Context context = this;

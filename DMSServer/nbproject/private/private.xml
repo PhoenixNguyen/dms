@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/domain/Staff.java</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/view/staff/current-location.jsp</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/hibernate.cfg.xml</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/action/ViewStaffCurrentLocation.java</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/dao/RoadManagementDAOImpl.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/staff-edit.jsp</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/domain/Customer.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/action/StaffsAction.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/customer.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -89,27 +89,22 @@ public class InventoryManager_ProductActivity extends TakeOrder_ProductActivity{
 				TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).setDiscount(discount);
 				TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + "").get(position).setNote(note.getText().toString());
 				
-				Collections.sort(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
+				/*Collections.sort(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
 				Collections.reverse(TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""));
 				
-				//finish
-				dialog.dismiss();
 				
 				adapter = new ProductArrayAdapter(context, android.R.layout.simple_list_item_1
 						, TakeOrder_ProductActivity.mProductsMap.get(CustomOnItemSelectedListener.mProviderIndex + ""), mManager);
-				listView.setAdapter(adapter);
+				listView.setAdapter(adapter);*/
 				
-				//SET total line
-				Set<String> keyset = TakeOrder_ProductActivity.mProductsMap.keySet();
-				line = 0;
-				for(String key : keyset){
-				for(int i = 0; i < TakeOrder_ProductActivity.mProductsMap.get(key).size(); i++)
-					if(TakeOrder_ProductActivity.mProductsMap.get(key).get(i).getTotal() > 0){
-						line++;
-					}
+				if(selectedProducts != null && !selectedProducts.contains(selectedValue.getProductID())){
+					line++;
+					total_value.setText(line+"");
 				}
-				total_value.setText(line+"");
 				//
+				
+				//finish
+				dialog.dismiss();
 			}
 		});
 

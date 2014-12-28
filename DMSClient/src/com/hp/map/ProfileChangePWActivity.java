@@ -101,6 +101,8 @@ public class ProfileChangePWActivity extends MainMenuActivity{
 		staff.setName(Rest.mStaff.getName());
 		staff.setPhone(Rest.mStaff.getPhone());
 		
+		staff.setImei(Rest.mStaff.getImei());
+		
 		staff.setPw(pw1.getText().toString());
 		
 		EditUserTask update = new EditUserTask(context, "updateStaff", staff

@@ -117,7 +117,6 @@ public class ProductAPI {
 
 						// if add more products for take order
 						if (TakeOrder_ProductActivity.add_take_order_detail) {
-
 							for (int i = 0; i < TakeOrder_ProductActivity.mProductsMap
 									.get(k + "").size(); i++) {
 								for (int j = 0; j < TakeOrderDetailAPI.takeOrderDetailList
@@ -161,7 +160,6 @@ public class ProductAPI {
 									}
 								}
 							}
-
 							TakeOrder_ProductActivity.take_order_id = TakeOrdersDetailManagerActivity.order_id;
 						}
 						// }

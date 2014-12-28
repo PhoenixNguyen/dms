@@ -46,9 +46,11 @@ import com.hp.domain.TakeOrder;
 import com.hp.domain.TakeOrderDetail;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -380,6 +382,13 @@ public class OrdersHandle {
                 e.printStackTrace();
         }
         
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date today = new Date();
+        if(inventoryManager != null){
+            inventoryManager.setTakeOrderDate(Timestamp.valueOf(df.format(today)));
+            inventoryManager.setDeliveryDate(Timestamp.valueOf(df.format(today)));
+            
+        }
         //Update location
         InventoryManagerDAO inventoryManagerDAO = new InventoryManagerDAOImpl();
         boolean st = inventoryManagerDAO.saveOrUpdate(inventoryManager);

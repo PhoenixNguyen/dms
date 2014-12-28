@@ -116,7 +116,8 @@
                         <form name="EditView" method="POST" action="update-staff" id="sub_form" onsubmit="">
 
                             <input type="hidden" name="staff.stt" value="<s:property value="staff.stt"/>">
-
+                            <input type="hidden" name="staff.imei" value="<s:property value="staff.imei"/>">
+                            
                             <table border=0 cellspacing=0 cellpadding=0 width=95% align=center>
                                 <tr>
                                     <td>
