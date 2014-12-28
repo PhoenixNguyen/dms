@@ -88,7 +88,8 @@ public class ProfileEditActivity extends MainMenuActivity{
 	        break;
 	        
 	    case R.id.action_done:
-        	updateData();
+	    	if(staff != null)
+	    		updateData();
             return true;
 	    
 	    default:
@@ -114,7 +115,7 @@ public class ProfileEditActivity extends MainMenuActivity{
 		staff.setName(name.getText().toString());
 		staff.setPhone(phone.getText().toString());
 		
-		
+		staff.setImei(Rest.mStaff.getImei());
 		
 		EditUserTask update = new EditUserTask(context, "updateStaff", staff
 			   );

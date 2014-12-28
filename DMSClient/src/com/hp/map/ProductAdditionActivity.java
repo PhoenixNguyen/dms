@@ -84,6 +84,7 @@ public class ProductAdditionActivity extends MainMenuActivity {
 		
 		
 		final List<String> list = new ArrayList<String>();
+		if(ProviderAPI.providersList != null && ProviderAPI.providersList.size() > 0)
 		for(int i = 0; i < ProviderAPI.providersList.size(); i++){
 	
 			//Add
@@ -91,21 +92,26 @@ public class ProductAdditionActivity extends MainMenuActivity {
 		}
 		
 		
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		product_provider.setAdapter(dataAdapter);
-		product_provider.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-				provider_selected = list.get(pos);
-			}
+		try {
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, list);
+			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			product_provider.setAdapter(dataAdapter);
+			product_provider.setOnItemSelectedListener(new OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+					provider_selected = list.get(pos);
+				}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu){
@@ -196,8 +202,13 @@ public class ProductAdditionActivity extends MainMenuActivity {
 	
 	public void insertProduct(Product product){
 		
-		ModifyProductTask addData = new ModifyProductTask(context, "insertProduct", product, true);
-		addData.execute();
+		try {
+			ModifyProductTask addData = new ModifyProductTask(context, "insertProduct", product, true);
+			addData.execute();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

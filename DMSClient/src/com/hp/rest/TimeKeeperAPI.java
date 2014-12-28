@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import com.hp.domain.TimeKeeper;
 import com.hp.map.TimeKeeperActivity;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class TimeKeeperAPI {
 	public static List<TimeKeeper> timeKeeperList = new ArrayList<TimeKeeper>();
@@ -83,25 +85,35 @@ public class TimeKeeperAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				String result = "";
-				if (response.getStatus() == 200)
-						result = response.getEntity(String.class);
-				
-				if (result.equalsIgnoreCase("true")){
+					String result = "";
+					if (response.getStatus() == 200)
+							result = response.getEntity(String.class);
+					
+					if (result.equalsIgnoreCase("true")){
 
-					return "success";
-				} 
-				else
-					if (result.equalsIgnoreCase("nocalendar")){
+						return "success";
+					} 
+					else
+						if (result.equalsIgnoreCase("nocalendar")){
 
-						return "nocalendar";
+							return "nocalendar";
+						}
+					else {
+
+						return "fail";
 					}
-				else {
-
-					return "fail";
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 
@@ -229,22 +241,32 @@ public class TimeKeeperAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if (response.getStatus() != 200) {
+					if (response.getStatus() != 200) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				
 				// =====================================================================================

@@ -20,7 +20,9 @@ import com.hp.domain.SetLunch;
 import com.hp.map.SetLunchAdditionActivity;
 import com.hp.map.SetLunchManagerActivity;
 import com.hp.set.lunch.SetLunchArrayAdapter;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class SetLunchAPI {
 	public static List<SetLunch> setLunchList = new ArrayList<SetLunch>();
@@ -89,32 +91,42 @@ public class SetLunchAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				//
-				String result = "";
-				if (response.getStatus() == 200)
-						result = response.getEntity(String.class);
-				
-				if (result.equalsIgnoreCase("true")){
+					//
+					String result = "";
+					if (response.getStatus() == 200)
+							result = response.getEntity(String.class);
+					
+					if (result.equalsIgnoreCase("true")){
 
-					return "success";
-				} 
-				else
-					if (result.equalsIgnoreCase("existsetlunch")){
-
-						return "existsetlunch";
-					}
+						return "success";
+					} 
 					else
-						if (result.equalsIgnoreCase("readonly")){
+						if (result.equalsIgnoreCase("existsetlunch")){
 
-							return "readonly";
+							return "existsetlunch";
 						}
-				
-				else {
+						else
+							if (result.equalsIgnoreCase("readonly")){
 
-					return "fail";
+								return "readonly";
+							}
+					
+					else {
+
+						return "fail";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				//
 				// =====================================================================================
@@ -274,22 +286,32 @@ public class SetLunchAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if (response.getStatus() != 200) {
+					if (response.getStatus() != 200) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				
 				// =====================================================================================

@@ -52,7 +52,7 @@ public class BackgroundLocationService extends Service implements
 
 	IBinder mBinder = new LocalBinder();
 
-	private LocationClient mLocationClient;
+	public static LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
 	// Flag that indicates if a request is underway.
 	private boolean mInProgress;
@@ -281,6 +281,18 @@ public class BackgroundLocationService extends Service implements
 		if (pX == 0 && pY == 0)
 			return;
 
+		//check internet
+		if(CheckingInternet.isOnline()){
+			System.out.println("Internet access!!____________________");
+		}
+		else{
+											
+			System.out.println("NO Internet access!!____________________");
+			//Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+			return;
+			
+		}
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		String datestr = dateFormat.format(date);

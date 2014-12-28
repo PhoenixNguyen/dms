@@ -33,7 +33,9 @@ import com.hp.map.R;
 import com.hp.map.Schedule_CalendarActivity;
 import com.hp.schedule.DialogArrayAdapter;
 import com.hp.schedule.ScheduleViewArrayAdapter;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class ScheduleAPI {
 	public static List<Schedule> scheduleList;
@@ -89,21 +91,31 @@ public class ScheduleAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response.toString());
+			//System.out.println("________________ " + response.toString());
 
-			if (response.getStatus() != 200 || response.getLength() < 2 ) {
+			try {
+				if (response.getStatus() != 200 || response.getLength() < 2 ) {
 
-				return "nodata";
-			} else {
-
-				String re = response.getEntity(String.class);
-				System.out.println("________________ " + re);
-
-				// Convert
-				if (ConvertStringToObjectList(re))
-					return "success";
-				else
 					return "nodata";
+				} else {
+
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
+
+					// Convert
+					if (ConvertStringToObjectList(re))
+						return "success";
+					else
+						return "nodata";
+				}
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 
@@ -242,16 +254,22 @@ public class ScheduleAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if ((response.getStatus() == 200)
-						&& output.compareTo("status:0") != 0) {
+					if ((response.getStatus() == 200)
+							&& output.compareTo("status:0") != 0) {
 
-					return "success";
-				} else {
+						return "success";
+					} else {
 
-					return "fail";
+						return "fail";
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 
@@ -372,21 +390,31 @@ public class ScheduleAPI {
 					return "nohost";
 				}
 				
-				System.out.println("________________ " + response.toString());
+				//System.out.println("________________ " + response.toString());
 
-				if (response.getStatus() != 200) {
+				try {
+					if (response.getStatus() != 200) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 
@@ -509,21 +537,31 @@ public class ScheduleAPI {
 					return "nohost";
 				}
 				
-				System.out.println("________________ " + response.toString());
+				//System.out.println("________________ " + response.toString());
 
-				if (response.getStatus() != 200  ) {
+				try {
+					if (response.getStatus() != 200  ) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (re.compareTo("0") != 0)
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (re.compareTo("0") != 0)
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 

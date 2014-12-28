@@ -38,7 +38,9 @@ import com.hp.map.CustomerListActivity;
 import com.hp.map.LoginActivity;
 import com.hp.map.ProfileActivity;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class UserAPI {
 	public static class AuthenticateUserTask extends AsyncTask<Void,Void,String>
@@ -101,23 +103,33 @@ public class UserAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response.toString());
+			//System.out.println("________________ " + response.toString());
 
-			if (response.getStatus() != 200) {
+			try {
+				if (response.getStatus() != 200) {
 
-				return "nodata";
-			} else {
-
-				String re = response.getEntity(String.class);
-				System.out.println("________________ " + re);
-
-				// Convert
-				if (convertStringToObject(re)){
-					return "success";
-					
-				}
-				else
 					return "nodata";
+				} else {
+
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
+
+					// Convert
+					if (convertStringToObject(re)){
+						return "success";
+						
+					}
+					else
+						return "nodata";
+				}
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			
 			// =====================================================================================
@@ -330,21 +342,31 @@ public class UserAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response.toString());
+			//System.out.println("________________ " + response.toString());
 
-			if (response.getStatus() != 200) {
+			try {
+				if (response.getStatus() != 200) {
 
-				return "nodata";
-			} else {
+					return "nodata";
+				} else {
 
-				String re = response.getEntity(String.class);
-				System.out.println("________________ " + re);
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
 
-				// Convert
-				if (re.compareTo("true") == 0)
-					return "success";
-				else
-					return "fail";
+					// Convert
+					if (re.compareTo("true") == 0)
+						return "success";
+					else
+						return "fail";
+				}
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			
 			// =====================================================================================

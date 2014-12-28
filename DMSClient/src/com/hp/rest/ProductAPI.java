@@ -27,7 +27,9 @@ import com.hp.map.ProductManagerActivity;
 import com.hp.map.TakeOrder_ProductActivity;
 import com.hp.map.TakeOrdersDetailManagerActivity;
 import com.hp.order.ProductArrayAdapter;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class ProductAPI {
 	public static List<Product> productList;
@@ -336,16 +338,26 @@ public class ProductAPI {
 			return "nohost";
 		}
 		
-		String output = response.toString();
-		System.out.println("input 1: " + output);
-		
-		if((response.getStatus() == 200) && (response.getEntity(String.class).compareTo("true") == 0)){
+		try {
+			String output = response.toString();
+			System.out.println("input 1: " + output);
 			
-			return "success";
-		}
-		else{
-				        
-		  return "fail";
+			if((response.getStatus() == 200) && (response.getEntity(String.class).compareTo("true") == 0)){
+				
+				return "success";
+			}
+			else{
+					        
+			  return "fail";
+			}
+		} catch (ClientHandlerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "nohost";
+		} catch (UniformInterfaceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "nohost";
 		}
 		// =====================================================================================
 		

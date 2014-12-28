@@ -113,8 +113,8 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 		productsList.add(product);
 		
 		listView = (ListView)findViewById(R.id.list_view_product);
-		adapter = new ProductArrayAdapter(this, android.R.layout.simple_list_item_1, productsList, mManager);
-		listView.setAdapter(adapter);
+//		adapter = new ProductArrayAdapter(this, android.R.layout.simple_list_item_1, productsList, mManager);
+//		listView.setAdapter(adapter);
 		
 		
 		listView.setOnItemClickListener(this);

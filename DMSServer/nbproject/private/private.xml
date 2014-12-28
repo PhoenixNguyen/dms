@@ -8,6 +8,7 @@
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/hibernate.cfg.xml</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/action/ViewStaffCurrentLocation.java</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/domain/RoadManagement.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/dao/RoadManagementDAOImpl.java</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/OrdersHandle.java</file>
         </group>
     </open-files>

@@ -92,28 +92,33 @@ public class CalendarAPI {
 				System.out.println("input 1: " + output);
 
 				//
-				String result = "";
-				if (response.getStatus() == 200)
-						result = response.getEntity(String.class);
-				
-				if (result.equalsIgnoreCase("true")){
-
-					return "success";
-				} 
-				else
-					if (result.equalsIgnoreCase("existcalendar")){
-
-						return "existcalendar";
-					}
+				try{
+					String result = "";
+					if (response.getStatus() == 200)
+							result = response.getEntity(String.class);
+					
+					if (result.equalsIgnoreCase("true")){
+	
+						return "success";
+					} 
 					else
-						if (result.equalsIgnoreCase("readonly")){
-
-							return "readonly";
+						if (result.equalsIgnoreCase("existcalendar")){
+	
+							return "existcalendar";
 						}
-				
-				else {
-
-					return "fail";
+						else
+							if (result.equalsIgnoreCase("readonly")){
+	
+								return "readonly";
+							}
+					
+					else {
+	
+						return "fail";
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
 				}
 				//
 				// =====================================================================================
@@ -273,24 +278,28 @@ public class CalendarAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
-
-				if (response.getStatus() != 200) {
-
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
+				try{
+					String output = response.toString();
+					System.out.println("input 1: " + output);
+	
+					if (response.getStatus() != 200) {
+	
 						return "nodata";
+					} else {
+	
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+	
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+					return "nohost";
 				}
-				
 				// =====================================================================================
 
 			}

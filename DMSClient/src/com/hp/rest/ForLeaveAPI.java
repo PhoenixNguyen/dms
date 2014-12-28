@@ -19,7 +19,9 @@ import com.hp.domain.ForLeave;
 import com.hp.forleave.ForLeaveArrayAdapter;
 import com.hp.map.ForLeaveAdditionActivity;
 import com.hp.map.ForLeaveManagerActivity;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class ForLeaveAPI {
 	public static List<ForLeave> forLeaveList = new ArrayList<ForLeave>();
@@ -88,32 +90,42 @@ public class ForLeaveAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				//
-				String result = "";
-				if (response.getStatus() == 200)
-						result = response.getEntity(String.class);
-				
-				if (result.equalsIgnoreCase("true")){
+					//
+					String result = "";
+					if (response.getStatus() == 200)
+							result = response.getEntity(String.class);
+					
+					if (result.equalsIgnoreCase("true")){
 
-					return "success";
-				} 
-				else
-					if (result.equalsIgnoreCase("existforleave")){
-
-						return "existforleave";
-					}
+						return "success";
+					} 
 					else
-						if (result.equalsIgnoreCase("readonly")){
+						if (result.equalsIgnoreCase("existforleave")){
 
-							return "readonly";
+							return "existforleave";
 						}
-				
-				else {
+						else
+							if (result.equalsIgnoreCase("readonly")){
 
-					return "fail";
+								return "readonly";
+							}
+					
+					else {
+
+						return "fail";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				//
 				// =====================================================================================
@@ -259,22 +271,32 @@ public class ForLeaveAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if (response.getStatus() != 200) {
+					if (response.getStatus() != 200) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				
 				// =====================================================================================

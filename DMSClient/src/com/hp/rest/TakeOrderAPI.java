@@ -31,7 +31,9 @@ import com.hp.map.TakeOrder_ProductActivity;
 import com.hp.map.TakeOrdersDetailManagerActivity;
 import com.hp.map.TakeOrdersManagerActivity;
 import com.hp.order_manager.OrdersManagerArrayAdapter;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class TakeOrderAPI {
 	public static List<TakeOrder> takeOrderList;
@@ -102,21 +104,31 @@ public class TakeOrderAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response1.toString());
-			System.out.println("________________ " + response2.toString());
+			//System.out.println("________________ " + response1.toString());
+			//System.out.println("________________ " + response2.toString());
 			
-			if (response1.getStatus() != 200 || (response1.getEntity(String.class).compareTo("true") != 0)) {
+			try {
+				if (response1.getStatus() != 200 || (response1.getEntity(String.class).compareTo("true") != 0)) {
 
-				return "nodata1";
-			} 
-			else
-				if (response2.getStatus() != 200 || (response2.getEntity(String.class).compareTo("0") == 0)) {
+					return "nodata1";
+				} 
+				else
+					if (response2.getStatus() != 200 || (response2.getEntity(String.class).compareTo("0") == 0)) {
 
-					return "nodata2";
+						return "nodata2";
+					}
+				else {
+					
+					return "success";
 				}
-			else {
-				
-				return "success";
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 
@@ -216,16 +228,26 @@ public class TakeOrderAPI {
 					return "nohost";
 				}
 
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if ((response.getStatus() == 200)
-						&& (response.getEntity(String.class).compareTo("true") == 0)) {
+					if ((response.getStatus() == 200)
+							&& (response.getEntity(String.class).compareTo("true") == 0)) {
 
-					return "success";
-				} else {
+						return "success";
+					} else {
 
-					return "fail";
+						return "fail";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 
@@ -350,22 +372,32 @@ public class TakeOrderAPI {
 					return "nohost";
 				}
 				
-				String output = response.toString();
-				System.out.println("input 1: " + output);
+				try {
+					String output = response.toString();
+					System.out.println("input 1: " + output);
 
-				if (response.getStatus() != 200) {
+					if (response.getStatus() != 200) {
 
-					return "nodata";
-				} else {
-
-					String re = response.getEntity(String.class);
-					System.out.println("________________ " + re);
-
-					// Convert
-					if (ConvertStringToObjectList(re))
-						return "success";
-					else
 						return "nodata";
+					} else {
+
+						String re = response.getEntity(String.class);
+						System.out.println("________________ " + re);
+
+						// Convert
+						if (ConvertStringToObjectList(re))
+							return "success";
+						else
+							return "nodata";
+					}
+				} catch (ClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
+				} catch (UniformInterfaceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "nohost";
 				}
 				// =====================================================================================
 

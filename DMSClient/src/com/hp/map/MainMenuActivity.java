@@ -2,6 +2,7 @@ package com.hp.map;
 
 
 import com.hp.common.UpdateApp;
+import com.hp.gps.BackgroundLocationService;
 import com.hp.menu.DetailListData;
 import com.hp.menu.DetailsList;
 import com.hp.menu.DialogArrayAdapter;
@@ -39,6 +40,12 @@ public class MainMenuActivity extends Activity  {
 			getActionBar().setHomeButtonEnabled(true);
 			getActionBar().setLogo(R.drawable.ic_launcher);
 			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+		
+		if(BackgroundLocationService.mLocationClient == null){
+			// Init service 
+			System.out.println("turn on");
+			startService(new Intent(context, BackgroundLocationService.class));
 		}
 		
 	}

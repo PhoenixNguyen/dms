@@ -323,6 +323,8 @@ public class UtilitiesHandle {
 //            return Response.status(200).entity("nocalendar").build();
 //        }
         
+        timeKeeper.setTimeAt(Timestamp.valueOf(dateFormat.format(new Date())));
+        
         TimeKeeperDAO timeKeeperDAO = new TimeKeeperDAOImpl();
         List<TimeKeeper> todayList = timeKeeperDAO.getTimeKeeperList(timeKeeper.getStaff(), df.parse(df.format(timeKeeper.getTimeAt())));
         
@@ -343,7 +345,6 @@ public class UtilitiesHandle {
             System.out.println(Float.parseFloat(dc.format(diffInMinutes/60f)));
             timeKeeper.setTimeBetween( Float.parseFloat(dc.format(diffInMinutes/60f)));
             
-            timeKeeper.setTimeAt(Timestamp.valueOf(dateFormat.format(new Date())));
         }
         return Response.status(200).entity(timeKeeperDAO.saveOrUpdate(timeKeeper) + "").build();
     }
@@ -389,13 +390,15 @@ public class UtilitiesHandle {
         if(setLunch == null)
             return Response.status(200).entity("false").build();
         
+        Date today = new Date();
+        setLunch.setTimeAt(Timestamp.valueOf(dateFormat.format(today)));
+        
         List<SetLunch> setLunchList = setLunchDAO.getSetLunchList(setLunch.getStaff(), setLunch.getTimeAt());
         
         if(setLunchList != null && setLunchList.size() > 0){
             return Response.status(200).entity("existsetlunch").build();
         }
         
-        Date today = new Date();
         setLunch.setCreatedTime(Timestamp.valueOf(dateFormat.format(today)));
         
         return Response.status(200).entity(setLunchDAO.saveOrUpdate(setLunch) + "").build();
@@ -442,13 +445,15 @@ public class UtilitiesHandle {
         if(forLeave == null)
             return Response.status(200).entity("false").build();
         
+        Date today = new Date();
+        forLeave.setTimeAt(Timestamp.valueOf(dateFormat.format(today)));
+        
         List<ForLeave> forLeaveList = forLeaveDAO.getForLeaveList(forLeave.getStaff(), forLeave.getTimeAt());
         
         if(forLeaveList != null && forLeaveList.size() > 0){
             return Response.status(200).entity("existforleave").build();
         }
         
-        Date today = new Date();
         forLeave.setCreatedTime(Timestamp.valueOf(dateFormat.format(today)));
         
         return Response.status(200).entity(forLeaveDAO.saveOrUpdate(forLeave) + "").build();

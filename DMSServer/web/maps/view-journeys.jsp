@@ -81,9 +81,10 @@
                     <s:iterator value="listRoad" status="status">
                     <s:iterator value="listRoad.get(#status.index)" status="index">
                     <s:date name="thoiGian" id="createdDateId" format="HH:mm:ss dd-MM-yyyy "/>
-                            'Mã Nhân viên: <s:property value="maNhanVien"/> <br/>\
-                            Thời gian:<br/><s:property value="%{createdDateId}"/> <br/>\
-                            Thứ tự di chuyển: <s:property value="%{#index.index + 1}"/>',
+                            '<div style="width:550px;"><b>Mã Nhân viên:</b> <s:property value="maNhanVien"/> <br/>\
+                            <b>Thời gian:</b> <s:property value="%{createdDateId}"/> <br/>\
+                            <b>Thứ tự di chuyển:</b> <s:property value="%{#index.index + 1}"/><br/>\
+                            <b>Vị trí:</b> <s:property value="ghiChu"/></div>',
                     </s:iterator>
                     </s:iterator>
                 ];

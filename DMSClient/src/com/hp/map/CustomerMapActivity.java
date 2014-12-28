@@ -41,6 +41,7 @@ import com.hp.domain.RoadManagement;
 import com.hp.menu.DetailListData;
 import com.hp.menu.DetailsList;
 import com.hp.menu.DialogArrayAdapter;
+import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 import com.hp.rest.CustomerAPI;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
@@ -477,17 +478,23 @@ public class CustomerMapActivity extends FragmentActivity
                     Builder builder = new LatLngBounds.Builder();
                     //for(int i = 0; i< Rest.customerList.size(); i++){
                     		
+                    if(CustomerAPI.customerList != null && CustomerAPI.customerList.size() > 0)
                     	builder.include(new LatLng(CustomerAPI.customerList.get(positionClick).getCoordinateX(), CustomerAPI.customerList.get(positionClick).getCoordinateY()));
                         	
                     //}
                     
-                    LatLngBounds  bounds = builder.build();
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                      mapView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    } else {
-                      mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+                    try {
+						LatLngBounds  bounds = builder.build();
+						if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+						  mapView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+						} else {
+						  mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+						}
+						mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 }
             });
         }
@@ -552,6 +559,14 @@ public class CustomerMapActivity extends FragmentActivity
     	if(mX <= 0.0 || mY <= 0.0)
     		return;
     	
+    	if (CheckingInternet.isOnline()) {
+			System.out.println("Internet access!!____________________");
+		} else {
+			
+			System.out.println("NO Internet access!!____________________");
+			Toast.makeText(this, "Không có kết nối mạng hãy bật 3G hoặc wifi để tiếp tục!", Toast.LENGTH_SHORT).show();
+			return ;
+		}
         System.out.println("SEND DEMO LOCATION: _______");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -564,17 +579,32 @@ public class CustomerMapActivity extends FragmentActivity
 //        		,mY
 //        		,"");
         
-        Customer customer = CustomerAPI.customerList.get(positionClick);
-        customer.setCoordinateX(mX);
-        customer.setCoordinateY(mY);
-        
-        ModifyCustomerTask insertData = new ModifyCustomerTask(context, "updateCustomer", customer, true);
-		insertData.execute();
-		
-		//loading
-		GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
-			    true, this);
-        getData.execute();
+        try {
+			Customer customer = CustomerAPI.customerList.get(positionClick);
+			customer.setCoordinateX(mX);
+			customer.setCoordinateY(mY);
+			
+			ModifyCustomerTask insertData = new ModifyCustomerTask(context, "updateCustomer", customer, true);
+			insertData.execute();
+			
+			//loading
+			
+			CustomerAPI.customerList.get(positionClick).setCoordinateX(mX);
+			CustomerAPI.customerList.get(positionClick).setCoordinateY(mY);
+			
+			if (!checkReady()) {
+	            return;
+	        }
+	        mMap.clear();
+			setUpMap();
+			
+//			GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
+//				    true, this);
+//			getData.execute();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         		
     }
     
@@ -633,8 +663,8 @@ public class CustomerMapActivity extends FragmentActivity
     public boolean onMarkerClick(final Marker marker) {
 
             // This causes the marker at Adelaide to change color and alpha.
-            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(mRandom.nextFloat() * 360));
-            //marker.setAlpha(mRandom.nextFloat());
+//            marker.setIcon(BitmapDescriptorFactory.defaultMarker(mRandom.nextFloat() * 360));
+//            marker.setAlpha(mRandom.nextFloat());
         
         return false;
     }

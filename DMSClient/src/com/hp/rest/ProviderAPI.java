@@ -80,23 +80,27 @@ public class ProviderAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response.toString());
+			//System.out.println("________________ " + response.toString());
 
-			if (response.getStatus() != 200) {
+			if (response != null && response.getStatus() != 200) {
 
 				return "nodata";
 			} else {
-
-				String re = response.getEntity(String.class);
-				System.out.println("________________ " + re);
-
-				// Convert
-				if (ConvertStringToObjectList(re))
-					
-					
-					return "success";
-				else
+				try{
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
+	
+					// Convert
+					if (ConvertStringToObjectList(re))
+						
+						
+						return "success";
+					else
+						return "nodata";
+				}catch(Exception e){
+					e.printStackTrace();
 					return "nodata";
+				}
 			}
 			// =====================================================================================
 

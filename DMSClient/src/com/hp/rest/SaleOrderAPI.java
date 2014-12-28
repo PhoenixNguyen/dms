@@ -29,7 +29,9 @@ import com.hp.map.R;
 import com.hp.map.SaleManagerActivity;
 import com.hp.order_manager.OrdersManagerArrayAdapter;
 import com.hp.sale_order.DialogArrayAdapter;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class SaleOrderAPI {
 	public static List<TakeOrder> takeOrderList;
@@ -85,21 +87,31 @@ public class SaleOrderAPI {
 			return "nohost";
 		}
 		
-		System.out.println("________________ " + response.toString());
+		//System.out.println("________________ " + response.toString());
 	
-		if (response.getStatus() != 200) {
-	
-			return "nodata";
-		} else {
-	
-			String re = response.getEntity(String.class);
-			System.out.println("________________ " + re);
-	
-			// Convert
-			if (ConvertStringToObjectList(re))
-				return "success";
-			else
+		try {
+			if (response.getStatus() != 200) {
+
 				return "nodata";
+			} else {
+
+				String re = response.getEntity(String.class);
+				System.out.println("________________ " + re);
+
+				// Convert
+				if (ConvertStringToObjectList(re))
+					return "success";
+				else
+					return "nodata";
+			}
+		} catch (ClientHandlerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "nohost";
+		} catch (UniformInterfaceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "nohost";
 		}
 		// =====================================================================================
 	
@@ -242,15 +254,21 @@ public class SaleOrderAPI {
 				return "nohost";
 			}
 			
-			System.out.println("________________ " + response.toString());
+			//System.out.println("________________ " + response.toString());
 		
-			if (response.getStatus() != 200) {
-		
-				return "nodata";
-			} else {
-		
-				return "success";
-				
+			try {
+				if (response.getStatus() != 200) {
+
+					return "nodata";
+				} else {
+
+					return "success";
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 		

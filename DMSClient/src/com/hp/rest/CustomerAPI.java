@@ -29,7 +29,9 @@ import com.hp.map.CustomerMapActivity;
 import com.hp.map.ProfileActivity;
 import com.hp.map.R;
 import com.hp.map.TakeImagesActivity;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class CustomerAPI {
 
@@ -148,19 +150,29 @@ public class CustomerAPI {
 				return "nohost";
 			}
 			
-			if (response.getStatus() != 200) {
+			try {
+				if (response.getStatus() != 200) {
 
-				return "nodata";
-			} else {
-
-				String re = response.getEntity(String.class);
-				System.out.println("________________ " + re);
-
-				// Convert
-				if (ConvertStringToObjectList(re))
-					return "success";
-				else
 					return "nodata";
+				} else {
+
+					String re = response.getEntity(String.class);
+					System.out.println("________________ " + re);
+
+					// Convert
+					if (ConvertStringToObjectList(re))
+						return "success";
+					else
+						return "nodata";
+				}
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 
@@ -268,7 +280,6 @@ public class CustomerAPI {
 		Customer customer;
 
 		boolean insert;
-
 		public ModifyCustomerTask(Context context, String method,
 				Customer customer, boolean insert) {
 			this.context = context;
@@ -309,16 +320,26 @@ public class CustomerAPI {
 				return "nohost";
 			}
 			
-			String output = response.toString();
-			System.out.println("input 1: " + output);
+			try {
+				String output = response.toString();
+				System.out.println("input 1: " + output);
 
-			if ((response.getStatus() == 200)
-					&& (response.getEntity(String.class).compareTo("true") == 0)) {
+				if ((response.getStatus() == 200)
+						&& (response.getEntity(String.class).compareTo("true") == 0)) {
 
-				return "success";
-			} else {
+					return "success";
+				} else {
 
-				return "fail";
+					return "fail";
+				}
+			} catch (ClientHandlerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
+			} catch (UniformInterfaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 
@@ -333,7 +354,6 @@ public class CustomerAPI {
 				else {
 					Toast.makeText(context, "Đã lưu ", Toast.LENGTH_SHORT)
 							.show();
-
 				}
 
 				
@@ -450,16 +470,22 @@ public class CustomerAPI {
 				return "nohost";
 			}
 			
-			String output = response.toString();
-			System.out.println("input 1: " + output);
+			try {
+				String output = response.toString();
+				System.out.println("input 1: " + output);
 
-			if (response.getStatus() == 200
-					) {
+				if (response.getStatus() == 200
+						) {
 
-				return "success";
-			} else {
+					return "success";
+				} else {
 
-				return "fail";
+					return "fail";
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "nohost";
 			}
 			// =====================================================================================
 

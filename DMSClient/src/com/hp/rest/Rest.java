@@ -47,7 +47,7 @@ public class Rest {
 	    //return UriBuilder.fromUri("http://192.168.169.3:8080/DMSProject").build();
 	    //return UriBuilder.fromUri("http://masterpro02.hosco.com.vn:8001/DMS").build();
 	    //return UriBuilder.fromUri("http://dms.adiagri.com.vn:8484/DMS/").build();
-		return UriBuilder.fromUri("http://192.168.0.4:8080/DMS").build();
+		return UriBuilder.fromUri("http://192.168.0.32:8080/DMS").build();
 	  }
 	
 	

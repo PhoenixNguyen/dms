@@ -8,6 +8,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.hp.domain.Customer;
 import com.hp.map.R;
+import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
 import com.hp.rest.CustomerAPI.ModifyCustomerTask;
@@ -128,13 +129,29 @@ public class CustomerAdditionActivity extends MainMenuActivity{
 	
 	public void insertCustomer(Customer customer){
 		
-		ModifyCustomerTask insertData = new ModifyCustomerTask(context, "insertCustomer", customer, true);
-		insertData.execute();
+		if (CheckingInternet.isOnline()) {
+			System.out.println("Internet access!!____________________");
+			
+		} else {
+			
+			System.out.println("NO Internet access!!____________________");
+			Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();
+			return ;
+
+		}
 		
-		//loading
-		GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
-			    true, customer);
-        getData.execute();
+		try {
+			ModifyCustomerTask insertData = new ModifyCustomerTask(context, "insertCustomer", customer, true);
+			insertData.execute();
+			
+			//loading
+			GetCustomerListTask getData = new GetCustomerListTask(context, "getCustomersListStart", Rest.mStaff.getId(),
+				    true, customer);
+			getData.execute();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	      
 	}
 
