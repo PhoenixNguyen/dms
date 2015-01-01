@@ -542,14 +542,6 @@ public class CalendarManagerActivity extends MainMenuActivity implements OnClick
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 	
-	
-	@Override
-	protected void onResume() {
-
-	   super.onResume();
-	   this.onCreate(null);
-	}
-	
 	public void newCalendar(){
 		startActivity(new Intent(this, CalendarAdditionActivity.class));
 	}

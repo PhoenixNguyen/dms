@@ -54,7 +54,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product>{
         else
         	featureView.setBackgroundColor(Color.parseColor("#CCFF99"));
 
-        System.out.println(position);
+        //System.out.println(position);
         if(values != null && values.size() > 0){
 	        featureView.setTitleId(values.get(position).getProductID());
 	        featureView.setDescriptionId(values.get(position).getProductName());

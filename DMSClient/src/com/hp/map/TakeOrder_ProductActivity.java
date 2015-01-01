@@ -141,7 +141,8 @@ public class TakeOrder_ProductActivity extends Activity implements OnItemClickLi
 	
 	public void onResume(){
 		super.onResume();
-		this.onCreate(null);
+		/*super.onResume();
+		this.onCreate(null);*/
 	}
 	
 	public void init(){

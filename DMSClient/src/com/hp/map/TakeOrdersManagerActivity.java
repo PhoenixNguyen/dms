@@ -562,14 +562,6 @@ public class TakeOrdersManagerActivity extends MainMenuActivity implements OnCli
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 	
-	
-	@Override
-	protected void onResume() {
-
-	   super.onResume();
-	   this.onCreate(null);
-	}
-	
 	public void newTakeOrder(){
 		startActivity(new Intent(this, CustomerListActivity.class));
 	}

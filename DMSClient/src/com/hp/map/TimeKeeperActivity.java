@@ -61,7 +61,15 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		init();
 		getTimeKeepingList();
 		
-		getAddress();
+		if(BackgroundLocationService.mCurrentAddress != null)
+			time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
+	    			 "_____________________________________ \n" +
+	    			 "Vị trí hiện tại của bạn: " + " \n" + BackgroundLocationService.mCurrentAddress);
+		else{
+			time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
+	    			 "_____________________________________ \n" +
+	    			 "Hệ thống đang cố dò vị trí, xin hãy chờ trong giây lát!");
+		}
 	}
 	
 	
@@ -124,7 +132,7 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		total_time.setText("Tổng số giờ làm việc " + hours + " giờ.");
 	}
 	
-	@SuppressLint("SimpleDateFormat")
+	/*@SuppressLint("SimpleDateFormat")
 	public String getAddress(){
 		//check internet
 		if(CheckingInternet.isOnline()){
@@ -192,12 +200,12 @@ public class TimeKeeperActivity extends MainMenuActivity{
 	     }
 	     
 	     return address;
-	}
+	}*/
 	@SuppressLint("SimpleDateFormat")
 	public void timeKeeping(View v){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//Get City
-		String city = getAddress();
+		String city = BackgroundLocationService.mCurrentAddress;
 		if(city == null)
 			return;
 		

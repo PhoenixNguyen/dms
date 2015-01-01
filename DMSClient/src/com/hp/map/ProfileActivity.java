@@ -1,5 +1,6 @@
 package com.hp.map;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,7 +32,7 @@ import android.widget.Toast;
 public class ProfileActivity extends MainMenuActivity  
 {
 	private TextView my_info;
-	private static TextView my_location;
+	public static TextView my_location;
 	private EditText name;
 	private EditText address;
 	private EditText job;
@@ -93,10 +94,14 @@ public class ProfileActivity extends MainMenuActivity
 			}
 		}
 		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		if(BackgroundLocationService.mCurrentAddress != null && !BackgroundLocationService.mCurrentAddress.equals(""))
+			my_location.setText("" + df.format(new Date()) + "\n" + 
+				 "" +
+				 "Vị trí hiện tại: " + " \n" + BackgroundLocationService.mCurrentAddress);
+		
 		// Init service 
 		startService(new Intent(context, BackgroundLocationService.class));
-		if(BackgroundLocationService.CURRENT_LOCATION != null)
-			getAddress(BackgroundLocationService.CURRENT_LOCATION);
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu){
@@ -138,7 +143,7 @@ public class ProfileActivity extends MainMenuActivity
 		moveTaskToBack(true);
 	}
 	
-	@SuppressLint("SimpleDateFormat")
+	/*@SuppressLint("SimpleDateFormat")
 	public static String getAddress(Location location){
 		//check internet
 		if(CheckingInternet.isOnline()){
@@ -191,6 +196,16 @@ public class ProfileActivity extends MainMenuActivity
 		       if (!City.equals("")) {
 		        //finish_service();
 		       }
+	      }else
+	      if(Status.equalsIgnoreCase("OVER_QUERY_LIMIT"))
+	      {
+	          try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	          getAddress(location);
 	      }
 
 	     } catch (JSONException e) {
@@ -198,13 +213,20 @@ public class ProfileActivity extends MainMenuActivity
 	     }
 		//End Get City
 		
-	     if(!address.equals("")){
-	    	 my_location.setText("" + df.format(new Date()) + "\n" + 
-	    			 "" +
-	    			 "Vị trí hiện tại: " + " \n" + address);
-	     }
+	     try {
+			if(!address.equals("")){
+				 my_location.setText("" + df.format(new Date()) + "\n" + 
+						 "" +
+						 "Vị trí hiện tại: " + " \n" + address);
+			 }
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	     
+	     System.out.println("address ---> " + address);
 	     return address;
-	}
+	}*/
 	
 }

@@ -522,14 +522,6 @@ public class ForLeaveManagerActivity extends MainMenuActivity implements OnClick
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 	
-	
-	@Override
-	protected void onResume() {
-
-	   super.onResume();
-	   this.onCreate(null);
-	}
-	
 	public void newForLeave(){
 		startActivity(new Intent(this, ForLeaveAdditionActivity.class));
 	}

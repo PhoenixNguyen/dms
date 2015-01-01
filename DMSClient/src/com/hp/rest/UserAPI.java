@@ -12,6 +12,7 @@ import java.util.Date;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,6 +32,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.hp.common.SharedConstant;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
 import com.hp.gps.MyLocationListener;
@@ -151,19 +153,25 @@ public class UserAPI {
 				
 				//Save passwork
 				if(activity.remember_me.isChecked()){
-					SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+					SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = sp.edit();
-					editor.putString("username", Rest.mStaff.getId());
-					editor.putString("password", Rest.mStaff.getPw());
+					editor.putString(SharedConstant.LOGIN_USERNAME, Rest.mStaff.getId());
+					editor.putString(SharedConstant.LOGIN_PASSWORD, Rest.mStaff.getPw());
 					editor.commit();
 				}
 				else{
-					SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
+					SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = sp.edit();
-					editor.putString("username", "");
-					editor.putString("password", "");
+					editor.putString(SharedConstant.LOGIN_USERNAME, "");
+					editor.putString(SharedConstant.LOGIN_PASSWORD, "");
 					editor.commit();
 				}
+				
+				// Save Staff
+				SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sp.edit();
+				editor.putString(SharedConstant.LOGIN_STAFF, Rest.mStaffJson);
+				editor.commit();
 				
 				//To enable st auto
 				//enableConditions(context);
@@ -207,15 +215,17 @@ public class UserAPI {
     			return false;
     		}
             
-            if(Rest.mStaff != null)
+            if(Rest.mStaff != null){
+            	Rest.mStaffJson = str;
             	return true;
+            }
             else
             	return false;
         }
     } 
 	
 	
-	private static void setMobileDataEnabled(Context context, boolean enabled) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchFieldException, NoSuchMethodException {
+	/*private static void setMobileDataEnabled(Context context, boolean enabled) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchFieldException, NoSuchMethodException {
 	    final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 	    final Class conmanClass = Class.forName(conman.getClass().getName());
 	    final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
@@ -290,7 +300,7 @@ public class UserAPI {
 	             locationManager.removeUpdates(myListener);
 	         }
 	    }, MY_TIMEOUT_IN_MS);
-	}
+	}*/
 	
 	//EDIT STAFF
 	public static class EditUserTask extends AsyncTask<Void,Void,String>

@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/LightYellow"
-                android:text="Đang cập nhật vị trí ..."
+                android:text="Hệ thống đang dò vị trí, xin hãy chờ trong giây lát!"
                  />
             <TextView
                 android:layout_width="match_parent"

@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,6 +23,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
 import com.hp.common.HttpHelper;
+import com.hp.common.Utility;
 import com.hp.domain.RoadManagement;
 import com.hp.map.ProfileActivity;
 import com.hp.rest.CheckingInternet;
@@ -30,6 +32,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -48,6 +51,9 @@ public class BackgroundLocationService extends Service implements
 		GooglePlayServicesClient.OnConnectionFailedListener, LocationListener,
 		com.google.android.gms.location.LocationListener {
 
+	public static String mCurrentAddress = "";
+	
+	Context context = this;
 	public static Location CURRENT_LOCATION;
 
 	IBinder mBinder = new LocalBinder();
@@ -74,7 +80,7 @@ public class BackgroundLocationService extends Service implements
 		mLocationRequest = LocationRequest.create();
 		// Use high accuracy
 		mLocationRequest
-				.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+				.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);//PRIORITY_BALANCED_POWER_ACCURACY //PRIORITY_HIGH_ACCURACY
 		// Set the update interval to 5 seconds
 		mLocationRequest.setInterval(Constants.UPDATE_INTERVAL);
 		// Set the fastest update interval to 1 second
@@ -141,10 +147,11 @@ public class BackgroundLocationService extends Service implements
 		// Report to the UI that the location was updated
 		CURRENT_LOCATION = location;
 
-		String address = ProfileActivity.getAddress(location);
-
-		pụtJourney((float) location.getLatitude(),
-				(float) location.getLongitude(), address);
+		//String address = ProfileActivity.getAddress(location);
+		Utility.keepLogined(context);
+		//if(address != null && !address.equals(""))
+			pụtJourney((float) location.getLatitude(),
+				(float) location.getLongitude(), "");
 
 		String msg = Double.toString(location.getLatitude()) + ","
 				+ Double.toString(location.getLongitude());
@@ -305,8 +312,9 @@ public class BackgroundLocationService extends Service implements
 
 		try {
 
-			objectStr = mapper.writeValueAsString(roadManagement);
-
+			objectStr = new String(mapper.writeValueAsString(roadManagement).getBytes(("UTF-8")), "utf-8");
+			System.out.println(Rest.mStaff.getName());
+			System.out.println(objectStr);
 		} catch (JsonGenerationException ex) {
 
 			ex.printStackTrace();
@@ -329,11 +337,32 @@ public class BackgroundLocationService extends Service implements
 		String output = response.toString();
 		System.out.println("input 1: " + output);
 
-		if ((response.getStatus() == 200)
-				&& (response.getEntity(String.class).compareTo("true") == 0)) {
+		if ((response.getStatus() == 200)) {
+			String res = response.getEntity(String.class);
+			try {
+				JSONObject json = new JSONObject(res);
+				if(json.has("status") && json.getBoolean("status")){
+					System.out.println("Đã cập nhật vị trí");
+					
+					mCurrentAddress = json.getString("address");
+					
+					if(ProfileActivity.my_location != null){
+						DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+						ProfileActivity.my_location.setText("" + df.format(new Date()) + "\n" + 
+								 "" +
+								 "Vị trí hiện tại: " + " \n" + mCurrentAddress);
+					}
+				}else
+					System.out.println("Cập nhật vị trí thất bại");
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			// Toast.makeText(context, "Đã lưu", Toast.LENGTH_SHORT).show();
 			// refresh customers
-			System.out.println("Đã gửi");
+			
 
 		} else
 			System.out.println("Không thể gửi");

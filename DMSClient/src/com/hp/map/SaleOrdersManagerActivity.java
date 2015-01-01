@@ -558,14 +558,6 @@ public class SaleOrdersManagerActivity extends MainMenuActivity implements OnCli
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 	
-	
-	@Override
-	protected void onResume() {
-
-	   super.onResume();
-	   this.onCreate(null);
-	}
-	
 	@SuppressLint("NewApi")
 	static <T> T[] append(T[] arr, T element) {
         final int N = arr.length;

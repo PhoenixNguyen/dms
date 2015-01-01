@@ -51,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hp.common.LoadingView;
+import com.hp.common.SharedConstant;
 import com.hp.domain.Customer;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
@@ -93,9 +94,9 @@ public class LoginActivity extends Activity {
 		  
         remember_me = (CheckBox)findViewById(R.id.remember_me);
         
-        SharedPreferences sp = context.getSharedPreferences("loginSaved", Context.MODE_PRIVATE);
-        String username = sp.getString("username", null);
-        String password = sp.getString("password", null);
+        SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+        String username = sp.getString(SharedConstant.LOGIN_USERNAME, null);
+        String password = sp.getString(SharedConstant.LOGIN_PASSWORD, null);
         if(username != null && password != null){
         	mUsername.setText(username);//ba_dinhtu_liem
             mPassword.setText(password);//111111 

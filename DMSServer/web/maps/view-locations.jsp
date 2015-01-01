@@ -65,20 +65,23 @@
                 var infowindow = new google.maps.InfoWindow({
                     content: ''
                 });
-
+                
                 var contentString = [
             <s:iterator value="listCustomer" status="status">
+                
                     '<div id="boxShow"> <a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">\n\
                                         <img class= "ImageWrap" border="0" src="../customer/<s:property value="maDoiTuong"/>/1.jpg"  ></a>' +
                             '<p class= "TextWrap">\n\
                                 <b><a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">Khách hàng: <s:property value="doiTuong"/></a></b>' + '<br/><br/>' +
                             'Mã khách hàng: <s:property value="maDoiTuong"/>' + '<br/>' +
                             'Tỉnh thành: <s:property value="tinhThanh"/>' + '<br/>' +
-                            'Địa chỉ: <s:property value="diaChi"/>' + '<br/>' +
+                            'Địa chỉ:' +'<s:property value="diaChi.replace(\"\'\", \"\")"/>' + '<br/>' +
                             'Điện thoại: <s:property value="dienThoai"/>' + '<br/>' +
                             'Fax: <s:property value="fax"/>' + '<br/>\n\
                              Tọa độ X: <s:property value="coordinateX"/> <br/> \n\
                              Tọa độ Y: <s:property value="coordinateY"/> <br/>   </p></div>',
+            
+            
             </s:iterator>
                 ];
 
@@ -102,7 +105,9 @@
                 }
 
             }
-
+            function replaceSpecialCharacters(txt){
+                return txt.replace('\'', '');
+            }
             function bindInfoWindow(marker, map, infowindow, html, Ltitle) {
                
                 google.maps.event.addListener(marker, 'click', function() {

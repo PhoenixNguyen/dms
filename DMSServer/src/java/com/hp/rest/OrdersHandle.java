@@ -6,6 +6,7 @@
 
 package com.hp.rest;
 
+import com.hp.common.Utility;
 import com.hp.dao.InventoryManagerDAO;
 import com.hp.dao.InventoryManagerDAOImpl;
 import com.hp.dao.InventoryManagerDetailDAO;
@@ -44,7 +45,9 @@ import com.hp.domain.SaleOrderDetail;
 import com.hp.domain.Stock;
 import com.hp.domain.TakeOrder;
 import com.hp.domain.TakeOrderDetail;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,6 +55,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -66,6 +71,8 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -338,8 +345,14 @@ public class OrdersHandle {
     @POST
     @Path("/putStaffJourney")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putStaffJourney(String pData) { //String customerID
-        
+    public Response putStaffJourney(String pData) throws UnsupportedEncodingException { 
+//        ByteArrayInputStream pDataIS = null;
+//        try {
+//               pDataIS = new ByteArrayInputStream(pData.getBytes("UTF-8"));
+//               System.out.println(pDataIS.toString());
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(OrdersHandle.class.getName()).log(Level.SEVERE, null, ex);
+//        }
        // pair to object
         ObjectMapper mapper = new ObjectMapper();
         RoadManagement roadManagement = new RoadManagement();
@@ -357,13 +370,28 @@ public class OrdersHandle {
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
+        String address = "";
         if(roadManagement != null){
             roadManagement.setThoiGian(Timestamp.valueOf(dateFormat.format(date)));
+            
+            // Set address
+            address = Utility.getAddress(roadManagement.getViDo(), roadManagement.getKinhDo());
+            roadManagement.setGhiChu(address);
         }
+        
         RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();
-        boolean st = roadManagementDAO.saveOrUpdate(roadManagement);
-               
-        return Response.status(200).entity(st+"").build();
+        boolean status = roadManagementDAO.saveOrUpdate(roadManagement);
+        
+        JSONObject json = new JSONObject();
+        try {
+            json.put("status", status);
+            json.put("address", address);
+        } catch (JSONException ex) {
+            Logger.getLogger(OrdersHandle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return Response.status(200).entity(json.toString()).build();
         
     }
     

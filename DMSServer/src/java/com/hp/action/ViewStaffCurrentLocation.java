@@ -122,7 +122,7 @@ public class ViewStaffCurrentLocation extends ActionSupport{
         
         currLocations = roadManagementDAO.findLocationByTime(date);
         for(RoadManagement rm : currLocations){
-                System.out.println("currLocations: " + rm.getMaNhanVien() + " " + rm.getThoiGian());
+                System.out.println("currLocations: " + rm.getMaNhanVien() + " " + rm.getTenNhanVien());
         }
         lastRoads = roadManagementDAO.findLocationByTime(null);
         for(RoadManagement rm : lastRoads){

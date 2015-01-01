@@ -533,14 +533,6 @@ public class SetLunchManagerActivity extends MainMenuActivity implements OnClick
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 	
-	
-	@Override
-	protected void onResume() {
-
-	   super.onResume();
-	   this.onCreate(null);
-	}
-	
 	public void newSetLunch(){
 		startActivity(new Intent(this, SetLunchAdditionActivity.class));
 	}

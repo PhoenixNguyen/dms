@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/view/staff/current-location.jsp</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/InputResource.java</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/hibernate.cfg.xml</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/action/ViewStaffCurrentLocation.java</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/domain/RoadManagement.java</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/dao/RoadManagementDAOImpl.java</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/OrdersHandle.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/action/ViewJourneysAction.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/maps/view-journeys.jsp</file>
         </group>
     </open-files>
 </project-private>

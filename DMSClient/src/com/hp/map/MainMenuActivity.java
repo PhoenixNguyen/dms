@@ -2,10 +2,12 @@ package com.hp.map;
 
 
 import com.hp.common.UpdateApp;
+import com.hp.common.Utility;
 import com.hp.gps.BackgroundLocationService;
 import com.hp.menu.DetailListData;
 import com.hp.menu.DetailsList;
 import com.hp.menu.DialogArrayAdapter;
+import com.hp.rest.Rest;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -48,8 +50,17 @@ public class MainMenuActivity extends Activity  {
 			startService(new Intent(context, BackgroundLocationService.class));
 		}
 		
+		//Rest.mStaff = null;
+		
+		System.out.println("Test!");
+		Utility.keepLogined(context);
+		
 	}
 
+	public void onResume(){
+		super.onResume();
+	}
+	
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
 //		// Inflate the menu; this adds items to the action bar if it is present.

@@ -4,7 +4,10 @@
     Author     : HP
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+
+
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html>
@@ -13,6 +16,7 @@
         <title>Xem vị trí Nhân viên</title>
         <link REL="SHORTCUT ICON" HREF="${pageContext.request.contextPath}/themes/images/vtigercrm_icon.ico">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta charset="UTF-8">
         <style type="text/css">
 
         </style>
@@ -76,9 +80,6 @@
                 
                 
                 var contentString = [];
-                
-                //alert(<s:property value="lastLocations.size()"/>);
-                
                 <s:iterator value="currLocations" status="status" var="curr">
                     <s:iterator value="lastRoads" status="status2" var="last">
 
@@ -86,7 +87,6 @@
 
                             <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
                             <s:date name="#last.thoiGian" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
-
                             contentString.push({ content :
                                 '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
                                 '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
@@ -94,9 +94,9 @@
                                 '<b>Vị trí:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
                                 '<b>Lat:</b> <s:property value="#curr.viDo"/>, <s:property value="#curr.kinhDo"/> <br/> \n'+
                                 
-                                '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n\
-                                <b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.ghiChu"/> <br/> \n\
-                                </div>',
+                                '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n'+
+                                '<b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.ghiChu"/> <br/> \n'+
+                                '</div>',
                                 id : '<s:property value="#curr.maNhanVien"/>'
                     });
                         </s:if>
@@ -152,7 +152,7 @@
                                         <b><a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">Khách hàng: <s:property value="doiTuong"/></a></b>' + '<br/><br/>' +
                                     'Mã khách hàng: <s:property value="maDoiTuong"/>' + '<br/>' +
                                     'Tỉnh thành: <s:property value="tinhThanh"/>' + '<br/>' +
-                                    'Địa chỉ: <s:property value="diaChi"/>' + '<br/>' +
+                                    'Địa chỉ:' +'<s:property value="diaChi.replace(\"\'\", \"\")"/>' + '<br/>' +
                                     'Điện thoại: <s:property value="dienThoai"/>' + '<br/>' +
                                     'Fax: <s:property value="fax"/>' + '<br/>\n\
                                      \n\
@@ -208,7 +208,7 @@
             //Draw line
 
             function onGetLocation(x , l1, l2){
-                console.log("l1: " + l1);
+                //console.log("l1: " + l1);
                 //drawLine(x.clientX, x.clientY, toPixel(l1, l2));
                 //drawLine(x.offsetLeft + 100, x.offsetTop, toPixel(l1, l2));
                 drawLine(f (x).x + 100, f (x).y, toPixel(l1, l2));
@@ -382,7 +382,7 @@
             
             //var img1 = document.getElementById("cl1");
             function drawLine(x , y , p) {
-                console.log(x);
+                //console.log(x);
                 jg = new jsGraphics("canvas");
                 
                 var point = p;//toPixel();
