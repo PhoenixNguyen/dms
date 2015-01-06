@@ -102,8 +102,12 @@ public class LoginActivity extends Activity {
  		}else{
 	        boolean logined = sp.getBoolean(SharedConstant.LOGINED_STAFF, false);
 	        try {
-				if(logined)
-					startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+				if(logined){
+					Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+					i.putExtra("login", 1);
+					startActivity(i);
+					//startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
