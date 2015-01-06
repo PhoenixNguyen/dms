@@ -44,12 +44,11 @@ public class Rest {
 	}
 	
 	private static URI getBaseURI() {
-	    //return UriBuilder.fromUri("http://192.168.169.3:8080/DMSProject").build();
-	    //return UriBuilder.fromUri("http://masterpro02.hosco.com.vn:8001/DMS").build();
-	    //return UriBuilder.fromUri("http://dms.adiagri.com.vn:8484/DMS/").build();
-		//return UriBuilder.fromUri("http://192.168.0.4:8080/DMS").build();
-		return UriBuilder.fromUri("http://123.16.242.0:8080/DMS/").build();
-	  }
+		return UriBuilder.fromUri(mURL).build();
+	}
 	
+	//public static String mURL = "http://123.16.242.0:8080/DMS/";
+	public static String mURL = "http://192.168.1.104:8080/DMS";
+	//public static String mURL = "http://dms.adiagri.com.vn:8484/DMS/";
 	
 }

@@ -50,6 +50,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hp.common.HttpHelper;
 import com.hp.common.LoadingView;
 import com.hp.common.SharedConstant;
 import com.hp.domain.Customer;
@@ -95,6 +96,20 @@ public class LoginActivity extends Activity {
         remember_me = (CheckBox)findViewById(R.id.remember_me);
         
         SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+        // Check db server
+ 		if(CheckingInternet.checkUrl( Rest.mURL + SharedConstant.API_CHECK, HttpHelper.TIME_OUT_SHORT) != 200){
+ 			Toast.makeText(context, "Không thể kết nối được với máy chủ!", Toast.LENGTH_SHORT).show();
+ 		}else{
+	        boolean logined = sp.getBoolean(SharedConstant.LOGINED_STAFF, false);
+	        try {
+				if(logined)
+					startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 		}
+        
         String username = sp.getString(SharedConstant.LOGIN_USERNAME, null);
         String password = sp.getString(SharedConstant.LOGIN_PASSWORD, null);
         if(username != null && password != null){

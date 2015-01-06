@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.hp.common.HttpHelper;
+import com.hp.common.Utility;
 import com.hp.gps.BackgroundLocationService;
 import com.hp.rest.CustomerAPI.GetCustomerListTask;
 import com.hp.rest.CheckingInternet;
@@ -68,7 +69,7 @@ public class ProfileActivity extends MainMenuActivity
 		job.setFocusable(false);
 		phone.setFocusable(false);
 		
-		
+		Utility.keepLogined(context);
 		my_info.setText("Xin chào! " + Rest.mStaff.getId() + " - " + Rest.mStaff.getName());
 		
 		name.setText(Rest.mStaff.getName());

@@ -375,8 +375,8 @@ public class OrdersHandle {
             roadManagement.setThoiGian(Timestamp.valueOf(dateFormat.format(date)));
             
             // Set address
-            address = Utility.getAddress(roadManagement.getViDo(), roadManagement.getKinhDo());
-            roadManagement.setGhiChu(address);
+//            address = Utility.getAddress(roadManagement.getViDo(), roadManagement.getKinhDo());
+//            roadManagement.setGhiChu(address);
         }
         
         RoadManagementDAO roadManagementDAO = new RoadManagementDAOImpl();

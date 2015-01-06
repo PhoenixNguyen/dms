@@ -1,13 +1,12 @@
 package com.hp.map;
 
 
-import com.hp.common.UpdateApp;
+import com.hp.common.SharedConstant;
 import com.hp.common.Utility;
 import com.hp.gps.BackgroundLocationService;
 import com.hp.menu.DetailListData;
 import com.hp.menu.DetailsList;
 import com.hp.menu.DialogArrayAdapter;
-import com.hp.rest.Rest;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -16,6 +15,7 @@ import android.app.Dialog;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -124,6 +124,12 @@ public class MainMenuActivity extends Activity  {
 					//if sigout
 					if(selectedValue.activityClass == LoginActivity.class){
 						//LoginActivity.threadLooper.quit();
+						SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+						SharedPreferences.Editor editor = sp.edit();
+						
+						// Logout
+						editor.putBoolean(SharedConstant.LOGINED_STAFF, false);
+						editor.commit();
 					}
 					startActivity(new Intent(context, selectedValue.activityClass));
 				}

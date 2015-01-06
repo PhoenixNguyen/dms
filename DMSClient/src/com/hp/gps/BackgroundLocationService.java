@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.codec.binary.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
@@ -23,17 +24,23 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
 import com.hp.common.HttpHelper;
+import com.hp.common.SharedConstant;
 import com.hp.common.Utility;
 import com.hp.domain.RoadManagement;
+import com.hp.map.MainMenuActivity;
 import com.hp.map.ProfileActivity;
 import com.hp.rest.CheckingInternet;
 import com.hp.rest.Rest;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Binder;
@@ -56,6 +63,8 @@ public class BackgroundLocationService extends Service implements
 	Context context = this;
 	public static Location CURRENT_LOCATION;
 
+	Geocoder geocoder;
+	 	
 	IBinder mBinder = new LocalBinder();
 
 	public static LocationClient mLocationClient;
@@ -74,7 +83,8 @@ public class BackgroundLocationService extends Service implements
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
+		geocoder = new Geocoder(this);
+		
 		mInProgress = false;
 		// Create the LocationRequest object
 		mLocationRequest = LocationRequest.create();
@@ -95,7 +105,7 @@ public class BackgroundLocationService extends Service implements
 		 * callbacks.
 		 */
 		mLocationClient = new LocationClient(this, this, this);
-
+		
 	}
 
 	private boolean servicesConnected() {
@@ -142,16 +152,49 @@ public class BackgroundLocationService extends Service implements
 	}
 
 	// Define the callback method that receives location updates
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public void onLocationChanged(Location location) {
+		if(location == null)
+			return;
+		
 		// Report to the UI that the location was updated
 		CURRENT_LOCATION = location;
 
 		//String address = ProfileActivity.getAddress(location);
 		Utility.keepLogined(context);
-		//if(address != null && !address.equals(""))
-			pụtJourney((float) location.getLatitude(),
-				(float) location.getLongitude(), "");
+		
+		StringBuffer adress = new StringBuffer();
+		 try {
+			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10); //<10>
+			if(addresses != null){
+				Address returnedAddress = addresses.get(0);
+				System.out.println("returnedAddress: " + returnedAddress);
+			    for(int i=0; i<= returnedAddress.getMaxAddressLineIndex(); i++) {
+			    	adress.append(returnedAddress.getAddressLine(i));
+			    	if(i != returnedAddress.getMaxAddressLineIndex())
+			    		adress.append(", ");
+			    }
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    System.out.println("adress: " + adress.toString());
+	    // Update
+	    mCurrentAddress = adress.toString();
+		
+		if(ProfileActivity.my_location != null && mCurrentAddress != null && !mCurrentAddress.equals("")){
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			ProfileActivity.my_location.setText("" + df.format(new Date()) + "\n" + 
+					 "" +
+					 "Vị trí hiện tại: " + " \n" + mCurrentAddress);
+		}
+		//------
+		
+		//if(HttpHelper.checkServer())
+		pụtJourney((float) location.getLatitude(),
+				(float) location.getLongitude(), adress.toString());
 
 		String msg = Double.toString(location.getLatitude()) + ","
 				+ Double.toString(location.getLongitude());
@@ -289,16 +332,23 @@ public class BackgroundLocationService extends Service implements
 			return;
 
 		//check internet
-		if(CheckingInternet.isOnline()){
-			System.out.println("Internet access!!____________________");
+		try {
+			if(CheckingInternet.isOnline()){
+				System.out.println("Internet access!!____________________");
+			}
+			else{
+				System.out.println("NO Internet access!!____________________");
+				//Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+				return;
+			}
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
-		else{
-											
-			System.out.println("NO Internet access!!____________________");
-			//Toast.makeText(this, "Không có kết nối mạng, mở 3G hoặc Wifi để tiếp tục!", Toast.LENGTH_SHORT).show();				
+		
+		// Check db server
+		if(CheckingInternet.checkUrl( Rest.mURL + SharedConstant.API_CHECK, HttpHelper.TIME_OUT_LONG) != 200)
 			return;
-			
-		}
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
@@ -330,28 +380,31 @@ public class BackgroundLocationService extends Service implements
 		}
 
 		// Order ---------------------------------------------------------------
-		ClientResponse response = Rest.mService.path("webresources")
-				.path("putStaffJourney").accept("application/json")
-				.type("application/json").post(ClientResponse.class, objectStr);
+		ClientResponse response = null;
+		String output = "";
+		try {
+			response = Rest.mService.path("webresources")
+					.path("putStaffJourney").accept("application/json")
+					.type("application/json").post(ClientResponse.class, objectStr);
 
-		String output = response.toString();
-		System.out.println("input 1: " + output);
+			output = response.toString();
+			System.out.println("input 1: " + output);
+		} catch (UniformInterfaceException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			//stopService(new Intent(getApplicationContext(), BackgroundLocationService.class));
+		} catch (ClientHandlerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			//stopService(new Intent(getApplicationContext(), BackgroundLocationService.class));
+		}
 
-		if ((response.getStatus() == 200)) {
-			String res = response.getEntity(String.class);
+		if (response != null && (response.getStatus() == 200)) {
 			try {
+				String res = response.getEntity(String.class);
 				JSONObject json = new JSONObject(res);
 				if(json.has("status") && json.getBoolean("status")){
 					System.out.println("Đã cập nhật vị trí");
-					
-					mCurrentAddress = json.getString("address");
-					
-					if(ProfileActivity.my_location != null){
-						DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-						ProfileActivity.my_location.setText("" + df.format(new Date()) + "\n" + 
-								 "" +
-								 "Vị trí hiện tại: " + " \n" + mCurrentAddress);
-					}
 				}else
 					System.out.println("Cập nhật vị trí thất bại");
 				

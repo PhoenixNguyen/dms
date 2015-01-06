@@ -1,10 +1,17 @@
 package com.hp.rest;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
+
+import com.hp.common.HttpHelper;
+
+import android.os.StrictMode;
 
 public class CheckingInternet {
 
@@ -13,6 +20,9 @@ public class CheckingInternet {
 	}
 	
 	public static boolean isOnline() {
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		
         try {
         	InetAddress.getByName("google.com").isReachable(2);
 
@@ -40,5 +50,23 @@ public class CheckingInternet {
       } catch (Exception e) {
           return false;
       }
+  }
+  
+  public static int checkUrl(String url, int timeout){
+	  try {
+		  URL u = new URL (url);
+		  HttpURLConnection huc = (HttpURLConnection)u.openConnection();
+		  huc.setConnectTimeout(timeout);
+		  huc.setRequestMethod ("GET");
+		  huc.connect () ; 
+		  int code = huc.getResponseCode();
+		  System.out.println("code: "+code);
+		  
+		  return code;
+	} catch (Exception e){
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return -1;
+	}
   }
 }

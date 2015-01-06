@@ -32,6 +32,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.hp.common.HttpHelper;
 import com.hp.common.SharedConstant;
 import com.hp.domain.RoadManagement;
 import com.hp.domain.Staff;
@@ -82,9 +83,8 @@ public class UserAPI {
 				System.out.println("NO Internet access!!____________________");
 								
 				return "nointernet";
-				
 			}
-							
+			
 			// Connect server
 	        new Rest("").connectWebservices();
 	        
@@ -151,25 +151,26 @@ public class UserAPI {
 				activity.startActivity(i);
 	        	//new ThreatRealtime("hello").start();
 				
+				SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sp.edit();
+				
+				// Logined
+				editor.putBoolean(SharedConstant.LOGINED_STAFF, true);
+				editor.commit();
+				
 				//Save passwork
 				if(activity.remember_me.isChecked()){
-					SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
-					SharedPreferences.Editor editor = sp.edit();
 					editor.putString(SharedConstant.LOGIN_USERNAME, Rest.mStaff.getId());
 					editor.putString(SharedConstant.LOGIN_PASSWORD, Rest.mStaff.getPw());
 					editor.commit();
 				}
 				else{
-					SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
-					SharedPreferences.Editor editor = sp.edit();
 					editor.putString(SharedConstant.LOGIN_USERNAME, "");
 					editor.putString(SharedConstant.LOGIN_PASSWORD, "");
 					editor.commit();
 				}
 				
 				// Save Staff
-				SharedPreferences sp = context.getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
-				SharedPreferences.Editor editor = sp.edit();
 				editor.putString(SharedConstant.LOGIN_STAFF, Rest.mStaffJson);
 				editor.commit();
 				

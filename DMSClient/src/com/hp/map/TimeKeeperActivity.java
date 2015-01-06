@@ -61,14 +61,19 @@ public class TimeKeeperActivity extends MainMenuActivity{
 		init();
 		getTimeKeepingList();
 		
-		if(BackgroundLocationService.mCurrentAddress != null)
-			time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
-	    			 "_____________________________________ \n" +
-	    			 "Vị trí hiện tại của bạn: " + " \n" + BackgroundLocationService.mCurrentAddress);
-		else{
-			time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
-	    			 "_____________________________________ \n" +
-	    			 "Hệ thống đang cố dò vị trí, xin hãy chờ trong giây lát!");
+		try {
+			if(BackgroundLocationService.mCurrentAddress != null)
+				time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
+						 "_____________________________________ \n" +
+						 "Vị trí hiện tại của bạn: " + " \n" + BackgroundLocationService.mCurrentAddress);
+			else{
+				time_keeper.setText("Chấm công ngày: " + df.format(new Date()) + "\n" + 
+						 "_____________________________________ \n" +
+						 "Hệ thống đang cố dò vị trí, xin hãy chờ trong giây lát!");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

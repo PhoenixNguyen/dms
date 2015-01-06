@@ -55,17 +55,27 @@ public class Utility {
     }
 	
 	public static Staff keepLogined(Context context){
-		System.out.println("keepLogined!");
-		if(Rest.mStaff == null){
-			SharedPreferences sp = context.getApplicationContext().getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
-	        String staffJSON = sp.getString(SharedConstant.LOGIN_STAFF, null);
-	        System.out.println("staffJSON: "+staffJSON);
-	        if(staffJSON != null){
-	        	Rest.mStaff = convertJsonToStaff(staffJSON);
-	        	return Rest.mStaff;
-	        }else
-	        	return null;
-		}else
-			return Rest.mStaff;
+		
+		try {
+			System.out.println("keepLogined!");
+			if(Rest.mStaff == null || Rest.mStaff.getId() == null){
+				new Rest("").connectWebservices();
+				
+				SharedPreferences sp = context.getApplicationContext().getSharedPreferences(SharedConstant.LOGIN_STORE, Context.MODE_PRIVATE);
+			    String staffJSON = sp.getString(SharedConstant.LOGIN_STAFF, null);
+			    System.out.println("staffJSON: "+staffJSON);
+			    if(staffJSON != null){
+			    	Rest.mStaff = convertJsonToStaff(staffJSON);
+			    	return Rest.mStaff;
+			    }else
+			    	return null;
+			}else
+				return Rest.mStaff;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 }
