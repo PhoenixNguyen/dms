@@ -307,7 +307,7 @@
                                                                                 Địa chỉ 			
                                                                             </td>
                                                                             <td width=30% align=left class="dvtCellInfo">
-                                                                                <textarea value="<s:property value="diaChi"/>" name="customer.diaChi" tabindex="" class=detailedViewTextBox onFocus="this.className = 'detailedViewTextBoxOn'" onBlur="this.className = 'detailedViewTextBox'" rows=2></textarea>
+                                                                                <textarea value="<s:property value="diaChi"/>" name="customer.diaChi" tabindex="" class=detailedViewTextBox onFocus="this.className = 'detailedViewTextBoxOn'" onBlur="this.className = 'detailedViewTextBox'" rows=2><s:property value="diaChi"/></textarea>
                                                                             </td>
 
                                                                             <td width=20% class="dvtCellLabel" align=right>
@@ -315,7 +315,7 @@
                                                                                 Tỉnh thành
                                                                             </td>
                                                                             <td width=30% align=left class="dvtCellInfo">
-                                                                                <textarea value="<s:property value="tinhThanh"/>" name="customer.tinhThanh" tabindex="" class=detailedViewTextBox onFocus="this.className = 'detailedViewTextBoxOn'" onBlur="this.className = 'detailedViewTextBox'" rows=2></textarea>
+                                                                                <textarea value="<s:property value="tinhThanh"/>" name="customer.tinhThanh" tabindex="" class=detailedViewTextBox onFocus="this.className = 'detailedViewTextBoxOn'" onBlur="this.className = 'detailedViewTextBox'" rows=2><s:property value="tinhThanh"/></textarea>
                                                                             </td>
                                                                         </tr>
                                                                         

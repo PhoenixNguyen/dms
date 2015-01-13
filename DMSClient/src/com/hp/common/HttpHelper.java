@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -94,4 +99,44 @@ public class HttpHelper {
 		return false;
 	}
 	
+	public static String getData(String url) {
+		GetMethod get=new GetMethod(url);
+		try {
+			// Execute HTTP Post Request
+			int returnCode = client.executeMethod(get);
+			if (returnCode != HttpStatus.SC_NOT_IMPLEMENTED) {
+					BufferedReader reader = new BufferedReader(new InputStreamReader(get.getResponseBodyAsStream(), "UTF-8"));
+					String line;
+					StringBuilder buffer = new StringBuilder();
+					while ((line = reader.readLine()) != null) 
+						buffer = buffer.append(line);
+					return buffer.toString();
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private static MultiThreadedHttpConnectionManager connectionManager;
+	private static HttpClient client;
+	static {
+
+		if (connectionManager == null) {
+			connectionManager = new MultiThreadedHttpConnectionManager();
+			HttpConnectionManagerParams params = new HttpConnectionManagerParams();
+			params.setDefaultMaxConnectionsPerHost(100);
+			params.setMaxTotalConnections(5000);
+			params.setParameter(HttpConnectionManagerParams.SO_TIMEOUT, 10000);
+			params.setParameter(HttpConnectionManagerParams.CONNECTION_TIMEOUT,
+					10000);
+			connectionManager.setParams(params);
+		}
+		if (client == null)
+			client = new HttpClient(connectionManager);
+	}
 }

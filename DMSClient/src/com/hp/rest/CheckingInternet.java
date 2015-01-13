@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 
 import com.hp.common.HttpHelper;
 
+import android.os.AsyncTask;
 import android.os.StrictMode;
 
 public class CheckingInternet {
@@ -69,4 +70,5 @@ public class CheckingInternet {
 		return -1;
 	}
   }
+  
 }

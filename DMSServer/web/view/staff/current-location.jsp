@@ -51,7 +51,7 @@
                             {
                                 mXCoordinates: <s:property value="viDo"/>,
                                         mYCoordinates: <s:property value="kinhDo"/>,
-                                mMaDoiTuong: '<s:property value="maNhanVien"/>'
+                                mMaDoiTuong: "<s:property value="maNhanVien"/>"
 
                             },
                     </s:iterator>
@@ -75,7 +75,7 @@
                 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
                 var infowindow = new google.maps.InfoWindow({
-                    content: ''
+                    content: ""
                 });
                 
                 
@@ -88,16 +88,16 @@
                             <s:date name="#curr.thoiGian" id="createdDateId" format="dd-MM-yyyy HH:mm:ss"/>
                             <s:date name="#last.thoiGian" id="lastUpdated" format="dd-MM-yyyy HH:mm:ss"/>
                             contentString.push({ content :
-                                '<div style="width:550px;"><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>' + '<br/>' +
-                                '<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>' + '<br/>' +
-                                '<b>Thời gian:</b> <s:property value="%{createdDateId}"/>' + '<br/>' +
-                                '<b>Vị trí:</b> <s:property value="#curr.ghiChu"/>' + '<br/>' +
-                                '<b>Lat:</b> <s:property value="#curr.viDo"/>, <s:property value="#curr.kinhDo"/> <br/> \n'+
+                                "<div style='width:550px;'><b>Mã nhân viên:</b> <s:property value="#curr.maNhanVien"/>" + "<br/>" +
+                                "<b>Tên nhân viên:</b> <s:property value="#curr.tenNhanVien"/>" + "<br/>" +
+                                "<b>Thời gian:</b> <s:property value="%{createdDateId}"/>" + "<br/>" +
+                                "<b>Vị trí:</b> <s:property value="#curr.ghiChu"/>" + "<br/>" +
+                                "<b>Lat:</b> <s:property value="#curr.viDo"/>, <s:property value="#curr.kinhDo"/> <br/> \n"+
                                 
-                                '<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n'+
-                                '<b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.ghiChu"/> <br/> \n'+
-                                '</div>',
-                                id : '<s:property value="#curr.maNhanVien"/>'
+                                "<b>Thời gian cập nhật cuối cùng:</b> <s:property value="%{lastUpdated}"/> <br/>   \n"+
+                                "<b>Vị trí cập nhật cuối cùng:</b> <s:property value="#last.ghiChu"/> <br/> \n"+
+                                "</div>",
+                                id : "<s:property value="#curr.maNhanVien"/>"
                     });
                         </s:if>
 
@@ -138,7 +138,7 @@
                             {
                                 mXCoordinates: <s:property value="coordinateX"/>,
                                         mYCoordinates: <s:property value="coordinateY"/>,
-                                mMaDoiTuong: '<s:property value="maDoiTuong:"/>'
+                                mMaDoiTuong: "<s:property value="maDoiTuong:"/>"
 
                             },
                     </s:iterator>
@@ -146,17 +146,17 @@
                // alert(Customers2);
                var customerContent2 = [
                     <s:iterator value="listCustomer" status="status">
-                            '<div id="boxShow"> <a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">\n\
-                                                <img class= "ImageWrap" border="0" src="../customer/<s:property value="maDoiTuong"/>/1.jpg"  ></a>' +
-                                    '<p class= "TextWrap">\n\
-                                        <b><a href="customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>">Khách hàng: <s:property value="doiTuong"/></a></b>' + '<br/><br/>' +
-                                    'Mã khách hàng: <s:property value="maDoiTuong"/>' + '<br/>' +
-                                    'Tỉnh thành: <s:property value="tinhThanh"/>' + '<br/>' +
-                                    'Địa chỉ:' +'<s:property value="diaChi.replace(\"\'\", \"\")"/>' + '<br/>' +
-                                    'Điện thoại: <s:property value="dienThoai"/>' + '<br/>' +
-                                    'Fax: <s:property value="fax"/>' + '<br/>\n\
+                            "<div id='boxShow'> <a href='customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>'>\n\
+                                                <img class= 'ImageWrap' border='0' src='../customer/<s:property value="maDoiTuong"/>/1.jpg'  ></a>" +
+                                    "<p class= 'TextWrap'>\n\
+                                        <b><a href='customerDetail.action?page=0&customer_id=<s:property value="maDoiTuong"/>'>Khách hàng: <s:property value="doiTuong"/></a></b>" + "<br/><br/>" +
+                                    "Mã khách hàng: <s:property value="maDoiTuong"/>" + "<br/>" +
+                                    "Tỉnh thành: <s:property value="tinhThanh"/>" + "<br/>" +
+                                    "Địa chỉ:" +"<s:property value="diaChi"/>" + "<br/>" +
+                                    "Điện thoại: <s:property value="dienThoai"/>" + "<br/>" +
+                                    "Fax: <s:property value="fax"/>" + "<br/>\n\
                                      \n\
-                                      <br/>   </p></div>',
+                                      <br/>   </p></div>",
                     </s:iterator>
                 ];
                 

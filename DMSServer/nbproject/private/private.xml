@@ -5,8 +5,7 @@
         <group>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/InputResource.java</file>
             <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/hibernate.cfg.xml</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/GenericResource.java</file>
-            <file>file:/D:/Project/outcourcing/dms/DMSServer/src/java/com/hp/rest/OrdersHandle.java</file>
+            <file>file:/D:/Project/outcourcing/dms/DMSServer/web/maps/view-journeys.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -50,7 +50,7 @@
                             {
                                 mXCoordinates: <s:property value="viDo"/>,
                                         mYCoordinates: <s:property value="kinhDo"/>,
-                                mMaDoiTuong: '<s:property value="thoiGian"/>'
+                                mMaDoiTuong: "<s:property value="thoiGian"/>"
 
                             },
                     </s:iterator>
@@ -74,17 +74,17 @@
                 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
                 var infowindow = new google.maps.InfoWindow({
-                    content: ''
+                    content: ""
                 });
 
                 var contentString = [
                     <s:iterator value="listRoad" status="status">
                     <s:iterator value="listRoad.get(#status.index)" status="index">
                     <s:date name="thoiGian" id="createdDateId" format="HH:mm:ss dd-MM-yyyy "/>
-                            '<div style="width:550px; min-height: 100px;"><b>Mã Nhân viên:</b> <s:property value="maNhanVien"/> <br/>\
-                            <b>Thời gian:</b> <s:property value="%{createdDateId}"/> <br/>\
-                            <b>Thứ tự di chuyển:</b> <s:property value="%{#index.index + 1}"/><br/>\
-                            <b>Vị trí:</b> <s:property value="ghiChu"/></div>',
+                            "<div style='width:550px; min-height: 100px;'><b>Mã Nhân viên:</b> <s:property value="maNhanVien"/> <br/>" +
+                            "<b>Thời gian:</b> <s:property value="%{createdDateId}"/> <br/>" +
+                            "<b>Thứ tự di chuyển:</b> <s:property value="%{#index.index + 1}"/><br/>" +
+                            "<b>Vị trí:</b> <s:property value="ghiChu"/></div>",
                     </s:iterator>
                     </s:iterator>
                 ];
@@ -117,7 +117,7 @@
                             {
                                 mXCoordinates: <s:property value="coordinateX"/>,
                                         mYCoordinates: <s:property value="coordinateY"/>,
-                                mMaDoiTuong: '<s:property value="maDoiTuong"/>'
+                                mMaDoiTuong: "<s:property value="maDoiTuong"/>"
 
                             },
                             </s:if>
@@ -135,11 +135,11 @@
                                 <s:date name="listSchedules.get(#status.index).getTime()" id="createdDateId" format="HH:mm:ss dd-MM-yyyy "/>
                                 
                                 
-                                    'Thời gian : <s:property value="%{createdDateId}"/> <br/>\
+                                    "Thời gian : <s:property value="%{createdDateId}"/> <br/>\
                                     Mã khách hàng: <s:property value="listSchedules.get(#status.index).getMaKH()"/> <br/>\
                                     Tên khách hàng: <s:property value="doiTuong"/> <br/>\
                                     Mã nhân viên: <s:property value="listSchedules.get(#status.index).getMaNV()"/> <br/>\
-                                    Thứ tự lịch trình: <s:property value="%{#index2.index +1 }"/>',
+                                    Thứ tự lịch trình: <s:property value="%{#index2.index +1 }"/>",
                                    
                             </s:if>
                             </s:iterator>
